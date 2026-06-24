@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# 작업 일지 일별 스냅샷 (로컬 백업 — WORKLOG.md 본문은 Git 추적)
+docs/wip/history/
+
 # dependencies
 /node_modules
 /.pnp

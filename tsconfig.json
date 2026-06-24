@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "design-system/typography-tokens": ["./packages/design-system/src/typography-tokens.ts"],
+      "design-system/brand-colors": ["./packages/design-system/src/brand-colors.ts"]
     }
   },
   "include": [

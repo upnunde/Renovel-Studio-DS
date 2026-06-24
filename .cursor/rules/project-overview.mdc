@@ -1,0 +1,51 @@
+---
+description: 프로젝트 전반에 항상 적용되는 핵심 규칙 (구조, 언어, 개발 서버)
+alwaysApply: true
+---
+
+# Design System Test 공통 규칙
+
+## 프로젝트 목적
+
+shadcn/ui를 **베이스**로 **나만의 디자인 시스템**을 정의·발전시키고, **npm 패키지**(`packages/design-system`)로 다른 프로젝트에 범용 적용한다.
+
+## 저장소 구조
+
+| 영역 | 경로 |
+|------|------|
+| **배포 패키지** | `packages/design-system/` — 토큰·유틸 (→ 컴포넌트 점진 이전) |
+| **쇼케이스 앱** | `src/` — Next.js App Router, 토큰·컴포넌트 시각 검증 |
+| **UI (작업 중)** | `src/components/ui/` — shadcn 커스터마이즈 후 패키지로 이전 |
+| **토큰 정본** | `packages/design-system/src/tokens.css` · `theme.css` |
+| **shadcn CLI** | `components.json` |
+
+스택: **Next.js + TypeScript + Tailwind CSS v4 + shadcn/ui (base-nova)**
+
+아키텍처 상세: **`.cursor/rules/design-system-architecture.mdc`**
+
+## 개발 서버
+
+- 루트에서 **`npm run dev`** (포트 **3001**). 미리보기 URL: **`http://localhost:3001`**
+- 빌드 확인: **`npm run build`** · 린트: **`npm run lint`**
+
+## 언어
+
+- **답변·UI 노출 문자열은 한국어.**
+
+## UI·스타일 (요약)
+
+- 토큰 수정은 **`packages/design-system/src/tokens.css`** 가 정본.
+- shadcn 컴포넌트 커스터마이즈 → variant/props → 필요 시 패키지 이전.
+- 상세: **`.cursor/rules/shadcn-design-system.mdc`**
+
+## 에이전트 규칙
+
+- **커밋·push는 사용자가 요청할 때만** 수행한다.
+- **git config 변경·force push 금지.**
+- 커밋 요청 시 **`docs/wip/WORKLOG.md` 갱신**을 포함한다 (`.cursor/rules/worklog.mdc` 참고).
+- **`.env`·빌드 산출물(`.next/` 등)은 커밋하지 않는다.**
+- 무관한 대량 리팩터는 하지 않는다.
+
+## 작업 일지
+
+- **`docs/wip/WORKLOG.md`** · **`.cursor/rules/worklog.mdc`** · `npm run worklog:snapshot`
