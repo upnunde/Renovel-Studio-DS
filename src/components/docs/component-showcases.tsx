@@ -1164,12 +1164,22 @@ const SHOWCASES: Record<string, ReactNode> = {
               </TabsList>
             </Tabs>
           </ComponentCase>
-          <ComponentCase label="line variant → accent" tags={["hover", "accent"]}>
+          <ComponentCase label="line variant → muted" tags={["hover", "muted"]}>
             <Tabs defaultValue="tab1" className="max-w-md">
               <TabsList variant="line">
                 <TabsTrigger value="tab1">탭 1</TabsTrigger>
                 <TabsTrigger value="tab2" data-hovered>
                   탭 2
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </ComponentCase>
+          <ComponentCase label="text variant → muted" tags={["hover", "muted"]}>
+            <Tabs defaultValue="users" className="max-w-md">
+              <TabsList variant="text">
+                <TabsTrigger value="content">콘텐츠</TabsTrigger>
+                <TabsTrigger value="users" data-hovered>
+                  이용자
                 </TabsTrigger>
               </TabsList>
             </Tabs>

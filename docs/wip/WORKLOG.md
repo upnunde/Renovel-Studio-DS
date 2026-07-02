@@ -7,6 +7,7 @@
 
 - **시맨틱 컬러** — 겹침 alias 정리(`secondary`·`popover`·`sidebar-*` 등), Color Semantic 문서 구조 병합, Maps to 체인 표시
 - **호버 가이드** — DESIGN §2-1a·§2-1b, DS UI·문서·쇼케이스에 `hover:*` + `data-[hovered=true]:*` 병행
+- **Tabs** — line·text variant 호버를 default와 동일하게 muted + foreground로 통일
 - **토큰** — `--muted` 라이트 `grayscale-10`, Badge secondary 호버 accent 정렬, Tabs `text-foreground-muted`
 - **배포** — `design-system` **v0.1.2** 태그, 리노벨 스튜디오 `package.json` `#v0.1.2` 연동
 
