@@ -1,0 +1,141 @@
+/**
+ * 타이포그래피 @utility — typography-tokens.ts 와 1:1 동기화 (단일 소스).
+ * size·line-height·weight를 묶은 단일 클래스만 사용.
+ * 개별 속성 조합(text-sm + font-bold 등) 금지.
+ * 폰트 패밀리(Pretendard JP)는 fonts.css에서 전역 적용 → 여기서 미지정.
+ */
+@utility text-heading1_700 {
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 700;
+}
+@utility text-heading2_700 {
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 700;
+}
+@utility text-heading2_500 {
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 500;
+}
+@utility text-heading3_700 {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+}
+@utility text-heading3_500 {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 500;
+}
+@utility text-heading4_700 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+}
+@utility text-heading4_500 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+}
+@utility text-heading5_700 {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+}
+@utility text-heading5_500 {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 500;
+}
+@utility text-body1_700 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+}
+@utility text-body1_500 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+@utility text-body1_400 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+@utility text-body2_700 {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 700;
+}
+@utility text-body2_500 {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 500;
+}
+@utility text-body2_400 {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 400;
+}
+@utility text-body3_700 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+@utility text-body3_500 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+@utility text-body3_400 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+@utility text-body4_700 {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 700;
+}
+@utility text-body4_500 {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
+@utility text-body4_400 {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+@utility text-caption1_700 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+}
+@utility text-caption1_500 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+@utility text-caption1_400 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+@utility text-caption2_700 {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 700;
+}
+@utility text-caption2_500 {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 500;
+}
+@utility text-caption2_400 {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 400;
+}

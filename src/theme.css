@@ -1,0 +1,115 @@
+/**
+ * Tailwind @theme 매핑 — tokens.css 변수를 유틸 클래스로 연결
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-canvas: var(--canvas);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-background-muted: var(--background-muted);
+  --color-background-muted-foreground: var(--background-muted-foreground);
+  --color-card-muted: var(--card-muted);
+  --color-card-muted-foreground: var(--card-muted-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-inverse: var(--inverse);
+  --color-inverse-foreground: var(--inverse-foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-placeholder: var(--foreground-placeholder);
+  --color-foreground-disabled: var(--foreground-disabled);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-border-inverse: var(--border-inverse);
+  --color-input: var(--input);
+  --color-disabled: var(--disabled);
+  --color-disabled-foreground: var(--disabled-foreground);
+  --color-disabled-border: var(--disabled-border);
+  --color-ring: var(--ring);
+  --color-primary-container: var(--primary-container);
+  --color-primary-container-foreground: var(--primary-container-foreground);
+  --color-secondary-container: var(--secondary-container);
+  --color-secondary-container-foreground: var(--secondary-container-foreground);
+  --color-destructive-container: var(--destructive-container);
+  --color-destructive-container-foreground: var(--destructive-container-foreground);
+  --color-dim-10: var(--dim-10);
+  --color-dim-20: var(--dim-20);
+  --color-dim-30: var(--dim-30);
+  --color-dim-40: var(--dim-40);
+  --color-divider: var(--divider);
+  --color-divider-strong: var(--divider-strong);
+  --shadow-elevation-10: var(--shadow-elevation-10);
+  --shadow-elevation-20: var(--shadow-elevation-20);
+  --shadow-elevation-30: var(--shadow-elevation-30);
+  --shadow-elevation-40: var(--shadow-elevation-40);
+  --shadow-elevation-50: var(--shadow-elevation-50);
+  --shadow-elevation-60: var(--shadow-elevation-60);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-white: var(--white);
+  --color-black: var(--black);
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: var(--radius);
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-full: 9999px;
+  --border-width: var(--stroke-width);
+  --duration-short: var(--motion-duration-short);
+  --duration-medium: var(--motion-duration-medium);
+  --duration-long: var(--motion-duration-long);
+  --ease-standard: var(--motion-easing-standard);
+  --ease-emphasized-decelerate: var(--motion-easing-emphasized-decelerate);
+  --ease-emphasized-accelerate: var(--motion-easing-emphasized-accelerate);
+  --spacing-px: var(--space-px);
+  --spacing-0\.5: var(--space-0-5);
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-5: var(--space-5);
+  --spacing-6: var(--space-6);
+  --spacing-8: var(--space-8);
+  --spacing-10: var(--space-10);
+  --spacing-12: var(--space-12);
+  --spacing-16: var(--space-16);
+  --spacing-20: var(--space-20);
+}
+
+/* Z-Index 레이어 — 페이지 위계 6단계 (간격 100)
+ * 토스트는 다른 모든 레이어 위. z-overlay는 모달의 dim 백드롭, z-modal은 모달 본체.
+ */
+@utility z-base     { z-index: 0;   }
+@utility z-dropdown { z-index: 100; }
+@utility z-sticky   { z-index: 200; }
+@utility z-overlay  { z-index: 300; }
+@utility z-modal    { z-index: 400; }
+@utility z-toast    { z-index: 500; }

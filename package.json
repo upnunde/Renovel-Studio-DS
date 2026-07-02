@@ -1,0 +1,83 @@
+{
+  "name": "design-system",
+  "version": "0.1.0",
+  "description": "Renovel Studio 디자인 시스템 — shadcn/ui 기반 토큰·컴포넌트·유틸",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upnunde/Renovel-Studio-DS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/upnunde/Renovel-Studio-DS/issues"
+  },
+  "homepage": "https://github.com/upnunde/Renovel-Studio-DS#readme",
+  "files": [
+    "src",
+    "tsconfig.json"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens.css": "./src/tokens.css",
+    "./theme.css": "./src/theme.css",
+    "./typography.css": "./src/typography.css",
+    "./typography-tokens": "./src/typography-tokens.ts",
+    "./typography-display": "./src/typography-display.ts",
+    "./component-size-tokens": "./src/component-size-tokens.ts",
+    "./radius-tokens": "./src/radius-tokens.ts",
+    "./spacing-tokens": "./src/spacing-tokens.ts",
+    "./icon-tokens": "./src/icon-tokens.ts",
+    "./motion-tokens": "./src/motion-tokens.ts",
+    "./icons.css": "./src/icons.css",
+    "./tabs.css": "./src/tabs.css",
+    "./icons": "./src/components/icons.ts",
+    "./brand-colors": "./src/brand-colors.ts",
+    "./semantic-state-colors": "./src/semantic-state-colors.ts",
+    "./grayscale-colors": "./src/grayscale-colors.ts",
+    "./absolute-colors": "./src/absolute-colors.ts",
+    "./fonts.css": "./src/fonts.css",
+    "./utils": "./src/lib/utils.ts",
+    "./ui-disabled": "./src/lib/ui-disabled.ts",
+    "./ui/accordion": "./src/components/ui/accordion.tsx",
+    "./ui/alert": "./src/components/ui/alert.tsx",
+    "./ui/avatar": "./src/components/ui/avatar.tsx",
+    "./ui/badge": "./src/components/ui/badge.tsx",
+    "./ui/button": "./src/components/ui/button.tsx",
+    "./ui/button-group": "./src/components/ui/button-group.tsx",
+    "./ui/card": "./src/components/ui/card.tsx",
+    "./ui/checkbox": "./src/components/ui/checkbox.tsx",
+    "./ui/chip": "./src/components/ui/chip.tsx",
+    "./ui/dialog": "./src/components/ui/dialog.tsx",
+    "./ui/dropdown-menu": "./src/components/ui/dropdown-menu.tsx",
+    "./ui/email-input": "./src/components/ui/email-input.tsx",
+    "./ui/field-label": "./src/components/ui/field-label.tsx",
+    "./ui/icon": "./src/components/ui/icon.tsx",
+    "./ui/input": "./src/components/ui/input.tsx",
+    "./ui/label": "./src/components/ui/label.tsx",
+    "./ui/popover": "./src/components/ui/popover.tsx",
+    "./ui/progress": "./src/components/ui/progress.tsx",
+    "./ui/radio-group": "./src/components/ui/radio-group.tsx",
+    "./ui/select": "./src/components/ui/select.tsx",
+    "./ui/separator": "./src/components/ui/separator.tsx",
+    "./ui/skeleton": "./src/components/ui/skeleton.tsx",
+    "./ui/slider": "./src/components/ui/slider.tsx",
+    "./ui/sonner": "./src/components/ui/sonner.tsx",
+    "./ui/switch": "./src/components/ui/switch.tsx",
+    "./ui/tabs": "./src/components/ui/tabs.tsx",
+    "./ui/textarea": "./src/components/ui/textarea.tsx",
+    "./ui/toggle": "./src/components/ui/toggle.tsx",
+    "./ui/tooltip": "./src/components/ui/tooltip.tsx"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@base-ui/react": "^1.0.0",
+    "lucide-react": "^1.0.0",
+    "sonner": "^2.0.0"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "pretendard": "^1.3.9",
+    "tailwind-merge": "^3.6.0"
+  }
+}

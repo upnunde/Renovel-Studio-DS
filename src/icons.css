@@ -1,0 +1,24 @@
+/**
+ * 아이콘 크기 @utility — icon-tokens.ts 와 동기화
+ * 사용: className="icon-md"
+ */
+@utility icon-xs {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+}
+@utility icon-sm {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+}
+@utility icon-md {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+@utility icon-lg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+@utility icon-xl {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+}

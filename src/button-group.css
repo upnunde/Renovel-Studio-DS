@@ -1,0 +1,28 @@
+/**
+ * ButtonGroup 세그먼트 모서리 — Tailwind v4 data-slot 임의 선택자 파싱 버그 회피
+ */
+@layer components {
+  [data-slot="button-group"] > :first-child {
+    border-top-left-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+  }
+
+  [data-slot="button-group"] > :last-child {
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+  }
+
+  [data-slot="button-group"] > :not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  [data-slot="button-group"] > :not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  [data-slot="button-group"] > * + * {
+    border-left-width: 0;
+  }
+}

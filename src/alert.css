@@ -1,0 +1,32 @@
+/**
+ * Alert 레이아웃 — Tailwind v4 [data-slot=…] 임의 선택자 파싱 버그 회피
+ */
+@layer components {
+  [data-slot="alert"]:has([data-slot="alert-action"]) {
+    position: relative;
+    padding-right: 4.5rem;
+  }
+
+  [data-slot="alert"]:has(> svg),
+  [data-slot="alert"]:has(> [data-slot="icon"]) {
+    grid-template-columns: auto 1fr;
+    column-gap: 0.5rem;
+  }
+
+  [data-slot="alert"] > svg,
+  [data-slot="alert"] > [data-slot="icon"] {
+    grid-row: span 2 / span 2;
+    translate: 0 0.125rem;
+    color: currentcolor;
+  }
+
+  [data-slot="alert"] > svg:not([class*="size-"]) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  [data-slot="alert"]:has(> svg) > [data-slot="alert-title"],
+  [data-slot="alert"]:has(> [data-slot="icon"]) > [data-slot="alert-title"] {
+    grid-column-start: 2;
+  }
+}
