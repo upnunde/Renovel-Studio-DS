@@ -10,16 +10,16 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary-container text-primary-container-foreground [a]:hover:bg-primary-container/80",
+          "bg-primary-container text-primary-container-foreground [a]:hover:bg-primary-container/80 [a[data-hovered=true]]:bg-primary-container/80",
         secondary:
-          "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
+          "bg-secondary text-secondary-foreground [a]:hover:bg-accent [a]:hover:text-accent-foreground [a[data-hovered=true]]:bg-accent [a[data-hovered=true]]:text-accent-foreground",
         destructive:
-          "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20",
+          "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20 [a[data-hovered=true]]:bg-destructive/20",
         outline:
-          "border-border text-foreground [a]:hover:bg-accent [a]:hover:text-accent-foreground",
+          "border-border text-foreground [a]:hover:bg-accent [a]:hover:text-accent-foreground [a[data-hovered=true]]:bg-accent [a[data-hovered=true]]:text-accent-foreground",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline data-[hovered=true]:underline",
       },
       size: {
         default: "h-5 px-2 text-xs [&>svg]:size-3!",

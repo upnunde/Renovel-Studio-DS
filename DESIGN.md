@@ -71,6 +71,72 @@ Material Design 3의 이론적 토대를 **선택적으로** 흡수한다. **명
 
 **`{role}-foreground` 는 짝 `{role}` surface 안에서만 사용한다.** 단독으로 "흐린 텍스트" 용도로 쓰지 않는다.
 
+### 2-1a. Action · Interaction 역할
+
+shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**로 구분한다.
+
+| 카테고리 | 토큰 | 역할 |
+|----------|------|------|
+| **Action · Primary** | `primary` / `primary-foreground` | 주 액션 면 (filled CTA) |
+| **Interaction · Highlight · Brand** | `accent` / `accent-foreground` | 브랜드 호버·포커스·선택 (outline/ghost/select·menu) |
+| **Interaction · Fill · Neutral** | `muted` / `muted-foreground` | 무채색 호버·크롬 (chip, tabs, skeleton, track) |
+| **Interaction · Fill · Neutral** | `secondary` / `secondary-foreground` | 보조 버튼·배지 기본면 — **배경값은 `muted`와 동일**, 컴포넌트 의미만 분리 |
+
+**호버 매핑 (컴포넌트 CVA):**
+
+| 패턴 | 호버 토큰 | 예 |
+|------|-----------|-----|
+| 브랜드 틴트 | `accent` | Button outline/ghost, Select, Dropdown focus |
+| 무채색 | `muted` | Chip default, Tabs (default variant) |
+| 채움 면 강조 | `primary/80`, `inverse/80` | Button default, Chip pressed |
+| 위험 | `destructive/20` | destructive variant |
+
+`--hover` 별도 토큰은 없다. 위 시맨틱을 variant별로 선택한다.
+
+### 2-1c. 시맨틱 alias (중복 제거)
+
+동일 원시값·역할이 겹치는 토큰은 `tokens.css`에서 **alias**로 단일 원천을 가리킨다. shadcn 클래스명(`bg-secondary`, `bg-popover`, `sidebar-*` 등)은 유지하고, 정본 값은 한 곳만 수정한다.
+
+| Alias | 가리키는 토큰 | 비고 |
+|-------|---------------|------|
+| `secondary` (면) | `muted` | `secondary-foreground`는 별도 (보조 액션 대비) |
+| `card-muted` | `background-muted` | 카드·페이지 보조 면 통일 |
+| `popover` | `card` | 플로팅 = elevated card |
+| `divider` | `muted` | 구분선 = neutral fill과 동일 원시값 |
+| `disabled` (면, 라이트) | `muted` | 다크는 전용 grayscale |
+| `disabled-border` (라이트) | `border` | |
+| `sidebar` | `background` | |
+| `sidebar-accent` | `accent` | |
+| `sidebar-border` | `border` (라이트) / `input` (다크) | 사이드바만 input 톤 |
+| `secondary-container` (다크) | `muted` | 컴포넌트 미사용, API만 유지 |
+
+문서 Color Semantic 페이지의 **Maps to** 컬럼은 alias 체인을 표시한다.
+
+### 2-1b. Hover 표현 표준 (컴포넌트·문서 공통)
+
+모든 인터랙티브 컴포넌트는 hover 스타일을 **2개 트리거**로 동일하게 표현한다.
+
+- 사용자 상호작용: `hover:*`
+- 고정 스냅샷/테스트/문서: `data-[hovered=true]:*`
+
+예시:
+
+```tsx
+// outline 버튼 (브랜드 hover)
+className="hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground"
+```
+
+```tsx
+// Chip (무채색 hover)
+className="hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground"
+```
+
+운영 규칙:
+
+1. `data-[hovered=true]`는 문서/테스트 용도이며 런타임 동작(`hover`)을 대체하지 않는다.
+2. 스냅샷에서 임의 색상 클래스(`bg-*`)로 직접 덮지 말고, 각 컴포넌트의 `data-[hovered=true]`를 사용한다.
+3. 포인터 hover가 아닌 리스트/메뉴 항목은 기존 `focus:*` 유지 + 필요 시 `data-[hovered=true]:*`를 동일 매핑한다.
+
 ### 2-2. Foreground 위계 (단독 사용 가능)
 
 본문보다 흐린 텍스트가 일반 surface 위에 놓일 때 사용. 모두 같은 foreground 패밀리이며 시각적 위계만 다르다.
@@ -327,7 +393,7 @@ CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 �
 
 | 프로젝트 | 경로 | 연결 방식 |
 |---------|------|----------|
-| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `file:../../Design System Test/packages/design-system` |
+| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.2` |
 
 소비자 추가 시 이 목록 갱신. 디자인 시스템 변경 시 소비자 영향 항상 고려.
 

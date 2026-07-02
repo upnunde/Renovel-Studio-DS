@@ -50,7 +50,7 @@ function NavLink({
         "flex h-9 items-center rounded-full px-3 text-sm transition-colors",
         isActive
           ? "bg-primary font-medium text-primary-foreground"
-          : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+          : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[hovered=true]:bg-sidebar-accent data-[hovered=true]:text-sidebar-accent-foreground",
         className
       )}
       aria-current={isActive ? "page" : undefined}
@@ -75,7 +75,7 @@ function NavCollapsibleSection({
     <div className="space-y-0.5">
       <Link
         href={defaultHref}
-        className="flex h-9 items-center rounded-full px-3 text-sm text-sidebar-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+        className="flex h-9 items-center rounded-full px-3 text-sm text-sidebar-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[hovered=true]:bg-sidebar-accent data-[hovered=true]:text-sidebar-accent-foreground"
       >
         {section.label}
       </Link>

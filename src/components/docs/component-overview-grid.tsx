@@ -27,7 +27,7 @@ export function ComponentOverviewGrid() {
           <Link
             key={section}
             href={`#${sectionId(section)}`}
-            className="group block rounded-xl border border-border bg-card p-4 transition-colors hover:border-ring/40 hover:bg-accent/30"
+            className="group block rounded-xl border border-border bg-card p-4 transition-colors hover:border-ring/40 hover:bg-accent/30 data-[hovered=true]:border-ring/40 data-[hovered=true]:bg-accent/30"
           >
             <div className="flex items-start justify-between gap-3">
               <div>
@@ -41,7 +41,7 @@ export function ComponentOverviewGrid() {
                 <Icon
                   icon={ICONS.chevronRight}
                   size="sm"
-                  className="transition-transform group-hover:translate-x-0.5"
+                  className="transition-transform group-hover:translate-x-0.5 group-data-[hovered=true]:translate-x-0.5"
                 />
               </span>
             </div>
@@ -90,16 +90,16 @@ export function ComponentOverviewGrid() {
               <Link
                 key={doc.slug}
                 href={`/components/${doc.slug}`}
-                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-ring/40 hover:shadow-sm"
+                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-ring/40 hover:shadow-sm data-[hovered=true]:border-ring/40 data-[hovered=true]:shadow-sm"
               >
                 <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
                   <h3 className={docsType.groupTitle}>{doc.title}</h3>
-                  <span className="inline-flex shrink-0 items-center gap-0.5 text-sm font-medium text-primary opacity-80 transition-opacity group-hover:opacity-100">
+                  <span className="inline-flex shrink-0 items-center gap-0.5 text-sm font-medium text-primary opacity-80 transition-opacity group-hover:opacity-100 group-data-[hovered=true]:opacity-100">
                     바로가기
                     <Icon
                       icon={ICONS.chevronRight}
                       size="sm"
-                      className="transition-transform group-hover:translate-x-0.5"
+                      className="transition-transform group-hover:translate-x-0.5 group-data-[hovered=true]:translate-x-0.5"
                     />
                   </span>
                 </div>

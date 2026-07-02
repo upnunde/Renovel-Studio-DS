@@ -5,16 +5,14 @@
 
 ## 오늘 한 일
 
-- **패키지 배포** — `design-system` v0.1.1, GitHub repository·files·lucide peer, README·`.gitignore`, 루트 `.renovel-ds-publish/` 무시
-- **디자인 시스템 패키지** — UI 컴포넌트·토큰 정본 `packages/design-system/` 확장 (FieldLabel, InputHypertext, Chip, motion 등)
-- **문서 사이트** — 플레이그라운드·쇼케이스·Properties 연동, Dropdown Menu·Label·Textarea hypertext·Avatar md_s36
-- **토큰** — Dim 4단계(dim-10~40)·다크 `--border` grayscale-130·브랜드 chart 시리즈
-- **문서 UX** — 우측 TOC, 사이드바·Renvel 로고, DESIGN.md·에이전트 핸드오프
-- **Git** — `origin` → https://github.com/upnunde/Renovel-Studio-DS
+- **시맨틱 컬러** — 겹침 alias 정리(`secondary`·`popover`·`sidebar-*` 등), Color Semantic 문서 구조 병합, Maps to 체인 표시
+- **호버 가이드** — DESIGN §2-1a·§2-1b, DS UI·문서·쇼케이스에 `hover:*` + `data-[hovered=true]:*` 병행
+- **토큰** — `--muted` 라이트 `grayscale-10`, Badge secondary 호버 accent 정렬, Tabs `text-foreground-muted`
+- **배포** — `design-system` **v0.1.2** 태그, 리노벨 스튜디오 `package.json` `#v0.1.2` 연동
 
 ## 다음에 할 일
 
-- 소비 프로젝트(upnunde-test) GitHub tarball(v0.1.1) 연동 검증
+- 리노벨 스튜디오에서 `npm install` 후 UI 회귀 확인
 - 플로팅 버튼(FAB) 컴포넌트 검토
 - Figma 연동 (필요 시)
 
@@ -26,11 +24,13 @@
 
 - 브랜치: main
 - 원격: `origin` → upnunde/Renovel-Studio-DS
+- 태그: `v0.1.2`
 - 관련 경로:
-  - `packages/design-system/src/tokens.css` — 시맨틱·Dim 토큰 정본
-  - `src/components/docs/playground-registry.tsx` — 컴포넌트 플레이그라운드
-  - `DESIGN.md` — 디자인 시스템 규칙 정본
+  - `packages/design-system/src/tokens.css` — 시맨틱·alias 정본
+  - `src/lib/color-tokens.ts` — Color Semantic 문서 그룹
+  - `DESIGN.md` — Action·Interaction·Hover·alias 정책
 
 ## 메모
 
 - 개발: `npm run dev` → http://localhost:3001
+- 소비: `github:upnunde/Renovel-Studio-DS#v0.1.2`

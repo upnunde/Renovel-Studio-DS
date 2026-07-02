@@ -11,6 +11,8 @@ export function ShowcaseBlock({
   children,
   className,
   flush,
+  as: Heading = "h2",
+  headingId,
 }: {
   name?: string
   description?: string
@@ -18,15 +20,22 @@ export function ShowcaseBlock({
   className?: string
   /** 테이블 등 가장자리까지 채우는 콘텐츠 */
   flush?: boolean
+  /** 헤딩 레벨 — 카테고리 h2 아래 서브그룹은 "h3" 로 낮춰 위계 유지 */
+  as?: "h2" | "h3"
+  /** TOC 앵커 id — 미지정 시 name에서 생성 (동일 제목 충돌 시 지정) */
+  headingId?: string
 }) {
   return (
     <section className="overflow-hidden rounded-xl border border-border bg-card">
       {name || description ? (
         <div className={cn("border-b bg-muted/30", docsSpace.cardHeader)}>
           {name ? (
-            <h2 id={docsTocId(name)} className={cn(docsType.sectionTitle, "scroll-mt-10")}>
+            <Heading
+              id={headingId ?? (name ? docsTocId(name) : undefined)}
+              className={cn(docsType.sectionTitle, "scroll-mt-10")}
+            >
               {name}
-            </h2>
+            </Heading>
           ) : null}
           {description ? (
             <p className={cn(docsType.sectionDescription, name && "mt-1")}>

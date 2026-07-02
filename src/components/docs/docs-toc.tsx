@@ -1,10 +1,16 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { cn } from "@/lib/utils"
 
-type TocEntry = { id: string; text: string; level: 2 | 3 }
+type TocEntry = {
+  /** React list key — 항상 index 기반으로 유일 */
+  tocKey: string
+  id: string
+  text: string
+  level: 2 | 3
+}
 
 /**
  * shadcn·Material 스타일 우측 sticky TOC.
@@ -13,7 +19,8 @@ type TocEntry = { id: string; text: string; level: 2 | 3 }
  */
 export function DocsToc({ containerId }: { containerId?: string }) {
   const [entries, setEntries] = useState<TocEntry[]>([])
-  const [activeId, setActiveId] = useState<string | null>(null)
+  const [activeKey, setActiveKey] = useState<string | null>(null)
+  const nodesRef = useRef<HTMLElement[]>([])
 
   useEffect(() => {
     const root = containerId
@@ -25,36 +32,55 @@ export function DocsToc({ containerId }: { containerId?: string }) {
       const nodes = Array.from(
         root.querySelectorAll<HTMLElement>("h2[id], h3[id]")
       )
-      return nodes.map<TocEntry>((node) => ({
-        id: node.id,
-        text: node.textContent?.trim() ?? "",
-        level: node.tagName === "H2" ? 2 : 3,
-      }))
+      nodesRef.current = nodes
+
+      const idCount = new Map<string, number>()
+      const nextEntries = nodes.map<TocEntry>((node, index) => {
+        const occurrence = idCount.get(node.id) ?? 0
+        idCount.set(node.id, occurrence + 1)
+        if (process.env.NODE_ENV === "development" && occurrence > 0) {
+          console.warn(
+            `[DocsToc] 중복 heading id "${node.id}" — 고유 headingId를 지정하세요.`,
+            node
+          )
+        }
+        return {
+          tocKey: `toc-${index}`,
+          id: node.id,
+          text: node.textContent?.trim() ?? "",
+          level: node.tagName === "H2" ? 2 : 3,
+        }
+      })
+      setEntries(nextEntries)
     }
 
-    setEntries(collect())
+    collect()
 
-    const observer = new MutationObserver(() => setEntries(collect()))
+    const observer = new MutationObserver(() => collect())
     observer.observe(root, { childList: true, subtree: true })
     return () => observer.disconnect()
   }, [containerId])
 
   useEffect(() => {
-    if (entries.length === 0) return
+    const nodes = nodesRef.current
+    if (entries.length === 0 || nodes.length === 0) return
 
-    const nodes = entries
-      .map((entry) => document.getElementById(entry.id))
-      .filter((node): node is HTMLElement => node !== null)
-
-    if (nodes.length === 0) return
+    const keyByNode = new Map(
+      entries.map((entry, index) => [nodes[index], entry.tocKey] as const)
+    )
 
     const observer = new IntersectionObserver(
       (records) => {
         const visible = records
           .filter((record) => record.isIntersecting)
-          .sort((a, b) => a.target.getBoundingClientRect().top - b.target.getBoundingClientRect().top)
+          .sort(
+            (a, b) =>
+              a.target.getBoundingClientRect().top -
+              b.target.getBoundingClientRect().top
+          )
         if (visible.length > 0) {
-          setActiveId(visible[0].target.id)
+          const key = keyByNode.get(visible[0].target as HTMLElement)
+          if (key) setActiveKey(key)
         }
       },
       {
@@ -76,24 +102,24 @@ export function DocsToc({ containerId }: { containerId?: string }) {
     >
       <p className="mb-3 text-sm font-medium text-foreground">On this page</p>
       <ul className="space-y-1.5 border-l border-border">
-        {entries.map((entry) => (
-          <li key={entry.id}>
+        {entries.map((entry, index) => (
+          <li key={index}>
             <a
               href={`#${entry.id}`}
               onClick={(event) => {
                 event.preventDefault()
-                const target = document.getElementById(entry.id)
+                const target = nodesRef.current[index]
                 if (!target) return
                 target.scrollIntoView({ behavior: "smooth", block: "start" })
                 history.replaceState(null, "", `#${entry.id}`)
-                setActiveId(entry.id)
+                setActiveKey(entry.tocKey)
               }}
               className={cn(
                 "-ml-px block border-l text-sm leading-5 transition-colors duration-short ease-standard",
                 entry.level === 2 ? "pl-3" : "pl-6",
-                activeId === entry.id
+                activeKey === entry.tocKey
                   ? "border-foreground font-medium text-foreground"
-                  : "border-transparent text-foreground-muted hover:text-foreground"
+                  : "border-transparent text-foreground-muted hover:text-foreground data-[hovered=true]:text-foreground"
               )}
             >
               {entry.text}

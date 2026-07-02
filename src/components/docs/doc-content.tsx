@@ -114,9 +114,14 @@ export function DocCardGrid({
         <Link
           key={item.href}
           href={item.href}
-          className={cn("group rounded-xl border border-border bg-card transition-colors hover:bg-accent/50", docsSpace.pad)}
+          className={cn(
+            "group rounded-xl border border-border bg-card transition-colors hover:bg-accent/50 data-[hovered=true]:bg-accent/50",
+            docsSpace.pad
+          )}
         >
-          <p className="font-medium group-hover:text-primary">{item.title}</p>
+          <p className="font-medium group-hover:text-primary group-data-[hovered=true]:text-primary">
+            {item.title}
+          </p>
           <p className={cn("mt-1", docsType.bodyMuted)}>{item.description}</p>
         </Link>
       ))}
@@ -146,7 +151,7 @@ export function DocRelatedLinks({
         <Link
           key={item.href}
           href={item.href}
-          className="rounded-md border border-border bg-muted/30 px-2 py-0.5 font-mono text-sm hover:bg-accent"
+          className="rounded-md border border-border bg-muted/30 px-2 py-0.5 font-mono text-sm hover:bg-accent data-[hovered=true]:bg-accent"
         >
           {item.title}
         </Link>

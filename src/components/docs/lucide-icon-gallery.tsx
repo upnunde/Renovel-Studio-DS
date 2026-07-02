@@ -26,7 +26,7 @@ function IconTile({ name }: { name: string }) {
       className={cn(
         "flex w-full flex-col items-center rounded-lg border border-transparent text-center transition-colors",
         docsSpace.pad,
-        "hover:border-border hover:bg-muted/50"
+        "hover:border-border hover:bg-muted/50 data-[hovered=true]:border-border data-[hovered=true]:bg-muted/50"
       )}
     >
       <span className="flex size-9 items-center justify-center rounded-md bg-muted">
@@ -77,7 +77,10 @@ export function LucideIconGallery() {
             href="https://lucide.dev/icons/"
             target="_blank"
             rel="noopener noreferrer"
-            className={cn("shrink-0 underline-offset-4 hover:text-foreground hover:underline", docsType.bodyMuted)}
+            className={cn(
+              "shrink-0 underline-offset-4 hover:text-foreground hover:underline data-[hovered=true]:text-foreground data-[hovered=true]:underline",
+              docsType.bodyMuted
+            )}
           >
             전체 아이콘 보기 (Lucide) ↗
           </a>

@@ -1,6 +1,8 @@
 export type ColorToken = {
   name: string
   variable: string
+  /** 문서용 — 컴포넌트·상태에서의 실제 역할 */
+  role?: string
   /** tokens.css :root / .dark 매핑 — 시맨틱이 가리키는 원시 토큰 */
   source?: { light: string; dark: string }
 }
@@ -9,6 +11,13 @@ export type TokenGroup = {
   id: string
   title: string
   tokens: ColorToken[]
+}
+
+/** 시맨틱 팔레트 상위 그룹 — 카테고리(h2) → 서브그룹(h3) 2단 위계 */
+export type TokenCategory = {
+  id: string
+  title: string
+  groups: TokenGroup[]
 }
 
 export {
@@ -102,197 +111,337 @@ export const COLOR_PRIMITIVE_GROUPS: TokenGroup[] = [
   ...STATE_COLOR_GROUPS,
 ]
 
-/** tokens.css :root / .dark 와 동기화 — surface+foreground 페어 인접, 위계·역할별 그룹 */
-export const COLOR_SEMANTIC_GROUPS: TokenGroup[] = [
+/** tokens.css :root / .dark 와 동기화 — 카테고리(h2) → 서브그룹(h3) 2단 위계 */
+export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
   {
-    id: "surface-base",
-    title: "Surface · Base",
-    tokens: [
-      { name: "canvas", variable: "--canvas" },
-      { name: "background", variable: "--background" },
-      { name: "background-muted", variable: "--background-muted" },
-      { name: "background-muted-foreground", variable: "--background-muted-foreground" },
-      { name: "foreground", variable: "--foreground" },
+    id: "surface",
+    title: "Surface",
+    groups: [
+      {
+        id: "surface-base",
+        title: "Base",
+        tokens: [
+          { name: "canvas", variable: "--canvas" },
+          { name: "background", variable: "--background" },
+          {
+            name: "background-muted",
+            variable: "--background-muted",
+            role: "페이지·레이아웃 보조 면",
+          },
+          {
+            name: "background-muted-foreground",
+            variable: "--background-muted-foreground",
+            role: "background-muted 면 위 텍스트·아이콘",
+          },
+          { name: "foreground", variable: "--foreground" },
+        ],
+      },
+      {
+        id: "surface-elevated",
+        title: "Elevated · Card · Popover",
+        tokens: [
+          { name: "card", variable: "--card", role: "카드·패널 면" },
+          {
+            name: "card-foreground",
+            variable: "--card-foreground",
+            role: "card 면 위 텍스트·아이콘",
+          },
+          {
+            name: "popover",
+            variable: "--popover",
+            role: "플로팅 면 — card alias",
+          },
+          {
+            name: "popover-foreground",
+            variable: "--popover-foreground",
+            role: "popover 면 위 텍스트·아이콘 — card-foreground alias",
+          },
+          {
+            name: "card-muted",
+            variable: "--card-muted",
+            role: "카드 내 보조 면 — background-muted alias",
+          },
+          {
+            name: "card-muted-foreground",
+            variable: "--card-muted-foreground",
+            role: "card-muted 면 위 텍스트 — background-muted-foreground alias",
+          },
+        ],
+      },
+      {
+        id: "surface-inverse",
+        title: "Inverse",
+        tokens: [
+          { name: "inverse", variable: "--inverse" },
+          { name: "inverse-foreground", variable: "--inverse-foreground" },
+        ],
+      },
     ],
   },
   {
-    id: "surface-card",
-    title: "Surface · Card",
-    tokens: [
-      { name: "card", variable: "--card" },
-      { name: "card-foreground", variable: "--card-foreground" },
-      { name: "card-muted", variable: "--card-muted" },
-      { name: "card-muted-foreground", variable: "--card-muted-foreground" },
+    id: "foreground",
+    title: "Foreground",
+    groups: [
+      {
+        id: "foreground-hierarchy",
+        title: "Hierarchy",
+        tokens: [
+          { name: "foreground-muted", variable: "--foreground-muted" },
+          { name: "foreground-placeholder", variable: "--foreground-placeholder" },
+          { name: "foreground-disabled", variable: "--foreground-disabled" },
+        ],
+      },
     ],
   },
   {
-    id: "surface-popover",
-    title: "Surface · Popover",
-    tokens: [
-      { name: "popover", variable: "--popover" },
-      { name: "popover-foreground", variable: "--popover-foreground" },
+    id: "action",
+    title: "Action",
+    groups: [
+      {
+        id: "action-primary",
+        title: "Primary",
+        tokens: [
+          {
+            name: "primary",
+            variable: "--primary",
+            role: "주 액션 면 (filled 버튼·CTA)",
+          },
+          {
+            name: "primary-foreground",
+            variable: "--primary-foreground",
+            role: "primary 면 위 텍스트·아이콘",
+          },
+          {
+            name: "primary-container",
+            variable: "--primary-container",
+            role: "저채도 브랜드 컨테이너 면",
+          },
+          {
+            name: "primary-container-foreground",
+            variable: "--primary-container-foreground",
+            role: "primary-container 면 위 텍스트·아이콘",
+          },
+          {
+            name: "ring",
+            variable: "--ring",
+            role: "포커스 링 (브랜드)",
+          },
+        ],
+      },
     ],
   },
   {
-    id: "surface-inverse",
-    title: "Surface · Inverse",
-    tokens: [
-      { name: "inverse", variable: "--inverse" },
-      { name: "inverse-foreground", variable: "--inverse-foreground" },
+    id: "interaction",
+    title: "Interaction",
+    groups: [
+      {
+        id: "interaction-highlight-brand",
+        title: "Highlight · Brand",
+        tokens: [
+          {
+            name: "accent",
+            variable: "--accent",
+            role: "브랜드 호버·포커스·선택 하이라이트 (outline/ghost/select·menu)",
+          },
+          {
+            name: "accent-foreground",
+            variable: "--accent-foreground",
+            role: "highlight 면 위 텍스트·아이콘",
+          },
+        ],
+      },
+      {
+        id: "interaction-fill-neutral",
+        title: "Fill · Neutral",
+        tokens: [
+          {
+            name: "muted",
+            variable: "--muted",
+            role: "무채색 호버·크롬 면 (chip, tabs, skeleton, track) — grayscale-10",
+          },
+          {
+            name: "muted-foreground",
+            variable: "--muted-foreground",
+            role: "neutral fill 위 보조 텍스트",
+          },
+          {
+            name: "secondary",
+            variable: "--secondary",
+            role: "보조 버튼·배지 기본면 — muted alias (foreground만 별도)",
+          },
+          {
+            name: "secondary-foreground",
+            variable: "--secondary-foreground",
+            role: "secondary 면 위 텍스트·아이콘",
+          },
+        ],
+      },
     ],
   },
   {
-    id: "foreground-hierarchy",
-    title: "Foreground · Hierarchy",
-    tokens: [
-      { name: "foreground-muted", variable: "--foreground-muted" },
-      { name: "foreground-placeholder", variable: "--foreground-placeholder" },
-      { name: "foreground-disabled", variable: "--foreground-disabled" },
+    id: "state",
+    title: "State",
+    groups: [
+      {
+        id: "state-success",
+        title: "Success",
+        tokens: [
+          { name: "success", variable: "--success" },
+          { name: "success-foreground", variable: "--success-foreground" },
+        ],
+      },
+      {
+        id: "state-warning",
+        title: "Warning",
+        tokens: [
+          { name: "warning", variable: "--warning" },
+          { name: "warning-foreground", variable: "--warning-foreground" },
+        ],
+      },
+      {
+        id: "state-info",
+        title: "Info",
+        tokens: [
+          { name: "info", variable: "--info" },
+          { name: "info-foreground", variable: "--info-foreground" },
+        ],
+      },
+      {
+        id: "state-destructive",
+        title: "Destructive",
+        tokens: [
+          { name: "destructive", variable: "--destructive" },
+          { name: "destructive-foreground", variable: "--destructive-foreground" },
+          { name: "destructive-container", variable: "--destructive-container" },
+          { name: "destructive-container-foreground", variable: "--destructive-container-foreground" },
+        ],
+      },
     ],
   },
   {
-    id: "emphasis-primary",
-    title: "Emphasis · Primary",
-    tokens: [
-      { name: "primary", variable: "--primary" },
-      { name: "primary-foreground", variable: "--primary-foreground" },
-      { name: "primary-container", variable: "--primary-container" },
-      { name: "primary-container-foreground", variable: "--primary-container-foreground" },
-      { name: "ring", variable: "--ring" },
-    ],
-  },
-  {
-    id: "emphasis-accent",
-    title: "Emphasis · Accent",
-    tokens: [
-      { name: "accent", variable: "--accent" },
-      { name: "accent-foreground", variable: "--accent-foreground" },
-    ],
-  },
-  {
-    id: "interaction-secondary",
-    title: "Interaction · Secondary",
-    tokens: [
-      { name: "secondary", variable: "--secondary" },
-      { name: "secondary-foreground", variable: "--secondary-foreground" },
-      { name: "secondary-container", variable: "--secondary-container" },
-      { name: "secondary-container-foreground", variable: "--secondary-container-foreground" },
-    ],
-  },
-  {
-    id: "interaction-muted",
-    title: "Interaction · Muted",
-    tokens: [
-      { name: "muted", variable: "--muted" },
-      { name: "muted-foreground", variable: "--muted-foreground" },
-    ],
-  },
-  {
-    id: "state-success",
-    title: "State · Success",
-    tokens: [
-      { name: "success", variable: "--success" },
-      { name: "success-foreground", variable: "--success-foreground" },
-    ],
-  },
-  {
-    id: "state-warning",
-    title: "State · Warning",
-    tokens: [
-      { name: "warning", variable: "--warning" },
-      { name: "warning-foreground", variable: "--warning-foreground" },
-    ],
-  },
-  {
-    id: "state-info",
-    title: "State · Info",
-    tokens: [
-      { name: "info", variable: "--info" },
-      { name: "info-foreground", variable: "--info-foreground" },
-    ],
-  },
-  {
-    id: "state-destructive",
-    title: "State · Destructive",
-    tokens: [
-      { name: "destructive", variable: "--destructive" },
-      { name: "destructive-foreground", variable: "--destructive-foreground" },
-      { name: "destructive-container", variable: "--destructive-container" },
-      { name: "destructive-container-foreground", variable: "--destructive-container-foreground" },
-    ],
-  },
-  {
-    id: "ui-border",
-    title: "UI · Border",
-    tokens: [
-      { name: "border", variable: "--border" },
-      { name: "border-strong", variable: "--border-strong" },
-      { name: "border-inverse", variable: "--border-inverse" },
-    ],
-  },
-  {
-    id: "ui-divider",
-    title: "UI · Divider",
-    tokens: [
-      { name: "divider", variable: "--divider" },
-      { name: "divider-strong", variable: "--divider-strong" },
-    ],
-  },
-  {
-    id: "ui-input-disabled",
-    title: "UI · Input · Disabled",
-    tokens: [
-      { name: "input", variable: "--input" },
-      { name: "disabled", variable: "--disabled" },
-      { name: "disabled-foreground", variable: "--disabled-foreground" },
-      { name: "disabled-border", variable: "--disabled-border" },
+    id: "ui-chrome",
+    title: "UI",
+    groups: [
+      {
+        id: "ui-border",
+        title: "Border",
+        tokens: [
+          { name: "border", variable: "--border" },
+          { name: "border-strong", variable: "--border-strong" },
+          { name: "border-inverse", variable: "--border-inverse" },
+        ],
+      },
+      {
+        id: "ui-divider",
+        title: "Divider",
+        tokens: [
+          { name: "divider", variable: "--divider", role: "구분선 — muted alias (라이트·다크)" },
+          { name: "divider-strong", variable: "--divider-strong" },
+        ],
+      },
+      {
+        id: "ui-input-disabled",
+        title: "Input · Disabled",
+        tokens: [
+          { name: "input", variable: "--input" },
+          {
+            name: "disabled",
+            variable: "--disabled",
+            role: "비활성 면 — 라이트: muted alias, 다크: 전용",
+          },
+          { name: "disabled-foreground", variable: "--disabled-foreground" },
+          {
+            name: "disabled-border",
+            variable: "--disabled-border",
+            role: "비활성 보더 — 라이트: border alias",
+          },
+        ],
+      },
     ],
   },
   {
     id: "overlay",
-    title: "Overlay · Dim",
-    tokens: [
-      { name: "dim-10", variable: "--dim-10" },
-      { name: "dim-20", variable: "--dim-20" },
-      { name: "dim-30", variable: "--dim-30" },
-      { name: "dim-40", variable: "--dim-40" },
+    title: "Overlay",
+    groups: [
+      {
+        id: "overlay-dim",
+        title: "Dim",
+        tokens: [
+          { name: "dim-10", variable: "--dim-10" },
+          { name: "dim-20", variable: "--dim-20" },
+          { name: "dim-30", variable: "--dim-30" },
+          { name: "dim-40", variable: "--dim-40" },
+        ],
+      },
     ],
   },
   {
     id: "chart",
     title: "Chart",
-    tokens: [
-      { name: "chart-1", variable: "--chart-1" },
-      { name: "chart-2", variable: "--chart-2" },
-      { name: "chart-3", variable: "--chart-3" },
-      { name: "chart-4", variable: "--chart-4" },
-      { name: "chart-5", variable: "--chart-5" },
+    groups: [
+      {
+        id: "chart-series",
+        title: "Series",
+        tokens: [
+          { name: "chart-1", variable: "--chart-1" },
+          { name: "chart-2", variable: "--chart-2" },
+          { name: "chart-3", variable: "--chart-3" },
+          { name: "chart-4", variable: "--chart-4" },
+          { name: "chart-5", variable: "--chart-5" },
+        ],
+      },
     ],
   },
   {
-    id: "sidebar-base",
-    title: "Sidebar · Base",
-    tokens: [
-      { name: "sidebar", variable: "--sidebar" },
-      { name: "sidebar-foreground", variable: "--sidebar-foreground" },
-    ],
-  },
-  {
-    id: "sidebar-emphasis",
-    title: "Sidebar · Emphasis",
-    tokens: [
-      { name: "sidebar-primary", variable: "--sidebar-primary" },
-      { name: "sidebar-primary-foreground", variable: "--sidebar-primary-foreground" },
-      { name: "sidebar-accent", variable: "--sidebar-accent" },
-      { name: "sidebar-accent-foreground", variable: "--sidebar-accent-foreground" },
-    ],
-  },
-  {
-    id: "sidebar-ui",
-    title: "Sidebar · UI",
-    tokens: [
-      { name: "sidebar-border", variable: "--sidebar-border" },
-      { name: "sidebar-ring", variable: "--sidebar-ring" },
+    id: "sidebar",
+    title: "Sidebar",
+    groups: [
+      {
+        id: "sidebar-aliases",
+        title: "Context aliases",
+        tokens: [
+          {
+            name: "sidebar",
+            variable: "--sidebar",
+            role: "사이드바 면 — background alias",
+          },
+          {
+            name: "sidebar-foreground",
+            variable: "--sidebar-foreground",
+            role: "사이드바 텍스트 — foreground alias",
+          },
+          {
+            name: "sidebar-primary",
+            variable: "--sidebar-primary",
+            role: "사이드바 주 액션 — primary alias",
+          },
+          {
+            name: "sidebar-primary-foreground",
+            variable: "--sidebar-primary-foreground",
+            role: "sidebar-primary 텍스트 — primary-foreground alias",
+          },
+          {
+            name: "sidebar-accent",
+            variable: "--sidebar-accent",
+            role: "사이드바 호버·선택 — accent alias",
+          },
+          {
+            name: "sidebar-accent-foreground",
+            variable: "--sidebar-accent-foreground",
+            role: "sidebar-accent 텍스트 — accent-foreground alias",
+          },
+          {
+            name: "sidebar-border",
+            variable: "--sidebar-border",
+            role: "사이드바 구분선 — 라이트: border, 다크: input alias",
+          },
+          {
+            name: "sidebar-ring",
+            variable: "--sidebar-ring",
+            role: "사이드바 포커스 링 — ring alias",
+          },
+        ],
+      },
     ],
   },
 ]

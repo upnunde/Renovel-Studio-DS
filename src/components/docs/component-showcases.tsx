@@ -167,6 +167,25 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
+      <ComponentCaseGroup title="Hover (snapshot)">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="outline → accent" tags={["hover", "accent"]}>
+            <Button variant="outline" data-hovered>
+              Label
+            </Button>
+          </ComponentCase>
+          <ComponentCase label="secondary → accent" tags={["hover", "accent"]}>
+            <Button variant="secondary" data-hovered>
+              Label
+            </Button>
+          </ComponentCase>
+          <ComponentCase label="default → inverse/80" tags={["hover", "inverse/80"]}>
+            <Button variant="default" data-hovered>
+              Label
+            </Button>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
 
       <ComponentCaseGroup title="Shape">
         <ComponentCaseGrid columns={2}>
@@ -435,6 +454,20 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
+      <ComponentCaseGroup title="Hover (snapshot)">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="default → accent" tags={["hover", "accent"]}>
+            <Toggle data-hovered aria-label="굵게">
+              <Icon icon={ICONS.formatBold} size="md" />
+            </Toggle>
+          </ComponentCase>
+          <ComponentCase label="outline → accent" tags={["hover", "accent"]}>
+            <Toggle variant="outline" data-hovered aria-label="기울임">
+              <Icon icon={ICONS.formatItalic} size="md" />
+            </Toggle>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
       <ComponentCaseGroup title="Size">
         <ComponentCaseGrid columns={3}>
           {CONTROL_FORM_SIZE_APIS.map((size) => {
@@ -491,6 +524,23 @@ const SHOWCASES: Record<string, ReactNode> = {
             <Chip variant="default">기본</Chip>
             <Chip variant="default" defaultPressed>
               선택됨
+            </Chip>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Hover (snapshot)">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="outline → muted" tags={["hover", "muted"]}>
+            <Chip data-hovered>전자제품</Chip>
+          </ComponentCase>
+          <ComponentCase label="subtle → text 강조" tags={["hover", "muted + foreground"]}>
+            <Chip variant="subtle" data-hovered>
+              전자제품
+            </Chip>
+          </ComponentCase>
+          <ComponentCase label="default → muted" tags={["hover", "muted"]}>
+            <Chip variant="default" data-hovered>
+              기본
             </Chip>
           </ComponentCase>
         </ComponentCaseGrid>
@@ -756,6 +806,32 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   select: (
     <Showcase slug="select">
+      <ComponentCaseGroup title="Hover (snapshot)">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="trigger → accent" tags={["hover", "accent"]}>
+            <Select>
+              <SelectTrigger className="w-full max-w-xs" data-hovered>
+                <SelectValue placeholder="선택" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="a">옵션 A</SelectItem>
+              </SelectContent>
+            </Select>
+          </ComponentCase>
+          <ComponentCase label="item focus → accent" tags={["focus", "accent"]}>
+            <Select>
+              <SelectTrigger className="w-full max-w-xs">
+                <SelectValue placeholder="항목 포커스 확인" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="a" data-hovered>
+                  옵션 A
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
       <ComponentCaseGroup title="Size">
         <ComponentCaseGrid columns={3}>
           {CONTROL_FORM_SIZE_APIS.map((size) => {
@@ -897,6 +973,31 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
           <ComponentCase label="link" tags={["variant: link", "h20"]}>
             <Badge variant="link">link</Badge>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Hover (snapshot)">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="ghost → accent" tags={["hover", "accent"]}>
+            <Badge variant="ghost" data-hovered>
+              ghost
+            </Badge>
+          </ComponentCase>
+          <ComponentCase label="outline link → accent" tags={["hover", "accent"]}>
+            <Badge
+              variant="outline"
+              render={<a href="#" data-hovered onClick={(event) => event.preventDefault()} />}
+            >
+              outline-link
+            </Badge>
+          </ComponentCase>
+          <ComponentCase label="secondary link → secondary/80" tags={["hover", "secondary/80"]}>
+            <Badge
+              variant="secondary"
+              render={<a href="#" data-hovered onClick={(event) => event.preventDefault()} />}
+            >
+              secondary-link
+            </Badge>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
@@ -1051,6 +1152,30 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
+      <ComponentCaseGroup title="Hover (snapshot)">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="default variant → muted" tags={["hover", "muted"]}>
+            <Tabs defaultValue="series" className="max-w-md">
+              <TabsList>
+                <TabsTrigger value="series">시리즈</TabsTrigger>
+                <TabsTrigger value="character" data-hovered>
+                  캐릭터
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </ComponentCase>
+          <ComponentCase label="line variant → accent" tags={["hover", "accent"]}>
+            <Tabs defaultValue="tab1" className="max-w-md">
+              <TabsList variant="line">
+                <TabsTrigger value="tab1">탭 1</TabsTrigger>
+                <TabsTrigger value="tab2" data-hovered>
+                  탭 2
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
       <ComponentCaseGroup title="Size">
         <ComponentCaseGrid columns={3}>
           {TABS_SIZE_APIS.map((size) => {
@@ -1121,6 +1246,32 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
           <ComponentCase label="icon + select" tags={["leading-icon · RadioItem"]}>
             <DropdownMenuLeadingIconSelectDemo />
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Hover (snapshot)">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="default item → accent" tags={["hover", "accent"]}>
+            <DropdownMenu>
+              <DropdownMenuTrigger render={<Button variant="outline" />}>
+                메뉴
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem data-hovered>프로필</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </ComponentCase>
+          <ComponentCase label="destructive item → destructive/10" tags={["hover", "destructive"]}>
+            <DropdownMenu>
+              <DropdownMenuTrigger render={<Button variant="outline" />}>
+                메뉴
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem variant="destructive" data-hovered>
+                  로그아웃
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>

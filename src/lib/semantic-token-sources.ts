@@ -20,11 +20,11 @@ const LIGHT: Record<string, string> = {
   "--primary-foreground": "white",
   "--primary-container": "brand-100",
   "--primary-container-foreground": "brand-500",
-  "--secondary": "grayscale-15",
+  "--secondary": "grayscale-10",
   "--secondary-foreground": "grayscale-140",
   "--secondary-container": "grayscale-110",
   "--secondary-container-foreground": "white",
-  "--muted": "grayscale-15",
+  "--muted": "grayscale-10",
   "--muted-foreground": "grayscale-90",
   "--accent": "brand-50",
   "--accent-foreground": "brand-600",
@@ -36,7 +36,7 @@ const LIGHT: Record<string, string> = {
   "--dim-20": "black-opacity-60",
   "--dim-30": "black-opacity-80",
   "--dim-40": "black-opacity-90",
-  "--divider": "grayscale-15",
+  "--divider": "grayscale-10",
   "--divider-strong": "grayscale-30",
   "--border-strong": "grayscale-140",
   "--border-inverse": "white",
@@ -48,7 +48,7 @@ const LIGHT: Record<string, string> = {
   "--info-foreground": "white",
   "--border": "grayscale-20",
   "--input": "grayscale-30",
-  "--disabled": "grayscale-15",
+  "--disabled": "grayscale-10",
   "--disabled-foreground": "grayscale-60",
   "--disabled-border": "grayscale-20",
   "--ring": "brand-500",
@@ -135,12 +135,68 @@ const DARK: Record<string, string> = {
   "--sidebar-ring": "brand-400",
 }
 
+/** tokens.css 시맨틱 alias — Maps to 컬럼에 체인 표시 */
+const ALIAS_LIGHT: Record<string, string> = {
+  "--secondary": "--muted",
+  "--card-muted": "--background-muted",
+  "--card-muted-foreground": "--background-muted-foreground",
+  "--popover": "--card",
+  "--popover-foreground": "--card-foreground",
+  "--divider": "--muted",
+  "--disabled": "--muted",
+  "--disabled-border": "--border",
+  "--sidebar": "--background",
+  "--sidebar-foreground": "--foreground",
+  "--sidebar-primary": "--primary",
+  "--sidebar-primary-foreground": "--primary-foreground",
+  "--sidebar-accent": "--accent",
+  "--sidebar-accent-foreground": "--accent-foreground",
+  "--sidebar-border": "--border",
+  "--sidebar-ring": "--ring",
+}
+
+const ALIAS_DARK: Record<string, string> = {
+  "--secondary": "--muted",
+  "--card-muted": "--background-muted",
+  "--card-muted-foreground": "--background-muted-foreground",
+  "--popover": "--card",
+  "--popover-foreground": "--card-foreground",
+  "--divider": "--muted",
+  "--secondary-container": "--muted",
+  "--sidebar": "--background",
+  "--sidebar-foreground": "--foreground",
+  "--sidebar-primary": "--primary",
+  "--sidebar-primary-foreground": "--primary-foreground",
+  "--sidebar-accent": "--accent",
+  "--sidebar-accent-foreground": "--accent-foreground",
+  "--sidebar-border": "--input",
+  "--sidebar-ring": "--ring",
+}
+
+function resolveRawSource(
+  variable: string,
+  theme: "light" | "dark",
+  visited = new Set<string>()
+): string {
+  if (visited.has(variable)) return "—"
+  visited.add(variable)
+
+  const aliases = theme === "dark" ? ALIAS_DARK : ALIAS_LIGHT
+  const map = theme === "dark" ? DARK : LIGHT
+  const aliasTarget = aliases[variable]
+
+  if (aliasTarget) {
+    const raw = resolveRawSource(aliasTarget, theme, visited)
+    const aliasName = aliasTarget.replace(/^--/, "")
+    return `${aliasName} → ${raw}`
+  }
+
+  return map[variable] ?? "—"
+}
+
 export function getSemanticTokenSource(
   variable: string,
   theme: "light" | "dark"
 ): string {
-  const map = theme === "dark" ? DARK : LIGHT
-  const source = map[variable]
-  if (!source) return "—"
-  return source
+  return resolveRawSource(variable, theme)
 }
