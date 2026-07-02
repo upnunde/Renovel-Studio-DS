@@ -47,7 +47,7 @@ const LIGHT: Record<string, string> = {
   "--info": "info-500",
   "--info-foreground": "white",
   "--border": "grayscale-20",
-  "--input": "grayscale-30",
+  "--input": "grayscale-20",
   "--disabled": "grayscale-10",
   "--disabled-foreground": "grayscale-60",
   "--disabled-border": "grayscale-20",

@@ -28,7 +28,7 @@ npx shadcn@latest add <component-name>
 - 배경·전경·테두리: `bg-background`, `text-foreground`, `border-border` 등 **시맨틱 토큰** 사용.
 - `zinc-*`, `#hex` 등 하드코딩 색상은 레거시·일회성이 아니면 지양.
 - **컬러 작업은 라이트 모드(`:root`)를 정본**으로 정의하고, 다크 모드(`.dark`)는 같은 역할명에 맞는 토큰으로 대응한다.
-- 보더·사이드바 보더(라이트): `--border` · `--sidebar-border` → `grayscale-20` / `--input` → `grayscale-30` / 다크: `grayscale-110`.
+- 보더·인풋·사이드바 보더(라이트): `--border` · `--input` · `--sidebar-border` → `grayscale-20` / 다크: `border` `grayscale-130` · `input` · `sidebar-border` → `grayscale-110`.
 - **기본 표면**(background·card)은 `border-border`만 — shadow·`ring-foreground/10` elevation 지양. 부유 레이어(Popover·Menu·Dialog)만 `shadow-md` 등.
 - 다크 모드: `next-themes` + `class="dark"` (`.dark` 변수 세트).
 - 아이콘: **Lucide React** (shadcn 기본) — `lucide-react`, `<Icon icon={ICONS.check} size="md" />` (`src/components/icons`, `src/components/ui/icon.tsx`).

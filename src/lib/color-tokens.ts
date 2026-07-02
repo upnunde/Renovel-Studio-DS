@@ -343,7 +343,7 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         id: "ui-input-disabled",
         title: "Input · Disabled",
         tokens: [
-          { name: "input", variable: "--input" },
+          { name: "input", variable: "--input", role: "인풋·셀렉트 보더 — 라이트 grayscale-20" },
           {
             name: "disabled",
             variable: "--disabled",

@@ -11,11 +11,12 @@
 - **토큰** — `--muted` 라이트 `grayscale-10`, Badge secondary 호버 accent 정렬, Tabs `text-foreground-muted`
 - **배포** — `design-system` **v0.1.2** 태그, 리노벨 스튜디오 `package.json` `#v0.1.4` 연동
 - **icons** — `ICON_REGISTRY` export 정리, `icons/index.ts` 제거·`icons.ts` 정본 통합
-- **배포** — `design-system` **v0.1.4** 태그·리노벨 스튜디오 `#v0.1.4` 연동 준비
+- **배포** — `design-system` **v0.1.4** 태그·리노벨 `#v0.1.4`
+- **토큰** — `--input` 라이트 `grayscale-20`, **v0.1.5** 배포·리노벨 연동
 
 ## 다음에 할 일
 
-- 리노벨 스튜디오에서 `npm install` 후 UI 회귀 확인 (v0.1.4)
+- 리노벨 스튜디오 Input·Select 보더 톤 확인 (v0.1.5)
 - 플로팅 버튼(FAB) 컴포넌트 검토
 - Figma 연동 (필요 시)
 

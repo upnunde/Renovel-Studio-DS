@@ -195,9 +195,9 @@
   --info: var(--info-500);
   --info-foreground: var(--white);
 
-  /* UI · 경계 — 라이트: border·sidebar grayscale-20 · input grayscale-30 */
+  /* UI · 경계 — 라이트: border·input·sidebar-border grayscale-20 */
   --border: var(--grayscale-20);
-  --input: var(--grayscale-30);
+  --input: var(--grayscale-20);
   --ring: var(--brand-500);
 
   /* Container 페어 — Material container 패턴을 shadcn 페어 컨벤션으로 흡수 */

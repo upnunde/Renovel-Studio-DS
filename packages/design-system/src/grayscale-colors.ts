@@ -19,7 +19,7 @@ export const GRAYSCALE_SCALE: GrayscaleStep[] = [
   { name: "grayscale-10", variable: "--grayscale-10", hex: "#F8F8FC", role: "은은한 배경 틴트" },
   { name: "grayscale-15", variable: "--grayscale-15", hex: "#F1F1F5", role: "원시 스케일 (시맨틱 미연결)" },
   { name: "grayscale-20", variable: "--grayscale-20", hex: "#E7E7EB", role: "border" },
-  { name: "grayscale-30", variable: "--grayscale-30", hex: "#D7D7DB", role: "input" },
+  { name: "grayscale-30", variable: "--grayscale-30", hex: "#D7D7DB", role: "divider-strong · 구분선 강조" },
   { name: "grayscale-40", variable: "--grayscale-40", hex: "#C6C6CA", role: "비활성 보더" },
   { name: "grayscale-50", variable: "--grayscale-50", hex: "#B6B6BA", role: "비활성 보더" },
   { name: "grayscale-60", variable: "--grayscale-60", hex: "#A5A5A9", role: "플레이스홀더" },
