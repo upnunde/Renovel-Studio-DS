@@ -7,6 +7,10 @@
 @import "../../packages/design-system/src/icons.css";
 @import "../../packages/design-system/src/fonts.css";
 @import "../../packages/design-system/src/typography.css";
+@import "../../packages/design-system/src/button-group.css";
+@import "../../packages/design-system/src/tabs.css";
+@import "../../packages/design-system/src/avatar.css";
+@import "../../packages/design-system/src/alert.css";
 
 @custom-variant dark (&:is(.dark *));
 

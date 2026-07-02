@@ -9,27 +9,30 @@ import {
   DocsTableTd,
   DocsTableTh,
 } from "@/components/docs/docs-table"
-import { SPACING_SCALE, formatSpacingToken } from "design-system/spacing-tokens"
+import {
+  SEMANTIC_SPACE_GROUPS,
+  SPACING_SCALE,
+  formatSpacingToken,
+} from "design-system/spacing-tokens"
 import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
 import { cn } from "@/lib/utils"
 
 const gapExamples = [
-  { utility: "gap-px", label: "px_1", variable: "--space-px", px: 1 },
+  { utility: "gap-px", label: "px", variable: "--space-px", px: 1 },
   { utility: "gap-0.5", label: "0.5_2", variable: "--space-0-5", px: 2 },
-  { utility: "gap-1", label: "1_4", variable: "--space-1", px: 4 },
   { utility: "gap-2", label: "2_8", variable: "--space-2", px: 8 },
   { utility: "gap-4", label: "4_16", variable: "--space-4", px: 16 },
   { utility: "gap-6", label: "6_24", variable: "--space-6", px: 24 },
-  { utility: "gap-8", label: "8_32", variable: "--space-8", px: 32 },
   { utility: "gap-10", label: "10_40", variable: "--space-10", px: 40 },
+  { utility: "gap-16", label: "16_64", variable: "--space-16", px: 64 },
 ] as const
 
 export function FoundationSpacingShowcase() {
   return (
     <div className={docsSpace.stack}>
       <div
-        className="hidden gap-px gap-0.5 gap-1 gap-2 gap-3 gap-4 gap-5 gap-6 gap-7 gap-8 gap-9 gap-10 w-px w-0.5 w-1 w-2 w-3 w-4 w-5 w-6 w-7 w-8 w-9 w-10"
+        className="hidden gap-px gap-0.5 gap-1 gap-2 gap-3 gap-4 gap-5 gap-6 gap-8 gap-10 gap-12 gap-16 gap-20 w-px w-0.5 w-1 w-2 w-3 w-4 w-5 w-6 w-8 w-10 w-12 w-16 w-20"
         aria-hidden
       />
 
@@ -83,6 +86,40 @@ export function FoundationSpacingShowcase() {
           ))}
         </div>
       </ShowcaseBlock>
+
+      {SEMANTIC_SPACE_GROUPS.map((group) => (
+        <ShowcaseBlock
+          key={group.id}
+          name={`Semantic · ${group.title}`}
+          flush
+        >
+          <DocsTable>
+            <DocsTableColGroup columns={4} />
+            <DocsTableHead>
+              <DocsTableHeaderRow>
+                <DocsTableTh>Key</DocsTableTh>
+                <DocsTableTh>Tailwind</DocsTableTh>
+                <DocsTableTh>px</DocsTableTh>
+                <DocsTableTh>Usage</DocsTableTh>
+              </DocsTableHeaderRow>
+            </DocsTableHead>
+            <DocsTableBody>
+              {group.tokens.map((token) => (
+                <DocsTableRow key={`${group.id}-${token.key}`}>
+                  <DocsTableTd mono>{`space.${group.id}.${token.key}`}</DocsTableTd>
+                  <DocsTableTd mono muted>
+                    {token.className}
+                  </DocsTableTd>
+                  <DocsTableTd mono muted>
+                    {token.px}px
+                  </DocsTableTd>
+                  <DocsTableTd muted>{token.description}</DocsTableTd>
+                </DocsTableRow>
+              ))}
+            </DocsTableBody>
+          </DocsTable>
+        </ShowcaseBlock>
+      ))}
     </div>
   )
 }

@@ -1,9 +1,9 @@
 "use client"
 
 import { ICONS } from "@/components/icons"
-import { Icon } from "@/components/ui/icon"
+import { Icon } from "design-system/ui/icon"
 import { useTheme } from "next-themes"
-import { Button } from "@/components/ui/button"
+import { Button } from "design-system/ui/button"
 
 export function ModeToggle() {
   const { resolvedTheme, setTheme } = useTheme()

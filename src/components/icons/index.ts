@@ -6,6 +6,7 @@ import {
   ChevronUp,
   CircleAlert,
   CircleCheck,
+  Home,
   Info,
   Italic,
   Loader2,
@@ -22,6 +23,7 @@ import {
 export const ICONS = {
   check: Check,
   close: X,
+  home: Home,
   formatBold: Bold,
   formatItalic: Italic,
   formatUnderlined: Underline,
@@ -59,7 +61,7 @@ export const ICON_REGISTRY: IconRegistryGroup[] = [
     title: "텍스트 서식",
     description: "에디터·토글·서식 버튼",
     icons: [
-      { name: "Bold", icon: ICONS.formatBold, usage: "Button · Toggle" },
+      { name: "Bold", icon: ICONS.formatBold, usage: "Toggle · 서식 툴바" },
       { name: "Italic", icon: ICONS.formatItalic, usage: "Button · Toggle" },
       { name: "Underline", icon: ICONS.formatUnderlined, usage: "Button · Toggle" },
     ],
@@ -69,6 +71,7 @@ export const ICON_REGISTRY: IconRegistryGroup[] = [
     title: "네비게이션",
     description: "펼침·이동·계층",
     icons: [
+      { name: "Home", icon: ICONS.home, usage: "Button · 리드 아이콘 데모" },
       { name: "ChevronDown", icon: ICONS.chevronDown, usage: "Select · Accordion · Dropdown" },
       { name: "ChevronRight", icon: ICONS.chevronRight, usage: "Dropdown submenu" },
     ],

@@ -2,7 +2,7 @@ import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
 
 import { cn } from "@/lib/utils"
 import { uiDisabledInteractive } from "@/lib/ui-disabled"
-import { Icon } from "@/components/ui/icon"
+import { Icon } from "design-system/ui/icon"
 import { ICONS } from "@/components/icons"
 
 function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
@@ -35,7 +35,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          `group/accordion-trigger relative flex flex-1 items-start justify-between rounded-lg border border-transparent py-2.5 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:after:border-ring ${uiDisabledInteractive} **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:text-muted-foreground`,
+          `group/accordion-trigger relative flex flex-1 items-start justify-between rounded-lg border border-transparent py-2.5 text-left text-sm font-medium transition-all duration-short ease-standard outline-none hover:underline focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:after:border-ring ${uiDisabledInteractive} **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:text-foreground-muted`,
           className
         )}
         {...props}
@@ -45,7 +45,7 @@ function AccordionTrigger({
           icon={ICONS.chevronDown}
           size="md"
           data-slot="accordion-trigger-icon"
-          className="ml-auto text-muted-foreground transition-transform duration-200 group-aria-expanded/accordion-trigger:rotate-180"
+          className="ml-auto text-foreground-muted transition-transform duration-short ease-standard group-aria-expanded/accordion-trigger:rotate-180"
         />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>

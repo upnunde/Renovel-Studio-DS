@@ -2,6 +2,8 @@
 
 # 작업 일지 일별 스냅샷 (로컬 백업 — WORKLOG.md 본문은 Git 추적)
 docs/wip/history/
+# 핸드오프 inbox (Hook 버퍼 — HANDOFF.md에 병합 후 비움)
+docs/wip/.handoff-inbox.md
 
 # dependencies
 /node_modules

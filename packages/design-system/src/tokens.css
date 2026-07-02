@@ -3,7 +3,7 @@
  * 톤앤매너: 그레이스케일 기반 · 브랜드(#F642D4)는 버튼·선택·호버·강조
  */
 :root {
-  --radius: 0.625rem;
+  --radius: 0.75rem;
   --stroke-width: 0.5px;
 
   /* Icon — Lucide stroke · 컴포넌트 높이와 정렬 */
@@ -14,7 +14,25 @@
   --icon-size-xl: 1.25rem;
   --icon-stroke-width: 1.5;
 
-  /* Spacing — 1px · 2px · 4px 단위 · 최대 40px */
+  /* Motion — duration·easing
+   * 안무 규칙(Material 참고):
+   *  - 인터랙티브 상태 전환(hover/focus/pressed) → short + standard
+   *  - 등장(enter, decelerate) → medium + emphasized-decelerate
+   *  - 퇴장(exit, accelerate) → short + emphasized-accelerate
+   *  - 컴포넌트 내부 이동(thumb 등) → short + standard
+   */
+  --motion-duration-short: 100ms;
+  --motion-duration-medium: 200ms;
+  --motion-duration-long: 400ms;
+  --motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  /* Spacing — Material 결 13단계
+   *  미세: 1px · 2px
+   *  4px 그리드 (1~6): 4 · 8 · 12 · 16 · 20 · 24
+   *  8px 점프 (24 이후): 32 · 40 · 48 · 64 · 80
+   */
   --space-px: 1px;
   --space-0-5: 0.125rem;
   --space-1: 0.25rem;
@@ -23,10 +41,11 @@
   --space-4: 1rem;
   --space-5: 1.25rem;
   --space-6: 1.5rem;
-  --space-7: 1.75rem;
   --space-8: 2rem;
-  --space-9: 2.25rem;
   --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
 
   /* Grayscale scale — #FFFFFF (0) · 쿨 블루 틴트 · #F8F8FC (10) → #212124 (140) */
   --grayscale-0: #ffffff;
@@ -134,8 +153,23 @@
   --foreground: var(--grayscale-140);
   --card: var(--white);
   --card-foreground: var(--grayscale-140);
+  --background-muted: var(--grayscale-10);
+  --background-muted-foreground: var(--grayscale-140);
+  --card-muted: var(--grayscale-10);
+  --card-muted-foreground: var(--grayscale-140);
   --popover: var(--white);
   --popover-foreground: var(--grayscale-140);
+
+  /* 반전 표면 — primary/card 와 같은 페어 패턴 (bg-inverse text-inverse-foreground) */
+  --inverse: var(--grayscale-140);
+  --inverse-foreground: var(--white);
+
+  /* Foreground 위계 — 모두 같은 foreground 패밀리, 시각적 위계만 다름
+   * 정책: --{role}-foreground 는 짝 surface 안에서만, 위계만 다른 보조 텍스트·아이콘은 이 토큰들로
+   */
+  --foreground-muted: var(--grayscale-110);
+  --foreground-placeholder: var(--grayscale-70);
+  --foreground-disabled: var(--grayscale-60);
 
   /* 강조 · 액션 — 브랜드 */
   --primary: var(--brand-500);
@@ -164,16 +198,49 @@
   --input: var(--grayscale-30);
   --ring: var(--brand-500);
 
-  /* 비활성 — grayscale-40/50/60 기반 */
+  /* Container 페어 — Material container 패턴을 shadcn 페어 컨벤션으로 흡수 */
+  --primary-container: var(--brand-100);
+  --primary-container-foreground: var(--brand-500);
+  --secondary-container: var(--grayscale-110);
+  --secondary-container-foreground: var(--white);
+  --destructive-container: var(--error-100);
+  --destructive-container-foreground: var(--error-600);
+
+  /* Dim — overlay 농도 4단계 · 라이트·다크 공통(black-opacity, 항상 어둡게) */
+  --dim-10: var(--black-opacity-10);
+  --dim-20: var(--black-opacity-60);
+  --dim-30: var(--black-opacity-80);
+  --dim-40: var(--black-opacity-90);
+
+  /* Divider — 시각적 분리선 전용 (border와 분리) */
+  --divider: var(--grayscale-15);
+  --divider-strong: var(--grayscale-30);
+
+  /* Border 강조·반전 */
+  --border-strong: var(--grayscale-140);
+  --border-inverse: var(--white);
+
+  /* Elevation — Material 결 6단계 그림자
+   *  10·20: 카드·인풋 호버  ·  30·40: 드롭다운·팝오버  ·  50·60: 모달·바텀시트
+   */
+  --shadow-elevation-10: 0px 1px 2px 1px rgba(0, 0, 0, 0.06);
+  --shadow-elevation-20: 0px 2px 4px 2px rgba(0, 0, 0, 0.06);
+  --shadow-elevation-30: 0px 4px 8px 3px rgba(0, 0, 0, 0.06);
+  --shadow-elevation-40: 0px 8px 12px 4px rgba(0, 0, 0, 0.06);
+  --shadow-elevation-50: 0px 8px 16px 6px rgba(0, 0, 0, 0.06);
+  --shadow-elevation-60: 0px 12px 24px 8px rgba(0, 0, 0, 0.06);
+
+  /* 비활성 — grayscale-15/20/60 기반 */
   --disabled: var(--grayscale-15);
   --disabled-foreground: var(--grayscale-60);
-  --disabled-border: var(--grayscale-40);
+  --disabled-border: var(--grayscale-20);
 
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
+  /* 차트 시리즈 — 브랜드 톤 5단계 */
+  --chart-1: var(--brand-500);
+  --chart-2: var(--brand-400);
+  --chart-3: var(--brand-600);
+  --chart-4: var(--brand-300);
+  --chart-5: var(--brand-700);
 
   /* 사이드바 — 호버·선택은 브랜드 */
   --sidebar: var(--white);
@@ -187,13 +254,24 @@
 }
 
 .dark {
-  --canvas: var(--grayscale-140);
+  --canvas: var(--black);
   --background: var(--grayscale-140);
   --foreground: var(--grayscale-10);
-  --card: var(--grayscale-130);
+  --card: var(--grayscale-140);
   --card-foreground: var(--grayscale-10);
-  --popover: var(--grayscale-130);
+  --background-muted: var(--grayscale-130);
+  --background-muted-foreground: var(--grayscale-10);
+  --card-muted: var(--grayscale-130);
+  --card-muted-foreground: var(--grayscale-10);
+  --popover: var(--grayscale-140);
   --popover-foreground: var(--grayscale-10);
+
+  --inverse: var(--grayscale-10);
+  --inverse-foreground: var(--grayscale-140);
+
+  --foreground-muted: var(--grayscale-40);
+  --foreground-placeholder: var(--grayscale-80);
+  --foreground-disabled: var(--grayscale-70);
 
   --primary: var(--brand-500);
   --primary-foreground: var(--white);
@@ -215,19 +293,40 @@
   --info: var(--info-400);
   --info-foreground: var(--white);
 
-  --border: var(--grayscale-110);
+  --border: var(--grayscale-130);
   --input: var(--grayscale-110);
   --ring: var(--brand-400);
+
+  --primary-container: var(--brand-800);
+  --primary-container-foreground: var(--brand-100);
+  --secondary-container: var(--grayscale-130);
+  --secondary-container-foreground: var(--white);
+  --destructive-container: var(--error-800);
+  --destructive-container-foreground: var(--error-100);
+
+  --divider: var(--grayscale-130);
+  --divider-strong: var(--grayscale-110);
+
+  --border-strong: var(--grayscale-10);
+  --border-inverse: var(--grayscale-140);
+
+  --shadow-elevation-10: 0px 1px 2px 1px rgba(0, 0, 0, 0.32);
+  --shadow-elevation-20: 0px 2px 4px 2px rgba(0, 0, 0, 0.32);
+  --shadow-elevation-30: 0px 4px 8px 3px rgba(0, 0, 0, 0.32);
+  --shadow-elevation-40: 0px 8px 12px 4px rgba(0, 0, 0, 0.32);
+  --shadow-elevation-50: 0px 8px 16px 6px rgba(0, 0, 0, 0.32);
+  --shadow-elevation-60: 0px 12px 24px 8px rgba(0, 0, 0, 0.32);
 
   --disabled: var(--grayscale-120);
   --disabled-foreground: var(--grayscale-70);
   --disabled-border: var(--grayscale-110);
 
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
+  /* 차트 시리즈 — 다크 배경용 밝은 브랜드 톤 */
+  --chart-1: var(--brand-400);
+  --chart-2: var(--brand-500);
+  --chart-3: var(--brand-300);
+  --chart-4: var(--brand-600);
+  --chart-5: var(--brand-200);
 
   --sidebar: var(--grayscale-140);
   --sidebar-foreground: var(--grayscale-10);

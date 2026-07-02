@@ -7,18 +7,29 @@ export type RadiusToken = {
   formula: string
 }
 
-const BASE_RADIUS_PX = 10
-const BASE_RADIUS_REM = "0.625rem"
+export const RADIUS_MIN_PX = 2 as const
+export const RADIUS_MAX_PX = 20 as const
 
-/** --radius: 0.625rem (10px) 기준 계산 */
+const BASE_RADIUS_PX = 12
+const BASE_RADIUS_REM = "0.75rem"
+
+/** --radius: 0.75rem (12px) · 2px · 4px 단위 · 최대 20px · full 9999px */
 export const RADIUS_SCALE: RadiusToken[] = [
   {
-    label: "sm_6",
+    label: "xs_2",
+    class: "rounded-xs",
+    token: "--radius-xs",
+    px: 2,
+    rem: "0.125rem",
+    formula: "0.125rem",
+  },
+  {
+    label: "sm_4",
     class: "rounded-sm",
     token: "--radius-sm",
-    px: 6,
-    rem: "0.375rem",
-    formula: "calc(var(--radius) * 0.6)",
+    px: 4,
+    rem: "0.25rem",
+    formula: "0.25rem",
   },
   {
     label: "md_8",
@@ -26,47 +37,39 @@ export const RADIUS_SCALE: RadiusToken[] = [
     token: "--radius-md",
     px: 8,
     rem: "0.5rem",
-    formula: "calc(var(--radius) * 0.8)",
+    formula: "0.5rem",
   },
   {
-    label: "lg_10",
+    label: "lg_12",
     class: "rounded-lg",
     token: "--radius-lg",
-    px: 10,
+    px: 12,
     rem: BASE_RADIUS_REM,
     formula: "var(--radius)",
   },
   {
-    label: "xl_14",
+    label: "xl_16",
     class: "rounded-xl",
     token: "--radius-xl",
-    px: 14,
-    rem: "0.875rem",
-    formula: "calc(var(--radius) * 1.4)",
+    px: 16,
+    rem: "1rem",
+    formula: "1rem",
   },
   {
-    label: "2xl_18",
+    label: "2xl_20",
     class: "rounded-2xl",
     token: "--radius-2xl",
-    px: 18,
-    rem: "1.125rem",
-    formula: "calc(var(--radius) * 1.8)",
+    px: 20,
+    rem: "1.25rem",
+    formula: "1.25rem",
   },
   {
-    label: "3xl_22",
-    class: "rounded-3xl",
-    token: "--radius-3xl",
-    px: 22,
-    rem: "1.375rem",
-    formula: "calc(var(--radius) * 2.2)",
-  },
-  {
-    label: "4xl_26",
-    class: "rounded-4xl",
-    token: "--radius-4xl",
-    px: 26,
-    rem: "1.625rem",
-    formula: "calc(var(--radius) * 2.6)",
+    label: "full_9999",
+    class: "rounded-full",
+    token: "--radius-full",
+    px: 9999,
+    rem: "9999px",
+    formula: "9999px",
   },
 ]
 

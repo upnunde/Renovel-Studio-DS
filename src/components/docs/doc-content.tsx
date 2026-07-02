@@ -1,9 +1,10 @@
 import Link from "next/link"
 import type { ReactNode } from "react"
 
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "design-system/ui/badge"
 import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
+import { docsTocId } from "@/lib/docs-toc-id"
 import { cn } from "@/lib/utils"
 
 export function DocSection({
@@ -19,10 +20,13 @@ export function DocSection({
   children: ReactNode
   className?: string
 }) {
+  const headingId = id ?? docsTocId(title)
   return (
-    <section id={id} className={cn(docsSpace.stack, className)}>
+    <section className={cn(docsSpace.stack, className)}>
       <div className={docsSpace.stack}>
-        <h2 className={docsType.sectionTitle}>{title}</h2>
+        <h2 id={headingId} className={cn(docsType.sectionTitle, "scroll-mt-10")}>
+          {title}
+        </h2>
         {description ? (
           <p className={cn("max-w-3xl", docsType.sectionDescription)}>{description}</p>
         ) : null}
@@ -94,7 +98,7 @@ export function DocCallout({
       )}
     >
       {title ? <p className="mb-1 font-medium">{title}</p> : null}
-      <div className="text-muted-foreground [&_strong]:text-foreground">{children}</div>
+      <div className="text-foreground-muted [&_strong]:text-foreground">{children}</div>
     </aside>
   )
 }
@@ -137,7 +141,7 @@ export function DocRelatedLinks({
 
   return (
     <div className={cn("flex flex-wrap items-center", docsSpace.gap, docsType.bodyMuted)}>
-      <span className="text-muted-foreground">관련 문서</span>
+      <span className="text-foreground-muted">관련 문서</span>
       {items.map((item) => (
         <Link
           key={item.href}

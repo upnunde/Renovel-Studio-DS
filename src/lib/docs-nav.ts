@@ -8,7 +8,7 @@ export type DocsNavItem = {
 
 export type DocsNavSection = {
   label?: string
-  /** 라벨을 상위 링크로 표시하고 하위 항목을 펼침/접기 (기본 href = 첫 번째 item) */
+  /** 라벨을 상위 링크로 표시하고 하위 항목을 항상 펼침 (기본 href = 첫 번째 item) */
   collapsible?: boolean
   items: DocsNavItem[]
 }
@@ -45,6 +45,7 @@ export const docsNav: DocsNavGroup[] = [
           { title: "Icons", href: "/foundation/icons" },
           { title: "Spacing", href: "/foundation/spacing" },
           { title: "Radius", href: "/foundation/radius" },
+          { title: "Motion", href: "/foundation/motion" },
         ],
       },
     ],

@@ -24,7 +24,7 @@ import { docsSpace } from "@/lib/docs-space"
 import { getSemanticTokenSource } from "@/lib/semantic-token-sources"
 import { cn } from "@/lib/utils"
 
-function ThemeNote() {
+export function ThemeNote() {
   const { resolvedTheme } = useTheme()
   const isDark = resolvedTheme === "dark"
 
@@ -98,7 +98,6 @@ function SemanticTokenGroup({ group }: { group: TokenGroup }) {
 export function ColorSemanticPalette() {
   return (
     <div className={docsSpace.stack}>
-      <ThemeNote />
       {COLOR_SEMANTIC_GROUPS.map((group) => (
         <SemanticTokenGroup key={group.id} group={group} />
       ))}

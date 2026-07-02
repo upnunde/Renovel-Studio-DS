@@ -3,7 +3,8 @@
 import { useDeferredValue, useMemo, useState } from "react"
 
 import { ShowcaseBlock } from "@/components/docs/showcase-block"
-import { Icon } from "@/components/ui/icon"
+import { DocsFilterChips } from "@/components/docs/docs-filter-chips"
+import { Icon } from "design-system/ui/icon"
 import {
   LUCIDE_ICON_CATALOG,
   LUCIDE_ICON_COMMON_COUNT,
@@ -82,21 +83,17 @@ export function LucideIconGallery() {
           </a>
         </div>
 
-        <div className={cn("flex flex-wrap", docsSpace.gap)}>
-          <CategoryChip
-            active={activeCategory === "all"}
-            onClick={() => setActiveCategory("all")}
-            label={`전체 ${LUCIDE_ICON_COMMON_COUNT}`}
-          />
-          {LUCIDE_ICON_CATALOG.map((category) => (
-            <CategoryChip
-              key={category.id}
-              active={activeCategory === category.id}
-              onClick={() => setActiveCategory(category.id)}
-              label={category.title}
-            />
-          ))}
-        </div>
+        <DocsFilterChips
+          value={activeCategory}
+          onValueChange={setActiveCategory}
+          options={[
+            { value: "all", label: `전체 ${LUCIDE_ICON_COMMON_COUNT}` },
+            ...LUCIDE_ICON_CATALOG.map((category) => ({
+              value: category.id,
+              label: category.title,
+            })),
+          ]}
+        />
 
         {visibleCount === 0 ? (
           <p className={docsType.bodyMuted}>
@@ -124,30 +121,5 @@ export function LucideIconGallery() {
         )}
       </div>
     </ShowcaseBlock>
-  )
-}
-
-function CategoryChip({
-  active,
-  label,
-  onClick,
-}: {
-  active: boolean
-  label: string
-  onClick: () => void
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        docsType.body,
-        active
-          ? "border-primary bg-primary text-primary-foreground"
-          : "border-border bg-background text-muted-foreground hover:bg-muted"
-      )}
-    >
-      {label}
-    </button>
   )
 }

@@ -28,6 +28,13 @@ export const componentDocs: ComponentDoc[] = [
     section: "Actions",
   },
   {
+    slug: "chip",
+    title: "Chip",
+    description:
+      "여러 항목 중 선택·필터하거나 태그를 표시·삭제하는 알약형 컨트롤 (Toggle 기반)",
+    section: "Actions",
+  },
+  {
     slug: "input",
     title: "Input",
     description: "한 줄 텍스트·숫자·이메일 등을 입력하는 필드",
@@ -37,7 +44,7 @@ export const componentDocs: ComponentDoc[] = [
     slug: "label",
     title: "Label",
     description:
-      "폼 필드 이름을 표시하고 컨트롤과 접근성(htmlFor)으로 연결하는 라벨",
+      "폼 필드 이름(Label)과 제목·필수·보조문구·정보(FieldLabel) 패턴",
     section: "Inputs",
   },
   {

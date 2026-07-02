@@ -1,0 +1,42 @@
+---
+description: Cursor ↔ Claude Code 핸드오프. 세션 시작 시 HANDOFF·WORKLOG 읽기, 작업 완료·종료 시 HANDOFF 갱신.
+alwaysApply: true
+---
+
+# 에이전트 핸드오프
+
+Cursor Agent와 Claude Code(터미널/패널)는 **대화를 공유하지 않는다**. 맥락은 파일로 전달한다.
+
+## 공유 파일
+
+| 파일 | 용도 |
+|------|------|
+| `docs/wip/HANDOFF.md` | **즉시 핸드오프** — 최근 요청·Git 상태·다음 작업 |
+| `docs/wip/WORKLOG.md` | **장기 맥락** — 오늘 한 일·다음 할 일 |
+
+## 세션 시작 (필수)
+
+코드 수정·탐색 **전에** 반드시 읽기:
+
+1. `docs/wip/HANDOFF.md` — 최근 Claude Code 상태·「다음 작업 (Cursor용)」 확인
+2. `docs/wip/WORKLOG.md` — 프로젝트 맥락·다음 할 일
+3. **`DESIGN.md`** — 코드·UI·스타일 작업 시 규칙·토큰·Anti-Patterns 최우선 준수
+
+읽은 뒤 **「다음 작업 (Cursor용)」**과 **「Claude Code 상태」**의 미완·블로커를 우선 반영할 것.
+
+## 세션 종료 시
+
+의미 있는 작업 단위가 끝나거나 사용자가 **연결·핸드오프·Claude에 넘기기**를 요청하면:
+
+1. `docs/wip/HANDOFF.md`의 **「다음 작업 (Claude Code용)」**에 후속 작업을 구체적으로 적기
+2. 필요 시 `docs/wip/WORKLOG.md`도 갱신 (`.cursor/rules/worklog.mdc` 참고)
+3. `npm run handoff:update` 실행 (Hook이 이미 돌았어도 수동 갱신 가능)
+
+## Claude Code 쪽
+
+`CLAUDE.md` — 세션 시작 시 HANDOFF·WORKLOG 필수 읽기 (대칭).
+
+## 자동화
+
+- `.cursor/hooks.json` — 프롬프트 기록 + Agent 종료 시 HANDOFF 갱신
+- `npm run handoff:update` — 수동 스냅샷

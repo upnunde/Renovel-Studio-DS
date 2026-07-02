@@ -2,6 +2,7 @@ import { type ReactNode } from "react"
 
 import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
+import { docsTocId } from "@/lib/docs-toc-id"
 import { cn } from "@/lib/utils"
 
 export function ShowcaseBlock({
@@ -23,7 +24,9 @@ export function ShowcaseBlock({
       {name || description ? (
         <div className={cn("border-b bg-muted/30", docsSpace.cardHeader)}>
           {name ? (
-            <h2 className={docsType.sectionTitle}>{name}</h2>
+            <h2 id={docsTocId(name)} className={cn(docsType.sectionTitle, "scroll-mt-10")}>
+              {name}
+            </h2>
           ) : null}
           {description ? (
             <p className={cn(docsType.sectionDescription, name && "mt-1")}>

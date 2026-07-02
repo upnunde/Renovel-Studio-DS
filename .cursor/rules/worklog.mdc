@@ -12,6 +12,7 @@ alwaysApply: false
 | 경로 | 용도 |
 |------|------|
 | `docs/wip/WORKLOG.md` | **현재** 진행 중인 작업 요약 (Git 추적) |
+| `docs/wip/HANDOFF.md` | **에이전트 핸드오프** — Cursor↔Claude Code 즉시 맥락 (Git 추적) |
 | `docs/wip/history/YYYY-MM-DD/` | 일별 스냅샷 (로컬만, `npm run worklog:snapshot`) |
 
 ## 에이전트가 갱신할 때

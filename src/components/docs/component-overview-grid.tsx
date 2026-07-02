@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { ComponentOverviewPreview } from "@/components/docs/component-overview-preview"
-import { Icon } from "@/components/ui/icon"
+import { Icon } from "design-system/ui/icon"
 import { ICONS } from "@/components/icons"
 import { componentDocsBySection } from "@/lib/component-docs"
 import { docsType } from "@/lib/docs-type"
@@ -32,7 +32,7 @@ export function ComponentOverviewGrid() {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className={docsType.groupTitle}>{section}</p>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="mt-1 text-sm text-foreground-muted">
                   {items.length}개 컴포넌트
                 </p>
               </div>
@@ -56,7 +56,7 @@ export function ComponentOverviewGrid() {
                   </span>
                 ))}
                 {items.length > 3 ? (
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-foreground-muted">
                     +{items.length - 3}
                   </span>
                 ) : null}
@@ -69,11 +69,12 @@ export function ComponentOverviewGrid() {
       {sections.map(({ section, items }) => (
         <section
           key={section}
-          id={sectionId(section)}
           className={cn(docsSpace.groupStack, "scroll-mt-6")}
         >
           <div className="space-y-1">
-            <h2 className={docsType.sectionTitle}>{section}</h2>
+            <h2 id={sectionId(section)} className={cn(docsType.sectionTitle, "scroll-mt-10")}>
+              {section}
+            </h2>
             <p className={docsType.sectionDescription}>
               {items.map((doc) => doc.title).join(" · ")}
             </p>
@@ -107,7 +108,7 @@ export function ComponentOverviewGrid() {
                   <ComponentOverviewPreview slug={doc.slug} />
                 </div>
 
-                <p className="border-t border-border px-4 py-3 text-sm leading-5 text-muted-foreground">
+                <p className="border-t border-border px-4 py-3 text-sm leading-5 text-foreground-muted">
                   {doc.description}
                 </p>
               </Link>

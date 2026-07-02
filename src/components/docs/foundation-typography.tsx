@@ -10,16 +10,11 @@ import {
   DocsTableTh,
 } from "@/components/docs/docs-table"
 import {
-  COMPONENT_TYPOGRAPHY,
-  DESIGN_SPEC_REFERENCE,
   FONT_FAMILIES,
-  FONT_WEIGHTS,
   TYPOGRAPHY_SCALE,
 } from "design-system/typography-tokens"
 import {
   formatFontFamily,
-  formatFontWeight,
-  formatTypographyRecommended,
   formatTypographyToken,
 } from "design-system/typography-display"
 import { docsType } from "@/lib/docs-type"
@@ -35,51 +30,23 @@ export function FoundationTypographyShowcase() {
           <DocsTableHead>
             <DocsTableHeaderRow>
               <DocsTableTh>Token</DocsTableTh>
-              <DocsTableTh>rem</DocsTableTh>
+              <DocsTableTh>px</DocsTableTh>
               <DocsTableTh>Usage</DocsTableTh>
               <DocsTableTh>Preview</DocsTableTh>
             </DocsTableHeaderRow>
           </DocsTableHead>
           <DocsTableBody>
             {TYPOGRAPHY_SCALE.map((token) => (
-              <DocsTableRow key={token.name}>
+              <DocsTableRow key={token.className}>
                 <DocsTableTd mono>{formatTypographyToken(token)}</DocsTableTd>
                 <DocsTableTd mono muted>
-                  {token.rem}
+                  {token.fontSizePx}/{token.lineHeightPx}px
                 </DocsTableTd>
-                <DocsTableTd muted>{token.usage}</DocsTableTd>
+                <DocsTableTd muted>{token.description}</DocsTableTd>
                 <DocsTableTd>
-                  <div className="space-y-1">
-                    <span className={cn("text-foreground", token.name)}>가나다 ABC 123</span>
-                    <p className={docsType.bodyMuted}>
-                      {token.fontSizePx}px / {token.lineHeightPx}px
-                    </p>
-                  </div>
-                </DocsTableTd>
-              </DocsTableRow>
-            ))}
-          </DocsTableBody>
-        </DocsTable>
-      </ShowcaseBlock>
-
-      <ShowcaseBlock name="Font Weight" flush>
-        <DocsTable>
-          <DocsTableColGroup columns={4} />
-          <DocsTableHead>
-            <DocsTableHeaderRow>
-              <DocsTableTh>Token</DocsTableTh>
-              <DocsTableTh>Usage</DocsTableTh>
-              <DocsTableTh>Preview</DocsTableTh>
-              <DocsTableTh aria-hidden />
-            </DocsTableHeaderRow>
-          </DocsTableHead>
-          <DocsTableBody>
-            {FONT_WEIGHTS.map((w) => (
-              <DocsTableRow key={w.name}>
-                <DocsTableTd mono>{formatFontWeight(w.name, w.value)}</DocsTableTd>
-                <DocsTableTd muted>{w.usage}</DocsTableTd>
-                <DocsTableTd colSpan={2} className={cn("text-base", w.name)}>
-                  Pretendard {w.value}
+                  <span className={cn("text-foreground", token.className)}>
+                    가나다 ABC 123
+                  </span>
                 </DocsTableTd>
               </DocsTableRow>
             ))}
@@ -115,62 +82,12 @@ export function FoundationTypographyShowcase() {
         </DocsTable>
       </ShowcaseBlock>
 
-      <ShowcaseBlock name="Component Defaults" flush>
-        <DocsTable>
-          <DocsTableColGroup columns={3} />
-          <DocsTableHead>
-            <DocsTableHeaderRow>
-              <DocsTableTh>Component</DocsTableTh>
-              <DocsTableTh>Token</DocsTableTh>
-              <DocsTableTh>Usage</DocsTableTh>
-            </DocsTableHeaderRow>
-          </DocsTableHead>
-          <DocsTableBody>
-            {COMPONENT_TYPOGRAPHY.map((row) => (
-              <DocsTableRow key={row.component}>
-                <DocsTableTd mono>{row.component}</DocsTableTd>
-                <DocsTableTd mono>{row.display}</DocsTableTd>
-                <DocsTableTd muted>{row.usage}</DocsTableTd>
-              </DocsTableRow>
-            ))}
-          </DocsTableBody>
-        </DocsTable>
-      </ShowcaseBlock>
-
-      <ShowcaseBlock name="Design Spec Reference" flush>
-        <DocsTable>
-          <DocsTableColGroup columns={4} />
-          <DocsTableHead>
-            <DocsTableHeaderRow>
-              <DocsTableTh>Spec name</DocsTableTh>
-              <DocsTableTh>px</DocsTableTh>
-              <DocsTableTh>→ shadcn</DocsTableTh>
-              <DocsTableTh>Note</DocsTableTh>
-            </DocsTableHeaderRow>
-          </DocsTableHead>
-          <DocsTableBody>
-            {DESIGN_SPEC_REFERENCE.map((row) => (
-              <DocsTableRow key={row.specName}>
-                <DocsTableTd mono muted>
-                  {row.specName} · {row.weight}
-                </DocsTableTd>
-                <DocsTableTd mono className="tabular-nums">
-                  {row.fontSizePx}/{row.lineHeightPx}px
-                </DocsTableTd>
-                <DocsTableTd mono>
-                  {formatTypographyRecommended(
-                    row.recommended,
-                    row.fontSizePx,
-                    row.lineHeightPx
-                  )}
-                </DocsTableTd>
-                <DocsTableTd muted>
-                  {row.note ?? "—"}
-                </DocsTableTd>
-              </DocsTableRow>
-            ))}
-          </DocsTableBody>
-        </DocsTable>
+      <ShowcaseBlock name="정책" flush>
+        <div className={cn("p-5 space-y-2", docsType.bodyMuted)}>
+          <p>합본 클래스만 사용 — <code>text-body3_500</code> 같은 단일 utility로 size·line-height·font-weight를 묶는다.</p>
+          <p>개별 속성 조합(<code>text-sm + font-bold</code> 등) 금지. 폰트 패밀리는 fonts.css에서 전역 적용.</p>
+          <p>27개 utility는 <code>typography.css</code> @utility와 <code>typography-tokens.ts</code> TYPOGRAPHY_SCALE에서 1:1 동기화.</p>
+        </div>
       </ShowcaseBlock>
     </div>
   )

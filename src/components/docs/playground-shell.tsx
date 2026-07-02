@@ -1,10 +1,12 @@
 "use client"
 
+import { useState } from "react"
 import type { ReactNode } from "react"
 
 import { ShowcaseBlock } from "@/components/docs/showcase-block"
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
+import { Button } from "design-system/ui/button"
+import { Label } from "design-system/ui/label"
+import { Switch } from "design-system/ui/switch"
 import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
 import { cn } from "@/lib/utils"
@@ -29,7 +31,7 @@ export function PlaygroundLayout({
   previewClassName?: string
 }) {
   return (
-    <div className="grid gap-0 lg:grid-cols-[minmax(0,17rem)_1fr]">
+    <div className="grid gap-0 lg:grid-cols-[17rem_minmax(0,1fr)]">
       <div
         className={cn(
           "border-b border-border lg:border-r lg:border-b-0",
@@ -52,36 +54,63 @@ export function PlaygroundLayout({
           {preview}
         </div>
 
-        <div className={cn("border-t border-border bg-muted/20", docsSpace.pad)}>
-          <p className={cn("pb-2", docsType.codeLabel)}>Code</p>
-          <pre
-            className={cn(
-              "overflow-x-auto rounded-lg border border-border bg-background",
-              docsSpace.pad,
-              docsType.code
-            )}
-          >
-            <code>{code}</code>
-          </pre>
-        </div>
+        <PlaygroundCodeSection code={code} />
       </div>
+    </div>
+  )
+}
+
+function PlaygroundCodeSection({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false)
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(code)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2000)
+    } catch {
+      setCopied(false)
+    }
+  }
+
+  return (
+    <div className={cn("border-t border-border bg-muted/20", docsSpace.pad)}>
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <p className={docsType.codeLabel}>Code</p>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="h-7 shrink-0 px-2 text-xs"
+          onClick={handleCopy}
+          disabled={!code}
+        >
+          {copied ? "복사됨" : "복사"}
+        </Button>
+      </div>
+      <pre
+        className={cn(
+          "overflow-x-auto rounded-lg border border-border bg-background",
+          docsSpace.pad,
+          docsType.code
+        )}
+      >
+        <code>{code}</code>
+      </pre>
     </div>
   )
 }
 
 export function PlaygroundField({
   label,
-  description,
   children,
 }: {
   label: string
-  description?: string
   children: ReactNode
 }) {
   return (
     <div className={docsSpace.fieldStack}>
-      <Label className={docsType.tokenName}>{label}</Label>
-      {description ? <p className={docsType.bodyMuted}>{description}</p> : null}
+      <Label className={cn(docsType.tokenName, "mb-0.5")}>{label}</Label>
       {children}
     </div>
   )

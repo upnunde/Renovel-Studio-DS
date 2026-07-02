@@ -1,6 +1,6 @@
 import { type ReactNode } from "react"
 
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "design-system/ui/badge"
 import { ShowcaseBlock } from "@/components/docs/showcase-block"
 import {
   DocsTable,
@@ -14,8 +14,10 @@ import {
 } from "@/components/docs/docs-table"
 import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
+import { docsTocId } from "@/lib/docs-toc-id"
 import { cn } from "@/lib/utils"
 import { formatPropValue, type ComponentCaseSpec } from "@/lib/component-case-specs"
+import { sortPlaygroundOptionValues } from "@/components/docs/playground-utils"
 
 export function ComponentCaseDocs({
   spec,
@@ -28,12 +30,16 @@ export function ComponentCaseDocs({
 }) {
   return (
     <div className={docsSpace.stack}>
-      <ComponentSpecTable spec={spec} />
-      {playground}
-      <section className={docsSpace.stack}>
-        <h2 className={docsType.sectionTitle}>Examples</h2>
-        <div>{examples}</div>
-      </section>
+      <div className="flex flex-col gap-10">
+        <ComponentSpecTable spec={spec} />
+        {playground}
+        <section className={docsSpace.stackGap}>
+          <h2 id="examples" className={cn(docsType.sectionTitle, "scroll-mt-10")}>
+            Examples
+          </h2>
+          <div className={docsSpace.stackGap}>{examples}</div>
+        </section>
+      </div>
     </div>
   )
 }
@@ -56,7 +62,7 @@ export function ComponentSpecTable({ spec }: { spec: ComponentCaseSpec }) {
               <DocsTableTd mono>{prop.name}</DocsTableTd>
               <DocsTableTd>
                 <div className={cn("flex flex-wrap", docsSpace.inlineGap)}>
-                  {prop.values.map((value) => (
+                  {sortPlaygroundOptionValues(prop.values, prop.name).map((value) => (
                     <Badge key={value} variant="outline" className="font-mono text-sm">
                       {formatPropValue(prop, value)}
                     </Badge>
@@ -74,22 +80,19 @@ export function ComponentSpecTable({ spec }: { spec: ComponentCaseSpec }) {
 
 export function ComponentCaseGroup({
   title,
-  description,
   children,
   className,
 }: {
   title: string
-  description?: string
   children: ReactNode
   className?: string
 }) {
   return (
-    <section className={cn(docsSpace.caseGroupStack, docsSpace.caseGroupBottom, className)}>
+    <section className={cn(docsSpace.caseGroupStack, className)}>
       <div>
-        <h3 className={docsType.groupLabel}>{title}</h3>
-        {description ? (
-          <p className={docsType.bodyMuted}>{description}</p>
-        ) : null}
+        <h3 id={docsTocId(title)} className={cn(docsType.groupLabel, "scroll-mt-10")}>
+          {title}
+        </h3>
       </div>
       {children}
     </section>

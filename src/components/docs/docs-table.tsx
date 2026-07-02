@@ -80,7 +80,7 @@ export function DocsTableTd({
       className={cn(
         tdClass,
         mono && docsType.tableMono,
-        muted && "text-muted-foreground",
+        muted && "text-foreground-muted",
         className
       )}
       {...props}

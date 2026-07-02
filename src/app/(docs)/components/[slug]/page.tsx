@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 
-import { ComponentShowcase } from "@/components/docs/component-showcases"
+import { ComponentShowcase } from "@/components/docs/component-showcase-client"
 import { DocsMain } from "@/components/docs/docs-main"
 import { DocsPageHeader } from "@/components/docs-page-header"
 import { componentDocs, getComponentDoc } from "@/lib/component-docs"

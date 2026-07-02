@@ -24,6 +24,10 @@ export const ICON_LIBRARY = {
 export {
   CONTROL_ICON_SIZE_SCALE,
   CONTROL_SIZE_SCALE,
+  CONTROL_ALL_SIZE_APIS,
+  CONTROL_FORM_SIZE_APIS,
+  CONTROL_ICON_SIZE_APIS,
+  CONTROL_TEXT_SIZE_APIS,
   ICON_GLYPH_SCALE,
   controlCaseMeta,
   formatControlSizeOption,
@@ -37,4 +41,6 @@ export {
   formatAvatarSizeOption,
   controlSizeToIconGlyph,
   iconButtonSizeToIconGlyph,
+  sortAvatarSizeApis,
+  sortControlSizeApis,
 } from "./component-size-tokens"

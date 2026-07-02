@@ -1,0 +1,40 @@
+---
+description: 코드·UI 작업 전 DESIGN.md(규칙·토큰·Anti-Patterns) 최우선 준수. 스타일 임의 변경 금지.
+alwaysApply: true
+---
+
+# DESIGN.md 최우선 준수
+
+**코드 수정·UI 생성·스타일 변경 전에** 프로젝트 루트 `DESIGN.md`를 읽고 그 규칙을 **최우선**으로 따른다. 사용자 명시 지시가 DESIGN.md와 충돌할 때만 예외.
+
+## 작업 전 필수
+
+1. `DESIGN.md` — 철학·토큰 컨벤션·컴포넌트 규칙·소비 패턴·변경 정책
+2. 코드 정본 — `DESIGN.md` §7 표 (`packages/design-system/src/` 등)
+3. UI/스타일 작업 시 관련 섹션 재확인 (색·spacing·typography·motion·elevation)
+
+## 절대 하지 말 것 (Anti-Patterns)
+
+- `#hex`, `zinc-*`, `text-sm`+`font-bold` 등 **토큰·합본 타이포 우회**
+- shadcn 구조·`variant`/`size`/`asChild` 네이밍 파괴
+- `{role}-foreground`를 짝 surface 밖 “흐린 텍스트”로 단독 사용
+- 기본 표면에 불필요한 shadow·ring elevation
+- 토큰 없이 인라인 스타일로 브랜드·레이아웃 고정
+- DESIGN.md와 무관한 대량 스타일 리팩터
+
+## 반드시 할 것
+
+- 시맨틱 토큰: `bg-background`, `text-foreground`, `border-border`, `text-foreground-muted` 등
+- Typography: `text-heading*`, `text-body*`, `text-caption*` **합본 클래스만**
+- Spacing·radius·motion·shadow: `DESIGN.md`·`spacing-tokens`·`tokens.css` 정의 범위 내
+- shadcn(`base-nova`) 패턴 유지 — 내부 확장·variant 추가만
+- 토큰 값 변경 시 `packages/design-system/src/tokens.css` 정본 수정
+
+## UI 생성 (Stitch·프로토타입 포함)
+
+- 생성 전 `DESIGN.md`를 Stitch·프롬프트 컨텍스트에 반영 (`/api/stitch/generate` 등)
+- 생성물을 repo에 넣을 때도 **DS 토큰·컴포넌트로 정규화** — raw HTML 스타일 그대로 병합 금지
+
+## 충돌 시 우선순위
+
+`사용자 명시 지시` > `DESIGN.md` > `.cursor/rules/*` > 일반 관례

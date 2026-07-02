@@ -34,7 +34,8 @@ shadcn/ui를 **베이스**로 **나만의 디자인 시스템**을 정의·발�
 
 ## UI·스타일 (요약)
 
-- 토큰 수정은 **`packages/design-system/src/tokens.css`** 가 정본.
+- **최우선 정본**: 루트 **`DESIGN.md`** — 규칙·토큰·Anti-Patterns (`.cursor/rules/design-md-authority.mdc`)
+- 토큰 CSS 정본: **`packages/design-system/src/tokens.css`** · `theme.css`
 - shadcn 컴포넌트 커스터마이즈 → variant/props → 필요 시 패키지 이전.
 - 상세: **`.cursor/rules/shadcn-design-system.mdc`**
 

@@ -11,7 +11,7 @@ import {
   DocsTableTh,
 } from "@/components/docs/docs-table"
 import { ICON_REGISTRY, ICONS } from "@/components/icons"
-import { Icon } from "@/components/ui/icon"
+import { Icon } from "design-system/ui/icon"
 import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
 import {

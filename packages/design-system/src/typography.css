@@ -1,6 +1,8 @@
 /**
- * 타이포그래피 @utility — typography-tokens.ts 와 동기화
- * 사용: className="text-body1_400"
+ * 타이포그래피 @utility — typography-tokens.ts 와 1:1 동기화 (단일 소스).
+ * size·line-height·weight를 묶은 단일 클래스만 사용.
+ * 개별 속성 조합(text-sm + font-bold 등) 금지.
+ * 폰트 패밀리(Pretendard JP)는 fonts.css에서 전역 적용 → 여기서 미지정.
  */
 @utility text-heading1_700 {
   font-size: 32px;

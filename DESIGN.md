@@ -1,0 +1,391 @@
+# Design System — 정본 문서
+
+이 디자인 시스템(`packages/design-system`)의 철학·원칙·토큰 컨벤션·소비 패턴을 한 곳에 정리한 문서. 코드 정본은 `packages/design-system/src/` 안의 파일, 시각 정본은 docs 사이트(http://localhost:3001).
+
+---
+
+## 1. 디자인 철학
+
+### 1-1. shadcn/ui 절대 기준
+
+shadcn/ui (`base-nova`)의 구조를 **절대 깨지 않는다**. 그 안에서 응용·변형만 한다.
+
+**왜:** shadcn 구조는 AI(LLM) 협업에 최적화되어 있다. 컴포넌트 위치·props 패턴·variant 네이밍이 AI가 잘 이해하고 생성할 수 있는 형태라서 이 구조를 유지하면 새로운 컴포넌트·variant 추가가 일관되게 진행된다.
+
+**하지 않는 것:**
+- shadcn 디렉토리 구조 변경
+- `variant`/`size`/`asChild` 같은 props 네이밍 변경
+- shadcn 컴포넌트를 다른 추상화로 대체
+- shadcn에 없는 새 패러다임 도입
+- Material 용어(`on-surface`, `text-secondary` 등) 신설
+
+**하는 것:**
+- shadcn 컴포넌트 내부 구현 수정·확장 (스타일, variant 추가, props 추가)
+- 새 variant·새 size 토큰을 shadcn 패턴에 맞춰 추가
+- shadcn 위에 복합 패턴(FormField, PageHeader 등) 구성
+- Material Design 이론을 **토큰·스타일 레이어에서만** 차용 (컴포넌트 API에는 노출 안 함)
+
+### 1-2. Material Design 부분 차용
+
+Material Design 3의 이론적 토대를 **선택적으로** 흡수한다. **명명은 shadcn 컨벤션을 유지**.
+
+| M3 개념 | 적용 | 명명 |
+|---------|------|------|
+| Container 페어 | ✓ | shadcn `{role}-foreground` 형식으로 |
+| Inverse surface | ✓ | `inverse` / `inverse-foreground` |
+| Elevation 6단계 | ✓ | `shadow-elevation-10` ~ `-60` |
+| Motion easing 곡선 | ✓ | M3 cubic-bezier 값 그대로 |
+| Motion duration | △ | 3단계만 (short/medium/long) |
+| Scrim/Dim | ✓ | `dim-10/20/30` |
+| Outline + outline-variant | ✓ | `border` + `divider` |
+| Surface container 5단계 | ✗ | 미적용 |
+| State layer 토큰 | ✗ | 미적용 (컴포넌트 내부 처리) |
+| Typography 5-tier | ✗ | heading/body/caption 3-tier (한국 앱 컨벤션) |
+
+---
+
+## 2. 토큰 컨벤션
+
+### 2-1. 페어 패턴 (shadcn 표준)
+
+모든 surface 토큰은 `{role}` + `{role}-foreground` 페어로 정의·사용한다.
+
+```css
+--background          /* — */
+--card                / --card-foreground
+--popover             / --popover-foreground
+--primary             / --primary-foreground
+--primary-container   / --primary-container-foreground
+--secondary           / --secondary-foreground
+--secondary-container / --secondary-container-foreground
+--destructive         / --destructive-foreground
+--destructive-container / --destructive-container-foreground
+--muted               / --muted-foreground
+--accent              / --accent-foreground
+--inverse             / --inverse-foreground
+--success             / --success-foreground
+--warning             / --warning-foreground
+--info                / --info-foreground
+--disabled            / --disabled-foreground
+```
+
+**`{role}-foreground` 는 짝 `{role}` surface 안에서만 사용한다.** 단독으로 "흐린 텍스트" 용도로 쓰지 않는다.
+
+### 2-2. Foreground 위계 (단독 사용 가능)
+
+본문보다 흐린 텍스트가 일반 surface 위에 놓일 때 사용. 모두 같은 foreground 패밀리이며 시각적 위계만 다르다.
+
+```css
+--foreground           /* 본문 (grayscale-140) */
+--foreground-muted     /* 보조 텍스트·아이콘 (grayscale-110) */
+--foreground-placeholder  /* input placeholder (grayscale-70) */
+--foreground-disabled  /* 비활성 텍스트 (grayscale-60) */
+```
+
+**아이콘과 텍스트는 같은 토큰을 사용한다.** surface 위에 올라가는 점이 같으므로 분리하지 않음. `--icon-*` 별도 없음.
+
+### 2-3. Color 스케일
+
+원시 컬러 5종:
+
+- **Grayscale**: `--grayscale-0` ~ `--grayscale-140` (15단계, 쿨 블루 틴트)
+- **Brand**: `--brand-50` ~ `--brand-950` (9단계, `#F642D4` 베이스)
+- **Success**: green
+- **Warning**: amber
+- **Info**: sky
+- **Error**: red (시맨틱 `--destructive`로 매핑)
+
+### 2-4. Shape (Radius)
+
+```
+--radius (base) = 0.75rem (12px)
+2px · 4px 단위 · 최대 20px · full
+```
+
+`--radius-xs` ~ `--radius-2xl`, `--radius-full` (Tailwind `rounded-*`로 노출).
+
+### 2-5. Spacing
+
+Material 결 13단계 스케일. 작은 값은 4px 그리드, 24px 이후로는 8px 점프.
+
+```
+미세        : px (1px) · 0.5 (2px)
+4px 그리드  : 1 (4) · 2 (8) · 3 (12) · 4 (16) · 5 (20) · 6 (24)
+8px 점프    : 8 (32) · 10 (40) · 12 (48) · 16 (64) · 20 (80)
+```
+
+**최대 80px.** 그 외 임의값(예: 44px, 56px, 60px)은 사용처에서 `[44px]` 형식 임의값으로 처리. 토큰 비대화를 피하기 위함.
+
+Tailwind 표준 spacing 네임스페이스와 동일하게 매핑 (`p-5` = 20px, `gap-10` = 40px 등).
+
+### 2-6. Typography
+
+**합본 단일 클래스만 사용.** size·line-height·font-weight를 묶은 27개 `@utility`.
+
+```
+text-heading{1..5}_{700|500}      (heading)
+text-body{1..4}_{700|500|400}      (body)
+text-caption{1..2}_{700|500|400}   (caption)
+```
+
+**금지:** 개별 속성 조합 (`text-sm + font-bold` 등). 합본 클래스가 폰트 시스템의 단일 소스.
+
+### 2-7. Motion
+
+**Duration (3단계):**
+- `--motion-duration-short` 100ms — 인터랙티브 상태·내부 이동·퇴장
+- `--motion-duration-medium` 200ms — 등장
+- `--motion-duration-long` 400ms — 큰 표면 전환
+
+**Easing (3종, M3 cubic-bezier):**
+- `--motion-easing-standard` — 일반 상태 전환
+- `--motion-easing-emphasized-decelerate` — 등장 (천천히 안착)
+- `--motion-easing-emphasized-accelerate` — 퇴장 (빠르게 사라짐)
+
+**안무 규칙 (Choreography):**
+
+| 시나리오 | duration | easing |
+|----------|----------|--------|
+| 인터랙티브 상태 전환 | short | standard |
+| 내부 이동 | short | standard |
+| Overlay 등장 | medium | emphasized-decelerate |
+| Overlay 퇴장 | short | emphasized-accelerate |
+| 페이지 전환 | long | standard |
+
+### 2-8. Elevation
+
+6단계 그림자 (Material 결).
+
+```
+--shadow-elevation-10  /* 카드·인풋 호버 */
+--shadow-elevation-20
+--shadow-elevation-30  /* 드롭다운·팝오버 */
+--shadow-elevation-40
+--shadow-elevation-50  /* 모달·바텀시트 */
+--shadow-elevation-60
+```
+
+라이트 alpha 0.06 / 다크 alpha 0.32.
+
+### 2-9. Dim & Divider
+
+**Dim (overlay 농도):**
+- `--dim-10` — 가벼운 호버 백드롭
+- `--dim-20` — 모달 배경
+- `--dim-30` — 이미지 위 텍스트 보호
+
+**Divider (시각적 분리선 — border와 분리):**
+- `--divider` — 약한 분리선
+- `--divider-strong` — 강한 분리선
+
+**Border 강조·반전:**
+- `--border-strong` — 강한 보더
+- `--border-inverse` — 반전 표면 위 보더
+
+### 2-10. Z-Index
+
+6단계 utility, 간격 100. 토스트가 모든 레이어 위.
+
+```css
+z-base     /* 0   */
+z-dropdown /* 100 */
+z-sticky   /* 200 */
+z-overlay  /* 300 — 백드롭·플로팅 패널 */
+z-modal    /* 400 — 다이얼로그·바텀시트 */
+z-toast    /* 500 — 토스트·스낵바 */
+```
+
+---
+
+## 3. 컴포넌트 컨벤션
+
+### 3-1. 구조
+
+- 위치: `packages/design-system/src/components/ui/`
+- 패턴: `cva` + `VariantProps` + `cn` + Base UI primitive
+- 모든 컴포넌트가 `data-slot` 속성 부착 (도메인 wrapper 식별용)
+- props·variant 네이밍은 shadcn 컨벤션 (`variant`, `size`, `asChild` 등)
+
+### 3-2. 합성 친화 (Composition-friendly)
+
+도메인 컴포넌트가 DS 컴포넌트를 베이스로 위에 쌓을 수 있다.
+
+| 합성 패턴 | 지원 |
+|----------|------|
+| className 병합 (`cn`) | ✓ tailwind-merge 기반 |
+| props 전파 (`{...props}`) | ✓ |
+| CVA variant 확장 (외부에서 새 variant 조합) | ✓ `*Variants` export |
+| Portal 자체 관리 (Dialog/Popover/Tooltip/Dropdown) | ✓ |
+| ref 전달 | ✓ React 19 ref-as-prop |
+
+**주의 — Portal 컴포넌트 wrapping**: Dialog/Popover/Tooltip을 도메인 wrapper가 전체 감싸면 Portal이 중첩될 수 있음. **Trigger만 wrapping, Content는 원본 그대로**.
+
+### 3-3. 사이즈 컨벤션
+
+폼·인터랙티브 컨트롤은 정본 스케일 6단계:
+
+| API | px | 용도 |
+|-----|-----|------|
+| `xs` | 24 | 최소 버튼·배지·인라인 |
+| `sm` | 32 | 소형 버튼·폼 컨트롤 |
+| `default` | 36 | 기본 버튼·Input·Select |
+| `xl` | 40 | 대형 폼·터치 영역 |
+| `lg` | 42 | 강조 버튼·헤더 액션 |
+| `2xl` | 48 | 최대 폼·모바일 터치 |
+
+(`xl` < `lg`는 의도. 용도가 다름.)
+
+아이콘 글리프는 5단계 (`xs_g12` ~ `xl_g20`). 컨트롤 크기와 매핑.
+
+### 3-4. 컴포넌트 목록 (28개)
+
+**Forms:** input, textarea, label, checkbox, radio-group, switch, slider, select, toggle, chip, email-input
+
+**Actions:** button, button-group, icon
+
+**Display:** badge, avatar, card, alert, progress, skeleton, separator
+
+**Navigation:** tabs, accordion
+
+**Overlays:** dialog, popover, dropdown-menu, tooltip, sonner (toast)
+
+---
+
+## 4. 소비 (Consume) 패턴
+
+### 4-1. 패키지 의존성
+
+```json
+{
+  "dependencies": {
+    "design-system": "file:../path/to/packages/design-system"
+  }
+}
+```
+
+향후 npm publish 단계: `"@scope/design-system": "^x.y.z"`
+
+### 4-2. Import 경로
+
+```ts
+// 유틸
+import { cn } from "design-system"
+import { cn } from "design-system/utils"        // 동일
+
+// 토큰 모듈
+import { space, SPACING_SCALE } from "design-system/spacing-tokens"
+import { CONTROL_SIZE_SCALE } from "design-system/component-size-tokens"
+import { TYPOGRAPHY_SCALE } from "design-system/typography-tokens"
+import { MOTION_DURATION_SCALE } from "design-system/motion-tokens"
+
+// 컴포넌트
+import { Button } from "design-system/ui/button"
+import { Dialog, DialogContent } from "design-system/ui/dialog"
+
+// 아이콘
+import { ICONS } from "design-system/icons"
+
+// CSS
+@import "design-system/tokens.css"
+@import "design-system/theme.css"
+@import "design-system/typography.css"
+@import "design-system/fonts.css"
+@import "design-system/icons.css"
+```
+
+### 4-3. 도메인 wrapping 패턴
+
+```tsx
+// 도메인 컴포넌트는 DS 컴포넌트를 베이스로
+import { Button as DsButton, buttonVariants } from "design-system/ui/button"
+import { cn } from "design-system/utils"
+
+export function DomainButton({ className, ...props }) {
+  return (
+    <DsButton
+      className={cn("domain-specific-classes", className)}
+      {...props}
+    />
+  )
+}
+```
+
+CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 합성.
+
+### 4-4. 점진적 마이그레이션 (기존 프로젝트에 적용 시)
+
+| Phase | 내용 |
+|-------|------|
+| **A** | 새 컴포넌트만 DS 사용. 기존은 그대로. |
+| **B** | `globals.css`에 DS tokens.css·theme.css·typography.css import. 충돌 토큰은 자체 정의로 override 후 점진 제거. |
+| **C** | 기존 컴포넌트 단위로 DS 베이스로 wrapping 재작성. |
+| **D** | 자체 토큰 폐기. DS 단일 소스 완성. |
+
+---
+
+## 5. 소비자 프로젝트
+
+| 프로젝트 | 경로 | 연결 방식 |
+|---------|------|----------|
+| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `file:../../Design System Test/packages/design-system` |
+
+소비자 추가 시 이 목록 갱신. 디자인 시스템 변경 시 소비자 영향 항상 고려.
+
+---
+
+## 6. 개발 환경
+
+```bash
+npm run dev    # http://localhost:3001 (docs 사이트)
+npm run build  # 빌드 확인
+npm run lint   # 린트
+```
+
+**문서 사이트 라우트:**
+
+- `/foundation/colors` · `/foundation/color-tokens` · `/foundation/color-semantic`
+- `/foundation/typography`
+- `/foundation/spacing`
+- `/foundation/radius`
+- `/foundation/icons`
+- `/foundation/motion`
+- `/components/<slug>` (각 컴포넌트별)
+
+---
+
+## 7. 파일 정본 위치
+
+| 영역 | 정본 경로 |
+|------|----------|
+| 시맨틱 컬러·spacing·shadow·motion CSS 변수 | `packages/design-system/src/tokens.css` |
+| Tailwind v4 매핑 | `packages/design-system/src/theme.css` |
+| Typography @utility | `packages/design-system/src/typography.css` |
+| Typography 토큰 TS | `packages/design-system/src/typography-tokens.ts` |
+| Spacing 토큰 + Semantic 매핑 | `packages/design-system/src/spacing-tokens.ts` |
+| Radius 토큰 | `packages/design-system/src/radius-tokens.ts` |
+| Motion 토큰 | `packages/design-system/src/motion-tokens.ts` |
+| Icon 토큰 + Control size | `packages/design-system/src/icon-tokens.ts` · `component-size-tokens.ts` |
+| 컴포넌트 28개 | `packages/design-system/src/components/ui/` |
+| 공통 cn 유틸 | `packages/design-system/src/lib/utils.ts` |
+| disabled 헬퍼 | `packages/design-system/src/lib/ui-disabled.ts` |
+| 아이콘 ICONS map | `packages/design-system/src/components/icons.ts` |
+| 패키지 exports | `packages/design-system/package.json` |
+
+---
+
+## 8. 변경 정책
+
+1. **토큰 이름·값 변경** — 소비자 빌드가 깨질 수 있음. 변경 전 소비자 영향 분석 필수.
+2. **컴포넌트 props·variant 제거** — 소비자 사용 중이면 deprecate 단계 거치기.
+3. **export 경로 변경** — import가 깨짐. 절대 가벼이 변경 금지.
+4. **점진 흡수 원칙** — 다른 시스템(예: 리노벨)을 흡수할 때 "그쪽 정의 그대로"가 아니라 "DS의 최종 정의가 무엇인가" 관점으로 정규화.
+
+---
+
+## 9. 관련 문서
+
+- **`DESIGN.md`** — 디자인 시스템 정본 문서 (에이전트 최우선 준수)
+- `AGENTS.md` — 에이전트 (Cursor·Claude Code) 핸드오프
+- `CLAUDE.md` — Claude Code 세션 시작 규칙
+- `docs/wip/HANDOFF.md` — Cursor ↔ Claude Code 즉시 컨텍스트
+- `docs/wip/WORKLOG.md` — 작업 일지

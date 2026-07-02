@@ -1,0 +1,77 @@
+/**
+ * Avatar fallback icon 크기 — Tailwind v4 [data-slot=…] 임의 선택자 파싱 버그 회피
+ */
+@layer components {
+  [data-slot="avatar"][data-size="xs"]
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"] {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  [data-slot="avatar"][data-size="sm"]
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"] {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  [data-slot="avatar"][data-size="default"]
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"],
+  [data-slot="avatar"]:not([data-size])
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"] {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  [data-slot="avatar"][data-size="md"]
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"] {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  [data-slot="avatar"][data-size="lg"]
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"] {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  [data-slot="avatar"][data-size="xl"]
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"] {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  [data-slot="avatar"][data-size="2xl"]
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"] {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  [data-slot="avatar"][data-size="3xl"]
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"] {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  [data-slot="avatar"][data-size="4xl"]
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"] {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  [data-slot="avatar"][data-size="5xl"]
+    [data-slot="avatar-fallback"][data-variant="icon"]
+    [data-slot="icon"] {
+    width: 4rem;
+    height: 4rem;
+  }
+}

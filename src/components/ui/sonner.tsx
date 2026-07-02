@@ -1,7 +1,7 @@
 "use client"
 
 import { ICONS } from "@/components/icons"
-import { Icon } from "@/components/ui/icon"
+import { Icon } from "design-system/ui/icon"
 import { useTheme } from "next-themes"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
 

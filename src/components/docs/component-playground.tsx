@@ -1,16 +1,10 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
-import { Input } from "@/components/ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
+import { Input } from "design-system/ui/input"
+import { Slider } from "design-system/ui/slider"
+import { DocsFilterChips } from "@/components/docs/docs-filter-chips"
 import { getComponentCaseSpec } from "@/lib/component-case-specs"
 
 import { getPlaygroundEntry } from "./playground-registry"
@@ -22,70 +16,75 @@ import {
 } from "./playground-shell"
 import type { PlaygroundState } from "./playground-utils"
 import {
+  buildPlaygroundInitialState,
+  classifyPlaygroundControlKey,
   createPlaygroundRenderContext,
   findSpecProp,
   formatPlaygroundOption,
-  isBooleanProp,
-  isFiniteEnumProp,
-  shouldSkipSpecProp,
+  getPlaygroundControlLabel,
+  resolvePlaygroundControlKeys,
+  sortPlaygroundOptionValues,
 } from "./playground-utils"
 
 export function ComponentPlayground({ slug }: { slug: string }) {
   const entry = getPlaygroundEntry(slug)
   const spec = getComponentCaseSpec(slug)
 
-  const [state, setState] = useState<PlaygroundState>(
-    () => entry?.initialState ?? {}
+  const mergedInitialState = useMemo(
+    () =>
+      entry && spec ? buildPlaygroundInitialState(spec.properties, entry) : {},
+    [entry, spec]
   )
+
+  const [state, setState] = useState<PlaygroundState>(
+    () => mergedInitialState
+  )
+
+  useEffect(() => {
+    setState(mergedInitialState)
+  }, [slug, mergedInitialState])
 
   const code = useMemo(() => entry?.buildCode(state) ?? "", [entry, state])
 
   if (!entry || !spec) return null
 
   const properties = spec.properties
+  const controlKeys = resolvePlaygroundControlKeys(properties, entry)
 
-  const textKeys = new Set(entry.textKeys ?? [])
-  const numberKeys = new Map(
-    (entry.numberKeys ?? []).map((field) => [field.key, field])
+  const booleanKeys = controlKeys.filter(
+    (key) => classifyPlaygroundControlKey(key, properties, entry) === "boolean"
   )
-  const selectKeys = entry.selectKeys ?? {}
-  const booleanKeys: string[] = []
-  const enumKeys: string[] = []
-
-  for (const key of Object.keys(entry.initialState)) {
-    if (textKeys.has(key) || numberKeys.has(key) || selectKeys[key]) continue
-
-    const prop = findSpecProp(properties, key)
-    if (prop && !shouldSkipSpecProp(prop.name)) {
-      if (isBooleanProp(prop)) booleanKeys.push(key)
-      else if (isFiniteEnumProp(prop)) enumKeys.push(key)
-      else if (typeof entry.initialState[key] === "boolean") booleanKeys.push(key)
-      else if (typeof entry.initialState[key] === "string") enumKeys.push(key)
-    } else if (typeof entry.initialState[key] === "boolean") {
-      booleanKeys.push(key)
-    } else if (selectKeys[key]) {
-      // handled above
-    } else if (typeof entry.initialState[key] === "string" && !textKeys.has(key)) {
-      enumKeys.push(key)
-    }
-  }
 
   const orderedKeys = [
-    ...Object.keys(entry.initialState).filter(
-      (key) =>
-        !booleanKeys.includes(key) &&
-        (textKeys.has(key) ||
-          numberKeys.has(key) ||
-          enumKeys.includes(key) ||
-          selectKeys[key])
-    ),
+    ...controlKeys.filter((key) => !booleanKeys.includes(key)),
     ...booleanKeys,
   ]
 
   const uniqueOrderedKeys = [...new Set(orderedKeys)]
 
   function updateState(key: string, value: string | boolean | number) {
-    setState((current) => ({ ...current, [key]: value }))
+    setState((current) => {
+      const next = { ...current, [key]: value }
+      if (slug === "tabs" && key === "tabCount") {
+        const count = Math.min(4, Math.max(2, Number(value) || 2))
+        const tabValues = ["tab-1", "tab-2", "tab-3", "tab-4"].slice(0, count)
+        const currentDefault = String(next.defaultValue ?? "tab-1")
+        if (!tabValues.includes(currentDefault)) {
+          next.defaultValue = tabValues[0]
+        }
+      }
+      if (
+        (slug === "input" || slug === "label" || slug === "textarea") &&
+        (key === "hypertextMax" || key === "hypertextCount")
+      ) {
+        const max = Number(next.hypertextMax)
+        if (max > 0) {
+          const count = Number(next.hypertextCount) || 0
+          next.hypertextCount = Math.min(max, Math.max(0, count))
+        }
+      }
+      return next
+    })
   }
 
   const previewContext = createPlaygroundRenderContext(state, updateState)
@@ -95,18 +94,15 @@ export function ComponentPlayground({ slug }: { slug: string }) {
       return null
     }
 
-    const prop = findSpecProp(properties, key)
-    const description = prop?.description
+    const kind = classifyPlaygroundControlKey(key, properties, entry)
+    if (kind === "skip") return null
 
-    if (textKeys.has(key)) {
-      const label =
-        key === "label"
-          ? isIconOnlyLabel(state)
-            ? "aria-label"
-            : "children"
-          : key
+    const prop = findSpecProp(properties, key)
+    const numberField = entry.numberKeys?.find((field) => field.key === key)
+
+    if (kind === "text") {
       return (
-        <PlaygroundField key={key} label={label} description={description}>
+        <PlaygroundField key={key} label={getPlaygroundControlLabel(slug, key, state)}>
           <Input
             value={String(state[key] ?? "")}
             onChange={(event) => updateState(key, event.target.value)}
@@ -115,62 +111,59 @@ export function ComponentPlayground({ slug }: { slug: string }) {
       )
     }
 
-    if (numberKeys.has(key)) {
-      const field = numberKeys.get(key)!
+    if (kind === "number" && numberField) {
       return (
         <PlaygroundField
           key={key}
-          label={field.label ?? key}
-          description={description}
+          label={numberField.label ?? key}
         >
           <div className="space-y-2">
             <Slider
-              value={[Number(state[key] ?? field.min)]}
-              min={field.min}
-              max={field.max}
-              step={field.step ?? 1}
+              value={[Number(state[key] ?? numberField.min)]}
+              min={numberField.min}
+              max={numberField.max}
+              step={numberField.step ?? 1}
               onValueChange={(values) => {
                 const next = Array.isArray(values) ? values[0] : values
-                updateState(key, next ?? field.min)
+                updateState(key, next ?? numberField.min)
               }}
             />
-            <p className="text-center font-mono text-sm text-muted-foreground">
-              {Number(state[key] ?? field.min)}
+            <p className="text-center font-mono text-sm text-foreground-muted">
+              {Number(state[key] ?? numberField.min)}
             </p>
           </div>
         </PlaygroundField>
       )
     }
 
-    const options =
-      selectKeys[key] ??
-      (prop && isFiniteEnumProp(prop) ? prop.values : undefined)
+    if (kind === "select") {
+      const rawOptions =
+        entry.selectKeys?.[key] ??
+        (prop ? sortPlaygroundOptionValues(prop.values, key) : undefined)
 
-    if (options) {
+      if (!rawOptions?.length) return null
+
+      const filteredOptions =
+        entry.filterSelectOptions?.(state, key, rawOptions) ?? rawOptions
+      const options = sortPlaygroundOptionValues(filteredOptions, key)
+      const rawValue = String(state[key] ?? options[0])
+      const value = options.includes(rawValue) ? rawValue : options[0]
       return (
-        <PlaygroundField key={key} label={key} description={description}>
-          <Select
-            value={String(state[key] ?? options[0])}
-            onValueChange={(value) => {
-              if (value) updateState(key, value)
-            }}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {options.map((value) => (
-                <SelectItem key={value} value={value}>
-                  {formatPlaygroundOption(prop, value)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <PlaygroundField key={key} label={key}>
+          <DocsFilterChips
+            size="sm"
+            value={value}
+            onValueChange={(next) => updateState(key, next)}
+            options={options.map((option) => ({
+              value: option,
+              label: formatPlaygroundOption(prop, option),
+            }))}
+          />
         </PlaygroundField>
       )
     }
 
-    if (booleanKeys.includes(key)) {
+    if (kind === "boolean") {
       return (
         <PlaygroundSwitch
           key={key}
@@ -210,9 +203,4 @@ export function ComponentPlayground({ slug }: { slug: string }) {
       />
     </PlaygroundShell>
   )
-}
-
-function isIconOnlyLabel(state: PlaygroundState) {
-  const size = String(state.size ?? "")
-  return size === "icon" || size.startsWith("icon-")
 }

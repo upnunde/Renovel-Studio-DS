@@ -28,7 +28,7 @@ function Slider({
       thumbAlignment="edge"
       {...props}
     >
-      <SliderPrimitive.Control className={`group relative flex w-full touch-none items-center select-none data-vertical:h-full data-vertical:min-h-40 data-vertical:w-auto data-vertical:flex-col ${uiDisabledBlock} data-disabled:opacity-60`}>
+      <SliderPrimitive.Control className={`group relative flex w-full touch-none items-center select-none data-horizontal:h-4 data-vertical:h-full data-vertical:min-h-40 data-vertical:w-4 data-vertical:flex-col ${uiDisabledBlock} data-disabled:opacity-60`}>
         <SliderPrimitive.Track
           data-slot="slider-track"
           className="relative grow overflow-hidden rounded-full bg-muted select-none data-horizontal:h-1 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
@@ -42,7 +42,7 @@ function Slider({
           <SliderPrimitive.Thumb
             data-slot="slider-thumb"
             key={index}
-            className={`relative block size-3 shrink-0 rounded-full border border-ring bg-white ring-ring/50 transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-3 focus-visible:ring-3 focus-visible:outline-hidden active:ring-3 group-data-disabled:border-disabled-border group-data-disabled:bg-disabled ${uiDisabledBlock}`}
+            className={`relative block size-4 shrink-0 rounded-full border border-ring bg-white ring-ring/50 transition-[color,box-shadow] duration-short ease-standard select-none after:absolute after:-inset-2 hover:ring-3 focus-visible:ring-3 focus-visible:outline-hidden active:ring-3 group-data-disabled:border-disabled-border group-data-disabled:bg-disabled ${uiDisabledBlock}`}
           />
         ))}
       </SliderPrimitive.Control>

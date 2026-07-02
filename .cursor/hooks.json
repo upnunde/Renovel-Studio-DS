@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": ".cursor/hooks/handoff-log-prompt.sh"
+      }
+    ],
+    "stop": [
+      {
+        "command": ".cursor/hooks/handoff-on-stop.sh"
+      }
+    ]
+  }
+}

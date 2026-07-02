@@ -1,11 +1,20 @@
 import type { ComponentPropSpec } from "@/lib/component-case-specs"
 import { formatPropValue } from "@/lib/component-case-specs"
+import {
+  AVATAR_SIZE_SCALE,
+  getControlSizeToken,
+  sortAvatarSizeApis,
+  sortControlSizeApis,
+} from "design-system/component-size-tokens"
 
 export type PlaygroundState = Record<string, string | boolean | number>
 
 export type PlaygroundRenderContext = {
   set: (key: string, value: string | boolean | number) => void
-  bindOpen: (key?: string) => {
+  bindOpen: (
+    key?: string,
+    options?: { pin?: boolean }
+  ) => {
     open: boolean
     onOpenChange: (open: boolean) => void
   }
@@ -37,10 +46,16 @@ export function createPlaygroundRenderContext(
 ): PlaygroundRenderContext {
   return {
     set,
-    bindOpen: (key = "open") => ({
-      open: state[key] === true,
-      onOpenChange: (open) => set(key, open),
-    }),
+    bindOpen: (key = "open", options?: { pin?: boolean }) => {
+      const isOpen = playgroundBool(state, key)
+      return {
+        open: isOpen,
+        onOpenChange: (open) => {
+          if (options?.pin && isOpen && !open) return
+          set(key, open)
+        },
+      }
+    },
     bindValue: (key) => ({
       value: String(state[key] ?? ""),
       onValueChange: (value) => set(key, value),
@@ -81,23 +96,119 @@ export type PlaygroundNumberField = {
   label?: string
 }
 
+/** Properties 테이블 전용 — 플레이그라운드 컨트롤·미리보기에 매핑하지 않음 */
 const SKIPPED_SPEC_PROPS = new Set([
-  "children",
   "구성",
   "height",
   "box",
-  "list-height",
   "thickness",
   "item-height",
-  "htmlFor",
-  "rows",
   "className",
-  "image",
-  "defaultValue",
-  "min / max / step",
-  "delay",
   "text",
 ])
+
+export type PlaygroundRegistryLike = {
+  initialState: PlaygroundState
+  textKeys?: string[]
+  numberKeys?: PlaygroundNumberField[]
+  selectKeys?: Record<string, string[]>
+  /** 플레이그라운드 컨트롤에서 제외 (Properties 표에는 유지) */
+  skipControlKeys?: string[]
+}
+
+/** spec.properties + entry.initialState 기준 플레이그라운드 컨트롤 키 (정책: Properties 케이스 전부 노출) */
+export function resolvePlaygroundControlKeys(
+  properties: ComponentPropSpec[],
+  entry: PlaygroundRegistryLike
+): string[] {
+  const skip = new Set(entry.skipControlKeys ?? [])
+  const keys: string[] = []
+  for (const prop of properties) {
+    if (!shouldSkipSpecProp(prop.name) && !skip.has(prop.name)) keys.push(prop.name)
+  }
+  for (const key of Object.keys(entry.initialState)) {
+    if (!keys.includes(key) && !skip.has(key)) keys.push(key)
+  }
+  return keys
+}
+
+/** spec에만 있는 프로퍼티 기본값을 initialState에 병합 */
+export function buildPlaygroundInitialState(
+  properties: ComponentPropSpec[],
+  entry: PlaygroundRegistryLike
+): PlaygroundState {
+  const state: PlaygroundState = { ...entry.initialState }
+
+  for (const prop of properties) {
+    if (shouldSkipSpecProp(prop.name)) continue
+    if (prop.name in state) continue
+
+    const selectOptions = entry.selectKeys?.[prop.name]
+    if (selectOptions?.length) {
+      state[prop.name] = selectOptions[0]
+      continue
+    }
+
+    const numberField = entry.numberKeys?.find((field) => field.key === prop.name)
+    if (numberField) {
+      state[prop.name] = numberField.min
+      continue
+    }
+
+    if (isBooleanProp(prop)) {
+      state[prop.name] = false
+      continue
+    }
+
+    if (prop.values.includes("false")) {
+      state[prop.name] = "false"
+      continue
+    }
+
+    if (
+      prop.values[0] === "string" ||
+      prop.values[0] === "id" ||
+      prop.values[0] === "number"
+    ) {
+      state[prop.name] = ""
+      continue
+    }
+
+    state[prop.name] = prop.values[0]
+  }
+
+  return state
+}
+
+export function classifyPlaygroundControlKey(
+  key: string,
+  properties: ComponentPropSpec[],
+  entry: PlaygroundRegistryLike
+): "text" | "number" | "select" | "boolean" | "skip" {
+  if (entry.textKeys?.includes(key)) return "text"
+  if (entry.numberKeys?.some((field) => field.key === key)) return "number"
+  if (entry.selectKeys?.[key]) return "select"
+
+  const prop = findSpecProp(properties, key)
+  if (prop && shouldSkipSpecProp(prop.name)) return "skip"
+  if (prop) {
+    if (isBooleanProp(prop)) return "boolean"
+    if (prop.values.some(isMetadataPropValue)) return "text"
+    if (isFiniteEnumProp(prop)) return "select"
+    if (
+      prop.values[0] === "string" ||
+      prop.values[0] === "id" ||
+      prop.values[0] === "number"
+    ) {
+      return "text"
+    }
+  }
+
+  if (typeof entry.initialState[key] === "boolean") return "boolean"
+  if (entry.selectKeys?.[key]) return "select"
+
+  return "skip"
+}
 
 export function playgroundBool(state: PlaygroundState, key: string) {
   const value = state[key]
@@ -117,15 +228,21 @@ export function isFiniteEnumProp(prop: ComponentPropSpec) {
   if (prop.values.length === 0 || prop.values.length > 12) return false
   return prop.values.every(
     (value) =>
-      value !== "string" &&
-      value !== "number" &&
-      value !== "number[]" &&
-      value !== "string[]" &&
-      value !== "id" &&
+      !isMetadataPropValue(value) &&
       !value.includes("…") &&
       !value.includes("*") &&
-      !value.includes("–") &&
       !value.includes("/")
+  )
+}
+
+/** Properties 표기용 — 플레이그라운드 enum 옵션으로 취급하지 않음 */
+export function isMetadataPropValue(value: string) {
+  return (
+    value === "string" ||
+    value === "number" ||
+    value === "id" ||
+    value === "—" ||
+    value === "–"
   )
 }
 
@@ -148,6 +265,45 @@ export function formatPlaygroundOption(
   return formatPropValue(prop, value)
 }
 
+const BOOLEAN_OPTION_ORDER = ["false", "true", "indeterminate"] as const
+
+/** 플레이그라운드·Properties 표 — 옵션을 작은 값 → 큰 값 순으로 정렬 */
+export function sortPlaygroundOptionValues(
+  values: readonly string[],
+  propName?: string
+): string[] {
+  if (values.length <= 1) return [...values]
+
+  if (values.every((value) => getControlSizeToken(value))) {
+    return sortControlSizeApis(values)
+  }
+
+  if (
+    propName === "size" &&
+    values.every((value) => AVATAR_SIZE_SCALE.some((token) => token.api === value))
+  ) {
+    return sortAvatarSizeApis(values)
+  }
+
+  if (
+    values.every((value) =>
+      BOOLEAN_OPTION_ORDER.includes(value as (typeof BOOLEAN_OPTION_ORDER)[number])
+    )
+  ) {
+    return [...values].sort(
+      (a, b) =>
+        BOOLEAN_OPTION_ORDER.indexOf(a as (typeof BOOLEAN_OPTION_ORDER)[number]) -
+        BOOLEAN_OPTION_ORDER.indexOf(b as (typeof BOOLEAN_OPTION_ORDER)[number])
+    )
+  }
+
+  if (values.every((value) => /^\d+ms$/.test(value))) {
+    return [...values].sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
+  }
+
+  return [...values]
+}
+
 export function jsxBoolAttr(name: string, value: boolean) {
   return value ? ` ${name}` : ""
 }
@@ -155,4 +311,37 @@ export function jsxBoolAttr(name: string, value: boolean) {
 export function jsxStringAttr(name: string, value: string, defaultValue?: string) {
   if (value === defaultValue) return ""
   return ` ${name}="${value}"`
+}
+
+/** 플레이그라운드 코드 — enum/string prop (기본값도 항상 명시, 복사·AI 인식용) */
+export function playgroundPropAttr(name: string, value: string) {
+  return `${name}="${value}"`
+}
+
+export function playgroundPropAttrs(
+  parts: Array<string | false | null | undefined>
+) {
+  const attrs = parts.filter(Boolean)
+  return attrs.length ? ` ${attrs.join(" ")}` : ""
+}
+
+/** 플레이그라운드 컨트롤 라벨 — Button 등 slug별 표시명 보정 */
+export function getPlaygroundControlLabel(
+  slug: string,
+  key: string,
+  state: PlaygroundState
+) {
+  if (key !== "label") return key
+  if (slug === "button") {
+    return isPlaygroundIconOnlyButtonLabel(state) ? "aria-label" : "children"
+  }
+  if (slug === "toggle") return "aria-label"
+  if (slug === "chip" || slug === "badge") return "children"
+  return key
+}
+
+function isPlaygroundIconOnlyButtonLabel(state: PlaygroundState) {
+  if (state.type === "icon") return true
+  const size = String(state.size ?? "")
+  return size === "icon" || size.startsWith("icon-")
 }
