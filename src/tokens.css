@@ -214,8 +214,8 @@
   --dim-30: var(--black-opacity-80);
   --dim-40: var(--black-opacity-90);
 
-  /* Divider — 시각적 분리선 (라이트: muted와 동일 원시값) */
-  --divider: var(--muted);
+  /* Divider — 시각적 분리선 (라이트: border와 동일 grayscale-15) */
+  --divider: var(--grayscale-15);
   --divider-strong: var(--grayscale-30);
 
   /* Border 강조·반전 */
@@ -306,7 +306,7 @@
   --destructive-container: var(--error-800);
   --destructive-container-foreground: var(--error-100);
 
-  --divider: var(--muted);
+  --divider: var(--grayscale-130);
   --divider-strong: var(--grayscale-110);
 
   --border-strong: var(--grayscale-10);
