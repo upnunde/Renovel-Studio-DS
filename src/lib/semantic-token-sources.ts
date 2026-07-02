@@ -46,11 +46,11 @@ const LIGHT: Record<string, string> = {
   "--warning-foreground": "grayscale-140",
   "--info": "info-500",
   "--info-foreground": "white",
-  "--border": "grayscale-20",
+  "--border": "grayscale-15",
   "--input": "grayscale-20",
   "--disabled": "grayscale-10",
   "--disabled-foreground": "grayscale-60",
-  "--disabled-border": "grayscale-20",
+  "--disabled-border": "grayscale-15",
   "--ring": "brand-500",
   "--chart-1": "brand-500",
   "--chart-2": "brand-400",
@@ -63,7 +63,7 @@ const LIGHT: Record<string, string> = {
   "--sidebar-primary-foreground": "white",
   "--sidebar-accent": "brand-50",
   "--sidebar-accent-foreground": "brand-600",
-  "--sidebar-border": "grayscale-20",
+  "--sidebar-border": "grayscale-15",
   "--sidebar-ring": "brand-500",
 }
 

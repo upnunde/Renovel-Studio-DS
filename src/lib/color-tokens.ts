@@ -326,7 +326,7 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         id: "ui-border",
         title: "Border",
         tokens: [
-          { name: "border", variable: "--border" },
+          { name: "border", variable: "--border", role: "기본 보더 — grayscale-15 (라이트)" },
           { name: "border-strong", variable: "--border-strong" },
           { name: "border-inverse", variable: "--border-inverse" },
         ],

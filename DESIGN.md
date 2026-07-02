@@ -393,7 +393,7 @@ CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 �
 
 | 프로젝트 | 경로 | 연결 방식 |
 |---------|------|----------|
-| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.6` |
+| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.7` |
 
 소비자 추가 시 이 목록 갱신. 디자인 시스템 변경 시 소비자 영향 항상 고려.
 

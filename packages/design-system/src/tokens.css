@@ -195,8 +195,8 @@
   --info: var(--info-500);
   --info-foreground: var(--white);
 
-  /* UI · 경계 — 라이트: border·input·sidebar-border grayscale-20 */
-  --border: var(--grayscale-20);
+  /* UI · 경계 — 라이트: border grayscale-15 · input·sidebar-border grayscale-20 */
+  --border: var(--grayscale-15);
   --input: var(--grayscale-20);
   --ring: var(--brand-500);
 
