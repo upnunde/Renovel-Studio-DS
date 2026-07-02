@@ -17,7 +17,7 @@ export type GrayscaleStep = {
 export const GRAYSCALE_SCALE: GrayscaleStep[] = [
   { name: "grayscale-0", variable: "--grayscale-0", hex: "#FFFFFF", role: "canvas · 페이지 바탕 · 흰 표면" },
   { name: "grayscale-10", variable: "--grayscale-10", hex: "#F8F8FC", role: "은은한 배경 틴트" },
-  { name: "grayscale-15", variable: "--grayscale-15", hex: "#F1F1F5", role: "secondary · muted · 중간 배경 틴트" },
+  { name: "grayscale-15", variable: "--grayscale-15", hex: "#F1F1F5", role: "원시 스케일 (시맨틱 미연결)" },
   { name: "grayscale-20", variable: "--grayscale-20", hex: "#E7E7EB", role: "border" },
   { name: "grayscale-30", variable: "--grayscale-30", hex: "#D7D7DB", role: "input" },
   { name: "grayscale-40", variable: "--grayscale-40", hex: "#C6C6CA", role: "비활성 보더" },

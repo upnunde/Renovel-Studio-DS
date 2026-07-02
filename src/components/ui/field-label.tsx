@@ -117,7 +117,7 @@ function FieldLabel({
                 render={
                   <button
                     type="button"
-                    className="inline-flex shrink-0 rounded-full text-foreground-muted transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="inline-flex shrink-0 rounded-full text-foreground-muted transition-colors hover:text-foreground data-[hovered=true]:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   />
                 }
                 aria-label="추가 정보"

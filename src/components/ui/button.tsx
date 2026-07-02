@@ -9,16 +9,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-inverse text-inverse-foreground hover:bg-inverse/80",
-        primary: "bg-primary text-primary-foreground hover:bg-primary/80",
+        default:
+          "bg-inverse text-inverse-foreground hover:bg-inverse/80 data-[hovered=true]:bg-inverse/80",
+        primary:
+          "bg-primary text-primary-foreground hover:bg-primary/80 data-[hovered=true]:bg-primary/80",
         outline:
-          "border-border bg-background hover:bg-accent hover:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-accent",
+          "border-border bg-background hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-accent dark:data-[hovered=true]:bg-accent",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
+          "bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
+          "hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+          "bg-destructive/10 text-destructive hover:bg-destructive/20 data-[hovered=true]:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:data-[hovered=true]:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline underline-offset-4",
       },
       shape: {

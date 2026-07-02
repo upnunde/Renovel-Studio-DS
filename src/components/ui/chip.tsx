@@ -15,11 +15,11 @@ const chipVariants = cva(
     variants: {
       variant: {
         outline:
-          "border-border bg-background hover:bg-muted hover:text-foreground aria-pressed:border-transparent aria-pressed:bg-inverse aria-pressed:text-inverse-foreground aria-pressed:hover:bg-inverse/80",
+          "border-border bg-background hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-pressed:border-transparent aria-pressed:bg-inverse aria-pressed:text-inverse-foreground aria-pressed:hover:bg-inverse/80 aria-pressed:data-[hovered=true]:bg-inverse/80",
         subtle:
-          "border-transparent bg-muted text-foreground-muted hover:bg-muted hover:text-foreground aria-pressed:bg-inverse aria-pressed:text-inverse-foreground aria-pressed:hover:bg-inverse/80",
+          "border-transparent bg-muted text-foreground-muted hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-pressed:bg-inverse aria-pressed:text-inverse-foreground aria-pressed:hover:bg-inverse/80 aria-pressed:data-[hovered=true]:bg-inverse/80",
         default:
-          "border-transparent bg-background text-foreground hover:bg-muted hover:text-foreground aria-pressed:bg-inverse aria-pressed:text-inverse-foreground aria-pressed:hover:bg-inverse/80",
+          "border-transparent bg-background text-foreground hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-pressed:bg-inverse aria-pressed:text-inverse-foreground aria-pressed:hover:bg-inverse/80 aria-pressed:data-[hovered=true]:bg-inverse/80",
       },
       size: {
         default: "h-9 min-w-9 px-3 [&_svg:not([class*='size-'])]:size-4",
@@ -117,7 +117,7 @@ function Chip({
         onClick={onRemove}
         className={cn(
           "inline-flex h-full items-center text-foreground-muted outline-none transition-colors duration-short ease-standard hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none",
-          "group-has-[[aria-pressed=true]]/chip-shell:text-inverse-foreground/80 group-has-[[aria-pressed=true]]/chip-shell:hover:text-inverse-foreground",
+          "data-[hovered=true]:text-foreground group-has-[[aria-pressed=true]]/chip-shell:text-inverse-foreground/80 group-has-[[aria-pressed=true]]/chip-shell:hover:text-inverse-foreground group-has-[[aria-pressed=true]]/chip-shell:data-[hovered=true]:text-inverse-foreground",
           size === "sm" ? "pr-2 pl-0.5" : "pr-2.5 pl-1"
         )}
       >

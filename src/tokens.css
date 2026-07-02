@@ -155,10 +155,10 @@
   --card-foreground: var(--grayscale-140);
   --background-muted: var(--grayscale-10);
   --background-muted-foreground: var(--grayscale-140);
-  --card-muted: var(--grayscale-10);
-  --card-muted-foreground: var(--grayscale-140);
-  --popover: var(--white);
-  --popover-foreground: var(--grayscale-140);
+  --card-muted: var(--background-muted);
+  --card-muted-foreground: var(--background-muted-foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--card-foreground);
 
   /* 반전 표면 — primary/card 와 같은 페어 패턴 (bg-inverse text-inverse-foreground) */
   --inverse: var(--grayscale-140);
@@ -171,17 +171,19 @@
   --foreground-placeholder: var(--grayscale-70);
   --foreground-disabled: var(--grayscale-60);
 
-  /* 강조 · 액션 — 브랜드 */
+  /* 강조 · 액션 — 브랜드 CTA */
   --primary: var(--brand-500);
   --primary-foreground: var(--white);
 
-  /* 상호작용 — 호버는 브랜드 틴트 */
-  --secondary: var(--grayscale-15);
-  --secondary-foreground: var(--grayscale-140);
-  --muted: var(--grayscale-15);
-  --muted-foreground: var(--grayscale-90);
+  /* 상호작용 — Highlight(브랜드) · Fill(무채색) 역할 분리
+   * accent: 브랜드 호버·포커스·선택  ·  muted: 무채색 호버·크롬  ·  secondary: 보조 액션 기본면(bg = muted)
+   */
   --accent: var(--brand-50);
   --accent-foreground: var(--brand-600);
+  --muted: var(--grayscale-10);
+  --muted-foreground: var(--grayscale-90);
+  --secondary: var(--muted);
+  --secondary-foreground: var(--grayscale-140);
 
   --destructive: var(--error-500);
   --destructive-foreground: var(--white);
@@ -212,8 +214,8 @@
   --dim-30: var(--black-opacity-80);
   --dim-40: var(--black-opacity-90);
 
-  /* Divider — 시각적 분리선 전용 (border와 분리) */
-  --divider: var(--grayscale-15);
+  /* Divider — 시각적 분리선 (라이트: muted와 동일 원시값) */
+  --divider: var(--muted);
   --divider-strong: var(--grayscale-30);
 
   /* Border 강조·반전 */
@@ -230,10 +232,10 @@
   --shadow-elevation-50: 0px 8px 16px 6px rgba(0, 0, 0, 0.06);
   --shadow-elevation-60: 0px 12px 24px 8px rgba(0, 0, 0, 0.06);
 
-  /* 비활성 — grayscale-15/20/60 기반 */
-  --disabled: var(--grayscale-15);
+  /* 비활성 — 라이트: 면은 muted alias, 전경·보더는 전용 */
+  --disabled: var(--muted);
   --disabled-foreground: var(--grayscale-60);
-  --disabled-border: var(--grayscale-20);
+  --disabled-border: var(--border);
 
   /* 차트 시리즈 — 브랜드 톤 5단계 */
   --chart-1: var(--brand-500);
@@ -242,15 +244,15 @@
   --chart-4: var(--brand-300);
   --chart-5: var(--brand-700);
 
-  /* 사이드바 — 호버·선택은 브랜드 */
-  --sidebar: var(--white);
-  --sidebar-foreground: var(--grayscale-140);
-  --sidebar-primary: var(--brand-500);
-  --sidebar-primary-foreground: var(--white);
-  --sidebar-accent: var(--brand-50);
-  --sidebar-accent-foreground: var(--brand-600);
-  --sidebar-border: var(--grayscale-20);
-  --sidebar-ring: var(--brand-500);
+  /* 사이드바 — 글로벌 시맨틱 alias (shadcn API 유지) */
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
 }
 
 .dark {
@@ -261,10 +263,10 @@
   --card-foreground: var(--grayscale-10);
   --background-muted: var(--grayscale-130);
   --background-muted-foreground: var(--grayscale-10);
-  --card-muted: var(--grayscale-130);
-  --card-muted-foreground: var(--grayscale-10);
-  --popover: var(--grayscale-140);
-  --popover-foreground: var(--grayscale-10);
+  --card-muted: var(--background-muted);
+  --card-muted-foreground: var(--background-muted-foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--card-foreground);
 
   --inverse: var(--grayscale-10);
   --inverse-foreground: var(--grayscale-140);
@@ -276,12 +278,12 @@
   --primary: var(--brand-500);
   --primary-foreground: var(--white);
 
-  --secondary: var(--grayscale-130);
-  --secondary-foreground: var(--grayscale-10);
-  --muted: var(--grayscale-130);
-  --muted-foreground: var(--grayscale-70);
   --accent: var(--brand-800);
   --accent-foreground: var(--brand-100);
+  --muted: var(--grayscale-130);
+  --muted-foreground: var(--grayscale-70);
+  --secondary: var(--muted);
+  --secondary-foreground: var(--grayscale-10);
 
   --destructive: var(--error-400);
   --destructive-foreground: var(--white);
@@ -299,12 +301,12 @@
 
   --primary-container: var(--brand-800);
   --primary-container-foreground: var(--brand-100);
-  --secondary-container: var(--grayscale-130);
+  --secondary-container: var(--muted);
   --secondary-container-foreground: var(--white);
   --destructive-container: var(--error-800);
   --destructive-container-foreground: var(--error-100);
 
-  --divider: var(--grayscale-130);
+  --divider: var(--muted);
   --divider-strong: var(--grayscale-110);
 
   --border-strong: var(--grayscale-10);
@@ -328,12 +330,12 @@
   --chart-4: var(--brand-600);
   --chart-5: var(--brand-200);
 
-  --sidebar: var(--grayscale-140);
-  --sidebar-foreground: var(--grayscale-10);
-  --sidebar-primary: var(--brand-500);
-  --sidebar-primary-foreground: var(--white);
-  --sidebar-accent: var(--brand-800);
-  --sidebar-accent-foreground: var(--brand-100);
-  --sidebar-border: var(--grayscale-110);
-  --sidebar-ring: var(--brand-400);
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--input);
+  --sidebar-ring: var(--ring);
 }
