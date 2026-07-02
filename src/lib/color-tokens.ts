@@ -335,7 +335,7 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         id: "ui-divider",
         title: "Divider",
         tokens: [
-          { name: "divider", variable: "--divider", role: "구분선 — muted alias (라이트·다크)" },
+          { name: "divider", variable: "--divider", role: "구분선 — grayscale-15 (라이트) / grayscale-130 (다크)" },
           { name: "divider-strong", variable: "--divider-strong" },
         ],
       },

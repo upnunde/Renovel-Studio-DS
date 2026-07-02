@@ -102,7 +102,7 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 | `secondary` (면) | `muted` | `secondary-foreground`는 별도 (보조 액션 대비) |
 | `card-muted` | `background-muted` | 카드·페이지 보조 면 통일 |
 | `popover` | `card` | 플로팅 = elevated card |
-| `divider` | `muted` | 구분선 = neutral fill과 동일 원시값 |
+| `divider` (라이트) | `grayscale-15` | `border`와 동일 — 구분선 전용 |
 | `disabled` (면, 라이트) | `muted` | 다크는 전용 grayscale |
 | `disabled-border` (라이트) | `border` | |
 | `sidebar` | `background` | |
@@ -393,7 +393,7 @@ CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 �
 
 | 프로젝트 | 경로 | 연결 방식 |
 |---------|------|----------|
-| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.7` |
+| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.8` |
 
 소비자 추가 시 이 목록 갱신. 디자인 시스템 변경 시 소비자 영향 항상 고려.
 
