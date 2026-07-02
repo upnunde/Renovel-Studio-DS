@@ -167,7 +167,7 @@
   /* Foreground 위계 — 모두 같은 foreground 패밀리, 시각적 위계만 다름
    * 정책: --{role}-foreground 는 짝 surface 안에서만, 위계만 다른 보조 텍스트·아이콘은 이 토큰들로
    */
-  --foreground-muted: var(--grayscale-110);
+  --foreground-muted: var(--grayscale-100);
   --foreground-placeholder: var(--grayscale-70);
   --foreground-disabled: var(--grayscale-60);
 

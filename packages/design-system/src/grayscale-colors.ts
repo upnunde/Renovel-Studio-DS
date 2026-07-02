@@ -26,7 +26,7 @@ export const GRAYSCALE_SCALE: GrayscaleStep[] = [
   { name: "grayscale-70", variable: "--grayscale-70", hex: "#959598", role: "보조 아이콘" },
   { name: "grayscale-80", variable: "--grayscale-80", hex: "#848487", role: "캡션 텍스트" },
   { name: "grayscale-90", variable: "--grayscale-90", hex: "#747478", role: "muted-foreground" },
-  { name: "grayscale-100", variable: "--grayscale-100", hex: "#636366", role: "보조 본문" },
+  { name: "grayscale-100", variable: "--grayscale-100", hex: "#636366", role: "foreground-muted · 보조 본문" },
   { name: "grayscale-110", variable: "--grayscale-110", hex: "#535356", role: "다크 border" },
   { name: "grayscale-120", variable: "--grayscale-120", hex: "#424245", role: "다크 muted · secondary" },
   { name: "grayscale-130", variable: "--grayscale-130", hex: "#323235", role: "다크 card · elevated surface" },

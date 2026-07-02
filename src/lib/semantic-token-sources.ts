@@ -13,7 +13,7 @@ const LIGHT: Record<string, string> = {
   "--popover-foreground": "grayscale-140",
   "--inverse": "grayscale-140",
   "--inverse-foreground": "white",
-  "--foreground-muted": "grayscale-110",
+  "--foreground-muted": "grayscale-100",
   "--foreground-placeholder": "grayscale-70",
   "--foreground-disabled": "grayscale-60",
   "--primary": "brand-500",

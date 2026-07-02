@@ -143,7 +143,7 @@ className="hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted dat
 
 ```css
 --foreground           /* 본문 (grayscale-140) */
---foreground-muted     /* 보조 텍스트·아이콘 (grayscale-110) */
+--foreground-muted     /* 보조 텍스트·아이콘 (grayscale-100) */
 --foreground-placeholder  /* input placeholder (grayscale-70) */
 --foreground-disabled  /* 비활성 텍스트 (grayscale-60) */
 ```
@@ -393,7 +393,7 @@ CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 �
 
 | 프로젝트 | 경로 | 연결 방식 |
 |---------|------|----------|
-| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.5` |
+| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.6` |
 
 소비자 추가 시 이 목록 갱신. 디자인 시스템 변경 시 소비자 영향 항상 고려.
 
