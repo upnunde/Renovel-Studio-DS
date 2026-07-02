@@ -178,6 +178,11 @@
 [data-slot="tabs-list"][data-variant="line"]
   > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"]):hover,
 [data-slot="tabs-list"][data-variant="text"]
-  > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"]):hover {
+  > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"]):hover,
+[data-slot="tabs-list"][data-variant="line"]
+  > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"])[data-hovered="true"],
+[data-slot="tabs-list"][data-variant="text"]
+  > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"])[data-hovered="true"] {
   color: var(--foreground);
+  background-color: var(--muted);
 }
