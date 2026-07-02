@@ -13,10 +13,12 @@
 - **icons** — `ICON_REGISTRY` export 정리, `icons/index.ts` 제거·`icons.ts` 정본 통합
 - **배포** — `design-system` **v0.1.4** 태그·리노벨 `#v0.1.4`
 - **토큰** — `--input` 라이트 `grayscale-20`, **v0.1.5** 배포·리노벨 연동
+- **토큰** — `--foreground-muted` 정렬, **v0.1.6** 배포·리노벨 연동
+- **토큰** — `--border` 라이트 grayscale-15, **v0.1.7** 배포·리노벨 연동
 
 ## 다음에 할 일
 
-- 리노벨 스튜디오 Input·Select 보더 톤 확인 (v0.1.5)
+- 리노벨 스튜디오 border·muted 톤 확인 (v0.1.7)
 - 플로팅 버튼(FAB) 컴포넌트 검토
 - Figma 연동 (필요 시)
 
@@ -28,7 +30,7 @@
 
 - 브랜치: main
 - 원격: `origin` → upnunde/Renovel-Studio-DS
-- 태그: `v0.1.4`
+- 태그: `v0.1.7`
 - 관련 경로:
   - `packages/design-system/src/tokens.css` — 시맨틱·alias 정본
   - `src/lib/color-tokens.ts` — Color Semantic 문서 그룹
@@ -37,4 +39,4 @@
 ## 메모
 
 - 개발: `npm run dev` → http://localhost:3001
-- 소비: `github:upnunde/Renovel-Studio-DS#v0.1.4`
+- 소비: `github:upnunde/Renovel-Studio-DS#v0.1.7`
