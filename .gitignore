@@ -28,6 +28,7 @@ docs/wip/.handoff-inbox.md
 # misc
 .DS_Store
 *.pem
+.renovel-ds-publish/
 
 # debug
 npm-debug.log*

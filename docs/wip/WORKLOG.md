@@ -5,6 +5,7 @@
 
 ## 오늘 한 일
 
+- **패키지 배포** — `design-system` v0.1.1, GitHub repository·files·lucide peer, README·`.gitignore`, 루트 `.renovel-ds-publish/` 무시
 - **디자인 시스템 패키지** — UI 컴포넌트·토큰 정본 `packages/design-system/` 확장 (FieldLabel, InputHypertext, Chip, motion 등)
 - **문서 사이트** — 플레이그라운드·쇼케이스·Properties 연동, Dropdown Menu·Label·Textarea hypertext·Avatar md_s36
 - **토큰** — Dim 4단계(dim-10~40)·다크 `--border` grayscale-130·브랜드 chart 시리즈
@@ -13,7 +14,7 @@
 
 ## 다음에 할 일
 
-- npm 패키지명 확정 (`@scope/design-system`) 및 소비 프로젝트 적용 가이드
+- 소비 프로젝트(upnunde-test) GitHub tarball(v0.1.1) 연동 검증
 - 플로팅 버튼(FAB) 컴포넌트 검토
 - Figma 연동 (필요 시)
 
