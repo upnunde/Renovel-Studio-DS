@@ -39,7 +39,7 @@ export const ABSOLUTE_BASE: AbsoluteColorStep[] = [
     variable: "--white",
     css: WHITE,
     label: WHITE,
-    role: "background · card · CTA 전경",
+    role: "canvas · background · card · CTA 전경",
   },
   {
     name: "black",
