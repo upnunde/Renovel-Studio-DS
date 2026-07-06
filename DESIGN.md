@@ -107,7 +107,7 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 | `disabled-border` (라이트) | `border` | |
 | `sidebar` | `background` | |
 | `sidebar-accent` | `accent` | |
-| `sidebar-border` | `border` (라이트) / `input` (다크) | 사이드바만 input 톤 |
+| `sidebar-border` | `border` (라이트) / `grayscale-130` (다크) | 사이드바 구분선 |
 | `secondary-container` (다크) | `muted` | 컴포넌트 미사용, API만 유지 |
 
 문서 Color Semantic 페이지의 **Maps to** 컬럼은 alias 체인을 표시한다.

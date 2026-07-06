@@ -336,6 +336,6 @@
   --sidebar-primary-foreground: var(--primary-foreground);
   --sidebar-accent: var(--accent);
   --sidebar-accent-foreground: var(--accent-foreground);
-  --sidebar-border: var(--input);
+  --sidebar-border: var(--grayscale-130);
   --sidebar-ring: var(--ring);
 }

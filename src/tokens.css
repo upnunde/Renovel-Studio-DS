@@ -334,6 +334,6 @@
   --sidebar-primary-foreground: var(--white);
   --sidebar-accent: var(--brand-800);
   --sidebar-accent-foreground: var(--brand-100);
-  --sidebar-border: var(--grayscale-110);
+  --sidebar-border: var(--grayscale-130);
   --sidebar-ring: var(--brand-400);
 }

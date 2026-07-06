@@ -131,7 +131,7 @@ const DARK: Record<string, string> = {
   "--sidebar-primary-foreground": "white",
   "--sidebar-accent": "brand-800",
   "--sidebar-accent-foreground": "brand-100",
-  "--sidebar-border": "grayscale-110",
+  "--sidebar-border": "grayscale-130",
   "--sidebar-ring": "brand-400",
 }
 
@@ -167,7 +167,6 @@ const ALIAS_DARK: Record<string, string> = {
   "--sidebar-primary-foreground": "--primary-foreground",
   "--sidebar-accent": "--accent",
   "--sidebar-accent-foreground": "--accent-foreground",
-  "--sidebar-border": "--input",
   "--sidebar-ring": "--ring",
 }
 

@@ -433,7 +433,7 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
           {
             name: "sidebar-border",
             variable: "--sidebar-border",
-            role: "사이드바 구분선 — 라이트: border, 다크: input alias",
+            role: "사이드바 구분선 — 라이트: border, 다크: grayscale-130",
           },
           {
             name: "sidebar-ring",
