@@ -134,6 +134,8 @@ function playgroundHypertextMetrics(state: PlaygroundState) {
 }
 
 const PLAYGROUND_HYPERTEXT_DEMO_CHAR = "가"
+/** InputHypertext count/max 플레이그라운드 슬라이더 상한 */
+const PLAYGROUND_HYPERTEXT_COUNTER_MAX = 1000
 
 function playgroundHypertextInputProps(state: PlaygroundState) {
   const { max, count, hasCounter } = playgroundHypertextMetrics(state)
@@ -143,6 +145,11 @@ function playgroundHypertextInputProps(state: PlaygroundState) {
     readOnly: true as const,
     maxLength: max,
   }
+}
+
+/** hypertext 카운터 on/off 전환 시 controlled↔uncontrolled 경고 방지 — Input을 재마운트 */
+function playgroundHypertextInputKey(state: PlaygroundState) {
+  return playgroundHypertextMetrics(state).hasCounter ? "counter" : "plain"
 }
 
 function playgroundHypertextPreview(
@@ -698,13 +705,13 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       "aria-invalid": false,
       hypertext: false,
       hypertextText: "8자 이상 입력해 주세요.",
-      hypertextMax: 0,
+      hypertextMax: 1000,
       hypertextCount: 0,
     },
     textKeys: ["placeholder", "hypertextText"],
     numberKeys: [
-      { key: "hypertextMax", min: 0, max: 200, step: 1 },
-      { key: "hypertextCount", min: 0, max: 200, step: 1 },
+      { key: "hypertextMax", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
+      { key: "hypertextCount", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
     ],
     selectKeys: {
       type: ["text", "email", "password", "number", "file"],
@@ -725,13 +732,14 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         "aria-invalid": bool(state, "aria-invalid") || undefined,
         ...playgroundHypertextInputProps(state),
       }
+      const inputKey = `${type}-${playgroundHypertextInputKey(state)}`
       return (
         <InputGroup className="max-w-xs">
           <Label htmlFor="playground-input">라벨</Label>
           {type === "email" ? (
-            <EmailInput {...commonProps} />
+            <EmailInput key={inputKey} {...commonProps} />
           ) : (
-            <Input {...commonProps} type={type} />
+            <Input key={inputKey} {...commonProps} type={type} />
           )}
           {playgroundHypertextPreview(state)}
         </InputGroup>
@@ -766,13 +774,13 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       info: false,
       hypertext: false,
       hypertextText: "8자 이상 입력해 주세요.",
-      hypertextMax: 0,
+      hypertextMax: 1000,
       hypertextCount: 0,
     },
     textKeys: ["children", "hypertextText"],
     numberKeys: [
-      { key: "hypertextMax", min: 0, max: 200, step: 1 },
-      { key: "hypertextCount", min: 0, max: 200, step: 1 },
+      { key: "hypertextMax", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
+      { key: "hypertextCount", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
     ],
     selectKeys: {
       size: ["default", "lg"],
@@ -808,6 +816,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
             {str(state, "children")}
           </FieldLabel>
           <Input
+            key={playgroundHypertextInputKey(state)}
             id={FIELD_LABEL_PLAYGROUND_ID}
             placeholder="입력"
             aria-describedby={describedBy || undefined}
@@ -858,14 +867,14 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       "aria-invalid": false,
       hypertext: false,
       hypertextText: "8자 이상 입력해 주세요.",
-      hypertextMax: 0,
+      hypertextMax: 1000,
       hypertextCount: 0,
     },
     textKeys: ["placeholder", "hypertextText"],
     numberKeys: [
       { key: "rows", min: 2, max: 8, step: 1 },
-      { key: "hypertextMax", min: 0, max: 200, step: 1 },
-      { key: "hypertextCount", min: 0, max: 200, step: 1 },
+      { key: "hypertextMax", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
+      { key: "hypertextCount", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
     ],
     showWhen: {
       hypertextText: (state) => playgroundBool(state, "hypertext"),
@@ -876,6 +885,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     renderPreview: (state, _ctx) => (
       <InputGroup className="max-w-md">
         <Textarea
+          key={playgroundHypertextInputKey(state)}
           id="playground-textarea"
           rows={num(state, "rows")}
           placeholder={str(state, "placeholder")}

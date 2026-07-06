@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-07-06 13:55:50**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-07-06 14:24:31**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,8 +11,13 @@
 
 ## 최근 Cursor 요청
 
-- **2026-07-06 13:54:23** — grayscale 토근에서 grayscale-0은 그레이톤이 아니라 화이트이고 화이트 토근은 이미 존재하니까 grayscale-0을 사용한 모든 시맨틱은 화이트로 대체해줘
-그리고 grayscale-0은 삭제해줘
+- **2026-07-06 14:23:17** — DOM Path: div.flex h-.vh overflow-hidden bg-canva > div.min-h-0 flex-1 overflow-y-auto > div.mx-auto flex w-full max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-card[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.border-b border-border lg:border-r lg:border-b-0 .pace-y-5 p-5 > div.pace-y-0.5[2] > div.pace-y-2 > p.text-center font-mono text-.m text-foreground-muted
+Position: top=384px, left=281px, width=231px, height=20px
+React Component: PlaygroundField
+HTML Element: <p class="text-center font-mono text-sm text-foreground-muted" data-cursor-element-id="cursor-el-615">200</p> DOM Path: div.flex h-.vh overflow-hidden bg-canva > div.min-h-0 flex-1 overflow-y-auto > div.mx-auto flex w-full max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-card[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.flex min-h-48 flex-col > div.flex flex-1 flex-col item.-center ju.tify-center gap-3 p-5 > div.grid w-full gap-2 max-w-md > div#playground-textarea-helper > span.hrink-0 tabular-num. text-foreground-muted
+Position: top=365px, left=1012px, width=36px, height=18px
+React Component: InputHypertext
+HTML Element: <span class="shrink-0 tabular-nums text-foreground-muted" aria-live="polite" data-cursor-element-id="cursor-el-826">0/200</span> 하이퍼텍스트 맥스 수치를 0/1000 으로 변경
 
 ## 다음 작업 (Claude Code용)
 
@@ -24,33 +29,21 @@
 - 브랜치: `main`
 
 ```
- M DESIGN.md
  M docs/wip/HANDOFF.md
- M packages/design-system/src/absolute-colors.ts
- M packages/design-system/src/grayscale-colors.ts
- M packages/design-system/src/tokens.css
- M src/absolute-colors.ts
- M src/grayscale-colors.ts
- M src/lib/semantic-token-sources.ts
- M src/tokens.css
+ M src/components/docs/playground-registry.tsx
 ```
 
 ### diff 요약
 
 ```
- DESIGN.md                                      |  2 +-
- docs/wip/HANDOFF.md                            | 33 ++++++++++++++------------
- packages/design-system/src/absolute-colors.ts  |  2 +-
- packages/design-system/src/grayscale-colors.ts |  6 ++---
- packages/design-system/src/tokens.css          |  6 ++---
- src/absolute-colors.ts                         |  2 +-
- src/grayscale-colors.ts                        |  6 ++---
- src/lib/semantic-token-sources.ts              |  2 +-
- src/tokens.css                                 |  6 ++---
- 9 files changed, 34 insertions(+), 31 deletions(-)
+ docs/wip/HANDOFF.md                         | 27 +++++----------------------
+ src/components/docs/playground-registry.tsx | 20 +++++++++++---------
+ 2 files changed, 16 insertions(+), 31 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
 
 
 
