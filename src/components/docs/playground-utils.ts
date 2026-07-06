@@ -116,6 +116,15 @@ export type PlaygroundRegistryLike = {
   skipControlKeys?: string[]
 }
 
+/** 플레이그라운드 좌측 컨트롤 상단 고정 순서 (앞일수록 위) */
+const PLAYGROUND_CONTROL_PRIORITY = ["variant"] as const
+
+export function orderPlaygroundControlKeys(keys: string[]): string[] {
+  const priority = PLAYGROUND_CONTROL_PRIORITY.filter((key) => keys.includes(key))
+  const rest = keys.filter((key) => !priority.includes(key))
+  return [...priority, ...rest]
+}
+
 /** spec.properties + entry.initialState 기준 플레이그라운드 컨트롤 키 (정책: Properties 케이스 전부 노출) */
 export function resolvePlaygroundControlKeys(
   properties: ComponentPropSpec[],
@@ -129,7 +138,7 @@ export function resolvePlaygroundControlKeys(
   for (const key of Object.keys(entry.initialState)) {
     if (!keys.includes(key) && !skip.has(key)) keys.push(key)
   }
-  return keys
+  return orderPlaygroundControlKeys(keys)
 }
 
 /** spec에만 있는 프로퍼티 기본값을 initialState에 병합 */

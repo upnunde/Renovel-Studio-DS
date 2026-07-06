@@ -11,7 +11,7 @@ const LIGHT: Record<string, string> = {
   "--card-muted-foreground": "grayscale-140",
   "--popover": "white",
   "--popover-foreground": "grayscale-140",
-  "--inverse": "grayscale-140",
+  "--inverse": "grayscale-130",
   "--inverse-foreground": "white",
   "--foreground-muted": "grayscale-100",
   "--foreground-placeholder": "grayscale-70",

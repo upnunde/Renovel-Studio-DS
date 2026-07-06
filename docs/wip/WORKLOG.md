@@ -1,6 +1,6 @@
 # 작업 일지 (WORKLOG)
 
-> 마지막 갱신: 2026-07-02  
+> 마지막 갱신: 2026-07-06  
 > 다음 세션: Cursor에서 `@docs/wip/WORKLOG.md` 를 붙이고 「이어서」라고 하면 됩니다.
 
 ## 오늘 한 일
@@ -15,6 +15,10 @@
 - **토큰** — `--input` 라이트 `grayscale-20`, **v0.1.5** 배포·리노벨 연동
 - **토큰** — `--foreground-muted` 정렬, **v0.1.6** 배포·리노벨 연동
 - **토큰** — `--border` 라이트 grayscale-15, **v0.1.7** 배포·리노벨 연동
+- **플레이그라운드** — `variant` 컨트롤 최상단 배치 (`playground-utils`)
+- **토큰** — `--inverse` 라이트 `grayscale-130`
+- **Button** — outline variant 기본 면 `bg-transparent` (card 위 표면 일치)
+- **배포** — `design-system` **v0.1.9** 태그
 
 ## 다음에 할 일
 
@@ -30,7 +34,7 @@
 
 - 브랜치: main
 - 원격: `origin` → upnunde/Renovel-Studio-DS
-- 태그: `v0.1.7`
+- 태그: `v0.1.9`
 - 관련 경로:
   - `packages/design-system/src/tokens.css` — 시맨틱·alias 정본
   - `src/lib/color-tokens.ts` — Color Semantic 문서 그룹
@@ -39,4 +43,4 @@
 ## 메모
 
 - 개발: `npm run dev` → http://localhost:3001
-- 소비: `github:upnunde/Renovel-Studio-DS#v0.1.7`
+- 소비: `github:upnunde/Renovel-Studio-DS#v0.1.9`
