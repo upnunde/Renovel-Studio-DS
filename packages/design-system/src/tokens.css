@@ -47,8 +47,7 @@
   --space-16: 4rem;
   --space-20: 5rem;
 
-  /* Grayscale scale — #FFFFFF (0) · 쿨 블루 틴트 · #F8F8FC (10) → #212124 (140) */
-  --grayscale-0: #ffffff;
+  /* Grayscale scale — 쿨 블루 틴트 · #F8F8FC (10) → #121213 (150) · 흰 표면은 --white */
   --grayscale-10: #f8f8fc;
   --grayscale-15: #f1f1f5;
   --grayscale-20: #e7e7eb;
@@ -64,6 +63,7 @@
   --grayscale-120: #424245;
   --grayscale-130: #323235;
   --grayscale-140: #212124;
+  --grayscale-150: #121213;
 
   /* Brand scale — 버튼·선택·강조 전용 */
   --brand-50: #fdf2fc;
@@ -256,7 +256,7 @@
 }
 
 .dark {
-  --canvas: var(--black);
+  --canvas: var(--grayscale-150);
   --background: var(--grayscale-140);
   --foreground: var(--grayscale-10);
   --card: var(--grayscale-140);

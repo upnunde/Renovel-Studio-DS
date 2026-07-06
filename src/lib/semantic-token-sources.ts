@@ -68,7 +68,7 @@ const LIGHT: Record<string, string> = {
 }
 
 const DARK: Record<string, string> = {
-  "--canvas": "black",
+  "--canvas": "grayscale-150",
   "--background": "grayscale-140",
   "--foreground": "grayscale-10",
   "--card": "grayscale-140",

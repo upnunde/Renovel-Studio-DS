@@ -1,6 +1,6 @@
 /**
  * 그레이스케일 컬러 스케일 정본
- * 기준: grayscale-0 #FFFFFF · grayscale-10 #F8F8FC → grayscale-140 #212124
+ * 기준: grayscale-10 #F8F8FC → grayscale-150 #121213 (흰 표면은 absolute --white)
  * R=G 동일 luminance + B 채널에 은은한 쿨 블루 오프셋 (#F1F1F5 패턴)
  * tokens.css · color-tokens.ts 와 동기화
  */
@@ -15,8 +15,7 @@ export type GrayscaleStep = {
 }
 
 export const GRAYSCALE_SCALE: GrayscaleStep[] = [
-  { name: "grayscale-0", variable: "--grayscale-0", hex: "#FFFFFF", role: "canvas · 페이지 바탕 · 흰 표면" },
-  { name: "grayscale-10", variable: "--grayscale-10", hex: "#F8F8FC", role: "은은한 배경 틴트" },
+  { name: "grayscale-10", variable: "--grayscale-10", hex: "#F8F8FC", role: "은은한 배경 틴트 · muted" },
   { name: "grayscale-15", variable: "--grayscale-15", hex: "#F1F1F5", role: "border · divider" },
   { name: "grayscale-20", variable: "--grayscale-20", hex: "#E7E7EB", role: "input" },
   { name: "grayscale-30", variable: "--grayscale-30", hex: "#D7D7DB", role: "divider-strong · 구분선 강조" },
@@ -31,6 +30,7 @@ export const GRAYSCALE_SCALE: GrayscaleStep[] = [
   { name: "grayscale-120", variable: "--grayscale-120", hex: "#424245", role: "다크 muted · secondary" },
   { name: "grayscale-130", variable: "--grayscale-130", hex: "#323235", role: "다크 card · elevated surface" },
   { name: "grayscale-140", variable: "--grayscale-140", hex: "#212124", role: "foreground · 다크 배경" },
+  { name: "grayscale-150", variable: "--grayscale-150", hex: "#121213", role: "최심 다크 · 깊은 표면" },
 ]
 
 /** CSS linear-gradient용 문자열 */

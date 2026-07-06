@@ -154,7 +154,7 @@ className="hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted dat
 
 원시 컬러 5종:
 
-- **Grayscale**: `--grayscale-0` ~ `--grayscale-140` (15단계, 쿨 블루 틴트)
+- **Grayscale**: `--grayscale-10` ~ `--grayscale-150` (15단계, 쿨 블루 틴트) · 흰 표면은 `--white`
 - **Brand**: `--brand-50` ~ `--brand-950` (9단계, `#F642D4` 베이스)
 - **Success**: green
 - **Warning**: amber

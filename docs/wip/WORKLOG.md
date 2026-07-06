@@ -19,6 +19,9 @@
 - **토큰** — `--inverse` 라이트 `grayscale-130`
 - **Button** — outline variant 기본 면 `bg-transparent` (card 위 표면 일치)
 - **배포** — `design-system` **v0.1.9** 태그
+- **Grayscale** — `grayscale-0` 제거(흰 표면 `--white`), `grayscale-150` `#121213` 추가
+- **토큰** — 다크 `--canvas` → `grayscale-150`
+- **배포** — `design-system` **v0.1.10** 태그
 
 ## 다음에 할 일
 
@@ -34,7 +37,7 @@
 
 - 브랜치: main
 - 원격: `origin` → upnunde/Renovel-Studio-DS
-- 태그: `v0.1.9`
+- 태그: `v0.1.10`
 - 관련 경로:
   - `packages/design-system/src/tokens.css` — 시맨틱·alias 정본
   - `src/lib/color-tokens.ts` — Color Semantic 문서 그룹
@@ -43,4 +46,4 @@
 ## 메모
 
 - 개발: `npm run dev` → http://localhost:3001
-- 소비: `github:upnunde/Renovel-Studio-DS#v0.1.9`
+- 소비: `github:upnunde/Renovel-Studio-DS#v0.1.10`
