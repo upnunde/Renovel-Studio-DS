@@ -1,0 +1,25 @@
+# DS 태그 푸시 또는 Release publish 시 upnunde-test ds-sync 워크플로 실행
+#
+# Secrets (DS repo):
+#   UPNUNDE_TEST_DISPATCH_PAT — upnunde-test repository_dispatch 권한 PAT
+
+name: Notify upnunde-test (DS release)
+
+on:
+  push:
+    tags:
+      - "v*"
+  release:
+    types: [published]
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger upnunde-test ds-sync
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.UPNUNDE_TEST_DISPATCH_PAT }}
+          repository: upnunde/upnunde-test
+          event-type: ds-release
+          client-payload: '{"tag":"${{ github.event.release.tag_name || github.ref_name }}"}'
