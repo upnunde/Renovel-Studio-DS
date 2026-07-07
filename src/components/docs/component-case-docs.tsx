@@ -94,7 +94,7 @@ export function ComponentCaseGroup({
           {title}
         </h3>
       </div>
-      {children}
+      <div className={docsSpace.stackGap}>{children}</div>
     </section>
   )
 }
@@ -125,10 +125,13 @@ export function ComponentCase({
   label,
   tags,
   children,
+  flush,
 }: {
   label: string
   tags?: string[]
   children: ReactNode
+  /** 미리보기 프레임 — 카드 너비는 가변, 내부 모달 등은 중앙 고정 크기 */
+  flush?: boolean
 }) {
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-card">
@@ -140,7 +143,13 @@ export function ComponentCase({
           </Badge>
         ))}
       </div>
-      <div className={cn("flex min-h-14 flex-wrap items-center", docsSpace.inlineGap, docsSpace.pad)}>
+      <div
+        className={cn(
+          flush
+            ? cn(docsSpace.caseFlushFrame, docsSpace.pad)
+            : cn("flex min-h-14 flex-wrap items-center", docsSpace.inlineGap, docsSpace.pad)
+        )}
+      >
         {children}
       </div>
     </div>

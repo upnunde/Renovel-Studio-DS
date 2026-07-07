@@ -12,7 +12,7 @@ const tableClass = cn(
   DOCS_TABLE_MIN_WIDTH
 )
 
-const thClass = cn(docsSpace.tableCell, docsType.tableHeader)
+const thClass = cn(docsSpace.tableHeaderCell, docsType.tableHeader)
 const tdClass = cn(docsSpace.tableCell, "align-top")
 
 export function DocsTable({

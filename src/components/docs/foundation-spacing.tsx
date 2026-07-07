@@ -9,11 +9,7 @@ import {
   DocsTableTd,
   DocsTableTh,
 } from "@/components/docs/docs-table"
-import {
-  SEMANTIC_SPACE_GROUPS,
-  SPACING_SCALE,
-  formatSpacingToken,
-} from "design-system/spacing-tokens"
+import { SPACING_SCALE, formatSpacingToken } from "design-system/spacing-tokens"
 import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
 import { cn } from "@/lib/utils"
@@ -86,40 +82,6 @@ export function FoundationSpacingShowcase() {
           ))}
         </div>
       </ShowcaseBlock>
-
-      {SEMANTIC_SPACE_GROUPS.map((group) => (
-        <ShowcaseBlock
-          key={group.id}
-          name={`Semantic · ${group.title}`}
-          flush
-        >
-          <DocsTable>
-            <DocsTableColGroup columns={4} />
-            <DocsTableHead>
-              <DocsTableHeaderRow>
-                <DocsTableTh>Key</DocsTableTh>
-                <DocsTableTh>Tailwind</DocsTableTh>
-                <DocsTableTh>px</DocsTableTh>
-                <DocsTableTh>Usage</DocsTableTh>
-              </DocsTableHeaderRow>
-            </DocsTableHead>
-            <DocsTableBody>
-              {group.tokens.map((token) => (
-                <DocsTableRow key={`${group.id}-${token.key}`}>
-                  <DocsTableTd mono>{`space.${group.id}.${token.key}`}</DocsTableTd>
-                  <DocsTableTd mono muted>
-                    {token.className}
-                  </DocsTableTd>
-                  <DocsTableTd mono muted>
-                    {token.px}px
-                  </DocsTableTd>
-                  <DocsTableTd muted>{token.description}</DocsTableTd>
-                </DocsTableRow>
-              ))}
-            </DocsTableBody>
-          </DocsTable>
-        </ShowcaseBlock>
-      ))}
     </div>
   )
 }

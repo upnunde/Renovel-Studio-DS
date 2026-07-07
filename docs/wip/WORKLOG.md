@@ -1,49 +1,35 @@
 # 작업 일지 (WORKLOG)
 
-> 마지막 갱신: 2026-07-06  
+> 마지막 갱신: 2026-07-07  
 > 다음 세션: Cursor에서 `@docs/wip/WORKLOG.md` 를 붙이고 「이어서」라고 하면 됩니다.
 
 ## 오늘 한 일
 
-- **시맨틱 컬러** — 겹침 alias 정리(`secondary`·`popover`·`sidebar-*` 등), Color Semantic 문서 구조 병합, Maps to 체인 표시
-- **호버 가이드** — DESIGN §2-1a·§2-1b, DS UI·문서·쇼케이스에 `hover:*` + `data-[hovered=true]:*` 병행
-- **Tabs** — line·text variant 호버를 default와 동일하게 muted + foreground로 통일
-- **토큰** — `--muted` 라이트 `grayscale-10`, Badge secondary 호버 accent 정렬, Tabs `text-foreground-muted`
-- **배포** — `design-system` **v0.1.2** 태그, 리노벨 스튜디오 `package.json` `#v0.1.4` 연동
-- **icons** — `ICON_REGISTRY` export 정리, `icons/index.ts` 제거·`icons.ts` 정본 통합
-- **배포** — `design-system` **v0.1.4** 태그·리노벨 `#v0.1.4`
-- **토큰** — `--input` 라이트 `grayscale-20`, **v0.1.5** 배포·리노벨 연동
-- **토큰** — `--foreground-muted` 정렬, **v0.1.6** 배포·리노벨 연동
-- **토큰** — `--border` 라이트 grayscale-15, **v0.1.7** 배포·리노벨 연동
-- **플레이그라운드** — `variant` 컨트롤 최상단 배치 (`playground-utils`)
-- **토큰** — `--inverse` 라이트 `grayscale-130`
-- **Button** — outline variant 기본 면 `bg-transparent` (card 위 표면 일치)
-- **배포** — `design-system` **v0.1.9** 태그
-- **Grayscale** — `grayscale-0` 제거(흰 표면 `--white`), `grayscale-150` `#121213` 추가
-- **토큰** — 다크 `--canvas` → `grayscale-150`
-- **배포** — `design-system` **v0.1.10** 태그
-- **토큰** — 다크 `--sidebar-border` → `grayscale-130` (`input` alias 해제)
-- **배포** — `design-system` **v0.1.11** 태그
+- **Dialog 문서** — Playground·Examples 헤더/본문/푸터 전체 미리보기, `DialogFooterActionsPreview`·`dialog-patterns` 추가
+- **Examples 레이아웃** — `ComponentCase` flush 프레임(가변) + 모달(`max-w-sm`) 중앙 배치, Content 2열·Footer 2열 그리드
+- **Dialog 미리보기 스타일** — 섹션 패딩·정렬(본문 min-h-20, 모달 min-h-[200px], 푸터 하단 정렬), 동의/목록/입력 확인 좌측 정렬
+- **DialogTitle** — `text-heading5_500`(18/26 · 카드/모달 타이틀) 적용
+- **Playground** — `showTargetName` 케이스·컨트롤 제거, 푸터 버튼 fill/stack 정리
+- **Spacing** — semantic spacing 문서 페이지·토큰 정리 (`foundation/spacing-semantic`)
 
 ## 다음에 할 일
 
+- Dialog pattern 컴포넌트(checklist·acknowledge 등) 문서 Examples 연동 검토
 - 리노벨 스튜디오 border·muted 톤 확인 (v0.1.7)
-- 플로팅 버튼(FAB) 컴포넌트 검토
-- Figma 연동 (필요 시)
 
 ## 막힌 것 · 결정 필요
 
--
+- `main` ↔ `origin/main` diverged (로컬 18 · 원격 1) — push 전 pull/rebase 필요할 수 있음
 
 ## 주요 파일 · 브랜치
 
 - 브랜치: main
 - 원격: `origin` → upnunde/Renovel-Studio-DS
-- 태그: `v0.1.11`
 - 관련 경로:
-  - `packages/design-system/src/tokens.css` — 시맨틱·alias 정본
-  - `src/lib/color-tokens.ts` — Color Semantic 문서 그룹
-  - `DESIGN.md` — Action·Interaction·Hover·alias 정책
+  - `src/components/docs/dialog-footer-actions.tsx` — Dialog Playground/Examples 프리뷰
+  - `src/components/docs/component-showcases.tsx` — Dialog Examples
+  - `packages/design-system/src/components/ui/dialog.tsx` — 타이틀 타이포
+  - `src/components/docs/component-case-docs.tsx` — flush 프레임 패턴
 
 ## 메모
 

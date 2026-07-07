@@ -40,10 +40,17 @@ export const docsNav: DocsNavGroup[] = [
         ],
       },
       {
+        label: "Spacing",
+        collapsible: true,
+        items: [
+          { title: "Tokens", href: "/foundation/spacing" },
+          { title: "Semantic", href: "/foundation/spacing-semantic" },
+        ],
+      },
+      {
         items: [
           { title: "Typography", href: "/foundation/typography" },
           { title: "Icons", href: "/foundation/icons" },
-          { title: "Spacing", href: "/foundation/spacing" },
           { title: "Radius", href: "/foundation/radius" },
           { title: "Motion", href: "/foundation/motion" },
         ],

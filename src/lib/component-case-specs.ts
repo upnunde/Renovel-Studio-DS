@@ -440,8 +440,58 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
   dialog: {
     slug: "dialog",
     properties: [
-      { name: "open", values: ["false", "true"], description: "표시 여부" },
-      { name: "구성", values: ["Trigger", "Content", "Header", "Footer"], description: "모달 구조" },
+      {
+        name: "footerActions",
+        values: ["1", "2", "3"],
+        description: "Footer 액션 수 — 1(주액션) · 2(취소+주액션) · 3(취소+보조+주액션)",
+      },
+      {
+        name: "showHeader",
+        values: ["false", "true"],
+        description: "DialogHeader · Title · Description",
+      },
+      {
+        name: "showContent",
+        values: ["false", "true"],
+        description: "Header ↔ Footer 사이 본문 영역 토글",
+      },
+      {
+        name: "showBodyText",
+        values: ["false", "true"],
+        description: "본문 텍스트 한 줄",
+      },
+      {
+        name: "showList",
+        values: ["false", "true"],
+        description: "목록 블록 노출",
+      },
+      {
+        name: "listStyle",
+        values: ["muted", "numbered"],
+        description: "목록 스타일 — muted(박스·번호 없음) · numbered(박스+1·2·3)",
+      },
+      {
+        name: "showConsent",
+        values: ["false", "true"],
+        description: "동의 체크박스",
+      },
+      {
+        name: "showConfirmInput",
+        values: ["false", "true"],
+        description: "확인 문구 입력 필드",
+      },
+      {
+        name: "showFooter",
+        values: ["false", "true"],
+        description: "DialogFooter 액션 영역",
+      },
+      {
+        name: "pattern",
+        values: ["basic", "checklist", "acknowledge", "save-choice"],
+        description:
+          "역할 패턴 — basic · checklist(동의) · acknowledge(입력 확인) · save-choice(미저장 3-way)",
+      },
+      { name: "open", values: ["false", "true"], description: "modal 표시 여부 (앱 연동)" },
     ],
   },
   popover: {

@@ -1,6 +1,7 @@
 /**
  * Documentation **main content** spacing.
- * 20px (`p-5` / `space-y-5`) — section rhythm, table cells, card shells.
+ * 20px (`p-5` / `space-y-5`) — section rhythm, table body cells, card shells.
+ * Table headers — `py-2` (8px vertical).
  * Page shell — `px-5` (20px) · `pt-10 pb-10` (40px vertical) · `gap-10` (40px stack).
  * Tighter tokens — labels, chips, control fields (not 20px).
  * Do not use in sidebar or `src/components/ui/*`.
@@ -17,8 +18,14 @@ export const docsSpace = {
   pad: "p-5",
   padX: "px-5",
   padY: "py-5",
+  /** ComponentCase flush — 가변 프레임 안에 미리보기(모달 등) 중앙 배치 */
+  caseFlushFrame: "flex w-full justify-center",
+  /** Table body cell — 좌우 20px · 상하 20px */
   tableCell: "px-5 py-5",
-  cardHeader: "px-5 py-5",
+  /** Table header cell — 좌우 20px · 상하 8px (token 2) */
+  tableHeaderCell: "px-5 py-2",
+  /** Showcase·카드 헤더 — 좌우 20px · 상하 12px (token 3) */
+  cardHeader: "px-5 py-3",
   headerBottom: "pb-0",
 
   /** Label → control, description → input · 2px */

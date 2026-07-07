@@ -66,37 +66,37 @@ export const SEMANTIC_SPACE_LAYOUT = {
 
 /** 섹션 내부 — 카드·패널 단위 */
 export const SEMANTIC_SPACE_SECTION = {
-  pad: { key: "pad", className: "p-5", token: "5", px: 20, description: "섹션 내부 패딩" },
-  headerGap: { key: "headerGap", className: "gap-1", token: "1", px: 4, description: "제목 ↔ 설명" },
-  contentGap: { key: "contentGap", className: "gap-4", token: "4", px: 16, description: "헤더 ↔ 본문" },
-  stack: { key: "stack", className: "gap-5", token: "5", px: 20, description: "섹션 내 블록 묶음" },
+  pad: { key: "pad", className: "p-5", token: "5", px: 20, description: "카드·패널 내부 패딩" },
+  headerGap: { key: "headerGap", className: "gap-2", token: "2", px: 8, description: "제목 ↔ 설명 텍스트" },
+  contentGap: { key: "contentGap", className: "gap-4", token: "4", px: 16, description: "헤더 ↔ 본문 블록" },
+  stack: { key: "stack", className: "gap-5", token: "5", px: 20, description: "섹션 내 블록 수직 묶음" },
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 폼 — 필드·컨트롤 묶음 */
 export const SEMANTIC_SPACE_FORM = {
-  fieldGap: { key: "fieldGap", className: "gap-4", token: "4", px: 16, description: "필드 묶음 사이 (Label-Input 단위)" },
-  innerGap: { key: "innerGap", className: "gap-1.5", token: "—", px: 6, description: "Label ↔ Input ↔ Helper" },
-  groupGap: { key: "groupGap", className: "gap-5", token: "5", px: 20, description: "폼 섹션 사이" },
+  labelGap: { key: "labelGap", className: "gap-1", token: "1", px: 4, description: "Label ↔ Input (밀착)" },
+  fieldGap: { key: "fieldGap", className: "gap-4", token: "4", px: 16, description: "필드 단위(Label+Input+Helper) 사이" },
+  groupGap: { key: "groupGap", className: "gap-6", token: "6", px: 24, description: "폼 섹션·그룹 사이" },
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 리스트·그리드 */
 export const SEMANTIC_SPACE_LIST = {
-  tight: { key: "tight", className: "gap-2", token: "2", px: 8, description: "촘촘한 리스트 (메뉴 항목 등)" },
+  tight: { key: "tight", className: "gap-2", token: "2", px: 8, description: "촘촘한 리스트 (메뉴·드롭다운 항목)" },
   default: { key: "default", className: "gap-3", token: "3", px: 12, description: "기본 리스트" },
-  loose: { key: "loose", className: "gap-4", token: "4", px: 16, description: "느슨한 리스트 (카드 그리드)" },
+  loose: { key: "loose", className: "gap-5", token: "5", px: 20, description: "느슨한 리스트·카드 그리드" },
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 인라인 — 텍스트·아이콘·뱃지 가로 묶음 */
 export const SEMANTIC_SPACE_INLINE = {
-  tight: { key: "tight", className: "gap-1", token: "1", px: 4, description: "아이콘 ↔ 텍스트" },
-  default: { key: "default", className: "gap-1.5", token: "—", px: 6, description: "일반 인라인 묶음" },
-  loose: { key: "loose", className: "gap-2", token: "2", px: 8, description: "넉넉한 인라인" },
+  tight: { key: "tight", className: "gap-1", token: "1", px: 4, description: "아이콘 ↔ 텍스트 (최소 여백)" },
+  default: { key: "default", className: "gap-2", token: "2", px: 8, description: "일반 인라인 요소 묶음" },
+  loose: { key: "loose", className: "gap-3", token: "3", px: 12, description: "인라인 요소 넉넉한 묶음" },
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 액션 — 버튼 그룹·툴바 */
 export const SEMANTIC_SPACE_ACTIONS = {
-  gap: { key: "gap", className: "gap-2", token: "2", px: 8, description: "버튼 사이" },
-  groupGap: { key: "groupGap", className: "gap-3", token: "3", px: 12, description: "액션 그룹 사이" },
+  gap: { key: "gap", className: "gap-2", token: "2", px: 8, description: "버튼·칩 사이" },
+  groupGap: { key: "groupGap", className: "gap-4", token: "4", px: 16, description: "액션 그룹 사이" },
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 통합 시맨틱 스페이스 — 앱 전역 사용

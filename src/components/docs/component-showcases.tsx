@@ -5,6 +5,8 @@ import { Icon } from "design-system/ui/icon"
 import { toast } from "sonner"
 import { type ReactNode, useState } from "react"
 
+import { DialogFooterActionsPreview } from "@/components/docs/dialog-footer-actions"
+
 import {
   DropdownMenuLeadingIconDemo,
   DropdownMenuLeadingIconSelectDemo,
@@ -51,22 +53,15 @@ import {
 } from "design-system/ui/button-group"
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "design-system/ui/card"
 import { Checkbox } from "design-system/ui/checkbox"
 import { Chip, ChipGroup } from "design-system/ui/chip"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "design-system/ui/dialog"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -1105,17 +1100,100 @@ const SHOWCASES: Record<string, ReactNode> = {
   card: (
     <Showcase slug="card">
       <ComponentCaseGroup title="Composition">
-        <ComponentCase label="header + content">
-          <Card className="max-w-md">
-            <CardHeader>
-              <CardTitle>카드 제목</CardTitle>
-              <CardDescription>카드 설명</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-foreground-muted">본문</p>
-            </CardContent>
-          </Card>
-        </ComponentCase>
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="header + content" tags={["header", "content"]}>
+            <Card className="w-full">
+              <CardHeader>
+                <CardTitle>카드 제목</CardTitle>
+                <CardDescription>카드 설명</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-foreground-muted">본문</p>
+              </CardContent>
+            </Card>
+          </ComponentCase>
+          <ComponentCase label="content only" tags={["content"]}>
+            <Card className="w-full">
+              <CardContent>
+                <p className="text-sm text-foreground-muted">
+                  헤더·푸터 없는 단순 컨테이너
+                </p>
+              </CardContent>
+            </Card>
+          </ComponentCase>
+          <ComponentCase label="with action" tags={["header", "action", "content"]}>
+            <Card className="w-full">
+              <CardHeader>
+                <CardTitle>공지 · 알림</CardTitle>
+                <CardDescription>새로운 업데이트 3건</CardDescription>
+                <CardAction>
+                  <Button variant="ghost" size="sm">
+                    전체보기
+                  </Button>
+                </CardAction>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-foreground-muted">
+                  헤더 우측에 액션 슬롯이 배치돼요.
+                </p>
+              </CardContent>
+            </Card>
+          </ComponentCase>
+          <ComponentCase label="with footer" tags={["header", "content", "footer"]}>
+            <Card className="w-full">
+              <CardHeader>
+                <CardTitle>초대장 발송</CardTitle>
+                <CardDescription>팀원 3명에게 초대장을 보냅니다</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-foreground-muted">
+                  전송하기 전 대상을 확인해 주세요.
+                </p>
+              </CardContent>
+              <CardFooter className="justify-end gap-2">
+                <Button variant="ghost">취소</Button>
+                <Button>전송</Button>
+              </CardFooter>
+            </Card>
+          </ComponentCase>
+          <ComponentCase label="header + action + footer" tags={["full"]}>
+            <Card className="w-full">
+              <CardHeader>
+                <CardTitle>구독 관리</CardTitle>
+                <CardDescription>Pro · 월 ₩12,000</CardDescription>
+                <CardAction>
+                  <Button variant="outline" size="sm">
+                    변경
+                  </Button>
+                </CardAction>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-foreground-muted">
+                  다음 결제일 2026-08-01
+                </p>
+              </CardContent>
+              <CardFooter className="justify-between">
+                <span className="text-xs text-foreground-muted">자동 갱신</span>
+                <Button variant="destructive" size="sm">
+                  구독 취소
+                </Button>
+              </CardFooter>
+            </Card>
+          </ComponentCase>
+          <ComponentCase label="interactive" tags={["hover", "링크·카드"]}>
+            <Card className="w-full transition-colors duration-short ease-standard hover:bg-muted">
+              <CardHeader>
+                <CardTitle>다크 모드 도입기</CardTitle>
+                <CardDescription>2026-06-30 · 6분 읽기</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-foreground-muted">
+                  카드에 hover 효과를 얹어 링크 컨테이너로 사용해요.
+                </p>
+              </CardContent>
+            </Card>
+          </ComponentCase>
+        </ComponentCaseGrid>
       </ComponentCaseGroup>
     </Showcase>
   ),
@@ -1290,24 +1368,97 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   dialog: (
     <Showcase slug="dialog">
-      <ComponentCaseGroup title="Default">
-        <ComponentCase label="modal">
-          <Dialog>
-            <DialogTrigger render={<Button variant="outline" />}>
-              다이얼로그 열기
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>제목</DialogTitle>
-                <DialogDescription>설명</DialogDescription>
-              </DialogHeader>
-              <DialogFooter>
-                <Button variant="outline">취소</Button>
-                <Button>확인</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+      <ComponentCaseGroup title="Header">
+        <ComponentCase label="showHeader" tags={["title", "description"]} flush>
+          <DialogFooterActionsPreview showHeader />
         </ComponentCase>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Content — 옵션별">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="showBodyText" tags={["본문 텍스트 한 줄"]} flush>
+            <DialogFooterActionsPreview
+              showContent
+              showBodyText
+              bodyText="본문 영역"
+            />
+          </ComponentCase>
+
+          <ComponentCase
+            label="showList · listStyle=muted"
+            tags={["운영정책 목록"]}
+            flush
+          >
+            <DialogFooterActionsPreview
+              showContent
+              showBodyText={false}
+              showList
+              listStyle="muted"
+            />
+          </ComponentCase>
+
+          <ComponentCase
+            label="showList · listStyle=numbered"
+            tags={["공개 유의사항"]}
+            flush
+          >
+            <DialogFooterActionsPreview
+              showContent
+              showBodyText={false}
+              showList
+              listStyle="numbered"
+            />
+          </ComponentCase>
+
+          <ComponentCase label="showConsent" tags={["동의 체크박스"]} flush>
+            <DialogFooterActionsPreview
+              showContent
+              showBodyText={false}
+              showConsent
+              consentText="운영정책에 동의합니다."
+            />
+          </ComponentCase>
+
+          <ComponentCase
+            label="showConfirmInput"
+            tags={["문구 입력 확인"]}
+            flush
+          >
+            <DialogFooterActionsPreview
+              showContent
+              showBodyText={false}
+              showConfirmInput
+              confirmPhrase="확인했습니다"
+            />
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Footer — footerActions">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="1" tags={["primary only"]} flush>
+            <DialogFooterActionsPreview
+              footerActions="1"
+              showBodyText
+            />
+          </ComponentCase>
+          <ComponentCase label="2" tags={["cancel + primary"]} flush>
+            <DialogFooterActionsPreview
+              footerActions="2"
+              showBodyText
+            />
+          </ComponentCase>
+          <ComponentCase
+            label="3"
+            tags={["cancel + secondary + primary"]}
+            flush
+          >
+            <DialogFooterActionsPreview
+              footerActions="3"
+              showBodyText
+            />
+          </ComponentCase>
+        </ComponentCaseGrid>
       </ComponentCaseGroup>
     </Showcase>
   ),

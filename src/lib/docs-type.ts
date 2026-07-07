@@ -14,7 +14,7 @@ export const docsType = {
   panelTitle:
     "font-heading text-2xl leading-8 font-semibold tracking-tight text-foreground",
   sectionTitle:
-    "font-heading text-[1.375rem] leading-7 font-semibold tracking-tight text-foreground",
+    "font-heading text-heading4_700 tracking-tight text-foreground",
   sectionDescription: "text-sm leading-5 text-foreground-muted",
 
   groupTitle: "text-base leading-6 font-semibold text-foreground",

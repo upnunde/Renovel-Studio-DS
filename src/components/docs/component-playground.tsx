@@ -177,28 +177,57 @@ export function ComponentPlayground({ slug }: { slug: string }) {
     return null
   }
 
-  const primaryControls = uniqueOrderedKeys
-    .filter((key) => !booleanKeys.includes(key))
-    .map(renderControl)
-    .filter(Boolean)
+  const controls = (() => {
+    if (entry.controlGroups?.length) {
+      const groupedKeys = new Set(entry.controlGroups.flat())
+      const leftovers = uniqueOrderedKeys.filter((key) => !groupedKeys.has(key))
+      const groups = leftovers.length
+        ? [...entry.controlGroups, leftovers]
+        : entry.controlGroups
+      const renderedGroups = groups
+        .map((keys) => keys.map(renderControl).filter(Boolean))
+        .filter((rendered) => rendered.length > 0)
+      return (
+        <>
+          {renderedGroups.map((rendered, index) => (
+            <div
+              key={index}
+              className={
+                index === 0
+                  ? "space-y-3"
+                  : "space-y-3 border-t border-border pt-3"
+              }
+            >
+              {rendered}
+            </div>
+          ))}
+        </>
+      )
+    }
 
-  const booleanControls = booleanKeys.map(renderControl).filter(Boolean)
+    const primaryControls = uniqueOrderedKeys
+      .filter((key) => !booleanKeys.includes(key))
+      .map(renderControl)
+      .filter(Boolean)
+    const booleanControls = booleanKeys.map(renderControl).filter(Boolean)
+    return (
+      <>
+        {primaryControls}
+        {booleanControls.length > 0 ? (
+          <div className="space-y-3 border-t border-border pt-3">
+            {booleanControls}
+          </div>
+        ) : null}
+      </>
+    )
+  })()
 
   return (
     <PlaygroundShell>
       <PlaygroundLayout
         previewClassName={entry.getPreviewClassName?.(state)}
         code={code}
-        controls={
-          <>
-            {primaryControls}
-            {booleanControls.length > 0 ? (
-              <div className="space-y-3 border-t border-border pt-3">
-                {booleanControls}
-              </div>
-            ) : null}
-          </>
-        }
+        controls={controls}
         preview={entry.renderPreview(state, previewContext)}
       />
     </PlaygroundShell>

@@ -29,14 +29,10 @@ import {
 import { Checkbox } from "design-system/ui/checkbox"
 import { Chip } from "design-system/ui/chip"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "design-system/ui/dialog"
+  dialogFooterActionsCode,
+  DialogFooterActionsPreview,
+  type DialogListStyle,
+} from "@/components/docs/dialog-footer-actions"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -224,6 +220,11 @@ export type PlaygroundRegistryEntry = {
   selectKeys?: Record<string, string[]>
   /** 플레이그라운드 컨트롤에서 제외 (Properties 표에는 유지) */
   skipControlKeys?: string[]
+  /**
+   * 조립형 컴포넌트에서 컨트롤을 명시 그룹으로 배치. 지정 시 primary/boolean 자동 분리 대신
+   * 이 순서대로 렌더되고, 그룹 사이에 divider가 삽입됨. 그룹 내 개별 항목은 showWhen 필터가 그대로 적용.
+   */
+  controlGroups?: string[][]
   /** state 조건을 만족할 때만 컨트롤 노출 */
   showWhen?: Partial<Record<string, (state: PlaygroundState) => boolean>>
   /** select 옵션을 state에 따라 필터 (예: tabCount에 맞는 defaultValue) */
@@ -1197,6 +1198,11 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       showFooter: true,
     },
     textKeys: ["title", "description"],
+    controlGroups: [
+      ["showHeader", "title", "description"],
+      ["showContent"],
+      ["showFooter"],
+    ],
     showWhen: {
       title: (state) => playgroundBool(state, "showHeader"),
       description: (state) => playgroundBool(state, "showHeader"),
@@ -1378,28 +1384,106 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   },
 
   dialog: {
-    initialState: { open: false },
-    renderPreview: (state, ctx) => (
-      <Dialog {...ctx.bindOpen()}>
-        <DialogTrigger render={<Button variant="outline" />}>
-          다이얼로그 열기
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>제목</DialogTitle>
-            <DialogDescription>설명 텍스트입니다.</DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline">취소</Button>
-            <Button>확인</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    ),
-    buildCode: (state) => {
-      const open = bool(state, "open") ? " open" : ""
-      return `<Dialog${open}>\n  <DialogTrigger asChild>\n    <Button variant="outline">다이얼로그 열기</Button>\n  </DialogTrigger>\n  <DialogContent>\n    <DialogHeader>\n      <DialogTitle>제목</DialogTitle>\n      <DialogDescription>설명 텍스트입니다.</DialogDescription>\n    </DialogHeader>\n    <DialogFooter>\n      <Button variant="outline">취소</Button>\n      <Button>확인</Button>\n    </DialogFooter>\n  </DialogContent>\n</Dialog>`
+    initialState: {
+      title: "제목",
+      description: "설명 텍스트입니다.",
+      showHeader: true,
+      showContent: true,
+      showFooter: true,
+      footerActions: "2",
+      showBodyText: true,
+      bodyText: "본문 영역",
+      showList: false,
+      listStyle: "muted",
+      showConsent: false,
+      consentText: "운영정책에 동의합니다.",
+      showConfirmInput: false,
+      confirmPhrase: "확인했습니다",
     },
+    textKeys: [
+      "title",
+      "description",
+      "bodyText",
+      "consentText",
+      "confirmPhrase",
+    ],
+    selectKeys: {
+      footerActions: ["1", "2", "3"],
+      listStyle: ["muted", "numbered"],
+    },
+    skipControlKeys: ["open", "pattern"],
+    controlGroups: [
+      ["showHeader", "title", "description"],
+      [
+        "showContent",
+        "showBodyText",
+        "bodyText",
+        "showList",
+        "listStyle",
+        "showConsent",
+        "consentText",
+        "showConfirmInput",
+        "confirmPhrase",
+      ],
+      ["showFooter", "footerActions"],
+    ],
+    showWhen: {
+      title: (state) => playgroundBool(state, "showHeader"),
+      description: (state) => playgroundBool(state, "showHeader"),
+      footerActions: (state) => playgroundBool(state, "showFooter"),
+      showBodyText: (state) => playgroundBool(state, "showContent"),
+      bodyText: (state) =>
+        playgroundBool(state, "showContent") &&
+        playgroundBool(state, "showBodyText"),
+      showList: (state) => playgroundBool(state, "showContent"),
+      listStyle: (state) =>
+        playgroundBool(state, "showContent") &&
+        playgroundBool(state, "showList"),
+      showConsent: (state) => playgroundBool(state, "showContent"),
+      consentText: (state) =>
+        playgroundBool(state, "showContent") &&
+        playgroundBool(state, "showConsent"),
+      showConfirmInput: (state) => playgroundBool(state, "showContent"),
+      confirmPhrase: (state) =>
+        playgroundBool(state, "showContent") &&
+        playgroundBool(state, "showConfirmInput"),
+    },
+    renderPreview: (state) => (
+      <DialogFooterActionsPreview
+        className="w-full max-w-sm"
+        footerActions={str(state, "footerActions") as "1" | "2" | "3"}
+        title={str(state, "title")}
+        description={str(state, "description")}
+        showHeader={bool(state, "showHeader")}
+        showContent={bool(state, "showContent")}
+        showFooter={bool(state, "showFooter")}
+        showBodyText={bool(state, "showBodyText")}
+        bodyText={str(state, "bodyText")}
+        showList={bool(state, "showList")}
+        listStyle={str(state, "listStyle") as DialogListStyle}
+        showConsent={bool(state, "showConsent")}
+        consentText={str(state, "consentText")}
+        showConfirmInput={bool(state, "showConfirmInput")}
+        confirmPhrase={str(state, "confirmPhrase")}
+      />
+    ),
+    buildCode: (state) =>
+      dialogFooterActionsCode({
+        footerActions: str(state, "footerActions") as "1" | "2" | "3",
+        title: str(state, "title"),
+        description: str(state, "description"),
+        showHeader: bool(state, "showHeader"),
+        showContent: bool(state, "showContent"),
+        showFooter: bool(state, "showFooter"),
+        showBodyText: bool(state, "showBodyText"),
+        bodyText: str(state, "bodyText"),
+        showList: bool(state, "showList"),
+        listStyle: str(state, "listStyle") as DialogListStyle,
+        showConsent: bool(state, "showConsent"),
+        consentText: str(state, "consentText"),
+        showConfirmInput: bool(state, "showConfirmInput"),
+        confirmPhrase: str(state, "confirmPhrase"),
+      }),
   },
 
   popover: {

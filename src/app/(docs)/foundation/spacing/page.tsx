@@ -5,7 +5,7 @@ import { DocsPageHeader } from "@/components/docs-page-header"
 export default function FoundationSpacingPage() {
   return (
     <DocsMain>
-      <DocsPageHeader eyebrow="Foundation" title="Spacing" />
+      <DocsPageHeader eyebrow="Foundation · Spacing" title="Tokens" />
       <FoundationSpacingShowcase />
     </DocsMain>
   )

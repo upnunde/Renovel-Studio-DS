@@ -47,6 +47,7 @@
     "./ui/checkbox": "./src/components/ui/checkbox.tsx",
     "./ui/chip": "./src/components/ui/chip.tsx",
     "./ui/dialog": "./src/components/ui/dialog.tsx",
+    "./ui/dialog-patterns": "./src/components/ui/dialog-patterns.tsx",
     "./ui/dropdown-menu": "./src/components/ui/dropdown-menu.tsx",
     "./ui/email-input": "./src/components/ui/email-input.tsx",
     "./ui/field-label": "./src/components/ui/field-label.tsx",
