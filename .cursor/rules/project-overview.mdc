@@ -38,6 +38,7 @@ shadcn/ui를 **베이스**로 **나만의 디자인 시스템**을 정의·발�
 - 토큰 CSS 정본: **`packages/design-system/src/tokens.css`** · `theme.css`
 - shadcn 컴포넌트 커스터마이즈 → variant/props → 필요 시 패키지 이전.
 - 상세: **`.cursor/rules/shadcn-design-system.mdc`**
+- 네이밍 표기법: **`DESIGN.md` §3-5** · **`.cursor/rules/naming-conventions.mdc`**
 
 ## 에이전트 규칙
 

@@ -47,6 +47,39 @@
   --space-16: 4rem;
   --space-20: 5rem;
 
+  /* Semantic Spacing — 원시 스케일을 역할별 alias로 노출.
+   * TS(space.section.sectionStackGap) · CSS(var(--space-section-stack-gap)) · 문서 모두 동일 이름 사용.
+   */
+  /* Layout — 페이지 셸 */
+  --space-page-padding-x: var(--space-5);
+  --space-page-padding-y: var(--space-10);
+  --space-section-gap: var(--space-10);
+
+  /* Section — 카드·패널 내부 */
+  --space-section-padding: var(--space-5);
+  --space-section-header-gap: var(--space-2);
+  --space-section-content-gap: var(--space-4);
+  --space-section-stack-gap: var(--space-5);
+
+  /* Form — 필드 묶음 */
+  --space-form-label-gap: var(--space-1);
+  --space-form-field-gap: var(--space-4);
+  --space-form-group-gap: var(--space-6);
+
+  /* List — 리스트 항목 */
+  --space-list-item-gap-compact: var(--space-2);
+  --space-list-item-gap: var(--space-3);
+  --space-list-item-gap-relaxed: var(--space-5);
+
+  /* Inline — 아이콘·텍스트 인라인 */
+  --space-inline-icon-gap: var(--space-1);
+  --space-inline-gap: var(--space-2);
+  --space-inline-gap-relaxed: var(--space-3);
+
+  /* Actions — 버튼 그룹·툴바 */
+  --space-action-gap: var(--space-2);
+  --space-action-group-gap: var(--space-4);
+
   /* Grayscale scale — 쿨 블루 틴트 · #F8F8FC (10) → #121213 (150) · 흰 표면은 --white */
   --grayscale-10: #f8f8fc;
   --grayscale-15: #f1f1f5;

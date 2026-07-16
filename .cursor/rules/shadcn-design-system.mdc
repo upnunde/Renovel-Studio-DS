@@ -36,7 +36,7 @@ npx shadcn@latest add <component-name>
 ## 테마·레이아웃
 
 - `ThemeProvider`: `src/components/theme-provider.tsx`
-- 토스트: `Toaster` (`src/components/ui/sonner.tsx`) — `layout.tsx`에 마운트 유지.
+- 토스트(Toast): `Toaster` (`src/components/ui/sonner.tsx`) — `layout.tsx`에 마운트 유지.
 
 ## 하지 말 것
 

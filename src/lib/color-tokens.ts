@@ -319,8 +319,8 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
     ],
   },
   {
-    id: "ui-chrome",
-    title: "UI",
+    id: "line",
+    title: "Line",
     groups: [
       {
         id: "ui-border",

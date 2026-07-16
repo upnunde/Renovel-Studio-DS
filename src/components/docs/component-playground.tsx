@@ -16,12 +16,16 @@ import {
 } from "./playground-shell"
 import type { PlaygroundState } from "./playground-utils"
 import {
+  buildPlaygroundControlGroups,
   buildPlaygroundInitialState,
+  clampAvatarInitials,
   classifyPlaygroundControlKey,
   createPlaygroundRenderContext,
   findSpecProp,
+  formatPlaygroundNumberValue,
   formatPlaygroundOption,
   getPlaygroundControlLabel,
+  playgroundGroupUsesToggleNest,
   resolvePlaygroundControlKeys,
   sortPlaygroundOptionValues,
 } from "./playground-utils"
@@ -51,17 +55,6 @@ export function ComponentPlayground({ slug }: { slug: string }) {
   const properties = spec.properties
   const controlKeys = resolvePlaygroundControlKeys(properties, entry)
 
-  const booleanKeys = controlKeys.filter(
-    (key) => classifyPlaygroundControlKey(key, properties, entry) === "boolean"
-  )
-
-  const orderedKeys = [
-    ...controlKeys.filter((key) => !booleanKeys.includes(key)),
-    ...booleanKeys,
-  ]
-
-  const uniqueOrderedKeys = [...new Set(orderedKeys)]
-
   function updateState(key: string, value: string | boolean | number) {
     setState((current) => {
       const next = { ...current, [key]: value }
@@ -82,6 +75,12 @@ export function ComponentPlayground({ slug }: { slug: string }) {
           const count = Number(next.hypertextCount) || 0
           next.hypertextCount = Math.min(max, Math.max(0, count))
         }
+      }
+      if (slug === "textarea" && key === "rows") {
+        next.rows = Math.min(8, Math.max(4, Number(value) || 4))
+      }
+      if (slug === "avatar" && key === "initials") {
+        next.initials = clampAvatarInitials(String(value))
       }
       return next
     })
@@ -128,8 +127,12 @@ export function ComponentPlayground({ slug }: { slug: string }) {
                 updateState(key, next ?? numberField.min)
               }}
             />
-            <p className="text-center font-mono text-sm text-foreground-muted">
-              {Number(state[key] ?? numberField.min)}
+            <p className="text-right font-mono text-sm text-foreground-muted">
+              {formatPlaygroundNumberValue(
+                Number(state[key] ?? numberField.min),
+                numberField.min,
+                numberField.max
+              )}
             </p>
           </div>
         </PlaygroundField>
@@ -177,50 +180,67 @@ export function ComponentPlayground({ slug }: { slug: string }) {
     return null
   }
 
-  const controls = (() => {
-    if (entry.controlGroups?.length) {
-      const groupedKeys = new Set(entry.controlGroups.flat())
-      const leftovers = uniqueOrderedKeys.filter((key) => !groupedKeys.has(key))
-      const groups = leftovers.length
-        ? [...entry.controlGroups, leftovers]
-        : entry.controlGroups
-      const renderedGroups = groups
-        .map((keys) => keys.map(renderControl).filter(Boolean))
-        .filter((rendered) => rendered.length > 0)
+  function renderControlGroup(keys: string[], groupIndex: number) {
+    const visibleKeys = keys.filter(
+      (key) => !entry.showWhen?.[key] || entry.showWhen[key](state)
+    )
+    if (visibleKeys.length === 0) return null
+
+    const useToggleNest = playgroundGroupUsesToggleNest(
+      keys,
+      properties,
+      entry,
+      mergedInitialState
+    )
+
+    if (useToggleNest) {
+      const [anchorKey, ...childKeys] = keys
+      const childNodes = childKeys.map(renderControl).filter(Boolean)
       return (
-        <>
-          {renderedGroups.map((rendered, index) => (
-            <div
-              key={index}
-              className={
-                index === 0
-                  ? "space-y-3"
-                  : "space-y-3 border-t border-border pt-3"
-              }
-            >
-              {rendered}
-            </div>
-          ))}
-        </>
+        <div key={`${anchorKey}-${groupIndex}`} className="space-y-3">
+          {renderControl(anchorKey)}
+          {childNodes.length > 0 ? (
+            <div className="space-y-3">{childNodes}</div>
+          ) : null}
+        </div>
       )
     }
 
-    const primaryControls = uniqueOrderedKeys
-      .filter((key) => !booleanKeys.includes(key))
-      .map(renderControl)
-      .filter(Boolean)
-    const booleanControls = booleanKeys.map(renderControl).filter(Boolean)
+    const nodes = keys.map(renderControl).filter(Boolean)
+    if (nodes.length === 0) return null
+
     return (
-      <>
-        {primaryControls}
-        {booleanControls.length > 0 ? (
-          <div className="space-y-3 border-t border-border pt-3">
-            {booleanControls}
-          </div>
-        ) : null}
-      </>
+      <div key={groupIndex} className="space-y-3">
+        {nodes}
+      </div>
     )
-  })()
+  }
+
+  const controlGroups = buildPlaygroundControlGroups(
+    controlKeys,
+    properties,
+    entry,
+    mergedInitialState
+  )
+
+  const controls = (
+    <>
+      {controlGroups.map((group, index) => {
+        const rendered = renderControlGroup(group, index)
+        if (!rendered) return null
+        return (
+          <div
+            key={index}
+            className={
+              index === 0 ? undefined : "border-t border-border pt-3 space-y-3"
+            }
+          >
+            {rendered}
+          </div>
+        )
+      })}
+    </>
+  )
 
   return (
     <PlaygroundShell>

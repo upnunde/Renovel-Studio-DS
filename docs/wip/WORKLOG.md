@@ -1,35 +1,35 @@
 # 작업 일지 (WORKLOG)
 
-> 마지막 갱신: 2026-07-07  
+> 마지막 갱신: 2026-07-17  
 > 다음 세션: Cursor에서 `@docs/wip/WORKLOG.md` 를 붙이고 「이어서」라고 하면 됩니다.
 
 ## 오늘 한 일
 
-- **Dialog 문서** — Playground·Examples 헤더/본문/푸터 전체 미리보기, `DialogFooterActionsPreview`·`dialog-patterns` 추가
-- **Examples 레이아웃** — `ComponentCase` flush 프레임(가변) + 모달(`max-w-sm`) 중앙 배치, Content 2열·Footer 2열 그리드
-- **Dialog 미리보기 스타일** — 섹션 패딩·정렬(본문 min-h-20, 모달 min-h-[200px], 푸터 하단 정렬), 동의/목록/입력 확인 좌측 정렬
-- **DialogTitle** — `text-heading5_500`(18/26 · 카드/모달 타이틀) 적용
-- **Playground** — `showTargetName` 케이스·컨트롤 제거, 푸터 버튼 fill/stack 정리
-- **Spacing** — semantic spacing 문서 페이지·토큰 정리 (`foundation/spacing-semantic`)
+- **네이밍 컨벤션** — `DESIGN.md §3-5` · `.cursor/rules/naming-conventions.mdc` · Playground key/`formatSpecPropertyName` 정규화
+- **간격 소유권** — `DESIGN.md §2-5-1` (L1 padding / L2 부모 gap / L3 시맨틱) · docs `fieldStack` gap 통일
+- **Alert `type="icon"`** — flex가 grid를 덮던 문제 수정 · `.alert-layout-icon` (1행 아이콘+제목 · 2행 설명)
+- **아이콘 버튼 정사각** — `size`에 `w-*`+`aspect-square` · ButtonGroup `w-fit`이 `size-*`를 덮지 않도록 수정
+- **Playground·Examples** — Button/Label/Dialog 등 컨트롤·쇼케이스·스펙 정리 · Line(구 UI) 시맨틱 색 이름
 
 ## 다음에 할 일
 
-- Dialog pattern 컴포넌트(checklist·acknowledge 등) 문서 Examples 연동 검토
-- 리노벨 스튜디오 border·muted 톤 확인 (v0.1.7)
+- Docs 예시 잔여 margin → parent gap 정리 (선택)
+- `src/components/ui/progress.tsx` 패키지와 동기화 확인 (선택)
+- `main` ↔ `origin/main` diverged 해소 후 원격 동기화
 
 ## 막힌 것 · 결정 필요
 
-- `main` ↔ `origin/main` diverged (로컬 18 · 원격 1) — push 전 pull/rebase 필요할 수 있음
+- `main` ↔ `origin/main` diverged (로컬 ahead · 원격 behind) — push 시 rebase/merge 필요할 수 있음
 
 ## 주요 파일 · 브랜치
 
 - 브랜치: main
 - 원격: `origin` → upnunde/Renovel-Studio-DS
 - 관련 경로:
-  - `src/components/docs/dialog-footer-actions.tsx` — Dialog Playground/Examples 프리뷰
-  - `src/components/docs/component-showcases.tsx` — Dialog Examples
-  - `packages/design-system/src/components/ui/dialog.tsx` — 타이틀 타이포
-  - `src/components/docs/component-case-docs.tsx` — flush 프레임 패턴
+  - `packages/design-system/src/components/ui/alert.tsx` · `alert.css`
+  - `packages/design-system/src/components/ui/button.tsx` · `button-group.tsx`
+  - `DESIGN.md` · `.cursor/rules/naming-conventions.mdc`
+  - `src/components/docs/playground-registry.tsx`
 
 ## 메모
 

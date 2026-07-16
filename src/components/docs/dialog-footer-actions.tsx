@@ -246,13 +246,13 @@ function confirmInputCode(phrase: string) {
   return `  <div className="grid gap-2">\n    <p className="text-body4_400 text-foreground-muted">아래 내용을 숙지한 후, 입력창에 <span className="font-medium text-foreground">${phrase}</span>를 입력해 주세요.</p>\n    <Input placeholder="${phrase}" autoComplete="off" />\n  </div>`
 }
 
-export function dialogFooterActionsCode({
+export function buildDialogFooterActionsCode({
   footerActions,
   title,
   description,
   showHeader,
   showContent,
-  showFooter,
+  showFooter = true,
   showTargetName = false,
   targetName = "이름 없는 컬렉션",
   showBodyText = true,
@@ -269,7 +269,7 @@ export function dialogFooterActionsCode({
   description: string
   showHeader: boolean
   showContent: boolean
-  showFooter: boolean
+  showFooter?: boolean
 } & DialogBodyComposition) {
   const header = showHeader
     ? `\n  <DialogHeader>\n    <DialogTitle>${title}</DialogTitle>\n    <DialogDescription>${description}</DialogDescription>\n  </DialogHeader>`

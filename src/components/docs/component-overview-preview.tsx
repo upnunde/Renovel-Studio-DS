@@ -16,7 +16,6 @@ import { Label } from "design-system/ui/label"
 import { Progress } from "design-system/ui/progress"
 import { RadioGroup, RadioGroupItem } from "design-system/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "design-system/ui/select"
-import { Separator } from "design-system/ui/separator"
 import { Skeleton } from "design-system/ui/skeleton"
 import { Slider } from "design-system/ui/slider"
 import { Switch } from "design-system/ui/switch"
@@ -165,7 +164,7 @@ function PreviewRadioGroup() {
 function PreviewSlider() {
   return (
     <div className={cn(previewShell, "px-4")}>
-      <Slider defaultValue={[42]} max={100} step={1} className="w-full max-w-48" />
+      <Slider type="default" defaultValue={[42]} max={100} step={1} className="w-full max-w-48" />
     </div>
   )
 }
@@ -328,8 +327,7 @@ function PreviewAccordion() {
 function PreviewAlert() {
   return (
     <div className={cn(previewShell, "px-2")}>
-      <Alert className="w-full max-w-[220px] py-3">
-        <Icon icon={ICONS.info} size="sm" />
+      <Alert type="icon" className="w-full max-w-[220px] py-3">
         <AlertTitle className="text-sm">알림</AlertTitle>
         <AlertDescription className="text-xs">상태 메시지</AlertDescription>
       </Alert>
@@ -342,19 +340,9 @@ function PreviewSonner() {
     <div className={previewShell}>
       <div className="flex w-full max-w-[220px] items-center gap-2 rounded-lg border border-border bg-foreground px-3 py-2.5 text-background shadow-md">
         <Icon icon={ICONS.info} size="sm" />
-        <span className="flex-1 text-xs">토스트 알림</span>
+        <span className="flex-1 text-xs">토스트</span>
         <Icon icon={ICONS.close} size="sm" className="opacity-70" />
       </div>
-    </div>
-  )
-}
-
-function PreviewSeparator() {
-  return (
-    <div className={cn(previewShell, "flex-col gap-3 px-6")}>
-      <span className="text-xs text-foreground-muted">위 콘텐츠</span>
-      <Separator />
-      <span className="text-xs text-foreground-muted">아래 콘텐츠</span>
     </div>
   )
 }
@@ -384,7 +372,6 @@ const previewBySlug: Record<ComponentDoc["slug"], () => ReactNode> = {
   accordion: PreviewAccordion,
   alert: PreviewAlert,
   sonner: PreviewSonner,
-  separator: PreviewSeparator,
 }
 
 export function ComponentOverviewPreview({ slug }: { slug: ComponentDoc["slug"] }) {

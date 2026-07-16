@@ -147,7 +147,7 @@ function EmailInput({
               onMouseEnter={() => setActiveIndex(index)}
               className={cn(
                 "flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none",
-                index === activeIndex && "bg-accent text-accent-foreground"
+                index === activeIndex && "bg-muted text-foreground"
               )}
             >
               <span className="text-foreground-muted">{localPart}@</span>

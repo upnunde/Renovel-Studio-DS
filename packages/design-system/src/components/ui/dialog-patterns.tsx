@@ -24,6 +24,7 @@ import { Label } from "./label"
 export const DIALOG_ACKNOWLEDGE_PHRASE = "확인했습니다" as const
 
 type ButtonVariant = NonNullable<VariantProps<typeof buttonVariants>["variant"]>
+type ButtonStatus = NonNullable<VariantProps<typeof buttonVariants>["status"]>
 type DialogPatternPresentation = "modal" | "inline"
 
 /**
@@ -172,6 +173,8 @@ export type DialogAcknowledgeProps = DialogPatternBaseProps & {
   cancelLabel?: string
   confirmLabel: string
   confirmVariant?: ButtonVariant
+  /** 확인 버튼의 상태 톤 — Acknowledge 패턴은 위험 액션 확인 용도라 destructive가 기본 */
+  confirmStatus?: ButtonStatus
   onConfirm: () => void
   onCancel?: () => void
 }
@@ -192,7 +195,8 @@ export function DialogAcknowledge({
   confirmHint = "아래 내용을 숙지한 후, 입력창에 확인했습니다를 입력해 주세요.",
   cancelLabel = "취소",
   confirmLabel,
-  confirmVariant = "destructive",
+  confirmVariant = "default",
+  confirmStatus = "destructive",
   onConfirm,
   onCancel,
   contentClassName,
@@ -260,7 +264,12 @@ export function DialogAcknowledge({
           label={cancelLabel}
           onClick={handleCancel}
         />
-        <Button variant={confirmVariant} disabled={!ready} onClick={handleConfirm}>
+        <Button
+          variant={confirmVariant}
+          status={confirmStatus}
+          disabled={!ready}
+          onClick={handleConfirm}
+        >
           {confirmLabel}
         </Button>
       </DialogFooter>

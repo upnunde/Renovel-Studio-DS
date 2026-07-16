@@ -45,9 +45,9 @@ export function PlaygroundLayout({
       <div className="flex min-h-48 flex-col">
         <div
           className={cn(
-            "flex flex-1 flex-col items-center justify-center",
+            "flex min-h-[200px] flex-1 flex-col items-center justify-center",
             docsSpace.previewGap,
-            docsSpace.pad,
+            docsSpace.playgroundPreviewPad,
             previewClassName
           )}
         >
@@ -90,7 +90,7 @@ function PlaygroundCodeSection({ code }: { code: string }) {
       </div>
       <pre
         className={cn(
-          "overflow-x-auto rounded-lg border border-border bg-background",
+          "h-[160px] overflow-x-auto overflow-y-auto rounded-lg border border-border bg-background",
           docsSpace.pad,
           docsType.code
         )}
@@ -110,7 +110,7 @@ export function PlaygroundField({
 }) {
   return (
     <div className={docsSpace.fieldStack}>
-      <Label className={cn(docsType.tokenName, "mb-0.5")}>{label}</Label>
+      <Label className={docsType.tokenName}>{label}</Label>
       {children}
     </div>
   )

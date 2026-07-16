@@ -44,67 +44,187 @@ export function formatSpacingToken(token: SpacingToken): string {
  *
  * 원시 SPACING_SCALE 토큰을 사용처 시맨틱으로 매핑한다.
  * 컴포넌트는 자체 패딩(button px 등)을 가지고, 이 매핑은 그 바깥의 페이지·섹션·폼 등에 적용된다.
+ *
+ * 네이밍 — Color Semantic과 동일 패턴:
+ *   name  : kebab-case 역할명 (page-padding-x)
+ *   role  : 한국어 사용 맥락
+ *   source: SPACING_SCALE.label (Maps to)
+ *   코드  : space.{group}.{camelCase}.className
  * ──────────────────────────────────────────────────────────────────────────── */
 
 export type SemanticSpaceToken = {
-  /** 시맨틱 키 — 코드에서 import 키 */
-  key: string
+  /** kebab-case 역할명 — 문서·공유 시 직관적 식별자 */
+  name: string
+  /** tokens.css alias 변수 — 예: --space-section-stack-gap */
+  variable: string
   /** Tailwind 클래스 (gap-X · p-X · px-X · py-X 등) */
   className: string
-  /** 원시 token (SPACING_SCALE.token) */
-  token: string
+  /** SPACING_SCALE.label — 시맨틱이 가리키는 원시 스케일 */
+  source: string
   px: number
-  description: string
+  /** 문서용 — 컴포넌트·레이아웃에서의 실제 역할 */
+  role: string
+}
+
+function createSemanticSpaceToken(
+  name: string,
+  className: string,
+  sourceToken: string,
+  role: string,
+): SemanticSpaceToken {
+  const scaleEntry = SPACING_SCALE.find((entry) => entry.token === sourceToken)
+  if (!scaleEntry) {
+    throw new Error(`Unknown spacing token: ${sourceToken}`)
+  }
+
+  return {
+    name,
+    variable: `--space-${name}`,
+    className,
+    source: scaleEntry.label,
+    px: scaleEntry.px,
+    role,
+  }
 }
 
 /** 페이지 레이아웃 — 최상위 셸·섹션 묶음 */
 export const SEMANTIC_SPACE_LAYOUT = {
-  pagePadX: { key: "pagePadX", className: "px-5", token: "5", px: 20, description: "페이지 좌우 여백" },
-  pagePadY: { key: "pagePadY", className: "py-10", token: "10", px: 40, description: "페이지 상하 여백" },
-  sectionGap: { key: "sectionGap", className: "gap-10", token: "10", px: 40, description: "섹션 사이 간격" },
+  pagePaddingX: createSemanticSpaceToken(
+    "page-padding-x",
+    "px-5",
+    "5",
+    "페이지 좌우 여백",
+  ),
+  pagePaddingY: createSemanticSpaceToken(
+    "page-padding-y",
+    "py-10",
+    "10",
+    "페이지 상하 여백",
+  ),
+  sectionGap: createSemanticSpaceToken(
+    "section-gap",
+    "gap-10",
+    "10",
+    "섹션 사이 간격",
+  ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 섹션 내부 — 카드·패널 단위 */
 export const SEMANTIC_SPACE_SECTION = {
-  pad: { key: "pad", className: "p-5", token: "5", px: 20, description: "카드·패널 내부 패딩" },
-  headerGap: { key: "headerGap", className: "gap-2", token: "2", px: 8, description: "제목 ↔ 설명 텍스트" },
-  contentGap: { key: "contentGap", className: "gap-4", token: "4", px: 16, description: "헤더 ↔ 본문 블록" },
-  stack: { key: "stack", className: "gap-5", token: "5", px: 20, description: "섹션 내 블록 수직 묶음" },
+  sectionPadding: createSemanticSpaceToken(
+    "section-padding",
+    "p-5",
+    "5",
+    "카드·패널 내부 패딩",
+  ),
+  sectionHeaderGap: createSemanticSpaceToken(
+    "section-header-gap",
+    "gap-2",
+    "2",
+    "제목 ↔ 설명 텍스트",
+  ),
+  sectionContentGap: createSemanticSpaceToken(
+    "section-content-gap",
+    "gap-4",
+    "4",
+    "헤더 ↔ 본문 블록",
+  ),
+  sectionStackGap: createSemanticSpaceToken(
+    "section-stack-gap",
+    "gap-5",
+    "5",
+    "섹션 내 블록 수직 묶음",
+  ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 폼 — 필드·컨트롤 묶음 */
 export const SEMANTIC_SPACE_FORM = {
-  labelGap: { key: "labelGap", className: "gap-1", token: "1", px: 4, description: "Label ↔ Input (밀착)" },
-  fieldGap: { key: "fieldGap", className: "gap-4", token: "4", px: 16, description: "필드 단위(Label+Input+Helper) 사이" },
-  groupGap: { key: "groupGap", className: "gap-6", token: "6", px: 24, description: "폼 섹션·그룹 사이" },
+  formLabelGap: createSemanticSpaceToken(
+    "form-label-gap",
+    "gap-1",
+    "1",
+    "Label ↔ Input (밀착)",
+  ),
+  formFieldGap: createSemanticSpaceToken(
+    "form-field-gap",
+    "gap-4",
+    "4",
+    "필드 단위(Label+Input+Helper) 사이",
+  ),
+  formGroupGap: createSemanticSpaceToken(
+    "form-group-gap",
+    "gap-6",
+    "6",
+    "폼 섹션·그룹 사이",
+  ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 리스트·그리드 */
 export const SEMANTIC_SPACE_LIST = {
-  tight: { key: "tight", className: "gap-2", token: "2", px: 8, description: "촘촘한 리스트 (메뉴·드롭다운 항목)" },
-  default: { key: "default", className: "gap-3", token: "3", px: 12, description: "기본 리스트" },
-  loose: { key: "loose", className: "gap-5", token: "5", px: 20, description: "느슨한 리스트·카드 그리드" },
+  listItemGapCompact: createSemanticSpaceToken(
+    "list-item-gap-compact",
+    "gap-2",
+    "2",
+    "촘촘한 리스트 (메뉴·드롭다운 항목)",
+  ),
+  listItemGap: createSemanticSpaceToken(
+    "list-item-gap",
+    "gap-3",
+    "3",
+    "기본 리스트",
+  ),
+  listItemGapRelaxed: createSemanticSpaceToken(
+    "list-item-gap-relaxed",
+    "gap-5",
+    "5",
+    "느슨한 리스트·카드 그리드",
+  ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 인라인 — 텍스트·아이콘·뱃지 가로 묶음 */
 export const SEMANTIC_SPACE_INLINE = {
-  tight: { key: "tight", className: "gap-1", token: "1", px: 4, description: "아이콘 ↔ 텍스트 (최소 여백)" },
-  default: { key: "default", className: "gap-2", token: "2", px: 8, description: "일반 인라인 요소 묶음" },
-  loose: { key: "loose", className: "gap-3", token: "3", px: 12, description: "인라인 요소 넉넉한 묶음" },
+  inlineIconGap: createSemanticSpaceToken(
+    "inline-icon-gap",
+    "gap-1",
+    "1",
+    "아이콘 ↔ 텍스트 (최소 여백)",
+  ),
+  inlineGap: createSemanticSpaceToken(
+    "inline-gap",
+    "gap-2",
+    "2",
+    "일반 인라인 요소 묶음",
+  ),
+  inlineGapRelaxed: createSemanticSpaceToken(
+    "inline-gap-relaxed",
+    "gap-3",
+    "3",
+    "인라인 요소 넉넉한 묶음",
+  ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 액션 — 버튼 그룹·툴바 */
 export const SEMANTIC_SPACE_ACTIONS = {
-  gap: { key: "gap", className: "gap-2", token: "2", px: 8, description: "버튼·칩 사이" },
-  groupGap: { key: "groupGap", className: "gap-4", token: "4", px: 16, description: "액션 그룹 사이" },
+  actionGap: createSemanticSpaceToken(
+    "action-gap",
+    "gap-2",
+    "2",
+    "버튼·칩 사이",
+  ),
+  actionGroupGap: createSemanticSpaceToken(
+    "action-group-gap",
+    "gap-4",
+    "4",
+    "액션 그룹 사이",
+  ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 통합 시맨틱 스페이스 — 앱 전역 사용
  *
  * 사용 예:
  *   import { space } from "design-system/spacing-tokens"
- *   <main className={cn(space.layout.pagePadX, space.layout.pagePadY)}>
- *   <section className={cn("flex flex-col", space.section.stack, space.section.pad)}>
+ *   <main className={cn(space.layout.pagePaddingX.className, space.layout.pagePaddingY.className)}>
+ *   <section className={cn("flex flex-col", space.section.sectionStackGap.className, space.section.sectionPadding.className)}>
  */
 export const space = {
   layout: SEMANTIC_SPACE_LAYOUT,
@@ -117,12 +237,95 @@ export const space = {
 
 export type SemanticSpaceGroup = keyof typeof space
 
-/** Foundation Spacing 페이지·외부 문서화 용 */
-export const SEMANTIC_SPACE_GROUPS = [
-  { id: "layout", title: "Layout", description: "페이지·섹션 묶음 최상위", tokens: Object.values(SEMANTIC_SPACE_LAYOUT) },
-  { id: "section", title: "Section", description: "카드·패널 내부", tokens: Object.values(SEMANTIC_SPACE_SECTION) },
-  { id: "form", title: "Form", description: "필드·컨트롤 묶음", tokens: Object.values(SEMANTIC_SPACE_FORM) },
-  { id: "list", title: "List", description: "리스트·그리드", tokens: Object.values(SEMANTIC_SPACE_LIST) },
-  { id: "inline", title: "Inline", description: "텍스트·아이콘 가로 묶음", tokens: Object.values(SEMANTIC_SPACE_INLINE) },
-  { id: "actions", title: "Actions", description: "버튼 그룹·툴바", tokens: Object.values(SEMANTIC_SPACE_ACTIONS) },
-] as const
+export type SpacingSemanticGroup = {
+  id: string
+  title: string
+  tokens: SemanticSpaceToken[]
+}
+
+/** 시맨틱 스페이스 상위 그룹 — 카테고리(h2) → 서브그룹(h3) 2단 위계 */
+export type SpacingSemanticCategory = {
+  id: string
+  title: string
+  groups: SpacingSemanticGroup[]
+}
+
+/** Foundation Spacing Semantic 페이지 — Color Semantic과 동일 2단 위계 */
+export const SPACING_SEMANTIC_CATEGORIES: SpacingSemanticCategory[] = [
+  {
+    id: "layout",
+    title: "Layout",
+    groups: [
+      {
+        id: "layout-page",
+        title: "Page Shell",
+        tokens: Object.values(SEMANTIC_SPACE_LAYOUT),
+      },
+    ],
+  },
+  {
+    id: "section",
+    title: "Section",
+    groups: [
+      {
+        id: "section-interior",
+        title: "Card · Panel",
+        tokens: Object.values(SEMANTIC_SPACE_SECTION),
+      },
+    ],
+  },
+  {
+    id: "form",
+    title: "Form",
+    groups: [
+      {
+        id: "form-fields",
+        title: "Fields",
+        tokens: Object.values(SEMANTIC_SPACE_FORM),
+      },
+    ],
+  },
+  {
+    id: "list",
+    title: "List",
+    groups: [
+      {
+        id: "list-items",
+        title: "Item Gap",
+        tokens: Object.values(SEMANTIC_SPACE_LIST),
+      },
+    ],
+  },
+  {
+    id: "inline",
+    title: "Inline",
+    groups: [
+      {
+        id: "inline-horizontal",
+        title: "Horizontal",
+        tokens: Object.values(SEMANTIC_SPACE_INLINE),
+      },
+    ],
+  },
+  {
+    id: "actions",
+    title: "Actions",
+    groups: [
+      {
+        id: "actions-toolbar",
+        title: "Button · Toolbar",
+        tokens: Object.values(SEMANTIC_SPACE_ACTIONS),
+      },
+    ],
+  },
+]
+
+/** @deprecated SPACING_SEMANTIC_CATEGORIES 사용 */
+export const SEMANTIC_SPACE_GROUPS = SPACING_SEMANTIC_CATEGORIES.flatMap((category) =>
+  category.groups.map((group) => ({
+    id: group.id,
+    title: group.title,
+    description: category.title,
+    tokens: group.tokens,
+  })),
+)

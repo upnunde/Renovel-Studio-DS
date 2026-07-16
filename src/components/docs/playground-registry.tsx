@@ -29,7 +29,7 @@ import {
 import { Checkbox } from "design-system/ui/checkbox"
 import { Chip } from "design-system/ui/chip"
 import {
-  dialogFooterActionsCode,
+  buildDialogFooterActionsCode,
   DialogFooterActionsPreview,
   type DialogListStyle,
 } from "@/components/docs/dialog-footer-actions"
@@ -62,7 +62,7 @@ import {
   PopoverTitle,
   PopoverTrigger,
 } from "design-system/ui/popover"
-import { Progress } from "design-system/ui/progress"
+import { Progress, ProgressValue } from "design-system/ui/progress"
 import { RadioGroup, RadioGroupItem } from "design-system/ui/radio-group"
 import {
   Select,
@@ -71,7 +71,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "design-system/ui/select"
-import { Separator } from "design-system/ui/separator"
 import { Skeleton } from "design-system/ui/skeleton"
 import { Slider } from "design-system/ui/slider"
 import { Switch } from "design-system/ui/switch"
@@ -94,15 +93,22 @@ import {
   CONTROL_FORM_SIZE_APIS,
   TABS_SIZE_APIS,
   CONTROL_TEXT_SIZE_APIS,
-  iconChevronButtonClass,
 } from "design-system/component-size-tokens"
-
-import type { PlaygroundNumberField, PlaygroundRenderContext, PlaygroundState } from "./playground-utils"
-import { playgroundBool, playgroundPropAttr, playgroundPropAttrs } from "./playground-utils"
+import {
+  clampAvatarInitials,
+  formatPlaygroundNumberValue,
+  playgroundBool,
+  playgroundPropAttr,
+  playgroundPropAttrs,
+} from "./playground-utils"
+import type {
+  PlaygroundNumberField,
+  PlaygroundRenderContext,
+  PlaygroundState,
+} from "./playground-utils"
 
 const FIELD_LABEL_PLAYGROUND_ID = "field-playground"
 const FIELD_LABEL_DESCRIPTION_LINE = "필요 없는 보조문구는 삭제"
-const FIELD_LABEL_INFO_TEXT = "필드에 대한 추가 설명입니다."
 
 function fieldLabelPlaygroundDescription(
   state: PlaygroundState
@@ -252,8 +258,6 @@ function indentCodeBlock(code: string, spaces: number) {
     .join("\n")
 }
 
-const PLAYGROUND_MENU_ITEMS = ["항목 1", "항목 2"] as const
-
 function dropdownMenuPlaygroundTrigger() {
   return (
     <DropdownMenuTrigger render={<Button variant="outline" />}>
@@ -268,8 +272,8 @@ function dropdownMenuPlaygroundTrigger() {
 }
 
 function dropdownMenuPlaygroundItems(state: PlaygroundState) {
-  const itemType = str(state, "item type")
-  const itemVariant = str(state, "item variant")
+  const itemType = str(state, "itemType")
+  const itemVariant = str(state, "itemVariant")
 
   if (itemType === "leading-icon") {
     return (
@@ -366,7 +370,7 @@ function dropdownMenuPlaygroundItems(state: PlaygroundState) {
 }
 
 function dropdownMenuPlaygroundCode(state: PlaygroundState) {
-  const itemType = str(state, "item type")
+  const itemType = str(state, "itemType")
   const align = ` align="${str(state, "align")}"`
   const open = bool(state, "open") ? " open" : ""
   const glyph = controlSizeToIconGlyph("default")
@@ -386,7 +390,7 @@ function dropdownMenuPlaygroundCode(state: PlaygroundState) {
   } else if (itemType === "Sub") {
     body = `    <DropdownMenuSub>\n      <DropdownMenuSubTrigger>보내기</DropdownMenuSubTrigger>\n      <DropdownMenuSubContent>...</DropdownMenuSubContent>\n    </DropdownMenuSub>`
   } else {
-    const itemVariant = ` variant="${str(state, "item variant")}"`
+    const itemVariant = ` variant="${str(state, "itemVariant")}"`
     body = `    <DropdownMenuGroup>\n      <DropdownMenuLabel>계정</DropdownMenuLabel>\n      <DropdownMenuItem>프로필</DropdownMenuItem>\n      <DropdownMenuItem${itemVariant}>설정</DropdownMenuItem>\n    </DropdownMenuGroup>`
   }
 
@@ -408,45 +412,44 @@ function num(state: PlaygroundState, key: string) {
 export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   button: {
     description:
-      "타입(텍스트·리드 아이콘·아이콘 전용)과 사이즈를 따로 선택합니다. 아이콘 전용은 size에 따라 icon · icon-sm … 으로 출력됩니다. chevron을 켜면 DropdownMenu 트리거로 메뉴가 활성화됩니다.",
+      "타입(텍스트·리드 아이콘·아이콘 전용)과 사이즈를 따로 선택합니다. 아이콘 전용은 size에 따라 icon · icon-sm … 으로 출력됩니다.",
     initialState: {
       variant: "default",
+      status: "default",
       type: "text",
       size: "default",
       shape: "square",
       label: "Label",
-      chevron: false,
       disabled: false,
       "aria-invalid": false,
-      "aria-expanded": false,
     },
     textKeys: ["label"],
     selectKeys: {
       type: ["text", "leading-icon", "icon"],
       size: [...CONTROL_TEXT_SIZE_APIS],
       shape: [...BUTTON_SHAPE_APIS],
+      status: ["default", "success", "warning", "destructive"],
     },
-    showWhen: {
-      "aria-expanded": (state) => playgroundBool(state, "chevron"),
-    },
-    renderPreview: (state, ctx) => {
+    renderPreview: (state, _ctx) => {
       const size = str(state, "size")
       const label = str(state, "label")
       const buttonType = str(state, "type")
       const isIcon = buttonType === "icon"
       const isLeadingIcon = buttonType === "leading-icon"
-      const chevron = bool(state, "chevron")
-      const iconChevron = isIcon && chevron
       const glyph = controlSizeToIconGlyph(size)
 
-      const triggerChildren = (
-        <>
+      return (
+        <Button
+          variant={str(state, "variant") as "default"}
+          status={str(state, "status") as "default"}
+          shape={str(state, "shape") as "square"}
+          size={toButtonSize(size, isIcon) as "default"}
+          disabled={bool(state, "disabled")}
+          aria-invalid={bool(state, "aria-invalid") || undefined}
+          aria-label={isIcon ? label || "버튼" : undefined}
+        >
           {isIcon ? (
-            <Icon
-              icon={ICONS.home}
-              size={glyph}
-              position={chevron ? "inline-start" : undefined}
-            />
+            <Icon icon={ICONS.home} size={glyph} />
           ) : isLeadingIcon ? (
             <>
               <Icon icon={ICONS.home} size={glyph} position="inline-start" />
@@ -455,51 +458,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
           ) : (
             label || "Label"
           )}
-          {chevron ? (
-            <Icon icon={ICONS.chevronDown} size={glyph} position="inline-end" />
-          ) : null}
-        </>
-      )
-
-      const triggerButton = (
-        <Button
-          variant={str(state, "variant") as "default"}
-          shape={str(state, "shape") as "square"}
-          size={toButtonSize(size, isIcon) as "default"}
-          disabled={bool(state, "disabled")}
-          aria-invalid={bool(state, "aria-invalid") || undefined}
-          aria-label={isIcon ? label || "버튼" : undefined}
-          className={iconChevron ? iconChevronButtonClass(size) : undefined}
-        />
-      )
-
-      if (!chevron) {
-        return (
-          <Button
-            variant={str(state, "variant") as "default"}
-            shape={str(state, "shape") as "square"}
-            size={toButtonSize(size, isIcon) as "default"}
-            disabled={bool(state, "disabled")}
-            aria-invalid={bool(state, "aria-invalid") || undefined}
-            aria-label={isIcon ? label || "버튼" : undefined}
-            className={iconChevron ? iconChevronButtonClass(size) : undefined}
-          >
-            {triggerChildren}
-          </Button>
-        )
-      }
-
-      return (
-        <DropdownMenu {...ctx.bindOpen("aria-expanded")}>
-          <DropdownMenuTrigger render={triggerButton}>
-            {triggerChildren}
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start">
-            {PLAYGROUND_MENU_ITEMS.map((item) => (
-              <DropdownMenuItem key={item}>{item}</DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        </Button>
       )
     },
     buildCode: (state) => {
@@ -508,46 +467,29 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       const buttonType = str(state, "type")
       const isIcon = buttonType === "icon"
       const isLeadingIcon = buttonType === "leading-icon"
-      const chevron = bool(state, "chevron")
-      const iconChevron = isIcon && chevron
       const realSize = toButtonSize(size, isIcon)
       const glyph = controlSizeToIconGlyph(size)
+      const status = str(state, "status")
       const props = [
         playgroundPropAttr("variant", str(state, "variant")),
         playgroundPropAttr("shape", str(state, "shape")),
         playgroundPropAttr("size", realSize),
       ]
+      if (status !== "default") props.push(playgroundPropAttr("status", status))
       if (bool(state, "disabled")) props.push("disabled")
       if (bool(state, "aria-invalid")) props.push("aria-invalid")
       if (isIcon) props.push(`aria-label="${label || "버튼"}"`)
-      if (iconChevron) props.push(`className="${iconChevronButtonClass(size)}"`)
       const open = props.length ? ` ${props.join(" ")}` : ""
-      const chevronLine = `\n  <Icon icon={ICONS.chevronDown} size="${glyph}" position="inline-end" />`
       const leadingIconLine = `\n  <Icon icon={ICONS.home} size="${glyph}" position="inline-start" />`
-      const iconOnlyLine = chevron
-        ? `\n  <Icon icon={ICONS.home} size="${glyph}" position="inline-start" />`
-        : `\n  <Icon icon={ICONS.home} size="${glyph}" />`
+      const iconOnlyLine = `\n  <Icon icon={ICONS.home} size="${glyph}" />`
 
-      let buttonCode: string
       if (isIcon) {
-        buttonCode = `<Button${open}>${iconOnlyLine}${chevron ? chevronLine : ""}\n</Button>`
-      } else if (isLeadingIcon) {
-        buttonCode = `<Button${open}>${leadingIconLine}\n  ${label || "Label"}${chevron ? chevronLine : ""}\n</Button>`
-      } else if (chevron) {
-        buttonCode = `<Button${open}>\n  ${label || "Label"}${chevronLine}\n</Button>`
-      } else {
-        buttonCode = `<Button${open}>${label || "Label"}</Button>`
+        return `<Button${open}>${iconOnlyLine}\n</Button>`
       }
-
-      if (!chevron) {
-        return buttonCode
+      if (isLeadingIcon) {
+        return `<Button${open}>${leadingIconLine}\n  ${label || "Label"}\n</Button>`
       }
-
-      const menuOpen = bool(state, "aria-expanded") ? " open" : ""
-      const menuItems = PLAYGROUND_MENU_ITEMS.map(
-        (item) => `    <DropdownMenuItem>${item}</DropdownMenuItem>`
-      ).join("\n")
-      return `<DropdownMenu${menuOpen}>\n  <DropdownMenuTrigger asChild>\n${indentCodeBlock(buttonCode, 4)}\n  </DropdownMenuTrigger>\n  <DropdownMenuContent align="start">\n${menuItems}\n  </DropdownMenuContent>\n</DropdownMenu>`
+      return `<Button${open}>${label || "Label"}</Button>`
     },
     getPreviewClassName: (state) =>
       bool(state, "aria-invalid") ? "bg-destructive/5" : undefined,
@@ -667,16 +609,21 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     initialState: {
       variant: "outline",
       size: "default",
+      shape: "circle",
       label: "전자제품",
       selected: false,
       removable: false,
       disabled: false,
     },
     textKeys: ["label"],
+    selectKeys: {
+      shape: ["circle", "square"],
+    },
     renderPreview: (state, ctx) => (
       <Chip
         variant={str(state, "variant") as "outline"}
         size={str(state, "size") as "default"}
+        shape={str(state, "shape") as "circle"}
         {...ctx.bindPressed("selected")}
         disabled={bool(state, "disabled")}
         onRemove={bool(state, "removable") ? () => {} : undefined}
@@ -688,6 +635,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       const props = [
         playgroundPropAttr("variant", str(state, "variant")),
         playgroundPropAttr("size", str(state, "size")),
+        playgroundPropAttr("shape", str(state, "shape")),
         bool(state, "selected") ? "pressed" : "",
         bool(state, "disabled") ? "disabled" : "",
         bool(state, "removable") ? "onRemove={() => {}}" : "",
@@ -773,12 +721,13 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       description: false,
       descriptionLines: "1",
       info: false,
+      infoText: "필드에 대한 추가 설명입니다.",
       hypertext: false,
       hypertextText: "8자 이상 입력해 주세요.",
       hypertextMax: 1000,
       hypertextCount: 0,
     },
-    textKeys: ["children", "hypertextText"],
+    textKeys: ["children", "infoText", "hypertextText"],
     numberKeys: [
       { key: "hypertextMax", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
       { key: "hypertextCount", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
@@ -790,6 +739,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     skipControlKeys: ["htmlFor"],
     showWhen: {
       descriptionLines: (state) => bool(state, "description"),
+      infoText: (state) => playgroundBool(state, "info"),
       hypertextText: (state) => playgroundBool(state, "hypertext"),
       hypertextMax: (state) => playgroundBool(state, "hypertext"),
       hypertextCount: (state) =>
@@ -803,6 +753,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         descriptionId,
         descriptionLines
       )
+      const infoText = str(state, "infoText").trim()
 
       return (
         <InputGroup className="max-w-xs">
@@ -811,7 +762,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
             size={str(state, "size") as "default"}
             required={bool(state, "required")}
             description={descriptionLines}
-            info={bool(state, "info") ? FIELD_LABEL_INFO_TEXT : undefined}
+            info={bool(state, "info") && infoText ? infoText : undefined}
             descriptionId={descriptionLines ? descriptionId : undefined}
           >
             {str(state, "children")}
@@ -836,6 +787,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         descriptionId,
         descriptionLines
       )
+      const infoText = str(state, "infoText").trim()
       const fieldLabelAttrs = playgroundPropAttrs([
         playgroundPropAttr("size", str(state, "size")),
         playgroundPropAttr("htmlFor", FIELD_LABEL_PLAYGROUND_ID),
@@ -846,7 +798,9 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         descriptionLines
           ? fieldLabelPlaygroundDescriptionCode(descriptionLines)
           : "",
-        bool(state, "info") ? `info="${FIELD_LABEL_INFO_TEXT}"` : "",
+        bool(state, "info") && infoText
+          ? playgroundPropAttr("info", infoText)
+          : "",
       ])
       const inputAttrs = playgroundPropAttrs([
         playgroundPropAttr("id", FIELD_LABEL_PLAYGROUND_ID),
@@ -862,7 +816,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
   textarea: {
     initialState: {
-      rows: 3,
+      rows: 4,
       placeholder: "여러 줄 입력",
       disabled: false,
       "aria-invalid": false,
@@ -873,7 +827,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
     textKeys: ["placeholder", "hypertextText"],
     numberKeys: [
-      { key: "rows", min: 2, max: 8, step: 1 },
+      { key: "rows", min: 4, max: 8, step: 1 },
       { key: "hypertextMax", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
       { key: "hypertextCount", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
     ],
@@ -883,12 +837,14 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       hypertextCount: (state) =>
         playgroundBool(state, "hypertext") && Number(state.hypertextMax) > 0,
     },
-    renderPreview: (state, _ctx) => (
+    renderPreview: (state, _ctx) => {
+      const rows = Math.min(8, Math.max(4, num(state, "rows")))
+      return (
       <InputGroup className="max-w-md">
         <Textarea
           key={playgroundHypertextInputKey(state)}
           id="playground-textarea"
-          rows={num(state, "rows")}
+          rows={rows}
           placeholder={str(state, "placeholder")}
           disabled={bool(state, "disabled")}
           aria-invalid={bool(state, "aria-invalid") || undefined}
@@ -901,11 +857,13 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         />
         {playgroundHypertextPreview(state, "playground-textarea-helper")}
       </InputGroup>
-    ),
+      )
+    },
     buildCode: (state) => {
+      const rows = Math.min(8, Math.max(4, num(state, "rows")))
       const props = [
         `id="field-id"`,
-        `rows={${num(state, "rows")}}`,
+        `rows={${rows}}`,
         `placeholder="${str(state, "placeholder")}"`,
         bool(state, "disabled") ? "disabled" : "",
         bool(state, "aria-invalid") ? "aria-invalid" : "",
@@ -959,6 +917,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
   checkbox: {
     initialState: {
+      type: "default",
       checked: "false",
       disabled: false,
       "aria-invalid": false,
@@ -966,22 +925,36 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
     textKeys: ["caption"],
     selectKeys: {
-      checked: ["false", "true", "indeterminate"],
+      type: ["icon", "default"],
+      checked: ["false", "true"],
+    },
+    showWhen: {
+      caption: (state) => str(state, "type") !== "icon",
     },
     renderPreview: (state, ctx) => {
       const checked = str(state, "checked")
+      const checkbox = (
+        <Checkbox
+          id="playground-checkbox"
+          checked={checked === "true"}
+          onCheckedChange={(next) =>
+            ctx.set("checked", next ? "true" : "false")
+          }
+          disabled={bool(state, "disabled")}
+          aria-invalid={bool(state, "aria-invalid") || undefined}
+          aria-label={
+            str(state, "type") === "icon" ? str(state, "caption") : undefined
+          }
+        />
+      )
+
+      if (str(state, "type") === "icon") {
+        return checkbox
+      }
+
       return (
         <div className="flex items-center gap-2">
-          <Checkbox
-            id="playground-checkbox"
-            checked={checked === "true"}
-            indeterminate={checked === "indeterminate"}
-            onCheckedChange={(next) =>
-              ctx.set("checked", next ? "true" : "false")
-            }
-            disabled={bool(state, "disabled")}
-            aria-invalid={bool(state, "aria-invalid") || undefined}
-          />
+          {checkbox}
           <Label htmlFor="playground-checkbox">{str(state, "caption")}</Label>
         </div>
       )
@@ -990,11 +963,15 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       const checked = str(state, "checked")
       const props = [
         checked === "true" ? "checked" : "",
-        checked === "indeterminate" ? "indeterminate" : "",
         bool(state, "disabled") ? "disabled" : "",
         bool(state, "aria-invalid") ? "aria-invalid" : "",
-        'id="terms"',
+        str(state, "type") === "icon"
+          ? `aria-label="${str(state, "caption")}"`
+          : 'id="terms"',
       ].filter(Boolean)
+      if (str(state, "type") === "icon") {
+        return `<Checkbox ${props.join(" ")} />`
+      }
       return `<div className="flex items-center gap-2">\n  <Checkbox ${props.join(" ")} />\n  <Label htmlFor="terms">${str(state, "caption")}</Label>\n</div>`
     },
     getPreviewClassName: (state) =>
@@ -1002,7 +979,16 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   },
 
   switch: {
-    initialState: { checked: false, disabled: false, caption: true },
+    initialState: {
+      checked: false,
+      disabled: false,
+      caption: true,
+      captionText: "알림",
+    },
+    textKeys: ["captionText"],
+    showWhen: {
+      captionText: (state) => playgroundBool(state, "caption"),
+    },
     renderPreview: (state, ctx) => {
       const switchControl = (
         <Switch
@@ -1018,7 +1004,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
       return (
         <div className="flex w-full max-w-xs items-center justify-between gap-4">
-          <Label htmlFor="playground-switch">알림</Label>
+          <Label htmlFor="playground-switch">{str(state, "captionText")}</Label>
           {switchControl}
         </div>
       )
@@ -1030,7 +1016,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         bool(state, "disabled") ? "disabled" : "",
       ].filter(Boolean)
       if (bool(state, "caption")) {
-        return `<div className="flex items-center justify-between gap-4">\n  <Label htmlFor="notifications">알림</Label>\n  <Switch ${props.join(" ")} />\n</div>`
+        return `<div className="flex items-center justify-between gap-4">\n  <Label htmlFor="notifications">${str(state, "captionText")}</Label>\n  <Switch ${props.join(" ")} />\n</div>`
       }
       return `<Switch ${props.join(" ")} />`
     },
@@ -1038,74 +1024,141 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
   "radio-group": {
     initialState: {
+      type: "default",
       value: "a",
       disabled: false,
       "aria-invalid": false,
+      captionA: "옵션 A",
+      captionB: "옵션 B",
     },
-    selectKeys: { value: ["a", "b"] },
-    renderPreview: (state, ctx) => (
-      <RadioGroup
-        {...ctx.bindValue("value")}
-        disabled={bool(state, "disabled")}
-        aria-invalid={bool(state, "aria-invalid") || undefined}
-        className="max-w-xs"
-      >
-        <div className="flex items-center gap-2">
-          <RadioGroupItem value="a" id="rg-a" />
-          <Label htmlFor="rg-a">옵션 A</Label>
-        </div>
-        <div className="flex items-center gap-2">
-          <RadioGroupItem value="b" id="rg-b" />
-          <Label htmlFor="rg-b">옵션 B</Label>
-        </div>
-      </RadioGroup>
-    ),
+    textKeys: ["captionA", "captionB"],
+    selectKeys: {
+      type: ["icon", "default"],
+      value: ["a", "b"],
+    },
+    showWhen: {
+      captionA: (state) => str(state, "type") !== "icon",
+      captionB: (state) => str(state, "type") !== "icon",
+    },
+    renderPreview: (state, ctx) => {
+      const iconOnly = str(state, "type") === "icon"
+      return (
+        <RadioGroup
+          {...ctx.bindValue("value")}
+          disabled={bool(state, "disabled")}
+          aria-invalid={bool(state, "aria-invalid") || undefined}
+          className={iconOnly ? "flex max-w-xs flex-row gap-3" : "max-w-xs"}
+        >
+          <div className="flex items-center gap-2">
+            <RadioGroupItem
+              value="a"
+              id="rg-a"
+              aria-label={iconOnly ? str(state, "captionA") : undefined}
+            />
+            {iconOnly ? null : (
+              <Label htmlFor="rg-a">{str(state, "captionA")}</Label>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            <RadioGroupItem
+              value="b"
+              id="rg-b"
+              aria-label={iconOnly ? str(state, "captionB") : undefined}
+            />
+            {iconOnly ? null : (
+              <Label htmlFor="rg-b">{str(state, "captionB")}</Label>
+            )}
+          </div>
+        </RadioGroup>
+      )
+    },
     buildCode: (state) => {
       const props = [
         `defaultValue="${str(state, "value")}"`,
         bool(state, "disabled") ? "disabled" : "",
         bool(state, "aria-invalid") ? "aria-invalid" : "",
       ].filter(Boolean)
-      return `<RadioGroup ${props.join(" ")}>\n  <div className="flex items-center gap-2">\n    <RadioGroupItem value="a" id="a" />\n    <Label htmlFor="a">옵션 A</Label>\n  </div>\n  <div className="flex items-center gap-2">\n    <RadioGroupItem value="b" id="b" />\n    <Label htmlFor="b">옵션 B</Label>\n  </div>\n</RadioGroup>`
+      if (str(state, "type") === "icon") {
+        return `<RadioGroup ${props.join(" ")} className="flex gap-3">\n  <RadioGroupItem value="a" aria-label="${str(state, "captionA")}" />\n  <RadioGroupItem value="b" aria-label="${str(state, "captionB")}" />\n</RadioGroup>`
+      }
+      return `<RadioGroup ${props.join(" ")}>\n  <div className="flex items-center gap-2">\n    <RadioGroupItem value="a" id="a" />\n    <Label htmlFor="a">${str(state, "captionA")}</Label>\n  </div>\n  <div className="flex items-center gap-2">\n    <RadioGroupItem value="b" id="b" />\n    <Label htmlFor="b">${str(state, "captionB")}</Label>\n  </div>\n</RadioGroup>`
     },
     getPreviewClassName: (state) =>
       bool(state, "aria-invalid") ? "bg-destructive/5" : undefined,
   },
 
   slider: {
-    initialState: { value: 50, min: 0, max: 100, step: 1, disabled: false },
+    initialState: {
+      type: "default",
+      value: 50,
+      valueEnd: 80,
+      min: 0,
+      max: 100,
+      step: 1,
+      disabled: false,
+    },
+    skipControlKeys: ["min", "max"],
+    selectKeys: {
+      type: ["default", "range"],
+    },
     numberKeys: [
-      { key: "value", min: 0, max: 100, step: 1 },
-      { key: "min", min: 0, max: 90, step: 5, label: "min" },
-      { key: "max", min: 10, max: 100, step: 5, label: "max" },
+      { key: "value", min: 0, max: 100, step: 1, label: "value" },
+      { key: "valueEnd", min: 0, max: 100, step: 1, label: "valueEnd" },
       { key: "step", min: 1, max: 10, step: 1, label: "step" },
     ],
+    showWhen: {
+      valueEnd: (state) => str(state, "type") === "range",
+    },
     renderPreview: (state, ctx) => {
       const min = num(state, "min")
       const max = Math.max(min + num(state, "step"), num(state, "max"))
       const step = num(state, "step")
-      const value = Math.min(max, Math.max(min, num(state, "value")))
+      const isRange = str(state, "type") === "range"
+      const start = Math.min(max, Math.max(min, num(state, "value")))
+      const end = Math.min(max, Math.max(min + step, num(state, "valueEnd")))
+      const rangeStart = Math.min(start, end)
+      const rangeEnd = Math.max(start, end)
 
       return (
         <div className="w-full max-w-xs space-y-2">
           <Slider
-            {...ctx.bindSlider("value")}
+            type={isRange ? "range" : "default"}
+            value={isRange ? [rangeStart, rangeEnd] : [start]}
+            onValueChange={(values) => {
+              const next = Array.isArray(values) ? values : [values]
+              if (isRange) {
+                ctx.set("value", next[0] ?? rangeStart)
+                ctx.set("valueEnd", next[1] ?? rangeEnd)
+                return
+              }
+              ctx.set("value", next[0] ?? start)
+            }}
             min={min}
             max={max}
             step={step}
             disabled={bool(state, "disabled")}
           />
-          <p className="text-center font-mono text-sm text-foreground-muted">
-            {value} ({min}–{max}, step {step})
+          <p className="text-right font-mono text-sm text-foreground-muted tabular-nums">
+            {isRange
+              ? `${formatPlaygroundNumberValue(rangeStart, min, max)} – ${formatPlaygroundNumberValue(rangeEnd, min, max)}`
+              : formatPlaygroundNumberValue(start, min, max)}
           </p>
         </div>
       )
     },
     buildCode: (state) => {
+      const isRange = str(state, "type") === "range"
+      const min = num(state, "min")
+      const max = num(state, "max")
+      const start = num(state, "value")
+      const end = num(state, "valueEnd")
       const props = [
-        `defaultValue={[${num(state, "value")}]}`,
-        `min={${num(state, "min")}}`,
-        `max={${num(state, "max")}}`,
+        `type="${str(state, "type")}"`,
+        isRange
+          ? `defaultValue={[${start}, ${end}]}`
+          : `defaultValue={[${start}]}`,
+        `min={${min}}`,
+        `max={${max}}`,
         `step={${num(state, "step")}}`,
         bool(state, "disabled") ? "disabled" : "",
         'className="max-w-xs"',
@@ -1118,6 +1171,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     description: "size · default_h20 / md_h24 / lg_h28 · shape · circle / square",
     initialState: {
       variant: "default",
+      status: "default",
       size: "default",
       shape: "circle",
       label: "Badge",
@@ -1126,10 +1180,12 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     selectKeys: {
       size: [...BADGE_SIZE_APIS],
       shape: [...BADGE_SHAPE_APIS],
+      status: ["default", "success", "warning", "destructive"],
     },
     renderPreview: (state, _ctx) => (
       <Badge
         variant={str(state, "variant") as "default"}
+        status={str(state, "status") as "default"}
         size={str(state, "size") as "default"}
         shape={str(state, "shape") as "circle"}
       >
@@ -1137,8 +1193,10 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       </Badge>
     ),
     buildCode: (state) => {
+      const status = str(state, "status")
       const attrs = playgroundPropAttrs([
         playgroundPropAttr("variant", str(state, "variant")),
+        status !== "default" ? playgroundPropAttr("status", status) : null,
         playgroundPropAttr("size", str(state, "size")),
         playgroundPropAttr("shape", str(state, "shape")),
       ])
@@ -1150,41 +1208,43 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     description: "size · xs_s20 ~ 5xl_s128 (md_s36)",
     initialState: {
       size: "default",
-      image: true,
-      fallback: "initials",
+      type: "image",
       initials: "JD",
     },
     textKeys: ["initials"],
     selectKeys: {
       size: [...AVATAR_SIZE_APIS],
-      fallback: ["initials", "icon"],
+      type: ["image", "initials", "icon"],
     },
     showWhen: {
-      fallback: (state) => !playgroundBool(state, "image"),
-      initials: (state) =>
-        !playgroundBool(state, "image") && str(state, "fallback") === "initials",
+      initials: (state) => str(state, "type") === "initials",
     },
-    renderPreview: (state, _ctx) => (
-      <Avatar size={str(state, "size") as "default"}>
-        {bool(state, "image") ? (
-          <AvatarImage src={AVATAR_IMAGE} alt="사용자" />
-        ) : null}
-        {str(state, "fallback") === "icon" ? (
-          <AvatarIcon icon={ICONS.user} />
-        ) : (
-          <AvatarFallback>{str(state, "initials")}</AvatarFallback>
-        )}
-      </Avatar>
-    ),
+    renderPreview: (state, _ctx) => {
+      const type = str(state, "type")
+      return (
+        <Avatar size={str(state, "size") as "default"}>
+          {type === "image" ? (
+            <AvatarImage src={AVATAR_IMAGE} alt="사용자" />
+          ) : null}
+          {type === "icon" ? (
+            <AvatarIcon icon={ICONS.user} />
+          ) : (
+            <AvatarFallback>
+              {clampAvatarInitials(str(state, "initials"))}
+            </AvatarFallback>
+          )}
+        </Avatar>
+      )
+    },
     buildCode: (state) => {
       const size = playgroundPropAttrs([playgroundPropAttr("size", str(state, "size"))])
-      const image = bool(state, "image")
-        ? `\n  <AvatarImage src="…" alt="사용자" />`
-        : ""
+      const type = str(state, "type")
+      const image =
+        type === "image" ? `\n  <AvatarImage src="…" alt="사용자" />` : ""
       const fallback =
-        str(state, "fallback") === "icon"
+        type === "icon"
           ? `\n  <AvatarIcon icon={ICONS.user} />`
-          : `\n  <AvatarFallback>${str(state, "initials")}</AvatarFallback>`
+          : `\n  <AvatarFallback>${clampAvatarInitials(str(state, "initials"))}</AvatarFallback>`
       return `<Avatar${size}>${image}${fallback}\n</Avatar>`
     },
   },
@@ -1316,15 +1376,12 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     initialState: { value: 60 },
     numberKeys: [{ key: "value", min: 0, max: 100, step: 1 }],
     renderPreview: (state, _ctx) => (
-      <div className="w-full max-w-xs space-y-2">
-        <Progress value={num(state, "value")} />
-        <p className="text-center font-mono text-sm text-foreground-muted">
-          {num(state, "value")}%
-        </p>
-      </div>
+      <Progress value={num(state, "value")} className="w-full max-w-xs">
+        <ProgressValue />
+      </Progress>
     ),
     buildCode: (state) =>
-      `<Progress value={${num(state, "value")}} className="max-w-xs" />`,
+      `<Progress value={${num(state, "value")}} className="max-w-xs">\n  <ProgressValue />\n</Progress>`,
   },
 
   skeleton: {
@@ -1354,12 +1411,12 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   "dropdown-menu": {
     initialState: {
       align: "start",
-      "item type": "default",
-      "item variant": "default",
+      itemType: "default",
+      itemVariant: "default",
       open: false,
     },
     selectKeys: {
-      "item type": [
+      itemType: [
         "default",
         "leading-icon",
         "shortcut",
@@ -1370,7 +1427,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       ],
     },
     showWhen: {
-      "item variant": (state) => str(state, "item type") === "default",
+      itemVariant: (state) => str(state, "itemType") === "default",
     },
     renderPreview: (state, ctx) => (
       <DropdownMenu modal={false} {...ctx.bindOpen("open", { pin: true })}>
@@ -1389,7 +1446,6 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       description: "설명 텍스트입니다.",
       showHeader: true,
       showContent: true,
-      showFooter: true,
       footerActions: "2",
       showBodyText: true,
       bodyText: "본문 영역",
@@ -1425,12 +1481,11 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         "showConfirmInput",
         "confirmPhrase",
       ],
-      ["showFooter", "footerActions"],
+      ["footerActions"],
     ],
     showWhen: {
       title: (state) => playgroundBool(state, "showHeader"),
       description: (state) => playgroundBool(state, "showHeader"),
-      footerActions: (state) => playgroundBool(state, "showFooter"),
       showBodyText: (state) => playgroundBool(state, "showContent"),
       bodyText: (state) =>
         playgroundBool(state, "showContent") &&
@@ -1456,7 +1511,6 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         description={str(state, "description")}
         showHeader={bool(state, "showHeader")}
         showContent={bool(state, "showContent")}
-        showFooter={bool(state, "showFooter")}
         showBodyText={bool(state, "showBodyText")}
         bodyText={str(state, "bodyText")}
         showList={bool(state, "showList")}
@@ -1468,13 +1522,12 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       />
     ),
     buildCode: (state) =>
-      dialogFooterActionsCode({
+      buildDialogFooterActionsCode({
         footerActions: str(state, "footerActions") as "1" | "2" | "3",
         title: str(state, "title"),
         description: str(state, "description"),
         showHeader: bool(state, "showHeader"),
         showContent: bool(state, "showContent"),
-        showFooter: bool(state, "showFooter"),
         showBodyText: bool(state, "showBodyText"),
         bodyText: str(state, "bodyText"),
         showList: bool(state, "showList"),
@@ -1509,7 +1562,13 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   },
 
   tooltip: {
-    initialState: { side: "top", tip: "도움말 텍스트", open: false, delay: "0ms" },
+    initialState: {
+      side: "top",
+      tip: "도움말 텍스트",
+      open: false,
+      removable: false,
+      delay: "0ms",
+    },
     textKeys: ["tip"],
     selectKeys: {
       delay: ["0ms", "700ms"],
@@ -1517,10 +1576,11 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
     renderPreview: (state, ctx) => {
       const delayMs = str(state, "delay") === "700ms" ? 700 : 0
+      const removable = bool(state, "removable")
 
       return (
         <TooltipProvider delay={delayMs}>
-          <Tooltip {...ctx.bindOpen()}>
+          <Tooltip removable={removable} {...ctx.bindOpen()}>
             <TooltipTrigger render={<Button variant="outline" />}>
               툴팁
             </TooltipTrigger>
@@ -1533,7 +1593,10 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
     buildCode: (state) => {
       const side = ` side="${str(state, "side")}"`
-      const body = `<Tooltip>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "tip")}\n  </TooltipContent>\n</Tooltip>`
+      const removable = bool(state, "removable")
+      const open = bool(state, "open") ? " open" : ""
+      const removableAttr = removable ? " removable" : ""
+      const body = `<Tooltip${open}${removableAttr}>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "tip")}\n  </TooltipContent>\n</Tooltip>`
       if (str(state, "delay") === "700ms") {
         return `<TooltipProvider delay={700}>\n  ${body.replace(/\n/g, "\n  ")}\n</TooltipProvider>`
       }
@@ -1603,23 +1666,53 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   alert: {
     initialState: {
       variant: "default",
+      status: "default",
+      type: "default",
+      removable: false,
+      duration: "0",
       title: "알림",
       description: "추가 설명이 여기에 표시됩니다.",
     },
     textKeys: ["title", "description"],
-    selectKeys: { variant: ["default", "destructive"] },
-    renderPreview: (state, _ctx) => (
-      <Alert
-        variant={str(state, "variant") as "default"}
-        className="w-full max-w-md"
-      >
-        <AlertTitle>{str(state, "title")}</AlertTitle>
-        <AlertDescription>{str(state, "description")}</AlertDescription>
-      </Alert>
-    ),
+    selectKeys: {
+      variant: ["default"],
+      status: ["default", "success", "warning", "destructive"],
+      type: ["default", "icon"],
+      duration: ["0", "3000", "5000"],
+    },
+    showWhen: {
+      duration: (state) => playgroundBool(state, "removable"),
+    },
+    renderPreview: (state, _ctx) => {
+      const removable = bool(state, "removable")
+      const duration = Number(str(state, "duration") || 0)
+      return (
+        <Alert
+          key={`${str(state, "type")}-${removable}-${duration}`}
+          variant={str(state, "variant") as "default"}
+          status={str(state, "status") as "default"}
+          type={str(state, "type") as "default"}
+          removable={removable}
+          duration={removable ? duration : 0}
+          className="w-full max-w-md"
+        >
+          <AlertTitle>{str(state, "title")}</AlertTitle>
+          <AlertDescription>{str(state, "description")}</AlertDescription>
+        </Alert>
+      )
+    },
     buildCode: (state) => {
-      const variant = ` variant="${str(state, "variant")}"`
-      return `<Alert${variant}>\n  <AlertTitle>${str(state, "title")}</AlertTitle>\n  <AlertDescription>${str(state, "description")}</AlertDescription>\n</Alert>`
+      const removable = bool(state, "removable")
+      const duration = Number(str(state, "duration") || 0)
+      const status = str(state, "status")
+      const props = [
+        `variant="${str(state, "variant")}"`,
+        status !== "default" ? `status="${status}"` : "",
+        `type="${str(state, "type")}"`,
+        removable ? "removable" : "",
+        removable && duration > 0 ? `duration={${duration}}` : "",
+      ].filter(Boolean)
+      return `<Alert ${props.join(" ")}>\n  <AlertTitle>${str(state, "title")}</AlertTitle>\n  <AlertDescription>${str(state, "description")}</AlertDescription>\n</Alert>`
     },
   },
 
@@ -1648,34 +1741,6 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
   },
 
-  separator: {
-    initialState: { orientation: "horizontal" },
-    selectKeys: { orientation: ["horizontal", "vertical"] },
-    renderPreview: (state, _ctx) => {
-      if (str(state, "orientation") === "vertical") {
-        return (
-          <div className="flex h-16 items-center gap-4">
-            <span className="text-sm">왼쪽</span>
-            <Separator orientation="vertical" />
-            <span className="text-sm">오른쪽</span>
-          </div>
-        )
-      }
-      return (
-        <div className="w-full max-w-xs space-y-4">
-          <p className="text-sm">위 섹션</p>
-          <Separator />
-          <p className="text-sm">아래 섹션</p>
-        </div>
-      )
-    },
-    buildCode: (state) => {
-      if (str(state, "orientation") === "vertical") {
-        return `<div className="flex h-16 items-center gap-4">\n  <span>왼쪽</span>\n  <Separator orientation="vertical" />\n  <span>오른쪽</span>\n</div>`
-      }
-      return `<Separator orientation="${str(state, "orientation")}" />`
-    },
-  },
 }
 
 export function getPlaygroundEntry(slug: string) {

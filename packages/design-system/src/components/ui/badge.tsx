@@ -1,3 +1,5 @@
+import type * as React from "react"
+
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -12,14 +14,25 @@ const badgeVariants = cva(
         default:
           "bg-primary-container text-primary-container-foreground [a]:hover:bg-primary-container/80 [a[data-hovered=true]]:bg-primary-container/80",
         secondary:
-          "bg-secondary text-secondary-foreground [a]:hover:bg-accent [a]:hover:text-accent-foreground [a[data-hovered=true]]:bg-accent [a[data-hovered=true]]:text-accent-foreground",
-        destructive:
-          "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20 [a[data-hovered=true]]:bg-destructive/20",
+          "bg-secondary text-secondary-foreground [a]:hover:bg-muted [a]:hover:text-foreground [a[data-hovered=true]]:bg-muted [a[data-hovered=true]]:text-foreground",
         outline:
-          "border-border text-foreground [a]:hover:bg-accent [a]:hover:text-accent-foreground [a[data-hovered=true]]:bg-accent [a[data-hovered=true]]:text-accent-foreground",
+          "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-foreground [a[data-hovered=true]]:bg-muted [a[data-hovered=true]]:text-foreground",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground",
+          "hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground",
         link: "text-primary underline-offset-4 hover:underline data-[hovered=true]:underline",
+      },
+      /**
+       * 의미론적 상태 톤 — variant와 직교하는 상태 축.
+       * default 는 톤 없음, 나머지는 각 상태 컨테이너로 오버라이드.
+       */
+      status: {
+        default: "",
+        success:
+          "border-transparent bg-success/10 text-success focus-visible:ring-success/20 dark:bg-success/20 dark:focus-visible:ring-success/40 [a]:hover:bg-success/20 [a[data-hovered=true]]:bg-success/20",
+        warning:
+          "border-transparent bg-warning/15 text-warning focus-visible:ring-warning/20 dark:bg-warning/20 dark:focus-visible:ring-warning/40 [a]:hover:bg-warning/25 [a[data-hovered=true]]:bg-warning/25",
+        destructive:
+          "border-transparent bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20 [a[data-hovered=true]]:bg-destructive/20",
       },
       size: {
         default: "h-5 px-2 text-xs [&>svg]:size-3!",
@@ -33,6 +46,7 @@ const badgeVariants = cva(
     },
     defaultVariants: {
       variant: "default",
+      status: "default",
       size: "default",
       shape: "circle",
     },
@@ -42,6 +56,7 @@ const badgeVariants = cva(
 function Badge({
   className,
   variant = "default",
+  status = "default",
   size = "default",
   shape = "circle",
   render,
@@ -51,7 +66,8 @@ function Badge({
     defaultTagName: "span",
     props: mergeProps<"span">(
       {
-        className: cn(badgeVariants({ variant, size, shape }), className),
+        className: cn(badgeVariants({ variant, status, size, shape }), className),
+        ...({ "data-status": status } as React.HTMLAttributes<HTMLSpanElement>),
       },
       props
     ),
@@ -59,6 +75,7 @@ function Badge({
     state: {
       slot: "badge",
       variant,
+      status,
       size,
       shape,
     },

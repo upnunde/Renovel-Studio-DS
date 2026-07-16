@@ -1,0 +1,53 @@
+---
+description: 파일·코드·토큰·Playground 네이밍 표기법. 새 파일·export·spec·state key 추가 시 준수.
+alwaysApply: true
+---
+
+# 네이밍 표기법
+
+정본: **`DESIGN.md` §3-5**. 레이어당 case 하나 — 혼용 금지.
+
+## 레이어별 규칙
+
+| 레이어 | Case | 예 |
+|--------|------|-----|
+| 파일·폴더·docs slug | `kebab-case` | `playground-registry.tsx`, `dropdown-menu` |
+| React 컴포넌트·타입 | `PascalCase` | `PlaygroundLayout`, `ComponentCaseSpec` |
+| 함수·변수·props | `camelCase` | `buildCode`, `showHeader`, `variant` |
+| 모듈 상수 | `SCREAMING_SNAKE` | `COMPONENT_CASE_SPECS` |
+| CSS 변수 | `--kebab-case` | `--primary-container` |
+| `data-slot` | `kebab-case` | `dialog-footer` |
+| Typography | `text-body3_500` | 언더스코어 고정 |
+| 패키지 subpath | `kebab-case` | `design-system/ui/button-group` |
+
+## Playground · component-case-specs
+
+- **`properties[].name` / `initialState` / `selectKeys` 키**: `camelCase` 또는 HTML 속성명 (`aria-invalid`, `htmlFor`)
+- **공백·한글 키 금지** — 표시는 `getPlaygroundControlLabel` / `formatSpecPropertyName`
+- **Properties 전용** (컨트롤 없음): `composition`, `itemHeight` → `SKIPPED_SPEC_PROPS`
+- **Playground-only**: `showHeader`, `tabCount` 등 — 컴포넌트 API 아님, 문서에 명시
+
+## shadcn 유지
+
+- props: `variant`, `size`, `asChild` — 변경 금지
+- CVA: `*Variants` export
+- 파일: `kebab-case.tsx`, export `PascalCase`
+
+## docs 유틸 네이밍
+
+- 공개 함수: `get*` / `build*` / `format*` + `camelCase`
+- 비공개 헬퍼: `camelCase` (export 없음)
+- docs 컴포넌트 파일: `docs-*` 또는 `component-*` / `foundation-*` (단수 `doc-*` 신규 금지)
+
+## 정본 경로
+
+- 컴포넌트·토큰: `packages/design-system/src/`
+- `src/components/ui/`: 패키지 re-export 목표 (신규는 re-export 우선)
+
+## 새 항목 체크리스트
+
+1. 파일명 `kebab-case`?
+2. 컴포넌트 `PascalCase`?
+3. Playground key `camelCase` (공백 없음)?
+4. CSS/`data-slot` `kebab-case`?
+5. slug가 `component-docs` · `component-case-specs` · `playground-registry`와 일치?

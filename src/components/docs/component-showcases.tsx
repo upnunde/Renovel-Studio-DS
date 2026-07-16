@@ -91,7 +91,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "design-system/ui/select"
-import { Separator } from "design-system/ui/separator"
 import { Skeleton } from "design-system/ui/skeleton"
 import { Slider } from "design-system/ui/slider"
 import { Switch } from "design-system/ui/switch"
@@ -148,9 +147,6 @@ const SHOWCASES: Record<string, ReactNode> = {
           <ComponentCase label="secondary" tags={["variant: secondary"]}>
             <Button variant="secondary">Label</Button>
           </ComponentCase>
-          <ComponentCase label="destructive" tags={["variant: destructive"]}>
-            <Button variant="destructive">Label</Button>
-          </ComponentCase>
           <ComponentCase label="outline" tags={["variant: outline"]}>
             <Button variant="outline">Label</Button>
           </ComponentCase>
@@ -162,6 +158,24 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Status">
+        <ComponentCaseGrid columns={4}>
+          <ComponentCase label="default" tags={["status: default", "무톤"]}>
+            <Button>Label</Button>
+          </ComponentCase>
+          <ComponentCase label="success" tags={["status: success"]}>
+            <Button status="success">Label</Button>
+          </ComponentCase>
+          <ComponentCase label="warning" tags={["status: warning"]}>
+            <Button status="warning">Label</Button>
+          </ComponentCase>
+          <ComponentCase label="destructive" tags={["status: destructive"]}>
+            <Button status="destructive">Label</Button>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
       <ComponentCaseGroup title="Hover (snapshot)">
         <ComponentCaseGrid columns={3}>
           <ComponentCase label="outline → accent" tags={["hover", "accent"]}>
@@ -270,73 +284,6 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
           <ComponentCase label="error" tags={["aria-invalid: true"]}>
             <Button aria-invalid>오류</Button>
-          </ComponentCase>
-        </ComponentCaseGrid>
-      </ComponentCaseGroup>
-
-      <ComponentCaseGroup title="Menu trigger">
-        <ComponentCaseGrid columns={3}>
-          <ComponentCase label="label + chevron" tags={["variant: outline"]}>
-            <DropdownMenu>
-              <DropdownMenuTrigger render={<Button variant="outline" />}>
-                메뉴
-                <Icon
-                  icon={ICONS.chevronDown}
-                  size={controlSizeToIconGlyph("default")}
-                  position="inline-end"
-                />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                <DropdownMenuItem>프로필</DropdownMenuItem>
-                <DropdownMenuItem>설정</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </ComponentCase>
-          <ComponentCase
-            label="icon + label + chevron"
-            tags={["variant: outline"]}
-          >
-            <DropdownMenu>
-              <DropdownMenuTrigger render={<Button variant="outline" />}>
-                <Icon
-                  icon={ICONS.user}
-                  size={controlSizeToIconGlyph("default")}
-                  position="inline-start"
-                />
-                계정
-                <Icon
-                  icon={ICONS.chevronDown}
-                  size={controlSizeToIconGlyph("default")}
-                  position="inline-end"
-                />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                <DropdownMenuItem>프로필</DropdownMenuItem>
-                <DropdownMenuItem variant="destructive">로그아웃</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </ComponentCase>
-          <ComponentCase label="icon + chevron" tags={["size: sm", "ghost"]}>
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                render={<Button variant="ghost" size="sm" aria-label="홈" />}
-              >
-                <Icon
-                  icon={ICONS.home}
-                  size={controlSizeToIconGlyph("sm")}
-                  position="inline-start"
-                />
-                <Icon
-                  icon={ICONS.chevronDown}
-                  size={controlSizeToIconGlyph("sm")}
-                  position="inline-end"
-                />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                <DropdownMenuItem>굵게</DropdownMenuItem>
-                <DropdownMenuItem>기울임</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
@@ -560,6 +507,23 @@ const SHOWCASES: Record<string, ReactNode> = {
         </ComponentCaseGrid>
       </ComponentCaseGroup>
 
+      <ComponentCaseGroup title="Shape">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="circle" tags={["shape: circle", "rounded-full"]}>
+            <Chip shape="circle">전자제품</Chip>
+            <Chip shape="circle" defaultPressed>
+              선택됨
+            </Chip>
+          </ComponentCase>
+          <ComponentCase label="square" tags={["shape: square", "rounded-md"]}>
+            <Chip shape="square">전자제품</Chip>
+            <Chip shape="square" defaultPressed>
+              선택됨
+            </Chip>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
       <ComponentCaseGroup title="State">
         <ComponentCaseGrid columns={3}>
           <ComponentCase label="off" tags={["pressed: false"]}>
@@ -670,6 +634,20 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   label: (
     <Showcase slug="label">
+      <ComponentCaseGroup title="Label">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="기본" tags={["Label", "text-sm", "font-medium"]}>
+            <Label>라벨</Label>
+          </ComponentCase>
+          <ComponentCase label="htmlFor" tags={["Label", "Input", "htmlFor"]}>
+            <div className="flex w-full max-w-xs flex-col gap-2">
+              <Label htmlFor="label-demo-input">이메일</Label>
+              <Input id="label-demo-input" placeholder="name@example.com" />
+            </div>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
       <ComponentCaseGroup title="FieldLabel · Size">
         <ComponentCaseGrid columns={2}>
           <ComponentCase label="15_700" tags={["size: default", "text-body2_700"]}>
@@ -734,7 +712,7 @@ const SHOWCASES: Record<string, ReactNode> = {
           label="settings row"
           tags={["grid-cols-[auto,1fr]", "FieldLabel + Input"]}
         >
-          <div className="grid w-full max-w-md grid-cols-[auto,1fr] items-start gap-8">
+          <div className="grid w-full max-w-md grid-cols-[auto,1fr] items-start gap-4">
             <FieldLabel
               htmlFor="field-expression"
               required
@@ -746,7 +724,7 @@ const SHOWCASES: Record<string, ReactNode> = {
           </div>
         </ComponentCase>
         <ComponentCase label="InputGroup" tags={["FieldLabel", "Input", "InputHypertext"]}>
-          <InputGroup className="max-w-xs">
+          <InputGroup className="max-w-xs gap-4">
             <FieldLabel
               htmlFor="field-id"
               required
@@ -765,15 +743,6 @@ const SHOWCASES: Record<string, ReactNode> = {
               입력 후 아래 도움말과 구분됩니다.
             </InputHypertext>
           </InputGroup>
-        </ComponentCase>
-      </ComponentCaseGroup>
-
-      <ComponentCaseGroup title="Label · primitive">
-        <ComponentCase label="inline" tags={["text-sm", "14/20px", "htmlFor"]}>
-          <div className="flex items-center gap-2">
-            <Checkbox id="field-inline" />
-            <Label htmlFor="field-inline">동의합니다</Label>
-          </div>
         </ComponentCase>
       </ComponentCaseGroup>
     </Showcase>
@@ -866,6 +835,19 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   checkbox: (
     <Showcase slug="checkbox">
+      <ComponentCaseGroup title="Type">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="icon" tags={["type: icon"]}>
+            <Checkbox aria-label="선택" defaultChecked />
+          </ComponentCase>
+          <ComponentCase label="default" tags={["type: default"]}>
+            <div className="flex items-center gap-2">
+              <Checkbox id="c-default" defaultChecked />
+              <Label htmlFor="c-default">선택</Label>
+            </div>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
       <ComponentCaseGroup title="State">
         <ComponentCaseGrid columns={3}>
           <ComponentCase label="16px" tags={["size-4", "16px", "icon: sm_14"]}>
@@ -920,28 +902,39 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   "radio-group": (
     <Showcase slug="radio-group">
-      <ComponentCaseGroup title="Selection">
-        <ComponentCase label="default" tags={["value: a"]}>
-          <RadioGroup defaultValue="a">
-            <div className="flex items-center gap-2">
-              <RadioGroupItem value="a" id="r-a" />
-              <Label htmlFor="r-a">옵션 A</Label>
-            </div>
-            <div className="flex items-center gap-2">
-              <RadioGroupItem value="b" id="r-b" />
-              <Label htmlFor="r-b">옵션 B</Label>
-            </div>
-          </RadioGroup>
-        </ComponentCase>
+      <ComponentCaseGroup title="Type">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="icon" tags={["type: icon"]}>
+            <RadioGroup defaultValue="a" className="flex flex-row gap-3">
+              <RadioGroupItem value="a" aria-label="옵션 A" />
+              <RadioGroupItem value="b" aria-label="옵션 B" />
+            </RadioGroup>
+          </ComponentCase>
+          <ComponentCase label="default" tags={["type: default"]}>
+            <RadioGroup defaultValue="a">
+              <div className="flex items-center gap-2">
+                <RadioGroupItem value="a" id="r-a" />
+                <Label htmlFor="r-a">옵션 A</Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <RadioGroupItem value="b" id="r-b" />
+                <Label htmlFor="r-b">옵션 B</Label>
+              </div>
+            </RadioGroup>
+          </ComponentCase>
+        </ComponentCaseGrid>
       </ComponentCaseGroup>
     </Showcase>
   ),
 
   slider: (
     <Showcase slug="slider">
-      <ComponentCaseGroup title="Value">
-        <ComponentCase label="40%" tags={["value: [40]"]}>
-          <Slider className="max-w-md" defaultValue={[40]} max={100} step={1} />
+      <ComponentCaseGroup title="Type">
+        <ComponentCase label="default" tags={["type: default", "value: 40"]}>
+          <Slider className="max-w-md" type="default" defaultValue={[40]} max={100} step={1} />
+        </ComponentCase>
+        <ComponentCase label="range" tags={["type: range", "value: [25, 75]"]}>
+          <Slider className="max-w-md" type="range" defaultValue={[25, 75]} max={100} step={1} />
         </ComponentCase>
       </ComponentCaseGroup>
     </Showcase>
@@ -960,14 +953,28 @@ const SHOWCASES: Record<string, ReactNode> = {
           <ComponentCase label="outline" tags={["variant: outline", "h20"]}>
             <Badge variant="outline">outline</Badge>
           </ComponentCase>
-          <ComponentCase label="destructive" tags={["variant: destructive", "h20"]}>
-            <Badge variant="destructive">destructive</Badge>
-          </ComponentCase>
           <ComponentCase label="ghost" tags={["variant: ghost", "h20"]}>
             <Badge variant="ghost">ghost</Badge>
           </ComponentCase>
           <ComponentCase label="link" tags={["variant: link", "h20"]}>
             <Badge variant="link">link</Badge>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Status">
+        <ComponentCaseGrid columns={4}>
+          <ComponentCase label="default" tags={["status: default", "무톤"]}>
+            <Badge>default</Badge>
+          </ComponentCase>
+          <ComponentCase label="success" tags={["status: success"]}>
+            <Badge status="success">success</Badge>
+          </ComponentCase>
+          <ComponentCase label="warning" tags={["status: warning"]}>
+            <Badge status="warning">warning</Badge>
+          </ComponentCase>
+          <ComponentCase label="destructive" tags={["status: destructive"]}>
+            <Badge status="destructive">destructive</Badge>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
@@ -1025,29 +1032,20 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   avatar: (
     <Showcase slug="avatar">
-      <ComponentCaseGroup title="Image">
-        <ComponentCaseGrid columns={2}>
-          <ComponentCase label="with image" tags={["image: 있음"]}>
+      <ComponentCaseGroup title="Type">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="image" tags={["type: image"]}>
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" alt="avatar" />
               <AvatarFallback>DS</AvatarFallback>
             </Avatar>
           </ComponentCase>
-          <ComponentCase label="fallback" tags={["image: 없음"]}>
+          <ComponentCase label="initials" tags={["type: initials"]}>
             <Avatar>
               <AvatarFallback>AB</AvatarFallback>
             </Avatar>
           </ComponentCase>
-        </ComponentCaseGrid>
-      </ComponentCaseGroup>
-      <ComponentCaseGroup title="Fallback">
-        <ComponentCaseGrid columns={2}>
-          <ComponentCase label="initials" tags={['variant: default']}>
-            <Avatar>
-              <AvatarFallback>AB</AvatarFallback>
-            </Avatar>
-          </ComponentCase>
-          <ComponentCase label="icon" tags={['variant: icon']}>
+          <ComponentCase label="icon" tags={["type: icon"]}>
             <Avatar>
               <AvatarIcon icon={ICONS.user} />
             </Avatar>
@@ -1174,7 +1172,7 @@ const SHOWCASES: Record<string, ReactNode> = {
               </CardContent>
               <CardFooter className="justify-between">
                 <span className="text-xs text-foreground-muted">자동 갱신</span>
-                <Button variant="destructive" size="sm">
+                <Button status="destructive" size="sm">
                   구독 취소
                 </Button>
               </CardFooter>
@@ -1310,6 +1308,72 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   "dropdown-menu": (
     <Showcase slug="dropdown-menu">
+      <ComponentCaseGroup title="Trigger">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="label + chevron" tags={["Button · outline"]}>
+            <DropdownMenu>
+              <DropdownMenuTrigger render={<Button variant="outline" />}>
+                메뉴
+                <Icon
+                  icon={ICONS.chevronDown}
+                  size={controlSizeToIconGlyph("default")}
+                  position="inline-end"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem>프로필</DropdownMenuItem>
+                <DropdownMenuItem>설정</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </ComponentCase>
+          <ComponentCase
+            label="icon + label + chevron"
+            tags={["Button · outline"]}
+          >
+            <DropdownMenu>
+              <DropdownMenuTrigger render={<Button variant="outline" />}>
+                <Icon
+                  icon={ICONS.user}
+                  size={controlSizeToIconGlyph("default")}
+                  position="inline-start"
+                />
+                계정
+                <Icon
+                  icon={ICONS.chevronDown}
+                  size={controlSizeToIconGlyph("default")}
+                  position="inline-end"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem>프로필</DropdownMenuItem>
+                <DropdownMenuItem variant="destructive">로그아웃</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </ComponentCase>
+          <ComponentCase label="icon + chevron" tags={["size: sm", "ghost"]}>
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={<Button variant="ghost" size="sm" aria-label="홈" />}
+              >
+                <Icon
+                  icon={ICONS.home}
+                  size={controlSizeToIconGlyph("sm")}
+                  position="inline-start"
+                />
+                <Icon
+                  icon={ICONS.chevronDown}
+                  size={controlSizeToIconGlyph("sm")}
+                  position="inline-end"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem>굵게</DropdownMenuItem>
+                <DropdownMenuItem>기울임</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
       <ComponentCaseGroup title="Item">
         <ComponentCaseGrid columns={3}>
           <ComponentCase label="leading icon" tags={["Icon · inline-start"]}>
@@ -1494,6 +1558,14 @@ const SHOWCASES: Record<string, ReactNode> = {
             <TooltipContent>짧은 설명</TooltipContent>
           </Tooltip>
         </ComponentCase>
+        <ComponentCase label="removable" tags={["removable: true"]}>
+          <Tooltip removable>
+            <TooltipTrigger render={<Button variant="outline" />}>
+              툴팁
+            </TooltipTrigger>
+            <TooltipContent>닫기 전까지 유지되는 도움말</TooltipContent>
+          </Tooltip>
+        </ComponentCase>
       </ComponentCaseGroup>
     </Showcase>
   ),
@@ -1523,14 +1595,68 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   alert: (
     <Showcase slug="alert">
-      <ComponentCaseGroup title="Default">
-        <ComponentCase label="with icon">
-          <Alert>
-            <Icon icon={ICONS.info} size="md" />
-            <AlertTitle>알림</AlertTitle>
-            <AlertDescription>인라인 피드백 메시지</AlertDescription>
-          </Alert>
-        </ComponentCase>
+      <ComponentCaseGroup title="Type">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="default" tags={["type: default"]}>
+            <Alert type="default">
+              <AlertTitle>알림</AlertTitle>
+              <AlertDescription>아이콘 없는 인라인 메시지</AlertDescription>
+            </Alert>
+          </ComponentCase>
+          <ComponentCase label="icon" tags={["type: icon"]}>
+            <Alert type="icon">
+              <AlertTitle>알림</AlertTitle>
+              <AlertDescription>아이콘이 포함된 메시지</AlertDescription>
+            </Alert>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Status">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="default" tags={["status: default"]}>
+            <Alert type="icon">
+              <AlertTitle>알림</AlertTitle>
+              <AlertDescription>기본 카드 톤</AlertDescription>
+            </Alert>
+          </ComponentCase>
+          <ComponentCase label="success" tags={["status: success"]}>
+            <Alert status="success" type="icon">
+              <AlertTitle>완료</AlertTitle>
+              <AlertDescription>작업이 성공했어요</AlertDescription>
+            </Alert>
+          </ComponentCase>
+          <ComponentCase label="warning" tags={["status: warning"]}>
+            <Alert status="warning" type="icon">
+              <AlertTitle>주의</AlertTitle>
+              <AlertDescription>확인이 필요해요</AlertDescription>
+            </Alert>
+          </ComponentCase>
+          <ComponentCase label="destructive" tags={["status: destructive"]}>
+            <Alert status="destructive" type="icon">
+              <AlertTitle>오류</AlertTitle>
+              <AlertDescription>문제가 발생했어요</AlertDescription>
+            </Alert>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Removable">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="manual" tags={["removable: true"]}>
+            <Alert type="icon" removable>
+              <AlertTitle>닫을 수 있는 알림</AlertTitle>
+              <AlertDescription>✕ 버튼으로 닫습니다</AlertDescription>
+            </Alert>
+          </ComponentCase>
+          <ComponentCase
+            label="auto"
+            tags={["removable: true", "duration: 5000"]}
+          >
+            <Alert type="icon" removable duration={5000}>
+              <AlertTitle>자동 닫힘</AlertTitle>
+              <AlertDescription>5초 후 또는 ✕로 닫힙니다</AlertDescription>
+            </Alert>
+          </ComponentCase>
+        </ComponentCaseGrid>
       </ComponentCaseGroup>
     </Showcase>
   ),
@@ -1559,28 +1685,6 @@ const SHOWCASES: Record<string, ReactNode> = {
     </Showcase>
   ),
 
-  separator: (
-    <Showcase slug="separator">
-      <ComponentCaseGroup title="Orientation">
-        <ComponentCaseGrid columns={2}>
-          <ComponentCase label="horizontal" tags={["orientation: horizontal"]}>
-            <div className="w-full max-w-xs space-y-3">
-              <p className="text-sm">위</p>
-              <Separator />
-              <p className="text-sm">아래</p>
-            </div>
-          </ComponentCase>
-          <ComponentCase label="vertical" tags={["orientation: vertical"]}>
-            <div className="flex h-12 items-center gap-4">
-              <span className="text-sm">왼쪽</span>
-              <Separator orientation="vertical" />
-              <span className="text-sm">오른쪽</span>
-            </div>
-          </ComponentCase>
-        </ComponentCaseGrid>
-      </ComponentCaseGroup>
-    </Showcase>
-  ),
 }
 
 export function ComponentShowcase({ slug }: { slug: string }) {
@@ -1589,6 +1693,6 @@ export function ComponentShowcase({ slug }: { slug: string }) {
   return showcase
 }
 
-export function componentShowcaseSlugs() {
+export function getComponentShowcaseSlugs() {
   return Object.keys(SHOWCASES)
 }

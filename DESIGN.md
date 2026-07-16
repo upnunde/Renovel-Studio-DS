@@ -78,16 +78,16 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 | 카테고리 | 토큰 | 역할 |
 |----------|------|------|
 | **Action · Primary** | `primary` / `primary-foreground` | 주 액션 면 (filled CTA) |
-| **Interaction · Highlight · Brand** | `accent` / `accent-foreground` | 브랜드 호버·포커스·선택 (outline/ghost/select·menu) |
-| **Interaction · Fill · Neutral** | `muted` / `muted-foreground` | 무채색 호버·크롬 (chip, tabs, skeleton, track) |
+| **Interaction · Highlight · Brand** | `accent` / `accent-foreground` | 브랜드 호버·포커스·선택 (**Button** outline/ghost/secondary) |
+| **Interaction · Fill · Neutral** | `muted` / `muted-foreground` | 무채색 호버·크롬 (chip, tabs, select, menu, badge, toggle 등) |
 | **Interaction · Fill · Neutral** | `secondary` / `secondary-foreground` | 보조 버튼·배지 기본면 — **배경값은 `muted`와 동일**, 컴포넌트 의미만 분리 |
 
 **호버 매핑 (컴포넌트 CVA):**
 
 | 패턴 | 호버 토큰 | 예 |
 |------|-----------|-----|
-| 브랜드 틴트 | `accent` | Button outline/ghost, Select, Dropdown focus |
-| 무채색 | `muted` | Chip default, Tabs (default variant) |
+| 브랜드 틴트 | `accent` | **Button** outline/ghost/secondary |
+| 무채색 | `muted` | Chip, Tabs, Select, Dropdown, Badge, Toggle |
 | 채움 면 강조 | `primary/80`, `inverse/80` | Button default, Chip pressed |
 | 위험 | `destructive/20` | destructive variant |
 
@@ -183,6 +183,59 @@ Material 결 13단계 스케일. 작은 값은 4px 그리드, 24px 이후로는 
 **최대 80px.** 그 외 임의값(예: 44px, 56px, 60px)은 사용처에서 `[44px]` 형식 임의값으로 처리. 토큰 비대화를 피하기 위함.
 
 Tailwind 표준 spacing 네임스페이스와 동일하게 매핑 (`p-5` = 20px, `gap-10` = 40px 등).
+
+### 2-5-1. 간격 소유권 (Spacing Ownership)
+
+간격은 **누가 그리는지**로 3층으로 나뉜다. 층이 섞이면 이중 여백·시맨틱 붕괴가 일어난다.
+
+| 층 | 소유자 | 도구 | 예 |
+|----|--------|------|----|
+| **L1 — 컴포넌트 내부** | DS 컴포넌트 | `padding` | `Button px-2.5` · `Card p-5` |
+| **L2 — 합성(자식 사이 간격)** | 부모 wrapper | `flex/grid + gap` | `<InputGroup>` · `<CardHeader>` |
+| **L3 — 페이지·섹션 배치** | 소비 페이지 | 시맨틱 토큰 (`space.*.className`) | 페이지 여백·섹션 사이 · 폼 필드 사이 |
+
+**핵심 원칙 — 형제 간격은 부모의 `gap`이 소유한다.** 자식 컴포넌트에 `mt-*`/`mb-*`를 걸어 형제 간 간격을 만들지 않는다.
+
+**허용되는 margin:**
+- **컴포넌트 내부**: primitive slot 위치 조정용 (`Icon ml-auto`, `Chevron -mr-1` 등)
+- **페이지 레벨**: `space.*.className`을 통한 시맨틱 margin (섹션 사이 등)
+- **InputGroup / CardHeader / DialogFooter** 같은 **DS 합성 wrapper 내부의 자체 margin** (해당 wrapper가 소유)
+
+**Anti-Pattern (금지):**
+
+| 패턴 | 이유 | 대안 |
+|------|------|------|
+| `<Label className="mb-2" />` | 형제 간격을 자식이 소유 | 부모에 `flex flex-col gap-2` |
+| `<Input className="mt-1" />` | 위와 동일 | 위와 동일 |
+| 부모 `gap-2` + 자식 `mb-2` 동시 | 이중 여백 · 예측 불가 | 하나만 유지 (부모 gap 권장) |
+| `<div className="mt-[13px]">` | 토큰 밖 임의 margin | `space.section.sectionHeaderGap.className` 등 시맨틱 사용 |
+| DS 컴포넌트 정본에 형제용 `mb-*` | DS는 자기 밖 간격을 소유하지 않는다 | 소비자가 부모 gap으로 처리 |
+
+**시맨틱 토큰 사용 (L3):**
+
+```tsx
+import { space } from "design-system/spacing-tokens"
+import { cn } from "design-system/utils"
+
+// 폼 필드 하나
+<div className={cn("flex flex-col", space.form.formLabelGap.className)}>
+  <Label>이메일</Label>
+  <Input type="email" />
+</div>
+
+// 폼 전체 (필드 사이)
+<form className={cn("flex flex-col", space.form.formFieldGap.className)}>
+  <FieldGroup>...</FieldGroup>
+  <FieldGroup>...</FieldGroup>
+</form>
+```
+
+**검증 체크리스트:**
+
+- [ ] 형제 컴포넌트 사이 `mb-*`/`mt-*`가 있는가? → 부모 `gap`으로 이관
+- [ ] 부모 `gap` + 자식 `margin` 이중인가? → 하나로 통합
+- [ ] `mt-[13px]` 같은 임의값? → `space.*` 시맨틱 또는 스케일 값(`mt-3` 등)으로 변경
+- [ ] DS 컴포넌트 정본에 형제용 `mb-*`? → 제거하고 소비자 부모에 gap 지정
 
 ### 2-6. Typography
 
@@ -303,17 +356,53 @@ z-toast    /* 500 — 토스트·스낵바 */
 
 아이콘 글리프는 5단계 (`xs_g12` ~ `xl_g20`). 컨트롤 크기와 매핑.
 
+### 3-5. 네이밍 표기법
+
+레이어마다 **하나의 case만** 쓴다. 같은 개념을 레이어 간에 다른 표기로 쓰지 않는다.
+
+| 레이어 | Case | 규칙 | 예 |
+|--------|------|------|-----|
+| 파일·폴더·URL slug | `kebab-case` | 단어 `-` 연결 | `button-group.tsx`, `/components/dropdown-menu` |
+| React 컴포넌트·타입 | `PascalCase` | 파일 stem → 연결 | `field-label` → `FieldLabel` |
+| 함수·변수·props | `camelCase` | shadcn props 유지 | `variant`, `showHeader`, `getUserName` |
+| CVA export | `camelCase` + `Variants` | shadcn | `buttonVariants` |
+| 상수·레지스트리 | `SCREAMING_SNAKE` | 모듈 상수 | `PLAYGROUND_REGISTRY`, `ICONS` |
+| CSS 변수 | `--kebab-case` | semantic·scale | `--foreground-muted`, `--space-5` |
+| `data-slot` | `kebab-case` | `{slug}-{part}` | `dropdown-menu-item`, `field-label-description` |
+| Typography class | `text-{group}{n}_{weight}` | 언더스코어 고정 | `text-body3_500` |
+| Size token (문서) | `{api}_{axis}{px}` | 문서·Properties | `md_h36`, `xs_g12` |
+| 패키지 export path | `kebab-case` | 파일 stem 일치 | `design-system/ui/radio-group` |
+| Playground state key | `camelCase` | **공백·한글 금지** | `itemType`, `hypertextMax` |
+| HTML/React 속성 (spec) | **속성명 그대로** | DOM·코드 생성 일치 | `aria-invalid`, `htmlFor` |
+
+**문서화 예외 (의도적):**
+
+- **slug vs title**: `sonner` slug / `Toast` title
+- **Playground-only state**: `showHeader`, `tabCount` — 컴포넌트 공개 API가 아님
+- **Properties 전용 메타**: `composition`, `itemHeight` — playground 컨트롤 없음 (`SKIPPED_SPEC_PROPS`)
+- **Dropdown spec enum**: `RadioItem`, `CheckboxItem` — export 컴포넌트명 참조
+- **트리거 ARIA**: `aria-expanded`는 `DropdownMenuTrigger` 등이 **자동 설정** — Button prop으로 노출하지 않음
+
+**금지:**
+
+- Playground/registry state key에 공백·한글 (`"item type"`, `"구성"`)
+- 파일명 `PascalCase` / `snake_case`
+- CSS 클래스에 `camelCase`
+- 레이어 간 임의 혼용 (파일 `UserProfile.tsx`, 변수 `user_profile`)
+
+상세·에이전트 규칙: **`.cursor/rules/naming-conventions.mdc`**
+
 ### 3-4. 컴포넌트 목록 (28개)
 
 **Forms:** input, textarea, label, checkbox, radio-group, switch, slider, select, toggle, chip, email-input
 
 **Actions:** button, button-group, icon
 
-**Display:** badge, avatar, card, alert, progress, skeleton, separator
+**Display:** badge, avatar, card, alert, progress, skeleton
 
 **Navigation:** tabs, accordion
 
-**Overlays:** dialog, popover, dropdown-menu, tooltip, sonner (toast)
+**Overlays:** dialog, popover, dropdown-menu, tooltip, toast (sonner)
 
 ---
 
@@ -377,6 +466,14 @@ export function DomainButton({ className, ...props }) {
 ```
 
 CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 합성.
+
+### 4-3-1. 간격 규칙
+
+DS 컴포넌트는 자기 밖 간격을 소유하지 않는다. 형제 사이 간격은 소비 페이지가 부모의 `gap` 또는 `space.*` 시맨틱 토큰으로 그린다.
+
+- 자세한 정책: **[§2-5-1 간격 소유권](#2-5-1-간격-소유권-spacing-ownership)**
+- 금지: `<Label mb-2 />`, `<Input mt-1 />` — 부모에 `flex flex-col gap-2` 로 이관
+- 페이지 레벨은 `space.form.*`, `space.section.*` 등 시맨틱 토큰 사용
 
 ### 4-4. 점진적 마이그레이션 (기존 프로젝트에 적용 시)
 

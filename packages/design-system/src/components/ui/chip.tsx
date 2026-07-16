@@ -10,7 +10,7 @@ import { Icon } from "./icon"
 import { ICONS } from "../icons"
 
 const chipVariants = cva(
-  `group/chip inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full border text-sm font-medium whitespace-nowrap bg-clip-padding transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledInteractive} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0`,
+  `group/chip inline-flex shrink-0 items-center justify-center gap-1.5 border text-sm font-medium whitespace-nowrap bg-clip-padding transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledInteractive} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0`,
   {
     variants: {
       variant: {
@@ -24,6 +24,10 @@ const chipVariants = cva(
       size: {
         default: "h-9 min-w-9 px-3 [&_svg:not([class*='size-'])]:size-4",
         sm: "h-8 min-w-8 gap-1 px-2.5 text-[0.8rem] [&_svg:not([class*='size-'])]:size-3.5",
+      },
+      shape: {
+        circle: "rounded-full",
+        square: "rounded-md",
       },
     },
     compoundVariants: [
@@ -41,6 +45,7 @@ const chipVariants = cva(
     defaultVariants: {
       variant: "outline",
       size: "default",
+      shape: "circle",
     },
   }
 )
@@ -57,6 +62,7 @@ function Chip({
   className,
   variant = "outline",
   size = "default",
+  shape = "circle",
   showCheck,
   onRemove,
   removeLabel = "삭제",
@@ -83,7 +89,7 @@ function Chip({
     return (
       <TogglePrimitive
         data-slot="chip"
-        className={cn(chipVariants({ variant, size }), className)}
+        className={cn(chipVariants({ variant, size, shape }), className)}
         {...props}
       >
         {inner}
@@ -95,7 +101,7 @@ function Chip({
     <span
       data-slot="chip"
       className={cn(
-        chipVariants({ variant, size }),
+        chipVariants({ variant, size, shape }),
         "group/chip-shell gap-0 overflow-hidden p-0 has-[[aria-pressed=true]]:bg-inverse has-[[aria-pressed=true]]:text-inverse-foreground",
         className
       )}

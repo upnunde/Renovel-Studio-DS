@@ -41,8 +41,14 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
     properties: [
       {
         name: "variant",
-        values: ["default", "primary", "secondary", "outline", "ghost", "destructive", "link"],
-        description: "시각적 위계 · 기본(foreground) / 브랜드 강조 / 보조 / 윤곽 / 최소 / 위험 / 링크",
+        values: ["default", "primary", "secondary", "outline", "ghost", "link"],
+        description: "시각적 위계 · 기본(foreground) / 브랜드 강조 / 보조 / 윤곽 / 최소 / 링크",
+      },
+      {
+        name: "status",
+        values: ["default", "success", "warning", "destructive"],
+        description:
+          "의미론적 상태 톤 (variant와 직교) · default(무톤) / 성공(성공 컨테이너) / 경고 / 위험",
       },
       {
         name: "type",
@@ -74,16 +80,6 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         name: "aria-invalid",
         values: ["false", "true"],
         description: "폼 검증 오류 상태",
-      },
-      {
-        name: "aria-expanded",
-        values: ["false", "true"],
-        description: "팝오버·메뉴 트리거 열림 상태",
-      },
-      {
-        name: "chevron",
-        values: ["false", "true"],
-        description: "후행 ▼ · 켜면 DropdownMenu 트리거로 메뉴 활성화",
       },
     ],
   },
@@ -188,7 +184,12 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       {
         name: "info",
         values: ["false", "true"],
-        description: "정보 아이콘·툴팁 (타이틀2)",
+        description: "정보 아이콘·툴팁 (타이틀2) · true면 info 문구 입력",
+      },
+      {
+        name: "infoText",
+        values: ["string"],
+        description: "툴팁 문구 (info: true일 때 FieldLabel info prop)",
       },
       {
         name: "hypertext",
@@ -248,6 +249,11 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
   checkbox: {
     slug: "checkbox",
     properties: [
+      {
+        name: "type",
+        values: ["icon", "default"],
+        description: "icon=컨트롤만 · default=컨트롤+텍스트",
+      },
       { name: "checked", values: ["false", "true", "indeterminate"], description: "선택 상태" },
       { name: "disabled", values: ["false", "true"], description: "비활성" },
       { name: "aria-invalid", values: ["false", "true"], description: "오류 상태" },
@@ -269,6 +275,11 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
   "radio-group": {
     slug: "radio-group",
     properties: [
+      {
+        name: "type",
+        values: ["icon", "default"],
+        description: "icon=컨트롤만 · default=컨트롤+텍스트",
+      },
       { name: "value", values: ["a", "b"], description: "선택된 항목" },
       { name: "disabled", values: ["false", "true"], description: "그룹 비활성" },
       { name: "aria-invalid", values: ["false", "true"], description: "오류 상태" },
@@ -277,7 +288,13 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
   slider: {
     slug: "slider",
     properties: [
-      { name: "value", values: ["number"], description: "현재 값" },
+      {
+        name: "type",
+        values: ["default", "range"],
+        description: "단일 값(default) · 구간(range, Material Range Slider)",
+      },
+      { name: "value", values: ["number"], description: "현재 값 (range: 시작)" },
+      { name: "valueEnd", values: ["number"], description: "range 종료 값" },
       { name: "min", values: ["number"], description: "최솟값" },
       { name: "max", values: ["number"], description: "최댓값" },
       { name: "step", values: ["number"], description: "단계" },
@@ -298,6 +315,11 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         description: "높이 · sm_h32 / default_h36 (정본 스케일)",
       },
       {
+        name: "shape",
+        values: [...BADGE_SHAPE_APIS],
+        description: "circle(rounded-full) · square(rounded-md · md_8)",
+      },
+      {
         name: "selected",
         values: ["false", "true"],
         description: "선택 상태 유지 ( aria-pressed ) · outline·subtle은 체크 표시",
@@ -315,8 +337,14 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
     properties: [
       {
         name: "variant",
-        values: ["default", "secondary", "destructive", "outline", "ghost", "link"],
-        description: "강조·보조·위험·윤곽·최소·링크",
+        values: ["default", "secondary", "outline", "ghost", "link"],
+        description: "시각적 위계 · 강조 / 보조 / 윤곽 / 최소 / 링크",
+      },
+      {
+        name: "status",
+        values: ["default", "success", "warning", "destructive"],
+        description:
+          "의미론적 상태 톤 (variant와 직교) · default(무톤) / 성공 / 경고 / 위험",
       },
       {
         name: "size",
@@ -340,11 +368,15 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         description: "size · xs_s20 ~ 5xl_s128 · 인라인 ~ 프로필 히어로",
         valueHints: avatarHints(...AVATAR_SIZE_APIS),
       },
-      { name: "image", values: ["false", "true"], description: "AvatarImage 유무 (false면 Fallback 표시)" },
       {
-        name: "fallback",
-        values: ["initials", "icon"],
-        description: "AvatarFallback variant · initials / icon (image=false일 때만 적용)",
+        name: "type",
+        values: ["image", "initials", "icon"],
+        description: "image · AvatarImage / initials · 이니셜 / icon · 아이콘",
+      },
+      {
+        name: "initials",
+        values: ["string"],
+        description: "이니셜 · 한글 최대 2자 · 영문 최대 3자",
       },
     ],
   },
@@ -403,7 +435,12 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
     properties: [
       { name: "align", values: ["start", "center", "end"], description: "트리거 정렬" },
       {
-        name: "item type",
+        name: "open",
+        values: ["false", "true"],
+        description: "표시 여부 · DropdownMenuTrigger가 aria-expanded 자동 설정",
+      },
+      {
+        name: "itemType",
         values: [
           "default",
           "leading-icon",
@@ -416,9 +453,13 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         description:
           "항목 유형 · 텍스트 / 리드 아이콘 / 단축키 / 비활성 / 단일·복수 선택 / 서브메뉴",
       },
-      { name: "item variant", values: ["default", "destructive"], description: "메뉴 항목 스타일 (item type이 default일 때)" },
       {
-        name: "구성",
+        name: "itemVariant",
+        values: ["default", "destructive"],
+        description: "메뉴 항목 스타일 (itemType이 default일 때)",
+      },
+      {
+        name: "composition",
         values: [
           "Item",
           "Label",
@@ -431,7 +472,7 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         description: "서브 컴포넌트",
       },
       {
-        name: "item-height",
+        name: "itemHeight",
         values: ["md_h32"],
         description: "메뉴 항목 행 높이 · md_h32",
       },
@@ -443,7 +484,7 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       {
         name: "footerActions",
         values: ["1", "2", "3"],
-        description: "Footer 액션 수 — 1(주액션) · 2(취소+주액션) · 3(취소+보조+주액션)",
+        description: "푸터 버튼 구성 — 1(확인) · 2(취소+확인) · 3(취소+저장 안 함+저장 후 나가기)",
       },
       {
         name: "showHeader",
@@ -481,11 +522,6 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         description: "확인 문구 입력 필드",
       },
       {
-        name: "showFooter",
-        values: ["false", "true"],
-        description: "DialogFooter 액션 영역",
-      },
-      {
         name: "pattern",
         values: ["basic", "checklist", "acknowledge", "save-choice"],
         description:
@@ -507,6 +543,12 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       { name: "delay", values: ["0ms", "700ms"], description: "Provider delayDuration" },
       { name: "side", values: ["top", "right", "bottom", "left"], description: "표시 위치" },
       {
+        name: "removable",
+        values: ["false", "true"],
+        description: "클릭으로 열고 닫기 전까지 유지 — 콘텐츠에 닫기(✕) 버튼",
+      },
+      { name: "open", values: ["false", "true"], description: "표시 여부" },
+      {
         name: "text",
         values: ["xs_g12"],
         description: "툴팁 글리프 · xs_g12",
@@ -525,26 +567,36 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
     properties: [
       {
         name: "variant",
-        values: ["default", "destructive"],
-        description: "아이콘·제목·본문 조합",
+        values: ["default"],
+        description: "시각적 위계 · 기본 카드 톤",
+      },
+      {
+        name: "status",
+        values: ["default", "success", "warning", "destructive"],
+        description:
+          "의미론적 상태 톤 · default(무톤) / 성공 / 경고 / 위험",
+      },
+      {
+        name: "type",
+        values: ["default", "icon"],
+        description: "아이콘 유무",
+      },
+      {
+        name: "removable",
+        values: ["false", "true"],
+        description: "닫기(✕) — 수동 또는 duration 자동 닫힘",
+      },
+      {
+        name: "duration",
+        values: ["0", "3000", "5000"],
+        description: "자동 닫힘(ms) · 0=수동만 · removable일 때",
       },
     ],
   },
   sonner: {
     slug: "sonner",
     properties: [
-      { name: "type", values: ["default", "success", "error", "info", "warning"], description: "토스트 종류" },
-    ],
-  },
-  separator: {
-    slug: "separator",
-    properties: [
-      { name: "orientation", values: ["horizontal", "vertical"], description: "구분 방향" },
-      {
-        name: "thickness",
-        values: ["t1"],
-        description: "선 두께 · t1",
-      },
+      { name: "type", values: ["default", "success", "error", "info", "warning"], description: "토스트 팝업 종류" },
     ],
   },
 }
@@ -556,4 +608,37 @@ export function getComponentCaseSpec(slug: string): ComponentCaseSpec | undefine
 export function formatPropValue(prop: ComponentPropSpec, value: string): string {
   const raw = prop.valueHints?.[value] ?? value
   return raw.endsWith("[]") ? raw.slice(0, -2) : raw
+}
+
+/** Playground 컨트롤 표시명 — `name`(camelCase·HTML 속성) → 읽기 쉬운 라벨 */
+export function formatSpecPropertyName(name: string): string {
+  const labels: Record<string, string> = {
+    composition: "구성",
+    itemType: "item type",
+    itemVariant: "item variant",
+    itemHeight: "item-height",
+    htmlFor: "htmlFor",
+    info: "info",
+    infoText: "info text",
+    hypertextMax: "hypertext max",
+    hypertextCount: "hypertext count",
+    hypertextText: "hypertext text",
+    captionText: "caption text",
+    descriptionLines: "description lines",
+    footerActions: "footer actions",
+    showHeader: "show header",
+    showContent: "show content",
+    showFooter: "show footer",
+    showBodyText: "show body text",
+    showList: "show list",
+    listStyle: "list style",
+    showConsent: "show consent",
+    consentText: "consent text",
+    showConfirmInput: "show confirm input",
+    confirmPhrase: "confirm phrase",
+    defaultValue: "default value",
+    tabCount: "tab count",
+    valueEnd: "value end",
+  }
+  return labels[name] ?? name
 }

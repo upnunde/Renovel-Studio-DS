@@ -1,5 +1,5 @@
 import type { ComponentPropSpec } from "@/lib/component-case-specs"
-import { formatPropValue } from "@/lib/component-case-specs"
+import { formatPropValue, formatSpecPropertyName } from "@/lib/component-case-specs"
 import {
   AVATAR_SIZE_SCALE,
   getControlSizeToken,
@@ -96,13 +96,48 @@ export type PlaygroundNumberField = {
   label?: string
 }
 
+/** 슬라이더 현재값 — `50(0/100)` 형식 */
+export function formatPlaygroundNumberValue(
+  value: number,
+  min: number,
+  max: number
+) {
+  return `${value}(${min}/${max})`
+}
+
+const AVATAR_INITIALS_HANGUL_LIMIT = 2
+const AVATAR_INITIALS_LATIN_LIMIT = 3
+
+/** Avatar 이니셜 — 한글 최대 2자 · 영문 최대 3자 */
+export function clampAvatarInitials(value: string) {
+  let hangul = 0
+  let latin = 0
+  let result = ""
+
+  for (const char of value) {
+    if (/[\uac00-\ud7a3]/.test(char)) {
+      if (hangul >= AVATAR_INITIALS_HANGUL_LIMIT) continue
+      hangul += 1
+      result += char
+      continue
+    }
+    if (/[a-z]/i.test(char)) {
+      if (latin >= AVATAR_INITIALS_LATIN_LIMIT) continue
+      latin += 1
+      result += char
+    }
+  }
+
+  return result
+}
+
 /** Properties 테이블 전용 — 플레이그라운드 컨트롤·미리보기에 매핑하지 않음 */
 const SKIPPED_SPEC_PROPS = new Set([
-  "구성",
+  "composition",
   "height",
   "box",
   "thickness",
-  "item-height",
+  "itemHeight",
   "className",
   "text",
 ])
@@ -114,6 +149,9 @@ export type PlaygroundRegistryLike = {
   selectKeys?: Record<string, string[]>
   /** 플레이그라운드 컨트롤에서 제외 (Properties 표에는 유지) */
   skipControlKeys?: string[]
+  /** 명시 그룹 — 미지정 시 showWhen 기반으로 자동 구성 */
+  controlGroups?: string[][]
+  showWhen?: Partial<Record<string, (state: PlaygroundState) => boolean>>
 }
 
 /** 플레이그라운드 좌측 컨트롤 상단 고정 순서 (앞일수록 위) */
@@ -121,7 +159,8 @@ const PLAYGROUND_CONTROL_PRIORITY = ["variant"] as const
 
 export function orderPlaygroundControlKeys(keys: string[]): string[] {
   const priority = PLAYGROUND_CONTROL_PRIORITY.filter((key) => keys.includes(key))
-  const rest = keys.filter((key) => !priority.includes(key))
+  const prioritySet = new Set<string>(priority)
+  const rest = keys.filter((key) => !prioritySet.has(key))
   return [...priority, ...rest]
 }
 
@@ -340,13 +379,144 @@ export function getPlaygroundControlLabel(
   key: string,
   state: PlaygroundState
 ) {
-  if (key !== "label") return key
-  if (slug === "button") {
-    return isPlaygroundIconOnlyButtonLabel(state) ? "aria-label" : "children"
+  if (slug === "switch" && key === "captionText") return "캡션명"
+  if (slug === "checkbox" && key === "caption") return "라벨"
+  if (slug === "radio-group" && key === "captionA") return "옵션 A 라벨"
+  if (slug === "radio-group" && key === "captionB") return "옵션 B 라벨"
+  if (slug === "avatar" && key === "initials") return "이니셜"
+  if (slug === "label" && key === "infoText") return "info 문구"
+  if (key === "label") {
+    if (slug === "button") {
+      return isPlaygroundIconOnlyButtonLabel(state) ? "aria-label" : "children"
+    }
+    if (slug === "toggle") return "aria-label"
+    if (slug === "chip" || slug === "badge") return "children"
   }
-  if (slug === "toggle") return "aria-label"
-  if (slug === "chip" || slug === "badge") return "children"
-  return key
+  return formatSpecPropertyName(key)
+}
+
+function evalPlaygroundShowWhen(
+  entry: PlaygroundRegistryLike,
+  key: string,
+  state: PlaygroundState
+) {
+  const fn = entry.showWhen?.[key]
+  return fn ? fn(state) : true
+}
+
+/** child 컨트롤이 parent 토글에 직접 종속되는지 (showWhen 기준) */
+export function playgroundDependsOnToggle(
+  entry: PlaygroundRegistryLike,
+  childKey: string,
+  parentKey: string,
+  baseState: PlaygroundState
+) {
+  if (childKey === parentKey) return false
+  const withParent = { ...baseState, [parentKey]: true }
+  const withoutParent = { ...baseState, [parentKey]: false }
+  return (
+    evalPlaygroundShowWhen(entry, childKey, withParent) &&
+    !evalPlaygroundShowWhen(entry, childKey, withoutParent)
+  )
+}
+
+function playgroundHasToggleDependents(
+  entry: PlaygroundRegistryLike,
+  toggleKey: string,
+  keys: string[],
+  baseState: PlaygroundState
+) {
+  return keys.some((key) =>
+    playgroundDependsOnToggle(entry, key, toggleKey, baseState)
+  )
+}
+
+/**
+ * 플레이그라운드 좌측 컨트롤 그룹.
+ * controlGroups 미지정 시: 기본 필드 → 토글+하위(showWhen) → 독립 토글 묶음.
+ */
+export function buildPlaygroundControlGroups(
+  keys: string[],
+  properties: ComponentPropSpec[],
+  entry: PlaygroundRegistryLike,
+  baseState: PlaygroundState
+): string[][] {
+  if (entry.controlGroups?.length) {
+    const grouped = new Set(entry.controlGroups.flat())
+    const leftovers = keys.filter((key) => !grouped.has(key))
+    return leftovers.length
+      ? [...entry.controlGroups, leftovers]
+      : entry.controlGroups
+  }
+
+  const groups: string[][] = []
+  const assigned = new Set<string>()
+  const primary: string[] = []
+  const anchorToggles: string[] = []
+  const standaloneBooleans: string[] = []
+
+  for (const key of keys) {
+    const kind = classifyPlaygroundControlKey(key, properties, entry)
+    if (kind === "skip") continue
+
+    if (entry.showWhen?.[key]) continue
+
+    if (kind === "boolean") {
+      if (playgroundHasToggleDependents(entry, key, keys, baseState)) {
+        anchorToggles.push(key)
+      } else {
+        standaloneBooleans.push(key)
+      }
+      continue
+    }
+
+    primary.push(key)
+  }
+
+  if (primary.length) {
+    groups.push(primary)
+    primary.forEach((key) => assigned.add(key))
+  }
+
+  for (const anchor of anchorToggles) {
+    if (assigned.has(anchor)) continue
+    const group = [
+      anchor,
+      ...keys.filter(
+        (key) =>
+          !assigned.has(key) &&
+          playgroundDependsOnToggle(entry, key, anchor, baseState)
+      ),
+    ]
+    group.forEach((key) => assigned.add(key))
+    groups.push(group)
+  }
+
+  if (standaloneBooleans.length) {
+    groups.push(standaloneBooleans)
+    standaloneBooleans.forEach((key) => assigned.add(key))
+  }
+
+  const leftovers = keys.filter((key) => !assigned.has(key))
+  if (leftovers.length) groups.push(leftovers)
+
+  return groups
+}
+
+export function playgroundGroupUsesToggleNest(
+  group: string[],
+  properties: ComponentPropSpec[],
+  entry: PlaygroundRegistryLike,
+  baseState: PlaygroundState
+) {
+  if (group.length <= 1) return false
+  const [first, ...rest] = group
+  if (classifyPlaygroundControlKey(first, properties, entry) !== "boolean") {
+    return false
+  }
+  return rest.some((key) =>
+    playgroundDependsOnToggle(entry, key, first, baseState)
+  )
 }
 
 function isPlaygroundIconOnlyButtonLabel(state: PlaygroundState) {

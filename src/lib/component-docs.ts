@@ -44,7 +44,7 @@ export const componentDocs: ComponentDoc[] = [
     slug: "label",
     title: "Label",
     description:
-      "폼 필드 이름(Label)과 제목·필수·보조문구·정보(FieldLabel) 패턴",
+      "Label(필드·컨트롤 캡션)과 FieldLabel(제목·필수·보조문구·정보) 패턴",
     section: "Inputs",
   },
   {
@@ -158,15 +158,9 @@ export const componentDocs: ComponentDoc[] = [
   },
   {
     slug: "sonner",
-    title: "Sonner",
-    description: "화면 모서리에 잠깐 뜨는 토스트 알림",
+    title: "Toast",
+    description: "화면 모서리에 잠깐 뜨는 토스트 팝업",
     section: "Feedback",
-  },
-  {
-    slug: "separator",
-    title: "Separator",
-    description: "콘텐츠·도구 모음 사이를 나누는 구분선",
-    section: "Layout",
   },
 ]
 

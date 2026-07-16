@@ -9,19 +9,19 @@ import {
   DocsTableTd,
   DocsTableTh,
 } from "@/components/docs/docs-table"
-import { SPACING_SCALE, formatSpacingToken } from "design-system/spacing-tokens"
+import { SPACING_SCALE } from "design-system/spacing-tokens"
 import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
 import { cn } from "@/lib/utils"
 
 const gapExamples = [
-  { utility: "gap-px", label: "px", variable: "--space-px", px: 1 },
-  { utility: "gap-0.5", label: "0.5_2", variable: "--space-0-5", px: 2 },
-  { utility: "gap-2", label: "2_8", variable: "--space-2", px: 8 },
-  { utility: "gap-4", label: "4_16", variable: "--space-4", px: 16 },
-  { utility: "gap-6", label: "6_24", variable: "--space-6", px: 24 },
-  { utility: "gap-10", label: "10_40", variable: "--space-10", px: 40 },
-  { utility: "gap-16", label: "16_64", variable: "--space-16", px: 64 },
+  { utility: "gap-px", variable: "--space-px", px: 1 },
+  { utility: "gap-0.5", variable: "--space-0-5", px: 2 },
+  { utility: "gap-2", variable: "--space-2", px: 8 },
+  { utility: "gap-4", variable: "--space-4", px: 16 },
+  { utility: "gap-6", variable: "--space-6", px: 24 },
+  { utility: "gap-10", variable: "--space-10", px: 40 },
+  { utility: "gap-16", variable: "--space-16", px: 64 },
 ] as const
 
 export function FoundationSpacingShowcase() {
@@ -34,10 +34,12 @@ export function FoundationSpacingShowcase() {
 
       <ShowcaseBlock name="Spacing Scale" flush>
         <DocsTable>
-          <DocsTableColGroup columns={3} />
+          <DocsTableColGroup columns={5} />
           <DocsTableHead>
             <DocsTableHeaderRow>
               <DocsTableTh>Token</DocsTableTh>
+              <DocsTableTh>Tailwind</DocsTableTh>
+              <DocsTableTh>px</DocsTableTh>
               <DocsTableTh>Variable</DocsTableTh>
               <DocsTableTh>Preview</DocsTableTh>
             </DocsTableHeaderRow>
@@ -45,7 +47,13 @@ export function FoundationSpacingShowcase() {
           <DocsTableBody>
             {SPACING_SCALE.map((s) => (
               <DocsTableRow key={s.token}>
-                <DocsTableTd mono>{formatSpacingToken(s)}</DocsTableTd>
+                <DocsTableTd mono>{s.token}</DocsTableTd>
+                <DocsTableTd mono muted>
+                  {s.className.replace("w-", "")}
+                </DocsTableTd>
+                <DocsTableTd mono muted>
+                  {s.px}px
+                </DocsTableTd>
                 <DocsTableTd mono muted>
                   {s.variable}
                 </DocsTableTd>
@@ -66,7 +74,9 @@ export function FoundationSpacingShowcase() {
           {gapExamples.map((g) => (
             <div key={g.utility}>
               <p className={cn(docsSpace.headerBottom, docsType.bodyMuted)}>
-                {g.utility} · {g.label} · {g.px}px · {g.variable}
+                <span className="font-mono text-foreground">{g.utility}</span>
+                {" · "}
+                {g.px}px
               </p>
               <div className="flex" style={{ gap: `var(${g.variable})` }}>
                 {[1, 2, 3].map((n) => (

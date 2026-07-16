@@ -28,8 +28,8 @@ export const docsSpace = {
   cardHeader: "px-5 py-3",
   headerBottom: "pb-0",
 
-  /** Label → control, description → input · 2px */
-  fieldStack: "space-y-0.5",
+  /** Label → control · formLabelGap(gap-1 · 4px) 정렬 · 부모 gap이 형제 간격 소유 (§2-5-1) */
+  fieldStack: "flex flex-col gap-1",
   /** Playground / form control list */
   controlStack: "space-y-5",
   /** Badges, chips, case meta row */
@@ -40,4 +40,6 @@ export const docsSpace = {
   caseGroupStack: "space-y-2",
   /** Preview hint, stacked demo pieces */
   previewGap: "gap-3",
+  /** Playground 미리보기 — 좌우 20px · 상하 40px */
+  playgroundPreviewPad: "px-5 py-10",
 } as const
