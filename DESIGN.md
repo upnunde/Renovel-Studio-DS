@@ -237,6 +237,69 @@ import { cn } from "design-system/utils"
 - [ ] `mt-[13px]` 같은 임의값? → `space.*` 시맨틱 또는 스케일 값(`mt-3` 등)으로 변경
 - [ ] DS 컴포넌트 정본에 형제용 `mb-*`? → 제거하고 소비자 부모에 gap 지정
 
+### 2-5-2. 시맨틱 Spacing 사용 규칙 (소비 앱 공통)
+
+모든 소비 서비스(리노벨·신규 앱 포함)가 **같은 역할에 같은 토큰**을 쓴다. 값은 `spacing-tokens.ts` · `tokens.css` alias가 정본이고, 아래는 **언제 무엇을 쓰는지**만 고정한다.
+
+**정본·소비 방식**
+
+| 층 | 정본 | 소비 |
+|----|------|------|
+| 클래스 (권장) | `space.*.className` (`design-system/spacing-tokens`) | `cn(..., space.layout.pageStackGap.className)` |
+| CSS 변수 | `--space-{name}` (`tokens.css`) | `gap: var(--space-page-stack-gap)` 등 |
+| 반응형 | TS `className`이 breakpoint를 소유 | CSS alias는 **데스크톱 단일값**만 둔다 |
+
+서비스별 임의 `gap-3`·`py-10` 재정의 금지. 밀도·리듬이 부족하면 **토큰 추가를 DS에 요청**하고, 앱에서 로컬 스케일을 만들지 않는다.
+
+#### Layout
+
+| 토큰 | 쓸 때 | 쓰지 말 때 |
+|------|--------|------------|
+| `pagePaddingX` | 페이지·스크롤 셸 **좌우** 인셋 | — |
+| `pagePaddingY` | 하단 고정 UI가 없는 **단순 정적 페이지**(문서·마케팅 등)의 상하 여백 | 스크롤 앱 셸·FAB·하단 바·탭바가 있는 제품 UI |
+| `scrollBottom` | 스크롤 영역 **하단 여유**(FAB·하단 크롬 회피). 앱 셸 기본 | `pagePaddingY`와 이중 적용 |
+| `pageStackGap` | 페이지 안 **연속 블록·섹션**의 기본 수직 리듬 (12→20 반응형) | 랜딩의 “큰 챕터” 구분 |
+| `sectionGap` | **의도적 대형 구분**(40) — 랜딩·마케팅·챕터 브레이크 | 일반 제품 목록·폼 스택의 |
+
+앱 셸 기본 패턴:
+
+```tsx
+<main className={cn(space.layout.pagePaddingX.className, "flex flex-col", space.layout.pageStackGap.className)}>
+  {/* 섹션들 */}
+  <div className={space.layout.scrollBottom.className} aria-hidden />
+</main>
+```
+
+상단 여유는 헤더/네비 높이에 맡기거나, 필요 시 동일 스케일의 top 패딩만 명시한다. **`pagePaddingY`(py-10)를 앱 셸 기본값으로 쓰지 않는다.**
+
+#### Form
+
+| 토큰 | 역할 | 값 |
+|------|------|-----|
+| `formLabelGap` | Label ↔ Input (필드 **안**) | 4 |
+| `formFieldGapTight` | Helper·힌트 등 필드 **안** 밀착 묶음 | 8 |
+| `formFieldGap` | 필드 단위(Label+Input+Helper) **사이** | **16 (확정)** |
+| `formGroupGap` | 폼 섹션·그룹 사이 | 24 |
+| `formGroupGapRelaxed` | 문의·리소스 상세 등 넉넉한 그룹 사이 | 32 |
+
+필드 사이를 12로 줄이려는 로컬 토큰·임의 `gap-3`는 금지. 밀도 조절은 `formFieldGap` / `formFieldGapTight` / `formGroupGap*` 역할 안에서만 한다.
+
+#### Overlay (Modal · Sheet)
+
+| 토큰 | 역할 |
+|------|------|
+| `modalPaddingX` / `modalPaddingY` | 본문 인셋 (X는 반응형 클래스, Y는 `py-5`) |
+| `modalHeaderPaddingX` / `modalHeaderPaddingY` | 헤더 인셋 — **Y는 `py-4` (DS 정본)** |
+| `modalFooterPaddingX` / `modalFooterPaddingY` | 푸터 인셋 — **Y는 `py-4` (DS 정본)** |
+| `modalBodyStackGap` | 본문 세로 스택 |
+
+소비 앱은 헤더·푸터 Y를 DS `py-4`에 맞춘다. `pt-6` / `lg:pt-10` / `pb-5 pt-2` 등 앱 전용 Y는 두지 않는다. pad-x 반응형은 DS `modalPaddingX`를 따른다.
+
+#### Control · Section (요약)
+
+- `controlGroupCompact` / `Standard` / `Responsive` — 필터·툴바·칩 행 밀도 3단. 행 간격을 앱에서 재정의하지 않는다.
+- `sectionStackGap` — 카드·패널 안 기본 블록 스택. `sectionStackGapLarge` — 상세 본문의 큰 블록 묶음.
+
 ### 2-6. Typography
 
 **합본 단일 클래스만 사용.** size·line-height·font-weight를 묶은 27개 `@utility`.
@@ -471,9 +534,10 @@ CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 �
 
 DS 컴포넌트는 자기 밖 간격을 소유하지 않는다. 형제 사이 간격은 소비 페이지가 부모의 `gap` 또는 `space.*` 시맨틱 토큰으로 그린다.
 
-- 자세한 정책: **[§2-5-1 간격 소유권](#2-5-1-간격-소유권-spacing-ownership)**
+- 소유권: **[§2-5-1 간격 소유권](#2-5-1-간격-소유권-spacing-ownership)**
+- 역할별 사용: **[§2-5-2 시맨틱 Spacing 사용 규칙](#2-5-2-시맨틱-spacing-사용-규칙-소비-앱-공통)**
 - 금지: `<Label mb-2 />`, `<Input mt-1 />` — 부모에 `flex flex-col gap-2` 로 이관
-- 페이지 레벨은 `space.form.*`, `space.section.*` 등 시맨틱 토큰 사용
+- 페이지 레벨은 `space.layout.*`, `space.form.*`, `space.section.*`, `space.overlay.*` 등 시맨틱 토큰 사용
 
 ### 4-4. 점진적 마이그레이션 (기존 프로젝트에 적용 시)
 
@@ -490,7 +554,7 @@ DS 컴포넌트는 자기 밖 간격을 소유하지 않는다. 형제 사이 �
 
 | 프로젝트 | 경로 | 연결 방식 |
 |---------|------|----------|
-| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.8` |
+| 리노벨 스튜디오 | `/Users/user/Desktop/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.12` |
 
 소비자 추가 시 이 목록 갱신. 디자인 시스템 변경 시 소비자 영향 항상 고려.
 

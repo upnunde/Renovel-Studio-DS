@@ -46,10 +46,11 @@ export function formatSpacingToken(token: SpacingToken): string {
  * 컴포넌트는 자체 패딩(button px 등)을 가지고, 이 매핑은 그 바깥의 페이지·섹션·폼 등에 적용된다.
  *
  * 네이밍 — Color Semantic과 동일 패턴:
- *   name  : kebab-case 역할명 (page-padding-x)
- *   role  : 한국어 사용 맥락
- *   source: SPACING_SCALE.label (Maps to)
- *   코드  : space.{group}.{camelCase}.className
+ *   name    : kebab-case 역할명 (page-padding-x)
+ *   variable: --space-{name} (tokens.css alias)
+ *   role    : 한국어 사용 맥락
+ *   source  : SPACING_SCALE.label (Maps to)
+ *   코드    : space.{group}.{camelCase}.className
  * ──────────────────────────────────────────────────────────────────────────── */
 
 export type SemanticSpaceToken = {
@@ -87,25 +88,60 @@ function createSemanticSpaceToken(
   }
 }
 
+function createResponsiveSpaceToken(
+  name: string,
+  className: string,
+  sourceTokens: readonly [mobile: string, desktop: string],
+  role: string,
+): SemanticSpaceToken {
+  const [mobileToken, desktopToken] = sourceTokens
+  const mobile = SPACING_SCALE.find((entry) => entry.token === mobileToken)
+  const desktop = SPACING_SCALE.find((entry) => entry.token === desktopToken)
+  if (!mobile || !desktop) {
+    throw new Error(`Unknown spacing token pair: ${mobileToken}, ${desktopToken}`)
+  }
+
+  return {
+    name,
+    variable: `--space-${name}`,
+    className,
+    source: `${mobile.label} → ${desktop.label}`,
+    px: desktop.px,
+    role,
+  }
+}
+
 /** 페이지 레이아웃 — 최상위 셸·섹션 묶음 */
 export const SEMANTIC_SPACE_LAYOUT = {
-  pagePaddingX: createSemanticSpaceToken(
+  pagePaddingX: createResponsiveSpaceToken(
     "page-padding-x",
-    "px-5",
-    "5",
-    "페이지 좌우 여백",
+    "max-lg:px-3 lg:px-5",
+    ["3", "5"],
+    "페이지 좌우 여백 (모바일 12 / 데스크톱 20)",
   ),
   pagePaddingY: createSemanticSpaceToken(
     "page-padding-y",
     "py-10",
     "10",
-    "페이지 상하 여백",
+    "단순 정적 페이지 상하 여백 (앱 셸·하단 크롬 있는 UI에는 scrollBottom 사용)",
+  ),
+  pageStackGap: createResponsiveSpaceToken(
+    "page-stack-gap",
+    "gap-3 lg:gap-5",
+    ["3", "5"],
+    "페이지 내 연속 블록·섹션 기본 수직 리듬 (모바일 12 / 데스크톱 20)",
   ),
   sectionGap: createSemanticSpaceToken(
     "section-gap",
     "gap-10",
     "10",
-    "섹션 사이 간격",
+    "의도적 대형 구분·챕터 브레이크 (랜딩·마케팅)",
+  ),
+  scrollBottom: createSemanticSpaceToken(
+    "scroll-bottom",
+    "pb-20",
+    "20",
+    "스크롤 영역 하단 여유 (FAB·하단 크롬 회피) · 앱 셸 기본",
   ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
@@ -135,6 +171,12 @@ export const SEMANTIC_SPACE_SECTION = {
     "5",
     "섹션 내 블록 수직 묶음",
   ),
+  sectionStackGapLarge: createSemanticSpaceToken(
+    "section-stack-gap-large",
+    "gap-8",
+    "8",
+    "카드 상세 본문 큰 블록 수직 묶음",
+  ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
 /** 폼 — 필드·컨트롤 묶음 */
@@ -145,17 +187,97 @@ export const SEMANTIC_SPACE_FORM = {
     "1",
     "Label ↔ Input (밀착)",
   ),
+  formFieldGapTight: createSemanticSpaceToken(
+    "form-field-gap-tight",
+    "gap-2",
+    "2",
+    "Label ↔ Helper 등 필드 내 밀착 묶음",
+  ),
   formFieldGap: createSemanticSpaceToken(
     "form-field-gap",
     "gap-4",
     "4",
-    "필드 단위(Label+Input+Helper) 사이",
+    "필드 단위(Label+Input+Helper) 사이 · 16px 확정",
   ),
   formGroupGap: createSemanticSpaceToken(
     "form-group-gap",
     "gap-6",
     "6",
     "폼 섹션·그룹 사이",
+  ),
+  formGroupGapRelaxed: createSemanticSpaceToken(
+    "form-group-gap-relaxed",
+    "gap-8",
+    "8",
+    "문의·리소스 상세 등 넉넉한 폼 섹션 사이",
+  ),
+} as const satisfies Record<string, SemanticSpaceToken>
+
+/** 오버레이 — 모달·시트·팝오버 본문 인셋 */
+export const SEMANTIC_SPACE_OVERLAY = {
+  modalPaddingX: createResponsiveSpaceToken(
+    "modal-padding-x",
+    "max-lg:px-5 lg:px-6",
+    ["5", "6"],
+    "모달·시트 본문 좌우 인셋 (모바일 20 / 데스크톱 24)",
+  ),
+  modalPaddingY: createSemanticSpaceToken(
+    "modal-padding-y",
+    "py-5",
+    "5",
+    "모달·시트 본문 상하 인셋",
+  ),
+  modalHeaderPaddingX: createSemanticSpaceToken(
+    "modal-header-padding-x",
+    "px-6",
+    "6",
+    "모달·시트 헤더 좌우 인셋",
+  ),
+  modalHeaderPaddingY: createSemanticSpaceToken(
+    "modal-header-padding-y",
+    "py-4",
+    "4",
+    "모달·시트 헤더 상하 인셋 (소비 앱은 DS py-4에 맞춤)",
+  ),
+  modalFooterPaddingX: createSemanticSpaceToken(
+    "modal-footer-padding-x",
+    "px-6",
+    "6",
+    "모달·시트 푸터 좌우 인셋",
+  ),
+  modalFooterPaddingY: createSemanticSpaceToken(
+    "modal-footer-padding-y",
+    "py-4",
+    "4",
+    "모달·시트 푸터 상하 인셋 (소비 앱은 DS py-4에 맞춤)",
+  ),
+  modalBodyStackGap: createSemanticSpaceToken(
+    "modal-body-stack-gap",
+    "gap-6",
+    "6",
+    "모달·시트 본문 세로 스택",
+  ),
+} as const satisfies Record<string, SemanticSpaceToken>
+
+/** 컨트롤 그룹 — 필터·툴바·칩 행 (밀도 3단) */
+export const SEMANTIC_SPACE_CONTROL = {
+  controlGroupCompact: createSemanticSpaceToken(
+    "control-group-compact",
+    "gap-1",
+    "1",
+    "컴팩트 컨트롤 행 (모바일 필터 칩 행)",
+  ),
+  controlGroupStandard: createSemanticSpaceToken(
+    "control-group-standard",
+    "gap-2",
+    "2",
+    "표준 컨트롤 행 (툴바·칩 그룹)",
+  ),
+  controlGroupResponsive: createResponsiveSpaceToken(
+    "control-group-responsive",
+    "gap-1 lg:gap-2",
+    ["1", "2"],
+    "반응형 컨트롤 행 (모바일 4 / 데스크톱 8)",
   ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
@@ -221,15 +343,18 @@ export const SEMANTIC_SPACE_ACTIONS = {
 
 /** 통합 시맨틱 스페이스 — 앱 전역 사용
  *
- * 사용 예:
+ * 사용 규칙: DESIGN.md §2-5-2
+ * 사용 예 (앱 셸):
  *   import { space } from "design-system/spacing-tokens"
- *   <main className={cn(space.layout.pagePaddingX.className, space.layout.pagePaddingY.className)}>
- *   <section className={cn("flex flex-col", space.section.sectionStackGap.className, space.section.sectionPadding.className)}>
+ *   <main className={cn(space.layout.pagePaddingX.className, "flex flex-col", space.layout.pageStackGap.className)}>
+ *   <div className={space.layout.scrollBottom.className} aria-hidden />
  */
 export const space = {
   layout: SEMANTIC_SPACE_LAYOUT,
   section: SEMANTIC_SPACE_SECTION,
   form: SEMANTIC_SPACE_FORM,
+  overlay: SEMANTIC_SPACE_OVERLAY,
+  control: SEMANTIC_SPACE_CONTROL,
   list: SEMANTIC_SPACE_LIST,
   inline: SEMANTIC_SPACE_INLINE,
   actions: SEMANTIC_SPACE_ACTIONS,
@@ -282,6 +407,28 @@ export const SPACING_SEMANTIC_CATEGORIES: SpacingSemanticCategory[] = [
         id: "form-fields",
         title: "Fields",
         tokens: Object.values(SEMANTIC_SPACE_FORM),
+      },
+    ],
+  },
+  {
+    id: "overlay",
+    title: "Overlay",
+    groups: [
+      {
+        id: "overlay-modal",
+        title: "Modal · Sheet",
+        tokens: Object.values(SEMANTIC_SPACE_OVERLAY),
+      },
+    ],
+  },
+  {
+    id: "control",
+    title: "Control",
+    groups: [
+      {
+        id: "control-group",
+        title: "Filter · Toolbar",
+        tokens: Object.values(SEMANTIC_SPACE_CONTROL),
       },
     ],
   },
