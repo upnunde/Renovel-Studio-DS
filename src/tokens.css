@@ -47,6 +47,59 @@
   --space-16: 4rem;
   --space-20: 5rem;
 
+  /* Semantic Spacing — 원시 스케일을 역할별 alias로 노출.
+   * TS(space.*.className) · CSS(var(--space-*)) · DESIGN.md §2-5-2 동일 이름.
+   * 반응형 토큰: CSS는 데스크톱 단일값만. breakpoint 클래스는 TS className이 담당.
+   */
+  /* Layout — 페이지 셸 */
+  --space-page-padding-x: var(--space-5);
+  --space-page-padding-y: var(--space-10);
+  --space-page-stack-gap: var(--space-5);
+  --space-section-gap: var(--space-10);
+  --space-scroll-bottom: var(--space-20);
+
+  /* Section — 카드·패널 내부 */
+  --space-section-padding: var(--space-5);
+  --space-section-header-gap: var(--space-2);
+  --space-section-content-gap: var(--space-4);
+  --space-section-stack-gap: var(--space-5);
+  --space-section-stack-gap-large: var(--space-8);
+
+  /* Form — 필드 묶음 */
+  --space-form-label-gap: var(--space-1);
+  --space-form-field-gap-tight: var(--space-2);
+  --space-form-field-gap: var(--space-4);
+  --space-form-group-gap: var(--space-6);
+  --space-form-group-gap-relaxed: var(--space-8);
+
+  /* Overlay — 모달·시트 */
+  --space-modal-padding-x: var(--space-6);
+  --space-modal-padding-y: var(--space-5);
+  --space-modal-header-padding-x: var(--space-6);
+  --space-modal-header-padding-y: var(--space-4);
+  --space-modal-footer-padding-x: var(--space-6);
+  --space-modal-footer-padding-y: var(--space-4);
+  --space-modal-body-stack-gap: var(--space-6);
+
+  /* Control — 필터·툴바·칩 행 */
+  --space-control-group-compact: var(--space-1);
+  --space-control-group-standard: var(--space-2);
+  --space-control-group-responsive: var(--space-2);
+
+  /* List — 리스트 항목 */
+  --space-list-item-gap-compact: var(--space-2);
+  --space-list-item-gap: var(--space-3);
+  --space-list-item-gap-relaxed: var(--space-5);
+
+  /* Inline — 아이콘·텍스트 인라인 */
+  --space-inline-icon-gap: var(--space-1);
+  --space-inline-gap: var(--space-2);
+  --space-inline-gap-relaxed: var(--space-3);
+
+  /* Actions — 버튼 그룹·툴바 */
+  --space-action-gap: var(--space-2);
+  --space-action-group-gap: var(--space-4);
+
   /* Grayscale scale — 쿨 블루 틴트 · #F8F8FC (10) → #121213 (150) · 흰 표면은 --white */
   --grayscale-10: #f8f8fc;
   --grayscale-15: #f1f1f5;
