@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-07-16 14:13:23**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-07-20 10:06:00**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-07-16 14:12:59** — 개발서버 실행
+- **2026-07-20 10:05:56** — 그럼 적용하지마
 
 ## 다음 작업 (Claude Code용)
 
@@ -23,120 +23,75 @@
 - 브랜치: `main`
 
 ```
- M .cursor/rules/project-overview.mdc
- M .cursor/rules/shadcn-design-system.mdc
- M DESIGN.md
  M docs/wip/HANDOFF.md
- M docs/wip/WORKLOG.md
- M packages/design-system/src/alert.css
- M packages/design-system/src/components/icons.ts
- M packages/design-system/src/components/ui/alert.tsx
- M packages/design-system/src/components/ui/avatar.tsx
- M packages/design-system/src/components/ui/badge.tsx
- M packages/design-system/src/components/ui/button-group.tsx
- M packages/design-system/src/components/ui/button.tsx
- M packages/design-system/src/components/ui/chip.tsx
- M packages/design-system/src/components/ui/dialog-patterns.tsx
- M packages/design-system/src/components/ui/dropdown-menu.tsx
- M packages/design-system/src/components/ui/email-input.tsx
- M packages/design-system/src/components/ui/input.tsx
- M packages/design-system/src/components/ui/progress.tsx
- M packages/design-system/src/components/ui/select.tsx
- M packages/design-system/src/components/ui/slider.tsx
- M packages/design-system/src/components/ui/textarea.tsx
- M packages/design-system/src/components/ui/toggle.tsx
- M packages/design-system/src/components/ui/tooltip.tsx
- M packages/design-system/src/lib/ui-disabled.ts
- M packages/design-system/src/spacing-tokens.ts
- M packages/design-system/src/tokens.css
- M src/alert.css
- M src/app/globals.css
- M src/components/docs/component-overview-preview.tsx
- M src/components/docs/component-playground.tsx
- M src/components/docs/component-showcases.tsx
- M src/components/docs/dialog-footer-actions.tsx
- M src/components/docs/foundation-spacing-semantic.tsx
- M src/components/docs/foundation-spacing.tsx
- M src/components/docs/playground-registry.tsx
- M src/components/docs/playground-shell.tsx
- M src/components/docs/playground-utils.ts
- M src/components/ui/chip.tsx
- M src/components/ui/dropdown-menu.tsx
- M src/components/ui/email-input.tsx
- M src/components/ui/select.tsx
- M src/components/ui/slider.tsx
- M src/components/ui/textarea.tsx
- M src/components/ui/toggle.tsx
- M src/components/ui/tooltip.tsx
- M src/lib/color-tokens.ts
- M src/lib/component-case-specs.ts
- M src/lib/component-docs.ts
- M src/lib/docs-space.ts
- M src/lib/ui-disabled.ts
- M src/spacing-tokens.ts
-?? .cursor/rules/naming-conventions.mdc
 ?? .omc/
+?? "AGENTS 2.md"
+?? "CLAUDE 2.md"
+?? "DESIGN 2.md"
+?? "components 2.json"
+?? "docs/wip/HANDOFF 2.md"
+?? "docs/wip/WORKLOG 2.md"
+?? "eslint.config 2.mjs"
+?? "next.config 2.ts"
+?? "package-lock 2.json"
+?? "postcss.config 2.mjs"
+?? "public/dummy-resource/renovel-studio-logo 2.png"
+?? "public/dummy-resource/renovel-studio-logo 2.svg"
+?? "public/file 2.svg"
+?? "public/globe 2.svg"
+?? "public/next 2.svg"
+?? "public/vercel 2.svg"
+?? "public/window 2.svg"
+?? "scripts/snapshot-worklog 2.sh"
+?? "scripts/stitch-generate 2.ts"
+?? "scripts/update-handoff 2.sh"
+?? "src/app/(docs)/components/[slug]/page 2.tsx"
+?? "src/app/(docs)/components/actions/page 2.tsx"
+?? "src/app/(docs)/components/data-display/page 2.tsx"
+?? "src/app/(docs)/components/feedback/page 2.tsx"
+?? "src/app/(docs)/components/layout/page 2.tsx"
+?? "src/app/(docs)/components/overlays/page 2.tsx"
+?? "src/app/(docs)/components/page 2.tsx"
+?? "src/app/(docs)/layout 2.tsx"
+?? "src/app/(docs)/page 2.tsx"
+?? "src/app/favicon 2.ico"
+?? "src/app/globals 2.css"
+?? "src/app/layout 2.tsx"
+?? "src/components/color-semantic-palette 2.tsx"
+?? "src/components/color-token-palette 2.tsx"
+?? "src/components/docs-page-header 2.tsx"
+?? "src/components/docs-providers 2.tsx"
+?? "src/components/docs-sidebar 2.tsx"
+?? "src/components/mode-toggle 2.tsx"
+?? "src/components/renovel-studio-logo 2.tsx"
+?? "src/components/theme-provider 2.tsx"
+?? "src/lib/color-tokens 2.ts"
+?? "src/lib/component-case-specs 2.ts"
+?? "src/lib/component-docs 2.ts"
+?? "src/lib/docs-nav 2.ts"
 ?? "src/lib/docs-space 2.ts"
+?? "src/lib/docs-space 3.ts"
+?? "src/lib/docs-toc-id 2.ts"
+?? "src/lib/docs-type 2.ts"
+?? "src/lib/lucide-icon-catalog 2.ts"
+?? "src/lib/lucide-icon-map 2.ts"
+?? "src/lib/semantic-token-sources 2.ts"
+?? "src/lib/stitch/generate-ui 2.ts"
 ```
 
 ### diff 요약
 
 ```
- .cursor/rules/project-overview.mdc                 |   1 +
- .cursor/rules/shadcn-design-system.mdc             |   2 +-
- DESIGN.md                                          | 109 ++++-
- docs/wip/HANDOFF.md                                | 213 +++++++-
- docs/wip/WORKLOG.md                                |   1 +
- packages/design-system/src/alert.css               |  35 +-
- packages/design-system/src/components/icons.ts     |   6 +
- packages/design-system/src/components/ui/alert.tsx |  84 +++-
- .../design-system/src/components/ui/avatar.tsx     |   4 +-
- packages/design-system/src/components/ui/badge.tsx |  29 +-
- .../src/components/ui/button-group.tsx             |   3 +-
- .../design-system/src/components/ui/button.tsx     |  34 +-
- packages/design-system/src/components/ui/chip.tsx  |  12 +-
- .../src/components/ui/dialog-patterns.tsx          |  13 +-
- .../src/components/ui/dropdown-menu.tsx            |  10 +-
- .../src/components/ui/email-input.tsx              |   2 +-
- packages/design-system/src/components/ui/input.tsx |  16 +-
- .../design-system/src/components/ui/progress.tsx   |   4 +-
- .../design-system/src/components/ui/select.tsx     |   8 +-
- .../design-system/src/components/ui/slider.tsx     |  91 +++-
- .../design-system/src/components/ui/textarea.tsx   |   2 +-
- .../design-system/src/components/ui/toggle.tsx     |   4 +-
- .../design-system/src/components/ui/tooltip.tsx    | 107 +++-
- packages/design-system/src/lib/ui-disabled.ts      |  14 +-
- packages/design-system/src/spacing-tokens.ts       | 272 +++++++++--
- packages/design-system/src/tokens.css              |  33 ++
- src/alert.css                                      |  35 +-
- src/app/globals.css                                |   1 +
- src/components/docs/component-overview-preview.tsx |  19 +-
- src/components/docs/component-playground.tsx       | 122 +++--
- src/components/docs/component-showcases.tsx        | 398 +++++++++------
- src/components/docs/dialog-footer-actions.tsx      |   6 +-
- .../docs/foundation-spacing-semantic.tsx           |  84 ++--
- src/components/docs/foundation-spacing.tsx         |  32 +-
- src/components/docs/playground-registry.tsx        | 539 ++++++++++++---------
- src/components/docs/playground-shell.tsx           |   8 +-
- src/components/docs/playground-utils.ts            | 190 +++++++-
- src/components/ui/chip.tsx                         | 146 +-----
- src/components/ui/dropdown-menu.tsx                |  10 +-
- src/components/ui/email-input.tsx                  |   2 +-
- src/components/ui/select.tsx                       |   8 +-
- src/components/ui/slider.tsx                       |  54 +--
- src/components/ui/textarea.tsx                     |   2 +-
- src/components/ui/toggle.tsx                       |   4 +-
- src/components/ui/tooltip.tsx                      |  70 +--
- src/lib/color-tokens.ts                            |   4 +-
- src/lib/component-case-specs.ts                    | 173 +++++--
- src/lib/component-docs.ts                          |  12 +-
- src/lib/docs-space.ts                              |   6 +-
- src/lib/ui-disabled.ts                             |  14 +-
- src/spacing-tokens.ts                              | 271 +++++++++--
- 51 files changed, 2285 insertions(+), 1034 deletions(-)
+ docs/wip/HANDOFF.md | 169 ++++++++++++++++++++--------------------------------
+ 1 file changed, 64 insertions(+), 105 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
 
 
 
