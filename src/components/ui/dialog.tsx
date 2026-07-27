@@ -54,7 +54,7 @@ function DialogContent({
       <DialogPrimitive.Popup
         data-slot="dialog-content"
         className={cn(
-          "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:duration-medium data-open:ease-emphasized-decelerate data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-closed:duration-short data-closed:ease-emphasized-accelerate",
+          "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-5 text-sm text-popover-foreground ring-1 ring-foreground/10 outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:duration-medium data-open:ease-emphasized-decelerate data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-closed:duration-short data-closed:ease-emphasized-accelerate",
           className
         )}
         {...props}
@@ -90,6 +90,11 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+const dialogTitleClass = "text-heading5_500"
+
+const dialogDescriptionClass =
+  "text-sm text-foreground-muted *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground *:[a[data-hovered=true]]:text-foreground"
+
 function DialogFooter({
   className,
   showCloseButton = false,
@@ -102,7 +107,7 @@ function DialogFooter({
     <div
       data-slot="dialog-footer"
       className={cn(
-        "-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 p-4 sm:flex-row sm:justify-end",
+        "-mx-5 -mb-5 flex flex-col-reverse gap-2 rounded-b-xl p-5 sm:flex-row sm:justify-end",
         className
       )}
       {...props}
@@ -121,12 +126,19 @@ function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn(
-        "font-heading text-base leading-none font-medium",
-        className
-      )}
+      className={cn(dialogTitleClass, className)}
       {...props}
     />
+  )
+}
+
+/** Dialog Root 밖 — 문서·인라인 프리뷰용 */
+function DialogTitleStatic({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div data-slot="dialog-title" className={cn(dialogTitleClass, className)} {...props} />
   )
 }
 
@@ -137,10 +149,21 @@ function DialogDescription({
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cn(
-        "text-sm text-foreground-muted *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground *:[a[data-hovered=true]]:text-foreground",
-        className
-      )}
+      className={cn(dialogDescriptionClass, className)}
+      {...props}
+    />
+  )
+}
+
+/** Dialog Root 밖 — 문서·인라인 프리뷰용 */
+function DialogDescriptionStatic({
+  className,
+  ...props
+}: React.ComponentProps<"p">) {
+  return (
+    <p
+      data-slot="dialog-description"
+      className={cn(dialogDescriptionClass, className)}
       {...props}
     />
   )
@@ -151,10 +174,12 @@ export {
   DialogClose,
   DialogContent,
   DialogDescription,
+  DialogDescriptionStatic,
   DialogFooter,
   DialogHeader,
   DialogOverlay,
   DialogPortal,
   DialogTitle,
+  DialogTitleStatic,
   DialogTrigger,
 }

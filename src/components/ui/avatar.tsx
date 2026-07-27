@@ -49,7 +49,7 @@ const avatarFallbackVariants = cva(
           "group-data-[size=4xl]/avatar:text-3xl",
           "group-data-[size=5xl]/avatar:text-4xl",
         ].join(" "),
-        icon: "",
+        icon: "[&_[data-slot=icon]]:!size-1/2",
       },
     },
     defaultVariants: {
@@ -159,7 +159,7 @@ function AvatarIcon({
 }) {
   return (
     <AvatarFallback variant="icon" className={className} {...props}>
-      <Icon icon={icon} />
+      <Icon icon={icon} className="!size-1/2" />
     </AvatarFallback>
   )
 }

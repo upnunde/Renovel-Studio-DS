@@ -10,7 +10,8 @@ const buttonGroupVariants = cva(
     "flex w-fit items-stretch",
     "*:focus-visible:relative *:focus-visible:z-10",
     "has-[>[role=group]]:gap-2",
-    "[&_button:not([class*='w-'])]:w-fit",
+    /** size-* / w-* 아이콘 버튼은 정사각 유지 — w-fit으로 width 덮지 않음 */
+    "[&_button:not([class*='w-']):not([class*='size-'])]:w-fit",
     "[&>input]:flex-1",
   ].join(" "),
   {

@@ -3,18 +3,18 @@ import { Input as InputPrimitive } from "@base-ui/react/input"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
-import { uiDisabledField } from "../../lib/ui-disabled"
+import { uiDisabledField, uiDisabledFieldGroup } from "../../lib/ui-disabled"
 
 const inputVariants = cva(
-  `peer/input w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors duration-short ease-standard outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-foreground-placeholder focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledField} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40`,
+  `peer/input w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-0 text-foreground transition-colors duration-short ease-standard outline-none file:mr-3 file:inline-flex file:items-center file:border-0 file:bg-transparent file:px-0 file:py-0 file:text-body3_500 file:text-foreground placeholder:text-foreground-placeholder focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledField} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40`,
   {
     variants: {
       size: {
-        sm: "h-8 rounded-[min(var(--radius-md),12px)] px-2 text-[0.8rem]",
-        default: "h-9",
-        lg: "h-[42px]",
-        xl: "h-10 px-3",
-        "2xl": "h-12 px-3 text-base md:text-base",
+        sm: "h-8 rounded-[min(var(--radius-md),12px)] px-2 text-body4_400 !leading-8",
+        default: "h-9 text-body3_400 !leading-9",
+        lg: "h-[42px] text-body3_400 !leading-[42px]",
+        xl: "h-10 px-3 text-body2_400 !leading-10",
+        "2xl": "h-12 px-3 text-body1_400 !leading-12",
       },
     },
     defaultVariants: {
@@ -44,7 +44,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="input-group"
-      className={cn("grid w-full gap-2", className)}
+      className={cn("grid w-full gap-2", uiDisabledFieldGroup, className)}
       {...props}
     />
   )

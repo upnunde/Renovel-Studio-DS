@@ -42,6 +42,9 @@ import {
   Moon,
   MoreVertical,
   Music,
+  PanelLeft,
+  PanelLeftClose,
+  PanelLeftOpen,
   Pause,
   Pencil,
   Play,
@@ -149,6 +152,9 @@ export const ICONS = {
   moreVertical: MoreVertical,
 
   // 사이드바·분석
+  panelLeft: PanelLeft,
+  panelLeftClose: PanelLeftClose,
+  panelLeftOpen: PanelLeftOpen,
   barChart3: BarChart3,
   bell: Bell,
   bookOpen: BookOpen,

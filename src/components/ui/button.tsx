@@ -19,9 +19,21 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
         ghost:
           "hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
+        link: "text-primary underline underline-offset-4",
+      },
+      /**
+       * 의미론적 상태 톤 — variant(시각 위계)와 직교하는 상태 축.
+       *  - default 는 아무 톤도 부여하지 않음(variant 색상 유지)
+       *  - success·warning·destructive 는 각 상태 컨테이너 톤으로 강제 오버라이드
+       */
+      status: {
+        default: "",
+        success:
+          "bg-success/10 text-success hover:bg-success/20 data-[hovered=true]:bg-success/20 focus-visible:border-success/40 focus-visible:ring-success/20 dark:bg-success/20 dark:hover:bg-success/30 dark:data-[hovered=true]:bg-success/30 dark:focus-visible:ring-success/40",
+        warning:
+          "bg-warning/15 text-warning hover:bg-warning/25 data-[hovered=true]:bg-warning/25 focus-visible:border-warning/40 focus-visible:ring-warning/20 dark:bg-warning/20 dark:hover:bg-warning/30 dark:data-[hovered=true]:bg-warning/30 dark:focus-visible:ring-warning/40",
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 data-[hovered=true]:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:data-[hovered=true]:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        link: "text-primary underline underline-offset-4",
       },
       shape: {
         circle: "rounded-full in-data-[slot=button-group]:rounded-none",
@@ -36,16 +48,20 @@ const buttonVariants = cva(
         xl: "h-10 min-w-10 gap-1.5 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
         "2xl":
           "h-12 min-w-12 gap-2 px-3 text-base has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
-        icon: "size-9",
-        "icon-xs": "size-6 [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm": "size-8",
-        "icon-lg": "size-[42px]",
-        "icon-xl": "size-10",
-        "icon-2xl": "size-12 [&_svg:not([class*='size-'])]:size-5",
+        /** 정사각 — w-* 명시로 ButtonGroup `w-fit`이 width를 덮지 않게 함 */
+        icon: "aspect-square size-9 w-9 p-0",
+        "icon-xs":
+          "aspect-square size-6 w-6 p-0 [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm": "aspect-square size-8 w-8 p-0",
+        "icon-lg": "aspect-square size-[42px] w-[42px] p-0",
+        "icon-xl": "aspect-square size-10 w-10 p-0",
+        "icon-2xl":
+          "aspect-square size-12 w-12 p-0 [&_svg:not([class*='size-'])]:size-5",
       },
     },
     defaultVariants: {
       variant: "default",
+      status: "default",
       shape: "square",
       size: "default",
     },
@@ -55,6 +71,7 @@ const buttonVariants = cva(
 function Button({
   className,
   variant = "default",
+  status = "default",
   shape = "square",
   size = "default",
   ...props
@@ -62,7 +79,8 @@ function Button({
   return (
     <ButtonPrimitive
       data-slot="button"
-      className={cn(buttonVariants({ variant, shape, size }), className)}
+      data-status={status}
+      className={cn(buttonVariants({ variant, status, shape, size }), className)}
       {...props}
     />
   )
