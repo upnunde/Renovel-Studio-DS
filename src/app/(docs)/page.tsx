@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
 
-export default function DocsIndexPage() {
-  redirect("/foundation/color-tokens")
+export default function DocsHomePage() {
+  redirect("/foundation")
 }

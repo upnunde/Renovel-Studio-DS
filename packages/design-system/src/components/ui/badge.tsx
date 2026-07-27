@@ -7,7 +7,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../../lib/utils"
 
 const badgeVariants = cva(
-  "group/badge inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden border border-transparent font-medium whitespace-nowrap transition-all duration-short ease-standard focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none",
+  "group/badge inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden border border-transparent whitespace-nowrap transition-all duration-short ease-standard focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none",
   {
     variants: {
       variant: {
@@ -34,10 +34,12 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20 [a[data-hovered=true]]:bg-destructive/20",
       },
+      /** 높이 ↔ 타이포: h16·h20→caption2 · h24→caption1 · h28→body3 */
       size: {
-        default: "h-5 px-2 text-xs [&>svg]:size-3!",
-        md: "h-6 px-2 text-xs [&>svg]:size-3!",
-        lg: "h-7 px-2.5 text-xs [&>svg]:size-3.5!",
+        sm: "h-4 gap-0.5 px-1.5 text-caption2_500 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 [&>svg]:size-2.5!",
+        default: "h-5 px-2 text-caption2_500 [&>svg]:size-3!",
+        md: "h-6 px-2 text-caption1_500 [&>svg]:size-3!",
+        lg: "h-7 px-2.5 text-body3_500 [&>svg]:size-3.5!",
       },
       shape: {
         circle: "rounded-full",

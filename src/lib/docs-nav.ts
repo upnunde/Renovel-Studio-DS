@@ -32,6 +32,9 @@ export const docsNav: DocsNavGroup[] = [
     tab: "foundation",
     sections: [
       {
+        items: [{ title: "Overview", href: "/foundation" }],
+      },
+      {
         label: "Color",
         collapsible: true,
         items: [
@@ -52,6 +55,7 @@ export const docsNav: DocsNavGroup[] = [
           { title: "Typography", href: "/foundation/typography" },
           { title: "Icons", href: "/foundation/icons" },
           { title: "Radius", href: "/foundation/radius" },
+          { title: "Elevation", href: "/foundation/elevation" },
           { title: "Motion", href: "/foundation/motion" },
         ],
       },

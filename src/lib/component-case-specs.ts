@@ -349,7 +349,7 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       {
         name: "size",
         values: [...BADGE_SIZE_APIS],
-        description: "높이(h) · default_h20 / md_h24 / lg_h28",
+        description: "높이(h)·타이포 · sm_h16·caption2 / default_h20·caption2 / md_h24·caption1 / lg_h28·body3",
         valueHints: badgeHints(...BADGE_SIZE_APIS),
       },
       {
@@ -377,26 +377,6 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         name: "initials",
         values: ["string"],
         description: "이니셜 · 한글 최대 2자 · 영문 최대 3자",
-      },
-    ],
-  },
-  card: {
-    slug: "card",
-    properties: [
-      {
-        name: "showHeader",
-        values: ["false", "true"],
-        description: "CardHeader · Title · Description",
-      },
-      {
-        name: "showContent",
-        values: ["false", "true"],
-        description: "CardContent 본문 영역",
-      },
-      {
-        name: "showFooter",
-        values: ["false", "true"],
-        description: "CardFooter 액션 영역",
       },
     ],
   },
@@ -540,14 +520,18 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
   tooltip: {
     slug: "tooltip",
     properties: [
-      { name: "delay", values: ["0ms", "700ms"], description: "Provider delayDuration" },
-      { name: "side", values: ["top", "right", "bottom", "left"], description: "표시 위치" },
       {
-        name: "removable",
-        values: ["false", "true"],
-        description: "클릭으로 열고 닫기 전까지 유지 — 콘텐츠에 닫기(✕) 버튼",
+        name: "mode",
+        values: ["hover", "removable"],
+        description:
+          "hover · 호버 시에만 잠깐 표시 / removable · 클릭으로 열고 ✕로 닫기",
+        valueHints: {
+          hover: "호버",
+          removable: "X로 닫기",
+        },
       },
-      { name: "open", values: ["false", "true"], description: "표시 여부" },
+      { name: "side", values: ["top", "right", "bottom", "left"], description: "표시 위치" },
+      { name: "open", values: ["false", "true"], description: "표시 여부 (미리보기 고정)" },
       {
         name: "text",
         values: ["xs_g12"],
@@ -639,6 +623,7 @@ export function formatSpecPropertyName(name: string): string {
     defaultValue: "default value",
     tabCount: "tab count",
     valueEnd: "value end",
+    mode: "동작",
   }
   return labels[name] ?? name
 }

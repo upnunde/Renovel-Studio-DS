@@ -110,7 +110,19 @@ export function DocsToc({ containerId }: { containerId?: string }) {
                 event.preventDefault()
                 const target = nodesRef.current[index]
                 if (!target) return
-                target.scrollIntoView({ behavior: "smooth", block: "start" })
+                const scroller = target.closest(
+                  ".overflow-y-auto, .overflow-x-clip"
+                ) as HTMLElement | null
+                if (scroller) {
+                  const scrollerTop = scroller.getBoundingClientRect().top
+                  const targetTop = target.getBoundingClientRect().top
+                  scroller.scrollTo({
+                    top: scroller.scrollTop + (targetTop - scrollerTop) - 40,
+                    behavior: "smooth",
+                  })
+                } else {
+                  target.scrollIntoView({ behavior: "smooth", block: "start" })
+                }
                 history.replaceState(null, "", `#${entry.id}`)
                 setActiveKey(entry.tocKey)
               }}

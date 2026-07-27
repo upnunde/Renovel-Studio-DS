@@ -40,7 +40,7 @@ export function DocsMain({
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl gap-8 px-5 xl:pr-10">
+    <div className="mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10">
       <main
         id={mainId}
         className={cn(

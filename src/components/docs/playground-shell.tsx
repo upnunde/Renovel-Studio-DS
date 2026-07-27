@@ -45,7 +45,7 @@ export function PlaygroundLayout({
       <div className="flex min-h-48 flex-col">
         <div
           className={cn(
-            "flex min-h-[200px] flex-1 flex-col items-center justify-center",
+            "flex min-h-[400px] w-full flex-1 items-center justify-center",
             docsSpace.previewGap,
             docsSpace.playgroundPreviewPad,
             previewClassName

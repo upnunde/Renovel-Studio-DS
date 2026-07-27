@@ -1,37 +1,37 @@
 # 작업 일지 (WORKLOG)
 
-> 마지막 갱신: 2026-07-20  
+> 마지막 갱신: 2026-07-27  
 > 다음 세션: Cursor에서 `@docs/wip/WORKLOG.md` 를 붙이고 「이어서」라고 하면 됩니다.
 
 ## 오늘 한 일
 
-- **개발서버** — `npm run dev` (localhost:3001)
-- **Data Table Spacing Rules 검토** — Spacing Semantic(L3) 부적합 · Table L1 스펙으로 분류 → **적용하지 않기로 결정**
-- **핸드오프** — Cursor 세션 요청·Git 상태 스냅샷 갱신
-- **시맨틱 Spacing 정책** — `DESIGN.md` §2-5-2 소비 앱 공통 사용 규칙 · `tokens.css` alias TS 동기화
-- **릴리스 v0.1.12** — spacing 시맨틱 출시 · `docs/SPACING_SEMANTIC.md` · 패키지 태그 (앱 `sync:ds` 대상)
+- **Docs Overview 분리** — `/foundation` · `/components` Overview, `/` → foundation 리다이렉트, 사이드바 Overview 링크
+- **Elevation foundation** — `/foundation/elevation` · `elevation-tokens.ts` · Overview 카드
+- **Card 제거** — docs·패키지 `card` 컴포넌트 삭제 (`--card` 색 토큰은 유지)
+- **Alert padding** — `p-(--space-4)` (16px)
+- **Tooltip playground** — delay 제거 → mode(`호버`/`X로 닫기`), open pin 유지(모드 전환 리마운트로 안 꺼지게)
+- **레이아웃 overflow** — docs 셸 `fixed inset-0` · scroller `min-w-0`/`overflow-x-clip`
+- **Spacing Semantic Layout** — 실제 사용처는 `upnunde-test` `page-layout.ts` (이 docs 앱은 미적용) 확인
 
 ## 다음에 할 일
 
-- 앱에서 `v0.1.12` sync:ds / alias 연결 확인
-- Docs 예시 잔여 margin → parent gap 정리 (선택)
-- `src/components/ui/progress.tsx` 패키지와 동기화 확인 (선택)
-- 로컬 monorepo `main` ↔ 패키지 루트 `origin/main` diverged 정리 전략 결정
-- 로컬 `" 2"` 중복 파일 정리 여부 결정
+- Docs 셸을 `space.layout.*`에 맞출지 여부 결정
+- `origin/main` diverged(ahead 22 / behind 12) 정리 전략 결정
+- 앱 `sync:ds` / 패키지 버전 bump 여부
 
 ## 막힌 것 · 결정 필요
 
-- 로컬 Design System Test(monorepo)와 `Renovel-Studio-DS`(패키지 루트) 히스토리가 diverged — 릴리스는 `origin/main` 위에 패키지 파일만 올림
+- 로컬 Design System Test(monorepo)와 `Renovel-Studio-DS`(`origin/main`) 히스토리 diverged
 
 ## 주요 파일 · 브랜치
 
 - 브랜치: main
 - 원격: `origin` → upnunde/Renovel-Studio-DS
 - 관련 경로:
-  - `packages/design-system/src/components/ui/alert.tsx` · `alert.css`
-  - `packages/design-system/src/components/ui/button.tsx` · `button-group.tsx`
-  - `DESIGN.md` · `.cursor/rules/naming-conventions.mdc`
-  - `src/components/docs/playground-registry.tsx`
+  - `src/components/docs/foundation-overview.tsx` · `components-overview.tsx`
+  - `packages/design-system/src/elevation-tokens.ts`
+  - `src/components/docs/playground-registry.tsx` (tooltip)
+  - `docs/wip/SPACING_MIGRATION.md`
 
 ## 메모
 

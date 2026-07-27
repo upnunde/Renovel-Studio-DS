@@ -1,16 +1,16 @@
 import { DocsMain } from "@/components/docs/docs-main"
-import { ComponentOverviewGrid } from "@/components/docs/component-overview-grid"
+import { ComponentsOverview } from "@/components/docs/components-overview"
 import { DocsPageHeader } from "@/components/docs-page-header"
 
-export default function ComponentsIndexPage() {
+export default function ComponentsOverviewPage() {
   return (
-    <DocsMain width="6xl">
+    <DocsMain width="6xl" toc={false} className="gap-20">
       <DocsPageHeader
         eyebrow="Components"
         title="Overview"
-        description="디자인 시스템 컴포넌트 카탈로그 — 카테고리별 미리보기와 문서 바로가기"
+        description="카테고리별 컴포넌트 미리보기 — 카드를 누르면 상세 문서로 이동합니다."
       />
-      <ComponentOverviewGrid />
+      <ComponentsOverview />
     </DocsMain>
   )
 }

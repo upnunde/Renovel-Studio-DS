@@ -18,14 +18,6 @@ import {
   ButtonGroupSeparator,
   ButtonGroupText,
 } from "design-system/ui/button-group"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "design-system/ui/card"
 import { Checkbox } from "design-system/ui/checkbox"
 import { Chip } from "design-system/ui/chip"
 import {
@@ -1168,7 +1160,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   },
 
   badge: {
-    description: "size · default_h20 / md_h24 / lg_h28 · shape · circle / square",
+    description: "size · sm_h16·caption2 / default_h20·caption2 / md_h24·caption1 / lg_h28·body3 · shape · circle / square",
     initialState: {
       variant: "default",
       status: "default",
@@ -1249,58 +1241,6 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
   },
 
-  card: {
-    initialState: {
-      title: "카드 제목",
-      description: "부가 설명 텍스트",
-      showHeader: true,
-      showContent: true,
-      showFooter: true,
-    },
-    textKeys: ["title", "description"],
-    controlGroups: [
-      ["showHeader", "title", "description"],
-      ["showContent"],
-      ["showFooter"],
-    ],
-    showWhen: {
-      title: (state) => playgroundBool(state, "showHeader"),
-      description: (state) => playgroundBool(state, "showHeader"),
-    },
-    renderPreview: (state, _ctx) => (
-      <Card className="w-full max-w-sm">
-        {bool(state, "showHeader") ? (
-          <CardHeader>
-            <CardTitle>{str(state, "title")}</CardTitle>
-            <CardDescription>{str(state, "description")}</CardDescription>
-          </CardHeader>
-        ) : null}
-        {bool(state, "showContent") ? (
-          <CardContent>
-            <p className="text-sm text-foreground-muted">본문 영역</p>
-          </CardContent>
-        ) : null}
-        {bool(state, "showFooter") ? (
-          <CardFooter>
-            <Button size="sm">확인</Button>
-          </CardFooter>
-        ) : null}
-      </Card>
-    ),
-    buildCode: (state) => {
-      const header = bool(state, "showHeader")
-        ? `\n  <CardHeader>\n    <CardTitle>${str(state, "title")}</CardTitle>\n    <CardDescription>${str(state, "description")}</CardDescription>\n  </CardHeader>`
-        : ""
-      const content = bool(state, "showContent")
-        ? '\n  <CardContent>\n    <p className="text-sm text-foreground-muted">본문 영역</p>\n  </CardContent>'
-        : ""
-      const footer = bool(state, "showFooter")
-        ? '\n  <CardFooter>\n    <Button size="sm">확인</Button>\n  </CardFooter>'
-        : ""
-      return `<Card>${header}${content}${footer}\n</Card>`
-    },
-  },
-
   tabs: {
     initialState: {
       tabCount: "2",
@@ -1333,7 +1273,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
           onValueChange={(value) => {
             if (value) ctx.set("defaultValue", value)
           }}
-          className="w-full max-w-md"
+          className="w-fit max-w-md"
         >
           <TabsList
             variant={str(state, "variant") as "default"}
@@ -1563,24 +1503,51 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
   tooltip: {
     initialState: {
+      mode: "hover",
       side: "top",
       tip: "도움말 텍스트",
       open: false,
-      removable: false,
-      delay: "0ms",
     },
     textKeys: ["tip"],
     selectKeys: {
-      delay: ["0ms", "700ms"],
+      mode: ["hover", "removable"],
       side: ["top", "right", "bottom", "left"],
     },
     renderPreview: (state, ctx) => {
-      const delayMs = str(state, "delay") === "700ms" ? 700 : 0
-      const removable = bool(state, "removable")
+      const mode = str(state, "mode")
+      const removable = mode === "removable"
+      const forcedOpen = bool(state, "open")
+      // hover(비고정)는 uncontrolled, 그 외는 controlled — 전환 시 key로 리마운트
+      const controlled = removable || forcedOpen
 
       return (
-        <TooltipProvider delay={delayMs}>
-          <Tooltip removable={removable} {...ctx.bindOpen()}>
+        <TooltipProvider delay={0}>
+          <Tooltip
+            // mode를 key에 넣지 않음 — 호버↔X로 닫기 전환 시 리마운트로 open이 꺼지는 것 방지
+            key={controlled ? "controlled" : "uncontrolled"}
+            removable={removable}
+            {...(controlled
+              ? {
+                  open: forcedOpen,
+                  onOpenChange: (open, details) => {
+                    // open 고정 중에는 side/tip/mode 변경으로 닫히지 않게 유지
+                    // removable 은 ✕·Esc·바깥 클릭으로만 닫기 허용
+                    if (forcedOpen && !open) {
+                      if (
+                        removable &&
+                        (details.reason === "imperative-action" ||
+                          details.reason === "escape-key" ||
+                          details.reason === "outside-press")
+                      ) {
+                        ctx.set("open", false)
+                      }
+                      return
+                    }
+                    ctx.set("open", open)
+                  },
+                }
+              : {})}
+          >
             <TooltipTrigger render={<Button variant="outline" />}>
               툴팁
             </TooltipTrigger>
@@ -1593,14 +1560,9 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
     buildCode: (state) => {
       const side = ` side="${str(state, "side")}"`
-      const removable = bool(state, "removable")
-      const open = bool(state, "open") ? " open" : ""
+      const removable = str(state, "mode") === "removable"
       const removableAttr = removable ? " removable" : ""
-      const body = `<Tooltip${open}${removableAttr}>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "tip")}\n  </TooltipContent>\n</Tooltip>`
-      if (str(state, "delay") === "700ms") {
-        return `<TooltipProvider delay={700}>\n  ${body.replace(/\n/g, "\n  ")}\n</TooltipProvider>`
-      }
-      return body
+      return `<Tooltip${removableAttr}>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "tip")}\n  </TooltipContent>\n</Tooltip>`
     },
   },
 

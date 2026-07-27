@@ -8,9 +8,11 @@ export default function DocsLayout({
 }) {
   return (
     <DocsProviders>
-      <div className="flex h-svh overflow-hidden bg-canvas">
+      <div className="fixed inset-0 flex overflow-hidden bg-canvas">
         <DocsSidebar />
-        <div className="min-h-0 flex-1 overflow-y-auto">{children}</div>
+        <div className="min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto overscroll-contain">
+          {children}
+        </div>
       </div>
     </DocsProviders>
   )

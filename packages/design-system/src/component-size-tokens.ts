@@ -449,14 +449,15 @@ export type BadgeSizeToken = {
   tailwind: string
 }
 
-/** Badge — 높이(h) */
+/** Badge — 높이(h) · 타이포는 size CVA에 매핑 (h16·h20 caption2 / h24 caption1 / h28 body3) */
 export const BADGE_SIZE_SCALE: BadgeSizeToken[] = [
+  { label: "sm_h16", api: "sm", heightPx: 16, tailwind: "h-4" },
   { label: "default_h20", api: "default", heightPx: 20, tailwind: "h-5" },
   { label: "md_h24", api: "md", heightPx: 24, tailwind: "h-6" },
   { label: "lg_h28", api: "lg", heightPx: 28, tailwind: "h-7" },
 ]
 
-export type BadgeSizeApi = "default" | "md" | "lg"
+export type BadgeSizeApi = "sm" | "default" | "md" | "lg"
 
 export const BADGE_SIZE_APIS = BADGE_SIZE_SCALE.map(
   (token) => token.api
@@ -478,8 +479,10 @@ export function formatBadgeSizeOption(api: string): string {
 export function badgeCaseMeta(api: string) {
   const token = BADGE_SIZE_SCALE.find((t) => t.api === api)
   if (!token) return { label: api, tags: [`size: ${api}`] as string[] }
+  const typography =
+    api === "lg" ? "text-body3_500" : api === "md" ? "text-caption1_500" : "text-caption2_500"
   return {
     label: token.label,
-    tags: [`size: ${api}`, `h${token.heightPx}`],
+    tags: [`size: ${api}`, `h${token.heightPx}`, typography],
   }
 }

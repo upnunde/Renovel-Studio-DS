@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarIcon, AvatarImage } from "design-system/u
 import { Badge } from "design-system/ui/badge"
 import { Button } from "design-system/ui/button"
 import { ButtonGroup, ButtonGroupText } from "design-system/ui/button-group"
-import { Card, CardContent, CardHeader, CardTitle } from "design-system/ui/card"
+import { Chip } from "design-system/ui/chip"
 import { Checkbox } from "design-system/ui/checkbox"
 import { Input, InputGroup, InputHypertext } from "design-system/ui/input"
 import { Label } from "design-system/ui/label"
@@ -25,7 +25,8 @@ import { Toggle } from "design-system/ui/toggle"
 import type { ComponentDoc } from "@/lib/component-docs"
 import { cn } from "@/lib/utils"
 
-const previewShell = "pointer-events-none flex w-full items-center justify-center select-none"
+const previewShell =
+  "pointer-events-none flex w-full max-w-full min-w-0 items-center justify-center select-none"
 
 function PreviewButton() {
   return (
@@ -63,6 +64,19 @@ function PreviewToggle() {
       <Toggle size="sm" variant="outline" aria-pressed>
         On
       </Toggle>
+    </div>
+  )
+}
+
+function PreviewChip() {
+  return (
+    <div className={cn(previewShell, "gap-2")}>
+      <Chip size="sm" variant="outline">
+        Filter
+      </Chip>
+      <Chip size="sm" variant="subtle" aria-pressed>
+        Selected
+      </Chip>
     </div>
   )
 }
@@ -147,7 +161,7 @@ function PreviewSwitch() {
 function PreviewRadioGroup() {
   return (
     <div className={previewShell}>
-      <RadioGroup defaultValue="a" className="gap-2">
+      <RadioGroup defaultValue="a" className="w-auto gap-2">
         <div className="flex items-center gap-2">
           <RadioGroupItem value="a" id="preview-r1" />
           <Label htmlFor="preview-r1">옵션 A</Label>
@@ -192,21 +206,6 @@ function PreviewAvatar() {
       <Avatar>
         <AvatarIcon icon={ICONS.user} />
       </Avatar>
-    </div>
-  )
-}
-
-function PreviewCard() {
-  return (
-    <div className={cn(previewShell, "px-2")}>
-      <Card className="w-full max-w-[200px] py-3 shadow-none">
-        <CardHeader className="px-3 pb-0">
-          <CardTitle className="text-sm">카드 제목</CardTitle>
-        </CardHeader>
-        <CardContent className="px-3 pt-2 text-xs text-foreground-muted">
-          본문 영역
-        </CardContent>
-      </Card>
     </div>
   )
 }
@@ -295,11 +294,11 @@ function PreviewPopover() {
 
 function PreviewTooltip() {
   return (
-    <div className={cn(previewShell, "relative")}>
+    <div className={cn(previewShell, "relative overflow-visible py-6")}>
       <Button size="sm" variant="link" className="underline decoration-dotted">
         호버 대상
       </Button>
-      <div className="absolute -top-8 rounded-md bg-foreground px-2 py-1 text-xs text-background">
+      <div className="absolute top-1 left-1/2 -translate-x-1/2 rounded-md bg-foreground px-2 py-1 text-xs text-background">
         툴팁
       </div>
     </div>
@@ -351,6 +350,7 @@ const previewBySlug: Record<ComponentDoc["slug"], () => ReactNode> = {
   button: PreviewButton,
   "button-group": PreviewButtonGroup,
   toggle: PreviewToggle,
+  chip: PreviewChip,
   input: PreviewInput,
   label: PreviewLabel,
   textarea: PreviewTextarea,
@@ -361,7 +361,6 @@ const previewBySlug: Record<ComponentDoc["slug"], () => ReactNode> = {
   slider: PreviewSlider,
   badge: PreviewBadge,
   avatar: PreviewAvatar,
-  card: PreviewCard,
   tabs: PreviewTabs,
   progress: PreviewProgress,
   skeleton: PreviewSkeleton,
@@ -376,5 +375,9 @@ const previewBySlug: Record<ComponentDoc["slug"], () => ReactNode> = {
 
 export function ComponentOverviewPreview({ slug }: { slug: ComponentDoc["slug"] }) {
   const Preview = previewBySlug[slug]
-  return <div className="min-h-36 w-full">{Preview ? <Preview /> : null}</div>
+  return (
+    <div className="flex min-h-36 w-full min-w-0 max-w-full items-center justify-center overflow-hidden">
+      {Preview ? <Preview /> : null}
+    </div>
+  )
 }

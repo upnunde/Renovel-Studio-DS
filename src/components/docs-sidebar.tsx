@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Fragment, useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 import { ModeToggle } from "@/components/mode-toggle"
 import { RenvelStudioLogo } from "@/components/renovel-studio-logo"
@@ -173,6 +173,7 @@ function NavTabPanel({
 
 function NavGroups({ activeHref }: { activeHref: string | null }) {
   const pathname = usePathname()
+  const router = useRouter()
   const routeTab = getDocsNavTab(pathname)
   const [tab, setTab] = useState<DocsNavTab>(routeTab)
 
@@ -183,7 +184,11 @@ function NavGroups({ activeHref }: { activeHref: string | null }) {
   return (
     <Tabs
       value={tab}
-      onValueChange={(value) => setTab(value as DocsNavTab)}
+      onValueChange={(value) => {
+        const next = value as DocsNavTab
+        setTab(next)
+        router.push(next === "components" ? "/components" : "/foundation")
+      }}
       className="flex min-h-0 flex-1 flex-col gap-0"
     >
       <div className="shrink-0 border-b border-sidebar-border px-3 pt-0 pb-[1px]">
@@ -216,7 +221,7 @@ export function DocsSidebar() {
   return (
     <aside className="sticky top-0 flex h-svh w-56 shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar text-sidebar-foreground lg:w-60">
       <div className="shrink-0 px-4 py-5">
-        <Link href="/foundation/color-tokens" className="block space-y-0.5">
+        <Link href="/foundation" className="block space-y-0.5">
           <p className="mb-2 text-xs font-medium uppercase tracking-widest text-foreground-muted">
             Design System
           </p>

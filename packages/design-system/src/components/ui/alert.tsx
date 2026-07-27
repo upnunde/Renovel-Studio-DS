@@ -8,7 +8,7 @@ import { Icon } from "./icon"
 import { ICONS } from "../icons"
 
 const alertVariants = cva(
-  "group/alert relative w-full rounded-lg border px-2.5 py-2 text-left text-sm",
+  "group/alert relative w-full rounded-lg border p-(--space-4) text-left text-sm",
   {
     variants: {
       variant: {
