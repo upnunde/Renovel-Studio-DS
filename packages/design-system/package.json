@@ -1,7 +1,7 @@
 {
   "name": "design-system",
-  "version": "0.1.12",
-  "description": "Renovel Studio 디자인 시스템 — shadcn/ui 기반 토큰·컴포넌트·유틸",
+  "version": "0.1.13",
+  "description": "Renovel Studio \ub514\uc790\uc778 \uc2dc\uc2a4\ud15c \u2014 shadcn/ui \uae30\ubc18 \ud1a0\ud070\u00b7\ucef4\ud3ec\ub10c\ud2b8\u00b7\uc720\ud2f8",
   "type": "module",
   "repository": {
     "type": "git",

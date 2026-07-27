@@ -491,7 +491,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     initialState: { size: "default", children: "ButtonGroupText" },
     selectKeys: {
       size: [...CONTROL_TEXT_SIZE_APIS],
-      children: ["Button", "ButtonGroupText", "Input", "Select"],
+      children: ["Button", "ButtonGroupText"],
     },
     renderPreview: (state, _ctx) => {
       const size = str(state, "size") as "default"
@@ -502,32 +502,6 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
           <ButtonGroup size={size}>
             <Button variant="outline">왼쪽</Button>
             <Button variant="outline">오른쪽</Button>
-          </ButtonGroup>
-        )
-      }
-
-      if (children === "Input") {
-        return (
-          <ButtonGroup size={size} className="max-w-sm">
-            <ButtonGroupText>https://</ButtonGroupText>
-            <Input placeholder="example.com" />
-          </ButtonGroup>
-        )
-      }
-
-      if (children === "Select") {
-        return (
-          <ButtonGroup size={size} className="max-w-xs">
-            <Select defaultValue="recent">
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="recent">최신순</SelectItem>
-                <SelectItem value="name">이름순</SelectItem>
-              </SelectContent>
-            </Select>
-            <Button variant="outline">적용</Button>
           </ButtonGroup>
         )
       }
@@ -549,12 +523,6 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
       if (children === "Button") {
         return `<ButtonGroup${sizeAttr}>\n  <Button variant="outline">왼쪽</Button>\n  <Button variant="outline">오른쪽</Button>\n</ButtonGroup>`
-      }
-      if (children === "Input") {
-        return `<ButtonGroup${sizeAttr}>\n  <ButtonGroupText>https://</ButtonGroupText>\n  <Input placeholder="example.com" />\n</ButtonGroup>`
-      }
-      if (children === "Select") {
-        return `<ButtonGroup${sizeAttr}>\n  <Select defaultValue="recent">\n    <SelectTrigger><SelectValue /></SelectTrigger>\n    <SelectContent>...</SelectContent>\n  </Select>\n  <Button variant="outline">적용</Button>\n</ButtonGroup>`
       }
       return `<ButtonGroup${sizeAttr}>\n  <Button variant="outline">이전</Button>\n  <ButtonGroupSeparator />\n  <ButtonGroupText>1 / 3</ButtonGroupText>\n  <ButtonGroupSeparator />\n  <Button variant="outline">다음</Button>\n</ButtonGroup>`
     },

@@ -90,13 +90,13 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         name: "size",
         values: [...CONTROL_TEXT_SIZE_APIS],
         description:
-          "그룹 내 모든 자식 컨트롤(Button·Input·Select)에 일괄 적용되는 높이 · 세그먼트 모서리 md_8",
+          "그룹 내 모든 자식 컨트롤(Button)에 일괄 적용되는 높이 · 세그먼트 모서리 md_8",
         valueHints: controlHints(...CONTROL_TEXT_SIZE_APIS),
       },
       {
         name: "children",
-        values: ["Button", "ButtonGroupText", "ButtonGroupSeparator", "Input", "Select"],
-        description: "그룹에 묶는 컨트롤 조합",
+        values: ["Button", "ButtonGroupText", "ButtonGroupSeparator"],
+        description: "그룹에 묶는 컨트롤 조합 (Button · Text · Separator)",
       },
     ],
   },

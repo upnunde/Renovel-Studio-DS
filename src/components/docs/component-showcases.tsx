@@ -340,8 +340,11 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
           <ComponentCase label="with text label">
             <ButtonGroup>
-              <ButtonGroupText>https://</ButtonGroupText>
-              <Input className="w-40" placeholder="example.com" />
+              <Button variant="outline">이전</Button>
+              <ButtonGroupSeparator />
+              <ButtonGroupText>1 / 3</ButtonGroupText>
+              <ButtonGroupSeparator />
+              <Button variant="outline">다음</Button>
             </ButtonGroup>
           </ComponentCase>
           <ComponentCase label="primary + outline">
