@@ -43,7 +43,8 @@ shadcn/ui를 **베이스**로 **나만의 디자인 시스템**을 정의·발�
 ## 에이전트 규칙
 
 - **커밋·push는 사용자가 요청할 때만** 수행한다.
-- **git config 변경·force push 금지.**
+- **git config 변경 금지.**
+- **「깃푸시」 요청** 시 로컬을 정본으로 `git push --force-with-lease` 한다 — 상세는 **`.cursor/rules/git-push.mdc`**.
 - 커밋 요청 시 **`docs/wip/WORKLOG.md` 갱신**을 포함한다 (`.cursor/rules/worklog.mdc` 참고).
 - **`.env`·빌드 산출물(`.next/` 등)은 커밋하지 않는다.**
 - 무관한 대량 리팩터는 하지 않는다.

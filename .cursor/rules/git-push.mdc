@@ -1,0 +1,37 @@
+---
+description: 「깃푸시」 요청 시 원격 main을 최신으로 맞춰 팀이 바로 확인할 수 있게 한다.
+alwaysApply: true
+---
+
+# Git 푸시 (팀이 보는 최신본)
+
+사용자가 **깃푸시 / git push / 푸시 / 올려줘** 등을 요청하면 목적은  
+**다른 사람이 `origin/main`만 pull해도 방금 작업한 문서·화면을 바로 확인**하게 하는 것이다.
+
+## 절차
+
+1. 관련 미커밋 변경이 있으면 **먼저 커밋** (커밋 컨벤션·WORKLOG 포함). 푸시만 명시했고 tip이 이미 최신이면 커밋 생략.
+2. `git fetch origin` 후 `main`을 원격에 반영한다.
+3. diverged / non-fast-forward여도 **로컬 작업본이 팀이 볼 최신**이 되도록  
+   `git push --force-with-lease origin HEAD:main` 을 사용한다.
+4. 순수 `--force`는 쓰지 않는다. lease 거절 시 fetch 후 원격이 더 앞서 바뀌었음을 알리고 재확인.
+5. 푸시 후 `git status -sb`로 `main` ↔ `origin/main` 동기화를 확인한다.
+
+## 팀이 최신 확인하는 방법 (안내 시)
+
+```bash
+git fetch origin
+git checkout main
+git pull --ff-only origin main
+# fast-forward 불가(히스토리 갱신)면:
+git reset --hard origin/main
+npm install
+npm run dev
+```
+
+→ http://localhost:3001
+
+## 금지
+
+- 푸시 요청 없이 임의 push / force-with-lease 금지.
+- `git config` 변경 금지.

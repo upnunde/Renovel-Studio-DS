@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Renovel Studio Design System (Docs)
 
-## Getting Started
+디자인 시스템 **토큰·컴포넌트 문서/쇼케이스** 모노레포입니다.  
+패키지 코드는 `packages/design-system/`에 있습니다.
 
-First, run the development server:
+## 최신 화면 확인 (팀)
 
 ```bash
+git fetch origin
+git checkout main
+git reset --hard origin/main   # 원격 main = 팀이 보는 최신본
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+브라우저: **http://localhost:3001**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> `git pull`이 거절되면 히스토리가 갱신된 경우입니다. 위 `reset --hard`로 맞추면 됩니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 스크립트
 
-## Learn More
+| 명령 | 설명 |
+|------|------|
+| `npm run dev` | 문서 사이트 (포트 **3001**) |
+| `npm run build` | 프로덕션 빌드 |
+| `npm run lint` | ESLint |
 
-To learn more about Next.js, take a look at the following resources:
+## 구조
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| 경로 | 역할 |
+|------|------|
+| `packages/design-system/` | 배포용 DS 패키지 |
+| `src/` | Next.js 문서·플레이그라운드 |
+| `DESIGN.md` | 디자인 규칙 정본 |
