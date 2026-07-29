@@ -4,7 +4,12 @@ import * as React from "react"
 import type { VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
-import { Button, buttonVariants } from "./button"
+import {
+  Button,
+  buttonVariants,
+  type ButtonTone,
+  type LegacyButtonStatus,
+} from "./button"
 import { Checkbox } from "./checkbox"
 import {
   Dialog,
@@ -24,8 +29,15 @@ import { Label } from "./label"
 export const DIALOG_ACKNOWLEDGE_PHRASE = "확인했습니다" as const
 
 type ButtonVariant = NonNullable<VariantProps<typeof buttonVariants>["variant"]>
-type ButtonStatus = NonNullable<VariantProps<typeof buttonVariants>["status"]>
 type DialogPatternPresentation = "modal" | "inline"
+
+function mapLegacyStatusToTone(
+  status: LegacyButtonStatus | undefined
+): ButtonTone | undefined {
+  if (status == null) return undefined
+  if (status === "default") return "neutral"
+  return status
+}
 
 /**
  * 문서·쇼케이스용 — 포털 없이 다이얼로그 구조만 노출.
@@ -173,8 +185,10 @@ export type DialogAcknowledgeProps = DialogPatternBaseProps & {
   cancelLabel?: string
   confirmLabel: string
   confirmVariant?: ButtonVariant
-  /** 확인 버튼의 상태 톤 — Acknowledge 패턴은 위험 액션 확인 용도라 destructive가 기본 */
-  confirmStatus?: ButtonStatus
+  /** 확인 버튼 tone — Acknowledge 패턴은 위험 액션 확인 용도라 destructive가 기본 */
+  confirmTone?: ButtonTone
+  /** @deprecated `confirmTone` 사용 */
+  confirmStatus?: LegacyButtonStatus
   onConfirm: () => void
   onCancel?: () => void
 }
@@ -196,7 +210,8 @@ export function DialogAcknowledge({
   cancelLabel = "취소",
   confirmLabel,
   confirmVariant = "default",
-  confirmStatus = "destructive",
+  confirmTone,
+  confirmStatus,
   onConfirm,
   onCancel,
   contentClassName,
@@ -205,6 +220,8 @@ export function DialogAcknowledge({
   const [phrase, setPhrase] = React.useState("")
   const ready = phrase.trim() === confirmPhrase
   const isModal = presentation === "modal"
+  const resolvedConfirmTone =
+    confirmTone ?? mapLegacyStatusToTone(confirmStatus) ?? "destructive"
 
   React.useEffect(() => {
     if (isModal && !open) setPhrase("")
@@ -266,7 +283,7 @@ export function DialogAcknowledge({
         />
         <Button
           variant={confirmVariant}
-          status={confirmStatus}
+          tone={resolvedConfirmTone}
           disabled={!ready}
           onClick={handleConfirm}
         >

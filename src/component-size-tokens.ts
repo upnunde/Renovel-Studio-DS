@@ -203,6 +203,34 @@ export const CONTROL_FORM_SIZE_APIS = CONTROL_SIZE_SCALE.filter(
   (token) => token.api !== "xs"
 ).map((token) => token.api) as ControlFormSizeApi[]
 
+/** Radio · Checkbox 컨트롤 박스 size — h20 · h24 */
+export type RadioSizeToken = {
+  label: string
+  api: string
+  heightPx: number
+  tailwind: string
+}
+
+export const RADIO_SIZE_SCALE: RadioSizeToken[] = [
+  { label: "default_h20", api: "default", heightPx: 20, tailwind: "size-5" },
+  { label: "md_h24", api: "md", heightPx: 24, tailwind: "size-6" },
+]
+
+export type RadioSizeApi = "default" | "md"
+
+export const RADIO_SIZE_APIS = RADIO_SIZE_SCALE.map(
+  (token) => token.api
+) as RadioSizeApi[]
+
+export function formatRadioSizeOption(api: string): string {
+  return RADIO_SIZE_SCALE.find((t) => t.api === api)?.label ?? api
+}
+
+/** Checkbox — Radio와 동일 스케일 */
+export type CheckboxSizeApi = RadioSizeApi
+export const CHECKBOX_SIZE_APIS = RADIO_SIZE_APIS
+export const formatCheckboxSizeOption = formatRadioSizeOption
+
 /** Tabs TabsList size API — 폼 컨트롤 높이 스케일과 동일 (sm ~ 2xl) */
 export type TabsSizeApi = ControlFormSizeApi
 

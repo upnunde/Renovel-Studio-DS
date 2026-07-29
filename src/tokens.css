@@ -213,9 +213,13 @@
   --popover: var(--card);
   --popover-foreground: var(--card-foreground);
 
-  /* 반전 표면 — primary/card 와 같은 페어 패턴 (bg-inverse text-inverse-foreground) */
+  /* 반전 표면 — primary/card 와 같은 페어 패턴 (bg-inverse text-inverse-foreground)
+   * inverse-muted: Inverse 2단계 보조 면 (background-muted 와 동일 위계)
+   */
   --inverse: var(--grayscale-130);
   --inverse-foreground: var(--white);
+  --inverse-muted: var(--grayscale-110);
+  --inverse-muted-foreground: var(--white);
 
   /* Foreground 위계 — 모두 같은 foreground 패밀리, 시각적 위계만 다름
    * 정책: --{role}-foreground 는 짝 surface 안에서만, 위계만 다른 보조 텍스트·아이콘은 이 토큰들로
@@ -244,7 +248,7 @@
   --success: var(--success-500);
   --success-foreground: var(--white);
   --warning: var(--warning-500);
-  --warning-foreground: var(--grayscale-140);
+  --warning-foreground: var(--white);
   --info: var(--info-500);
   --info-foreground: var(--white);
 
@@ -323,6 +327,8 @@
 
   --inverse: var(--grayscale-10);
   --inverse-foreground: var(--grayscale-140);
+  --inverse-muted: var(--grayscale-20);
+  --inverse-muted-foreground: var(--grayscale-140);
 
   --foreground-muted: var(--grayscale-40);
   --foreground-placeholder: var(--grayscale-80);
@@ -344,7 +350,7 @@
   --success: var(--success-400);
   --success-foreground: var(--white);
   --warning: var(--warning-400);
-  --warning-foreground: var(--grayscale-140);
+  --warning-foreground: var(--white);
   --info: var(--info-400);
   --info-foreground: var(--white);
 

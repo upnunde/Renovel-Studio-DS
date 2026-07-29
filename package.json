@@ -1,7 +1,7 @@
 {
   "name": "design-system",
-  "version": "0.1.13",
-  "description": "Renovel Studio \ub514\uc790\uc778 \uc2dc\uc2a4\ud15c \u2014 shadcn/ui \uae30\ubc18 \ud1a0\ud070\u00b7\ucef4\ud3ec\ub10c\ud2b8\u00b7\uc720\ud2f8",
+  "version": "0.1.14",
+  "description": "Renovel Studio 디자인 시스템 — shadcn/ui 기반 토큰·컴포넌트·유틸",
   "type": "module",
   "repository": {
     "type": "git",
@@ -51,9 +51,11 @@
     "./ui/dropdown-menu": "./src/components/ui/dropdown-menu.tsx",
     "./ui/email-input": "./src/components/ui/email-input.tsx",
     "./ui/field-label": "./src/components/ui/field-label.tsx",
+    "./ui/file-input": "./src/components/ui/file-input.tsx",
     "./ui/icon": "./src/components/ui/icon.tsx",
     "./ui/input": "./src/components/ui/input.tsx",
     "./ui/label": "./src/components/ui/label.tsx",
+    "./ui/password-input": "./src/components/ui/password-input.tsx",
     "./ui/popover": "./src/components/ui/popover.tsx",
     "./ui/progress": "./src/components/ui/progress.tsx",
     "./ui/radio-group": "./src/components/ui/radio-group.tsx",
