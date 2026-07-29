@@ -94,6 +94,10 @@ export type PlaygroundNumberField = {
   max: number
   step?: number
   label?: string
+  /** 기본 `slider` · 직접 입력이 필요하면 `input` */
+  control?: "slider" | "input"
+  /** 동적 상한 — 예: hypertextCount ← hypertextMax */
+  maxFromState?: (state: PlaygroundState) => number
 }
 
 /** 슬라이더 현재값 — `50(0/100)` 형식 */
@@ -154,16 +158,7 @@ export type PlaygroundRegistryLike = {
   showWhen?: Partial<Record<string, (state: PlaygroundState) => boolean>>
 }
 
-/** 플레이그라운드 좌측 컨트롤 상단 고정 순서 (앞일수록 위) */
-const PLAYGROUND_CONTROL_PRIORITY = ["variant"] as const
-
-export function orderPlaygroundControlKeys(keys: string[]): string[] {
-  const priority = PLAYGROUND_CONTROL_PRIORITY.filter((key) => keys.includes(key))
-  const prioritySet = new Set<string>(priority)
-  const rest = keys.filter((key) => !prioritySet.has(key))
-  return [...priority, ...rest]
-}
-
+/** 플레이그라운드 좌측 컨트롤 — Properties 표(`spec.properties`) 순서를 그대로 유지 */
 export function resolvePlaygroundControlKeys(
   properties: ComponentPropSpec[],
   entry: PlaygroundRegistryLike
@@ -176,7 +171,7 @@ export function resolvePlaygroundControlKeys(
   for (const key of Object.keys(entry.initialState)) {
     if (!keys.includes(key) && !skip.has(key)) keys.push(key)
   }
-  return orderPlaygroundControlKeys(keys)
+  return keys
 }
 
 /** spec에만 있는 프로퍼티 기본값을 initialState에 병합 */
@@ -436,7 +431,8 @@ function playgroundHasToggleDependents(
 
 /**
  * 플레이그라운드 좌측 컨트롤 그룹.
- * controlGroups 미지정 시: 기본 필드 → 토글+하위(showWhen) → 독립 토글 묶음.
+ * controlGroups 미지정 시: `keys`(Properties 순서)를 따라가며
+ * 연속 필드·독립 토글·토글+하위(showWhen)를 묶되 상대 순서는 유지한다.
  */
 export function buildPlaygroundControlGroups(
   keys: string[],
@@ -454,53 +450,64 @@ export function buildPlaygroundControlGroups(
 
   const groups: string[][] = []
   const assigned = new Set<string>()
-  const primary: string[] = []
-  const anchorToggles: string[] = []
-  const standaloneBooleans: string[] = []
+  let primary: string[] = []
+  let standaloneBooleans: string[] = []
+
+  const flushPrimary = () => {
+    if (!primary.length) return
+    groups.push(primary)
+    primary.forEach((key) => assigned.add(key))
+    primary = []
+  }
+
+  const flushStandaloneBooleans = () => {
+    if (!standaloneBooleans.length) return
+    groups.push(standaloneBooleans)
+    standaloneBooleans.forEach((key) => assigned.add(key))
+    standaloneBooleans = []
+  }
 
   for (const key of keys) {
+    if (assigned.has(key)) continue
+
     const kind = classifyPlaygroundControlKey(key, properties, entry)
     if (kind === "skip") continue
-
+    // showWhen 하위는 앵커 토글 그룹에 편입
     if (entry.showWhen?.[key]) continue
 
     if (kind === "boolean") {
       if (playgroundHasToggleDependents(entry, key, keys, baseState)) {
-        anchorToggles.push(key)
+        flushPrimary()
+        flushStandaloneBooleans()
+        const group = [
+          key,
+          ...keys.filter(
+            (candidate) =>
+              candidate !== key &&
+              !assigned.has(candidate) &&
+              playgroundDependsOnToggle(entry, candidate, key, baseState)
+          ),
+        ]
+        group.forEach((item) => assigned.add(item))
+        groups.push(group)
       } else {
+        flushPrimary()
         standaloneBooleans.push(key)
       }
       continue
     }
 
+    flushStandaloneBooleans()
     primary.push(key)
   }
 
-  if (primary.length) {
-    groups.push(primary)
-    primary.forEach((key) => assigned.add(key))
-  }
+  flushPrimary()
+  flushStandaloneBooleans()
 
-  for (const anchor of anchorToggles) {
-    if (assigned.has(anchor)) continue
-    const group = [
-      anchor,
-      ...keys.filter(
-        (key) =>
-          !assigned.has(key) &&
-          playgroundDependsOnToggle(entry, key, anchor, baseState)
-      ),
-    ]
-    group.forEach((key) => assigned.add(key))
-    groups.push(group)
-  }
-
-  if (standaloneBooleans.length) {
-    groups.push(standaloneBooleans)
-    standaloneBooleans.forEach((key) => assigned.add(key))
-  }
-
-  const leftovers = keys.filter((key) => !assigned.has(key))
+  const leftovers = keys.filter((key) => {
+    if (assigned.has(key)) return false
+    return classifyPlaygroundControlKey(key, properties, entry) !== "skip"
+  })
   if (leftovers.length) groups.push(leftovers)
 
   return groups

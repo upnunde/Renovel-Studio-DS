@@ -191,28 +191,11 @@ function playgroundHypertextInputCodeProps(state: PlaygroundState) {
   return [`maxLength={${max}}`, `value="${demoValue}"`, "readOnly"]
 }
 
-function fieldLabelPlaygroundHypertextPreview(state: PlaygroundState) {
-  return playgroundHypertextPreview(
-    state,
-    `${FIELD_LABEL_PLAYGROUND_ID}-helper`
-  )
-}
-
-function fieldLabelPlaygroundHypertextCode(state: PlaygroundState) {
-  return playgroundHypertextCode(state, `${FIELD_LABEL_PLAYGROUND_ID}-helper`)
-}
-
 function fieldLabelPlaygroundDescribedBy(
-  state: PlaygroundState,
   descriptionId: string,
   descriptionLines: string[] | undefined
 ) {
-  return [
-    descriptionLines ? descriptionId : null,
-    bool(state, "hypertext") ? `${FIELD_LABEL_PLAYGROUND_ID}-helper` : null,
-  ]
-    .filter(Boolean)
-    .join(" ")
+  return descriptionLines ? descriptionId : ""
 }
 
 const AVATAR_IMAGE =
@@ -623,8 +606,8 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
     textKeys: ["placeholder", "hypertextText"],
     numberKeys: [
-      { key: "hypertextMax", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
-      { key: "hypertextCount", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
+      { key: "hypertextMax", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1, control: "input" },
+      { key: "hypertextCount", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1, maxFromState: (state) => Math.max(0, Number(state.hypertextMax) || 0) },
     ],
     selectKeys: {
       type: ["text", "email", "password", "number", "file"],
@@ -703,16 +686,8 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       descriptionLines: "1",
       info: false,
       infoText: "필드에 대한 추가 설명입니다.",
-      hypertext: false,
-      hypertextText: "8자 이상 입력해 주세요.",
-      hypertextMax: 1000,
-      hypertextCount: 0,
     },
-    textKeys: ["children", "infoText", "hypertextText"],
-    numberKeys: [
-      { key: "hypertextMax", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
-      { key: "hypertextCount", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
-    ],
+    textKeys: ["children", "infoText"],
     selectKeys: {
       size: ["default", "lg"],
       descriptionLines: ["1", "2", "3"],
@@ -721,16 +696,11 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     showWhen: {
       descriptionLines: (state) => bool(state, "description"),
       infoText: (state) => playgroundBool(state, "info"),
-      hypertextText: (state) => playgroundBool(state, "hypertext"),
-      hypertextMax: (state) => playgroundBool(state, "hypertext"),
-      hypertextCount: (state) =>
-        playgroundBool(state, "hypertext") && Number(state.hypertextMax) > 0,
     },
     renderPreview: (state, _ctx) => {
       const descriptionLines = fieldLabelPlaygroundDescription(state)
       const descriptionId = `${FIELD_LABEL_PLAYGROUND_ID}-desc`
       const describedBy = fieldLabelPlaygroundDescribedBy(
-        state,
         descriptionId,
         descriptionLines
       )
@@ -749,14 +719,11 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
             {str(state, "children")}
           </FieldLabel>
           <Input
-            key={playgroundHypertextInputKey(state)}
             id={FIELD_LABEL_PLAYGROUND_ID}
             placeholder="입력"
             aria-describedby={describedBy || undefined}
             aria-required={bool(state, "required") || undefined}
-            {...playgroundHypertextInputProps(state)}
           />
-          {fieldLabelPlaygroundHypertextPreview(state)}
         </InputGroup>
       )
     },
@@ -764,7 +731,6 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       const descriptionLines = fieldLabelPlaygroundDescription(state)
       const descriptionId = `${FIELD_LABEL_PLAYGROUND_ID}-desc`
       const describedBy = fieldLabelPlaygroundDescribedBy(
-        state,
         descriptionId,
         descriptionLines
       )
@@ -788,10 +754,8 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         `placeholder="입력"`,
         describedBy ? `aria-describedby="${describedBy}"` : "",
         bool(state, "required") ? "aria-required" : "",
-        ...playgroundHypertextInputCodeProps(state),
       ])
-      const hypertext = fieldLabelPlaygroundHypertextCode(state)
-      return `<InputGroup className="max-w-xs">\n  <FieldLabel${fieldLabelAttrs}>${str(state, "children")}</FieldLabel>\n  <Input${inputAttrs} />${hypertext}\n</InputGroup>`
+      return `<InputGroup className="max-w-xs">\n  <FieldLabel${fieldLabelAttrs}>${str(state, "children")}</FieldLabel>\n  <Input${inputAttrs} />\n</InputGroup>`
     },
   },
 
@@ -809,8 +773,8 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     textKeys: ["placeholder", "hypertextText"],
     numberKeys: [
       { key: "rows", min: 4, max: 8, step: 1 },
-      { key: "hypertextMax", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
-      { key: "hypertextCount", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1 },
+      { key: "hypertextMax", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1, control: "input" },
+      { key: "hypertextCount", min: 0, max: PLAYGROUND_HYPERTEXT_COUNTER_MAX, step: 1, maxFromState: (state) => Math.max(0, Number(state.hypertextMax) || 0) },
     ],
     showWhen: {
       hypertextText: (state) => playgroundBool(state, "hypertext"),

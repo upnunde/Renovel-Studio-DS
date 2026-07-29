@@ -5,27 +5,25 @@
 
 ## 오늘 한 일
 
-- **Radio / Checkbox** — size `default_h20`·`md_h24`, type `default`/`withText`, checked 상태, Playground 단일 컨트롤
-- **Input** — `PasswordInput`(표시/숨김), `FileInput`(파일 아이콘·제거), 전 Input clear(✕) 기본
-- **Button** — active 시 `translate-y` 눌림 모션 제거
-- **Chip / tokens** — fill·outline·`inverse-muted` 등 (이전 세션 포함 미커밋분)
+- **Radio / Checkbox / Input** — size·Password/File/clear 등 (main 커밋 `30fb0c8`)
+- **스튜디오 자동 감지** — `npm run ds:release` + 깃푸시 규칙 6단계 (태그 릴리스 → sync)
+  - 원인: 스튜디오는 `#v*.*.*` 핀, monorepo main 푸시만으로는 미감지
 
 ## 다음에 할 일
 
 - Docs 셸을 `space.layout.*`에 맞출지 여부 결정
-- 앱 `sync:ds` — 모노레포 main과 패키지 태그 배포 경로 정리
 
 ## 막힌 것 · 결정 필요
 
-- 패키지 소비(`#v0.1.13`)는 루트 구조 변경 영향 가능 — 배포용 태그/브랜치 분리 검토
+- 패키지 소비는 **릴리스 태그** 경로 — docs `main`과 혼동하지 말 것
 
 ## 주요 파일 · 브랜치
 
 - 브랜치: main
-- `packages/design-system/src/components/ui/{radio-group,checkbox,input,password-input,file-input,button,chip}.tsx`
-- `src/components/docs/playground-registry.tsx` · `component-case-specs.ts`
+- `scripts/ds-release.mjs` · `.cursor/rules/git-push.mdc` · `.github/workflows/notify-upnunde-test.yml`
 
 ## 메모
 
 - 개발: `npm run dev` → http://localhost:3001
-- 팀 최신: `git fetch && git reset --hard origin/main && npm i && npm run dev`
+- 패키지 릴리스+스튜디오: `npm run ds:release`
+- 팀 docs: `git fetch && git reset --hard origin/main && npm i && npm run dev`

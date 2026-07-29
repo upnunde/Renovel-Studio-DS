@@ -231,21 +231,6 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         values: ["string"],
         description: "툴팁 문구 (info: true일 때 FieldLabel info prop)",
       },
-      {
-        name: "hypertext",
-        values: ["false", "true"],
-        description: "InputHypertext 도움말 표시 (필드 아래)",
-      },
-      {
-        name: "hypertextMax",
-        values: ["number"],
-        description: "InputHypertext max — 0이면 글자수 미표시",
-      },
-      {
-        name: "hypertextCount",
-        values: ["number"],
-        description: "InputHypertext count — max와 함께 0/30 형식",
-      },
     ],
   },
   textarea: {

@@ -65,7 +65,7 @@ export function ComponentPlayground({ slug }: { slug: string }) {
         next.initials = clampAvatarInitials(String(value))
       }
       if (
-        (slug === "input" || slug === "label" || slug === "textarea") &&
+        (slug === "input" || slug === "textarea") &&
         (key === "hypertextMax" || key === "hypertextCount")
       ) {
         const max = Number(next.hypertextMax)
@@ -107,30 +107,56 @@ export function ComponentPlayground({ slug }: { slug: string }) {
     }
 
     if (kind === "number" && numberField) {
+      const min = numberField.min
+      const max = numberField.maxFromState
+        ? numberField.maxFromState(state)
+        : numberField.max
+      const current = Math.min(
+        max,
+        Math.max(min, Number(state[key] ?? min))
+      )
+      const label =
+        numberField.label ?? getPlaygroundControlLabel(slug, key, state)
+      const useInput = numberField.control === "input"
+
       return (
-        <PlaygroundField
-          key={key}
-          label={numberField.label ?? key}
-        >
-          <div className="space-y-2">
-            <Slider
-              value={[Number(state[key] ?? numberField.min)]}
-              min={numberField.min}
-              max={numberField.max}
+        <PlaygroundField key={key} label={label}>
+          {useInput ? (
+            <Input
+              type="number"
+              clearable={false}
+              inputMode="numeric"
+              min={min}
+              max={max}
               step={numberField.step ?? 1}
-              onValueChange={(values) => {
-                const next = Array.isArray(values) ? values[0] : values
-                updateState(key, next ?? numberField.min)
+              value={Number.isFinite(current) ? current : min}
+              onChange={(event) => {
+                const raw = event.target.value
+                if (raw === "") {
+                  updateState(key, min)
+                  return
+                }
+                const next = Number(raw)
+                if (Number.isNaN(next)) return
+                updateState(key, Math.min(max, Math.max(min, next)))
               }}
             />
-            <p className="text-right font-mono text-sm text-foreground-muted">
-              {formatPlaygroundNumberValue(
-                Number(state[key] ?? numberField.min),
-                numberField.min,
-                numberField.max
-              )}
-            </p>
-          </div>
+          ) : (
+            <Slider
+              type="default"
+              min={min}
+              max={Math.max(min, max)}
+              step={numberField.step ?? 1}
+              value={[current]}
+              onValueChange={(values) => {
+                const next = Array.isArray(values) ? values[0] : values
+                updateState(key, Number(next) || min)
+              }}
+            />
+          )}
+          <p className="mt-1 text-right font-mono text-sm text-foreground-muted tabular-nums">
+            {formatPlaygroundNumberValue(current, min, max)}
+          </p>
         </PlaygroundField>
       )
     }
