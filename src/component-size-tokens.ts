@@ -279,7 +279,21 @@ export const TABS_TYPOGRAPHY_BY_SIZE = {
 export const TABS_TEXT_TYPOGRAPHY = TABS_TYPOGRAPHY_BY_SIZE
 
 /**
- * text variant TabsList 항목 간격 — 개별 탭 padding으로 간격 확보, list gap은 0.
+ * line variant TabsList 항목 간격 — 개별 탭 padding 제거 후 list gap으로 간격 확보.
+ */
+export const TABS_LINE_LIST_GAP_BY_SIZE = {
+  sm: { className: "gap-2", px: 8, token: "2" },
+  default: { className: "gap-3", px: 12, token: "3" },
+  xl: { className: "gap-4", px: 16, token: "4" },
+  lg: { className: "gap-4", px: 16, token: "4" },
+  "2xl": { className: "gap-5", px: 20, token: "5" },
+} as const satisfies Record<
+  TabsSizeApi,
+  { className: string; px: number; token: string }
+>
+
+/**
+ * text variant TabsList 항목 간격 — 개별 탭 padding 제거 후 list gap으로 간격 확보.
  */
 export const TABS_TEXT_LIST_GAP_BY_SIZE = {
   sm: { className: "gap-2", px: 8, token: "2" },
