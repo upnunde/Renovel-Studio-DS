@@ -14,6 +14,8 @@
 - **Sidebar 전용 시맨틱 제거** — `sidebar-*` 토큰/테마 매핑/문서 카테고리를 제거하고 `docs-sidebar`를 공통 토큰(`background`, `foreground`, `accent`, `border`)으로 재구성
 - **Tabs text variant 정리** — trigger 좌우 padding을 제거하고 `TabsList` gap으로 간격을 옮겨 정렬을 맞춤
 - **Tabs hover 정리** — text variant는 영역 배경 hover를 제거하고 텍스트 색상만 반응하도록 수정
+- **Tabs line variant 정리** — trigger 좌우·세로 padding과 최소폭을 제거하고 `TabsList` gap으로 간격을 이관
+- **Tabs line hover 정리** — line variant도 박스형 hover를 제거하고 텍스트 색상만 반응하도록 수정
 
 ## 다음에 할 일
 

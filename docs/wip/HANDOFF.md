@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-07-29 18:18:46**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-07-29 18:24:16**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-07-29 18:17:28** — 커밋 푸시
+- **2026-07-29 18:23:54** — 응
 
 ## 다음 작업 (Claude Code용)
 
@@ -33,15 +33,21 @@
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 39 ++++++++++------------
- docs/wip/WORKLOG.md                                |  7 ++--
- .../design-system/src/component-size-tokens.ts     | 22 ++++++------
- packages/design-system/src/components/ui/tabs.tsx  |  2 +-
- packages/design-system/src/tabs.css                | 27 ++++-----------
- 5 files changed, 41 insertions(+), 56 deletions(-)
+ docs/wip/HANDOFF.md                                | 21 +++++----
+ docs/wip/WORKLOG.md                                |  2 +
+ .../design-system/src/component-size-tokens.ts     | 16 ++++++-
+ packages/design-system/src/components/ui/tabs.tsx  | 23 +++++++--
+ packages/design-system/src/tabs.css                | 55 +---------------------
+ 5 files changed, 48 insertions(+), 69 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
+
 
 
 

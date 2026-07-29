@@ -7,59 +7,7 @@
     flex: none;
   }
 
-  [data-slot="tabs-list"][data-variant="line"][data-size="sm"] > [data-slot="tabs-trigger"] {
-    padding-inline: 0.25rem;
-  }
-
-  [data-slot="tabs-list"][data-variant="line"][data-size="sm"]
-    > [data-slot="tabs-trigger"]:has([data-icon="inline-start"]) {
-    padding-left: 3px;
-  }
-
-  [data-slot="tabs-list"][data-variant="line"][data-size="sm"]
-    > [data-slot="tabs-trigger"]:has([data-icon="inline-end"]) {
-    padding-right: 3px;
-  }
-
-  [data-slot="tabs-list"][data-variant="line"][data-size="default"] > [data-slot="tabs-trigger"],
-  [data-slot="tabs-list"][data-variant="line"][data-size="lg"] > [data-slot="tabs-trigger"] {
-    padding-inline: 5px;
-  }
-
-  [data-slot="tabs-list"][data-variant="line"][data-size="default"]
-    > [data-slot="tabs-trigger"]:has([data-icon="inline-start"]),
-  [data-slot="tabs-list"][data-variant="line"][data-size="lg"]
-    > [data-slot="tabs-trigger"]:has([data-icon="inline-start"]) {
-    padding-left: 0.25rem;
-  }
-
-  [data-slot="tabs-list"][data-variant="line"][data-size="default"]
-    > [data-slot="tabs-trigger"]:has([data-icon="inline-end"]),
-  [data-slot="tabs-list"][data-variant="line"][data-size="lg"]
-    > [data-slot="tabs-trigger"]:has([data-icon="inline-end"]) {
-    padding-right: 0.25rem;
-  }
-
-  [data-slot="tabs-list"][data-variant="line"][data-size="xl"] > [data-slot="tabs-trigger"],
-  [data-slot="tabs-list"][data-variant="line"][data-size="2xl"] > [data-slot="tabs-trigger"] {
-    padding-inline: 0.375rem;
-  }
-
-  [data-slot="tabs-list"][data-variant="line"][data-size="xl"]
-    > [data-slot="tabs-trigger"]:has([data-icon="inline-start"]),
-  [data-slot="tabs-list"][data-variant="line"][data-size="2xl"]
-    > [data-slot="tabs-trigger"]:has([data-icon="inline-start"]) {
-    padding-left: 5px;
-  }
-
-  [data-slot="tabs-list"][data-variant="line"][data-size="xl"]
-    > [data-slot="tabs-trigger"]:has([data-icon="inline-end"]),
-  [data-slot="tabs-list"][data-variant="line"][data-size="2xl"]
-    > [data-slot="tabs-trigger"]:has([data-icon="inline-end"]) {
-    padding-right: 5px;
-  }
-
-  /* text — padding 없음, list gap으로 간격 확보 */
+  /* line · text — padding 없음, list gap으로 간격 확보 */
 }
 
 /**
@@ -182,7 +130,6 @@
 [data-slot="tabs-list"][data-variant="line"]
   > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"])[data-hovered="true"] {
   color: var(--foreground);
-  background-color: var(--muted);
 }
 
 [data-slot="tabs-list"][data-variant="text"]
