@@ -196,7 +196,7 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         id: "foreground-hierarchy",
         title: "Hierarchy",
         tokens: [
-          { name: "foreground-muted", variable: "--foreground-muted", role: "보조 텍스트·아이콘 — grayscale-100 (라이트)" },
+          { name: "foreground-muted", variable: "--foreground-muted", role: "보조 텍스트·아이콘 — grayscale-110 (라이트)" },
           { name: "foreground-placeholder", variable: "--foreground-placeholder" },
           { name: "foreground-disabled", variable: "--foreground-disabled" },
         ],

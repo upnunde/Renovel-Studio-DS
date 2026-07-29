@@ -5,9 +5,10 @@
 
 ## 오늘 한 일
 
-- **Tabs** — default 선택 탭 색을 Button default(`inverse-muted`)와 동일하게
-- **Playground** — Properties 표와 컨트롤 순서 정렬 · hypertext max 숫자입력/count 슬라이더 · Label에서 hypertext 제거
-- **스튜디오 감지** — 패키지 변경 포함 → `ds:release`로 태그 릴리스 예정
+- **Accordion 삭제** — 사용처 없어 컴포넌트·문서·패키지 export 완전 제거
+- **Dropdown Menu Playground** — `leading-icon`을 `showIcon` 독립 토글로 분리, `showLabel` 추가, Label 색상 `foreground/30`, Properties 정리(`composition`·`itemHeight` 제거)
+- **Tooltip** — Properties 정리(`mode`·`text` 제거), 컨트롤 순서 변경(side→open→removable)
+- **Alert** — status별 surface 배경 적용(success/warning/destructive), `variant` 제거(단일값)
 
 ## 다음에 할 일
 
@@ -20,8 +21,8 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: main
-- `packages/design-system/src/components/ui/tabs.tsx`
-- `src/components/docs/component-playground.tsx` · `playground-utils.ts` · `playground-registry.tsx`
+- `packages/design-system/src/components/ui/alert.tsx` · `dropdown-menu.tsx`
+- `src/lib/component-case-specs.ts` · `playground-registry.tsx`
 
 ## 메모
 

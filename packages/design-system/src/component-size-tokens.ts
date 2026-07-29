@@ -231,6 +231,30 @@ export type CheckboxSizeApi = RadioSizeApi
 export const CHECKBOX_SIZE_APIS = RADIO_SIZE_APIS
 export const formatCheckboxSizeOption = formatRadioSizeOption
 
+/** Switch 트랙 size — h16 · h20 · h24 */
+export type SwitchSizeToken = {
+  label: string
+  api: string
+  heightPx: number
+  widthPx: number
+}
+
+export const SWITCH_SIZE_SCALE: SwitchSizeToken[] = [
+  { label: "sm_h16", api: "sm", heightPx: 16, widthPx: 28 },
+  { label: "default_h20", api: "default", heightPx: 20, widthPx: 36 },
+  { label: "md_h24", api: "md", heightPx: 24, widthPx: 44 },
+]
+
+export type SwitchSizeApi = "sm" | "default" | "md"
+
+export const SWITCH_SIZE_APIS = SWITCH_SIZE_SCALE.map(
+  (token) => token.api
+) as SwitchSizeApi[]
+
+export function formatSwitchSizeOption(api: string): string {
+  return SWITCH_SIZE_SCALE.find((t) => t.api === api)?.label ?? api
+}
+
 /** Tabs TabsList size API — 폼 컨트롤 높이 스케일과 동일 (sm ~ 2xl) */
 export type TabsSizeApi = ControlFormSizeApi
 
@@ -255,18 +279,27 @@ export const TABS_TYPOGRAPHY_BY_SIZE = {
 export const TABS_TEXT_TYPOGRAPHY = TABS_TYPOGRAPHY_BY_SIZE
 
 /**
- * text variant TabsList 항목 간격 — 2xl_h48 기준 16px, 하위 size는 spacing 스케일에 맞춤.
+ * text variant TabsList 항목 간격 — 개별 탭 padding으로 간격 확보, list gap은 0.
  */
 export const TABS_TEXT_LIST_GAP_BY_SIZE = {
-  sm: { className: "gap-2", px: 8, token: "2" },
-  default: { className: "gap-3", px: 12, token: "3" },
-  xl: { className: "gap-3.5", px: 14, token: "3.5" },
-  lg: { className: "gap-3.5", px: 14, token: "3.5" },
-  "2xl": { className: "gap-4", px: 16, token: "4" },
+  sm: { className: "gap-0", px: 0, token: "0" },
+  default: { className: "gap-0", px: 0, token: "0" },
+  xl: { className: "gap-0", px: 0, token: "0" },
+  lg: { className: "gap-0", px: 0, token: "0" },
+  "2xl": { className: "gap-0", px: 0, token: "0" },
 } as const satisfies Record<
   TabsSizeApi,
   { className: string; px: number; token: string }
 >
+
+/** text variant TabsTrigger 좌우 padding (px) */
+export const TABS_TEXT_TRIGGER_PADDING_BY_SIZE = {
+  sm: 4,
+  default: 6,
+  lg: 8,
+  xl: 8,
+  "2xl": 12,
+} as const satisfies Record<TabsSizeApi, number>
 
 /** @deprecated TABS_TEXT_LIST_GAP_BY_SIZE 사용 */
 export const TABS_TEXT_LIST_GAP_CLASS = TABS_TEXT_LIST_GAP_BY_SIZE["2xl"].className

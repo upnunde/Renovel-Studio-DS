@@ -69,7 +69,7 @@ export const componentDocs: ComponentDoc[] = [
   },
   {
     slug: "radio-group",
-    title: "Radio Group",
+    title: "Radio",
     description: "라디오 컨트롤 · 시안은 1개 기준, 여러 개는 소비 측 조합",
     section: "Inputs",
   },
@@ -131,12 +131,6 @@ export const componentDocs: ComponentDoc[] = [
     slug: "tooltip",
     title: "Tooltip",
     description: "짧은 힌트",
-    section: "Overlays",
-  },
-  {
-    slug: "accordion",
-    title: "Accordion",
-    description: "접이식 섹션",
     section: "Overlays",
   },
   {

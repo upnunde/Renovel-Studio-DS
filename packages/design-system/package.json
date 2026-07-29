@@ -38,7 +38,6 @@
     "./fonts.css": "./src/fonts.css",
     "./utils": "./src/lib/utils.ts",
     "./ui-disabled": "./src/lib/ui-disabled.ts",
-    "./ui/accordion": "./src/components/ui/accordion.tsx",
     "./ui/alert": "./src/components/ui/alert.tsx",
     "./ui/avatar": "./src/components/ui/avatar.tsx",
     "./ui/badge": "./src/components/ui/badge.tsx",

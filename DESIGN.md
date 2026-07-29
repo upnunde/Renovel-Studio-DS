@@ -144,7 +144,7 @@ className="hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted dat
 
 ```css
 --foreground           /* 본문 (grayscale-140) */
---foreground-muted     /* 보조 텍스트·아이콘 (grayscale-100) */
+--foreground-muted     /* 보조 텍스트·아이콘 (grayscale-110) */
 --foreground-placeholder  /* input placeholder (grayscale-70) */
 --foreground-disabled  /* 비활성 텍스트 (grayscale-60) */
 ```
@@ -464,7 +464,7 @@ z-toast    /* 500 — 토스트·스낵바 */
 
 **Display:** badge, avatar, card, alert, progress, skeleton
 
-**Navigation:** tabs, accordion
+**Navigation:** tabs
 
 **Overlays:** dialog, popover, dropdown-menu, tooltip, toast (sonner)
 

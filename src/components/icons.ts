@@ -203,7 +203,7 @@ export const ICON_REGISTRY: IconRegistryGroup[] = [
     description: "펼침·이동·계층",
     icons: [
       { name: "Home", icon: ICONS.home, usage: "Button · 리드 아이콘 데모" },
-      { name: "ChevronDown", icon: ICONS.chevronDown, usage: "Select · Accordion · Dropdown" },
+      { name: "ChevronDown", icon: ICONS.chevronDown, usage: "Select · Dropdown" },
       { name: "ChevronRight", icon: ICONS.chevronRight, usage: "Dropdown submenu" },
     ],
   },

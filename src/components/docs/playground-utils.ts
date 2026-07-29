@@ -96,8 +96,12 @@ export type PlaygroundNumberField = {
   label?: string
   /** 기본 `slider` · 직접 입력이 필요하면 `input` */
   control?: "slider" | "input"
+  /** 동적 하한 — 예: value ← state.min */
+  minFromState?: (state: PlaygroundState) => number
   /** 동적 상한 — 예: hypertextCount ← hypertextMax */
   maxFromState?: (state: PlaygroundState) => number
+  /** 동적 step — 예: value ← state.step */
+  stepFromState?: (state: PlaygroundState) => number
 }
 
 /** 슬라이더 현재값 — `50(0/100)` 형식 */
@@ -384,10 +388,7 @@ export function getPlaygroundControlLabel(
     return "children"
   }
   if (slug === "chip" && key === "pressed") return "selected"
-  if (key === "removable") {
-    if (slug === "tooltip") return "동작"
-    return "removable"
-  }
+  if (key === "removable") return "removable"
   if (slug === "avatar" && key === "initials") return "이니셜"
   if (slug === "label" && key === "infoText") return "info 문구"
   return formatSpecPropertyName(key)
@@ -429,10 +430,27 @@ function playgroundHasToggleDependents(
   )
 }
 
+function playgroundBooleanParentKey(
+  entry: PlaygroundRegistryLike,
+  childKey: string,
+  keys: string[],
+  properties: ComponentPropSpec[],
+  baseState: PlaygroundState
+) {
+  return keys.find(
+    (parentKey) =>
+      parentKey !== childKey &&
+      classifyPlaygroundControlKey(parentKey, properties, entry) ===
+        "boolean" &&
+      playgroundDependsOnToggle(entry, childKey, parentKey, baseState)
+  )
+}
+
 /**
  * 플레이그라운드 좌측 컨트롤 그룹.
  * controlGroups 미지정 시: `keys`(Properties 순서)를 따라가며
  * 연속 필드·독립 토글·토글+하위(showWhen)를 묶되 상대 순서는 유지한다.
+ * select 의존 showWhen(예: valueEnd)은 primary 순서에 두고, boolean 종속만 nest한다.
  */
 export function buildPlaygroundControlGroups(
   keys: string[],
@@ -472,8 +490,14 @@ export function buildPlaygroundControlGroups(
 
     const kind = classifyPlaygroundControlKey(key, properties, entry)
     if (kind === "skip") continue
-    // showWhen 하위는 앵커 토글 그룹에 편입
-    if (entry.showWhen?.[key]) continue
+
+    // boolean 토글 종속만 앵커 그룹으로 편입 — select 의존 showWhen은 순서 유지
+    if (
+      entry.showWhen?.[key] &&
+      playgroundBooleanParentKey(entry, key, keys, properties, baseState)
+    ) {
+      continue
+    }
 
     if (kind === "boolean") {
       if (playgroundHasToggleDependents(entry, key, keys, baseState)) {

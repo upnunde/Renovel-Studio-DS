@@ -293,24 +293,6 @@ function PreviewTooltip() {
   )
 }
 
-function PreviewAccordion() {
-  return (
-    <div className={cn(previewShell, "px-2")}>
-      <div className="w-full max-w-[220px] rounded-lg border border-border bg-background text-sm">
-        <div className="flex items-center justify-between border-b border-border px-3 py-2 font-medium">
-          섹션 1
-          <Icon icon={ICONS.chevronDown} size="sm" className="text-foreground-muted" />
-        </div>
-        <div className="px-3 py-2 text-xs text-foreground-muted">내용</div>
-        <div className="flex items-center justify-between border-t border-border px-3 py-2 text-foreground-muted">
-          섹션 2
-          <Icon icon={ICONS.chevronDown} size="sm" />
-        </div>
-      </div>
-    </div>
-  )
-}
-
 function PreviewAlert() {
   return (
     <div className={cn(previewShell, "px-2")}>
@@ -356,7 +338,6 @@ const previewBySlug: Record<ComponentDoc["slug"], () => ReactNode> = {
   dialog: PreviewDialog,
   popover: PreviewPopover,
   tooltip: PreviewTooltip,
-  accordion: PreviewAccordion,
   alert: PreviewAlert,
   sonner: PreviewSonner,
 }

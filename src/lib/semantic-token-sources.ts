@@ -15,7 +15,7 @@ const LIGHT: Record<string, string> = {
   "--inverse-foreground": "white",
   "--inverse-muted": "grayscale-110",
   "--inverse-muted-foreground": "white",
-  "--foreground-muted": "grayscale-100",
+  "--foreground-muted": "grayscale-110",
   "--foreground-placeholder": "grayscale-70",
   "--foreground-disabled": "grayscale-60",
   "--primary": "brand-500",

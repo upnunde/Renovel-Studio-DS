@@ -36,12 +36,6 @@ import {
   badgeCaseMeta,
   BADGE_SIZE_APIS,
 } from "design-system/component-size-tokens"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "design-system/ui/accordion"
 import { Alert, AlertDescription, AlertTitle } from "design-system/ui/alert"
 import { Avatar, AvatarFallback, AvatarIcon, AvatarImage } from "design-system/ui/avatar"
 import { Badge } from "design-system/ui/badge"
@@ -947,6 +941,19 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   switch: (
     <Showcase slug="switch">
+      <ComponentCaseGroup title="Size">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="sm_h16" tags={["size: sm"]}>
+            <Switch size="sm" aria-label="알림" defaultChecked />
+          </ComponentCase>
+          <ComponentCase label="default_h20" tags={["size: default"]}>
+            <Switch size="default" aria-label="알림" defaultChecked />
+          </ComponentCase>
+          <ComponentCase label="md_h24" tags={["size: md"]}>
+            <Switch size="md" aria-label="알림" defaultChecked />
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
       <ComponentCaseGroup title="State">
         <ComponentCaseGrid columns={3}>
           <ComponentCase label="off" tags={["checked: false"]}>
@@ -1067,19 +1074,61 @@ const SHOWCASES: Record<string, ReactNode> = {
         </ComponentCaseGrid>
       </ComponentCaseGroup>
 
-      <ComponentCaseGroup title="Status">
+      <ComponentCaseGroup title="Status × Variant">
         <ComponentCaseGrid columns={4}>
-          <ComponentCase label="default" tags={["status: default", "무톤"]}>
-            <Badge>default</Badge>
-          </ComponentCase>
-          <ComponentCase label="success" tags={["status: success"]}>
+          <ComponentCase label="default · success" tags={["솔리드"]}>
             <Badge status="success">success</Badge>
           </ComponentCase>
-          <ComponentCase label="warning" tags={["status: warning"]}>
+          <ComponentCase label="secondary · success" tags={["소프트"]}>
+            <Badge variant="secondary" status="success">
+              success
+            </Badge>
+          </ComponentCase>
+          <ComponentCase label="outline · success" tags={["윤곽"]}>
+            <Badge variant="outline" status="success">
+              success
+            </Badge>
+          </ComponentCase>
+          <ComponentCase label="ghost · success" tags={["텍스트"]}>
+            <Badge variant="ghost" status="success">
+              success
+            </Badge>
+          </ComponentCase>
+          <ComponentCase label="default · warning" tags={["솔리드"]}>
             <Badge status="warning">warning</Badge>
           </ComponentCase>
-          <ComponentCase label="destructive" tags={["status: destructive"]}>
+          <ComponentCase label="secondary · warning" tags={["소프트"]}>
+            <Badge variant="secondary" status="warning">
+              warning
+            </Badge>
+          </ComponentCase>
+          <ComponentCase label="outline · warning" tags={["윤곽"]}>
+            <Badge variant="outline" status="warning">
+              warning
+            </Badge>
+          </ComponentCase>
+          <ComponentCase label="ghost · warning" tags={["텍스트"]}>
+            <Badge variant="ghost" status="warning">
+              warning
+            </Badge>
+          </ComponentCase>
+          <ComponentCase label="default · destructive" tags={["솔리드"]}>
             <Badge status="destructive">destructive</Badge>
+          </ComponentCase>
+          <ComponentCase label="secondary · destructive" tags={["소프트"]}>
+            <Badge variant="secondary" status="destructive">
+              destructive
+            </Badge>
+          </ComponentCase>
+          <ComponentCase label="outline · destructive" tags={["윤곽"]}>
+            <Badge variant="outline" status="destructive">
+              destructive
+            </Badge>
+          </ComponentCase>
+          <ComponentCase label="ghost · destructive" tags={["텍스트"]}>
+            <Badge variant="ghost" status="destructive">
+              destructive
+            </Badge>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
@@ -1127,7 +1176,7 @@ const SHOWCASES: Record<string, ReactNode> = {
           <ComponentCase label="circle" tags={["shape: circle", "rounded-full"]}>
             <Badge shape="circle">circle</Badge>
           </ComponentCase>
-          <ComponentCase label="square" tags={["shape: square", "rounded-md", "md_8"]}>
+          <ComponentCase label="square" tags={["shape: square", "size별 radius"]}>
             <Badge shape="square">square</Badge>
           </ComponentCase>
         </ComponentCaseGrid>
@@ -1574,29 +1623,6 @@ const SHOWCASES: Record<string, ReactNode> = {
             </TooltipTrigger>
             <TooltipContent>닫기 전까지 유지되는 도움말</TooltipContent>
           </Tooltip>
-        </ComponentCase>
-      </ComponentCaseGroup>
-    </Showcase>
-  ),
-
-  accordion: (
-    <Showcase slug="accordion">
-      <ComponentCaseGroup title="Multiple sections">
-        <ComponentCase label="default open" tags={["defaultValue: item-1"]}>
-          <Accordion defaultValue={["item-1"]} className="max-w-md">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>섹션 1</AccordionTrigger>
-              <AccordionContent className="text-sm text-foreground-muted">
-                펼침 콘텐츠
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger>섹션 2</AccordionTrigger>
-              <AccordionContent className="text-sm text-foreground-muted">
-                접힘 콘텐츠
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
         </ComponentCase>
       </ComponentCaseGroup>
     </Showcase>

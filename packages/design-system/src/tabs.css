@@ -58,6 +58,24 @@
     > [data-slot="tabs-trigger"]:has([data-icon="inline-end"]) {
     padding-right: 5px;
   }
+
+  /* text — 개별 탭 좌우 padding · list gap은 0 */
+  [data-slot="tabs-list"][data-variant="text"][data-size="sm"] > [data-slot="tabs-trigger"] {
+    padding-inline: 4px;
+  }
+
+  [data-slot="tabs-list"][data-variant="text"][data-size="default"] > [data-slot="tabs-trigger"] {
+    padding-inline: 6px;
+  }
+
+  [data-slot="tabs-list"][data-variant="text"][data-size="lg"] > [data-slot="tabs-trigger"],
+  [data-slot="tabs-list"][data-variant="text"][data-size="xl"] > [data-slot="tabs-trigger"] {
+    padding-inline: 8px;
+  }
+
+  [data-slot="tabs-list"][data-variant="text"][data-size="2xl"] > [data-slot="tabs-trigger"] {
+    padding-inline: 12px;
+  }
 }
 
 /**

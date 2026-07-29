@@ -3,12 +3,6 @@
 import { type ReactNode } from "react"
 
 import { ICONS } from "@/components/icons"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "design-system/ui/accordion"
 import { Alert, AlertDescription, AlertTitle } from "design-system/ui/alert"
 import { Avatar, AvatarFallback, AvatarIcon, AvatarImage } from "design-system/ui/avatar"
 import { Badge } from "design-system/ui/badge"
@@ -257,38 +251,19 @@ function dropdownMenuPlaygroundTrigger() {
 function dropdownMenuPlaygroundItems(state: PlaygroundState) {
   const itemType = str(state, "itemType")
   const itemVariant = str(state, "itemVariant")
-
-  if (itemType === "leading-icon") {
-    return (
-      <>
-        <DropdownMenuGroup>
-          <DropdownMenuLabel>계정</DropdownMenuLabel>
-          <DropdownMenuItem>
-            <Icon icon={ICONS.user} size="md" />
-            프로필
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Icon icon={ICONS.sun} size="md" />
-            테마
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive">
-          <Icon icon={ICONS.close} size="md" />
-          로그아웃
-        </DropdownMenuItem>
-      </>
-    )
-  }
+  const showLabel = bool(state, "showLabel")
+  const showIcon = bool(state, "showIcon")
 
   if (itemType === "shortcut") {
     return (
       <>
         <DropdownMenuItem>
+          {showIcon ? <Icon icon={ICONS.fileText} size="md" /> : null}
           복사
           <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
+          {showIcon ? <Icon icon={ICONS.plus} size="md" /> : null}
           붙여넣기
           <DropdownMenuShortcut>⌘V</DropdownMenuShortcut>
         </DropdownMenuItem>
@@ -299,8 +274,14 @@ function dropdownMenuPlaygroundItems(state: PlaygroundState) {
   if (itemType === "disabled") {
     return (
       <>
-        <DropdownMenuItem>활성 항목</DropdownMenuItem>
-        <DropdownMenuItem disabled>비활성 항목</DropdownMenuItem>
+        <DropdownMenuItem>
+          {showIcon ? <Icon icon={ICONS.user} size="md" /> : null}
+          활성 항목
+        </DropdownMenuItem>
+        <DropdownMenuItem disabled>
+          {showIcon ? <Icon icon={ICONS.settings2} size="md" /> : null}
+          비활성 항목
+        </DropdownMenuItem>
       </>
     )
   }
@@ -308,9 +289,15 @@ function dropdownMenuPlaygroundItems(state: PlaygroundState) {
   if (itemType === "RadioItem") {
     return (
       <DropdownMenuRadioGroup defaultValue="list">
-        <DropdownMenuLabel>보기</DropdownMenuLabel>
-        <DropdownMenuRadioItem value="list">목록</DropdownMenuRadioItem>
-        <DropdownMenuRadioItem value="grid">격자</DropdownMenuRadioItem>
+        {showLabel ? <DropdownMenuLabel>보기</DropdownMenuLabel> : null}
+        <DropdownMenuRadioItem value="list">
+          {showIcon ? <Icon icon={ICONS.listChecks} size="md" /> : null}
+          목록
+        </DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="grid">
+          {showIcon ? <Icon icon={ICONS.settings2} size="md" /> : null}
+          격자
+        </DropdownMenuRadioItem>
       </DropdownMenuRadioGroup>
     )
   }
@@ -318,9 +305,15 @@ function dropdownMenuPlaygroundItems(state: PlaygroundState) {
   if (itemType === "CheckboxItem") {
     return (
       <DropdownMenuGroup>
-        <DropdownMenuLabel>열 표시</DropdownMenuLabel>
-        <DropdownMenuCheckboxItem defaultChecked>상태</DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem>라벨</DropdownMenuCheckboxItem>
+        {showLabel ? <DropdownMenuLabel>열 표시</DropdownMenuLabel> : null}
+        <DropdownMenuCheckboxItem defaultChecked>
+          {showIcon ? <Icon icon={ICONS.info} size="md" /> : null}
+          상태
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem>
+          {showIcon ? <Icon icon={ICONS.user} size="md" /> : null}
+          라벨
+        </DropdownMenuCheckboxItem>
       </DropdownMenuGroup>
     )
   }
@@ -328,25 +321,45 @@ function dropdownMenuPlaygroundItems(state: PlaygroundState) {
   if (itemType === "Sub") {
     return (
       <>
-        <DropdownMenuItem>새 파일</DropdownMenuItem>
+        <DropdownMenuItem>
+          {showIcon ? <Icon icon={ICONS.fileText} size="md" /> : null}
+          새 파일
+        </DropdownMenuItem>
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>보내기</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>
+            {showIcon ? <Icon icon={ICONS.plus} size="md" /> : null}
+            보내기
+          </DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuItem>PDF</DropdownMenuItem>
-            <DropdownMenuItem>CSV</DropdownMenuItem>
+            <DropdownMenuItem>
+              {showIcon ? <Icon icon={ICONS.fileText} size="md" /> : null}
+              PDF
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              {showIcon ? <Icon icon={ICONS.listChecks} size="md" /> : null}
+              CSV
+            </DropdownMenuItem>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
       </>
     )
   }
 
+  const secondLabel = itemVariant === "destructive" ? "삭제" : "설정"
+  const secondIcon =
+    itemVariant === "destructive" ? ICONS.trash2 : ICONS.settings2
+
   return (
     <DropdownMenuGroup>
-      <DropdownMenuLabel>계정</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>프로필</DropdownMenuItem>
+      {showLabel ? <DropdownMenuLabel>계정</DropdownMenuLabel> : null}
+      {showLabel ? <DropdownMenuSeparator /> : null}
+      <DropdownMenuItem>
+        {showIcon ? <Icon icon={ICONS.user} size="md" /> : null}
+        프로필
+      </DropdownMenuItem>
       <DropdownMenuItem variant={itemVariant as "default"}>
-        {itemVariant === "destructive" ? "삭제" : "설정"}
+        {showIcon ? <Icon icon={secondIcon} size="md" /> : null}
+        {secondLabel}
       </DropdownMenuItem>
     </DropdownMenuGroup>
   )
@@ -356,25 +369,34 @@ function dropdownMenuPlaygroundCode(state: PlaygroundState) {
   const itemType = str(state, "itemType")
   const align = ` align="${str(state, "align")}"`
   const open = bool(state, "open") ? " open" : ""
+  const showLabel = bool(state, "showLabel")
+  const showIcon = bool(state, "showIcon")
   const glyph = controlSizeToIconGlyph("default")
   const trigger = `<Button variant="outline">\n      메뉴 열기\n      <Icon icon={ICONS.chevronDown} size="${glyph}" position="inline-end" />\n    </Button>`
+  const accountLabel = showLabel ? "      <DropdownMenuLabel>계정</DropdownMenuLabel>\n" : ""
+  const viewLabel = showLabel ? "      <DropdownMenuLabel>보기</DropdownMenuLabel>\n" : ""
+  const columnsLabel = showLabel ? "      <DropdownMenuLabel>열 표시</DropdownMenuLabel>\n" : ""
+  const accountSep = showLabel ? "      <DropdownMenuSeparator />\n" : ""
+  const iconLine = (name: string) =>
+    showIcon ? `        <Icon icon={ICONS.${name}} size="md" />\n` : ""
 
   let body = ""
-  if (itemType === "leading-icon") {
-    body = `    <DropdownMenuGroup>\n      <DropdownMenuLabel>계정</DropdownMenuLabel>\n      <DropdownMenuItem>\n        <Icon icon={ICONS.user} size="md" />\n        프로필\n      </DropdownMenuItem>\n    </DropdownMenuGroup>`
-  } else if (itemType === "shortcut") {
-    body = `    <DropdownMenuItem>\n      복사\n      <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>\n    </DropdownMenuItem>`
+  if (itemType === "shortcut") {
+    body = `    <DropdownMenuItem>\n${iconLine("fileText")}      복사\n      <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>\n    </DropdownMenuItem>`
   } else if (itemType === "disabled") {
-    body = `    <DropdownMenuItem>활성 항목</DropdownMenuItem>\n    <DropdownMenuItem disabled>비활성 항목</DropdownMenuItem>`
+    body = `    <DropdownMenuItem>\n${iconLine("user")}      활성 항목\n    </DropdownMenuItem>\n    <DropdownMenuItem disabled>\n${iconLine("settings2")}      비활성 항목\n    </DropdownMenuItem>`
   } else if (itemType === "RadioItem") {
-    body = `    <DropdownMenuRadioGroup defaultValue="list">\n      <DropdownMenuLabel>보기</DropdownMenuLabel>\n      <DropdownMenuRadioItem value="list">목록</DropdownMenuRadioItem>\n    </DropdownMenuRadioGroup>`
+    body = `    <DropdownMenuRadioGroup defaultValue="list">\n${viewLabel}      <DropdownMenuRadioItem value="list">\n${iconLine("listChecks")}        목록\n      </DropdownMenuRadioItem>\n    </DropdownMenuRadioGroup>`
   } else if (itemType === "CheckboxItem") {
-    body = `    <DropdownMenuGroup>\n      <DropdownMenuLabel>열 표시</DropdownMenuLabel>\n      <DropdownMenuCheckboxItem defaultChecked>상태</DropdownMenuCheckboxItem>\n    </DropdownMenuGroup>`
+    body = `    <DropdownMenuGroup>\n${columnsLabel}      <DropdownMenuCheckboxItem defaultChecked>\n${iconLine("info")}        상태\n      </DropdownMenuCheckboxItem>\n    </DropdownMenuGroup>`
   } else if (itemType === "Sub") {
-    body = `    <DropdownMenuSub>\n      <DropdownMenuSubTrigger>보내기</DropdownMenuSubTrigger>\n      <DropdownMenuSubContent>...</DropdownMenuSubContent>\n    </DropdownMenuSub>`
+    body = `    <DropdownMenuSub>\n      <DropdownMenuSubTrigger>\n${iconLine("plus")}        보내기\n      </DropdownMenuSubTrigger>\n      <DropdownMenuSubContent>...</DropdownMenuSubContent>\n    </DropdownMenuSub>`
   } else {
-    const itemVariant = ` variant="${str(state, "itemVariant")}"`
-    body = `    <DropdownMenuGroup>\n      <DropdownMenuLabel>계정</DropdownMenuLabel>\n      <DropdownMenuItem>프로필</DropdownMenuItem>\n      <DropdownMenuItem${itemVariant}>설정</DropdownMenuItem>\n    </DropdownMenuGroup>`
+    const variant = str(state, "itemVariant")
+    const itemVariant = ` variant="${variant}"`
+    const label = variant === "destructive" ? "삭제" : "설정"
+    const secondIcon = variant === "destructive" ? "trash2" : "settings2"
+    body = `    <DropdownMenuGroup>\n${accountLabel}${accountSep}      <DropdownMenuItem>\n${iconLine("user")}        프로필\n      </DropdownMenuItem>\n      <DropdownMenuItem${itemVariant}>\n${iconLine(secondIcon)}        ${label}\n      </DropdownMenuItem>\n    </DropdownMenuGroup>`
   }
 
   return `<DropdownMenu${open}>\n  <DropdownMenuTrigger asChild>\n    ${trigger}\n  </DropdownMenuTrigger>\n  <DropdownMenuContent${align}>\n${body}\n  </DropdownMenuContent>\n</DropdownMenu>`
@@ -924,19 +946,39 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
   switch: {
     initialState: {
+      size: "default",
       checked: false,
       disabled: false,
     },
-    renderPreview: (state, ctx) => (
-      <Switch
-        id="playground-switch"
-        {...ctx.bindSwitch("checked")}
-        disabled={bool(state, "disabled")}
-        aria-label="알림"
-      />
-    ),
+    selectKeys: {
+      size: ["sm", "default", "md"],
+    },
+    renderPreview: (state, ctx) => {
+      const size =
+        str(state, "size") === "sm"
+          ? "sm"
+          : str(state, "size") === "md"
+            ? "md"
+            : "default"
+      return (
+        <Switch
+          id="playground-switch"
+          size={size}
+          {...ctx.bindSwitch("checked")}
+          disabled={bool(state, "disabled")}
+          aria-label="알림"
+        />
+      )
+    },
     buildCode: (state) => {
+      const size =
+        str(state, "size") === "sm"
+          ? "sm"
+          : str(state, "size") === "md"
+            ? "md"
+            : "default"
       const props = [
+        size !== "default" ? `size="${size}"` : "",
         bool(state, "checked") ? "checked" : "",
         bool(state, "disabled") ? "disabled" : "",
         'aria-label="알림"',
@@ -1031,11 +1073,31 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       type: ["default", "range"],
     },
     numberKeys: [
-      { key: "value", min: 0, max: 100, step: 1, label: "value" },
-      { key: "valueEnd", min: 0, max: 100, step: 1, label: "valueEnd" },
-      { key: "min", min: 0, max: 100, step: 1, label: "min" },
-      { key: "max", min: 0, max: 100, step: 1, label: "max" },
-      { key: "step", min: 1, max: 10, step: 1, label: "step" },
+      {
+        key: "value",
+        min: 0,
+        max: 100,
+        step: 1,
+        label: "value",
+        minFromState: (state) => Number(state.min) || 0,
+        maxFromState: (state) =>
+          Math.max(Number(state.min) || 0, Number(state.max) || 0),
+        stepFromState: (state) => Math.max(1, Number(state.step) || 1),
+      },
+      {
+        key: "valueEnd",
+        min: 0,
+        max: 100,
+        step: 1,
+        label: "valueEnd",
+        minFromState: (state) => Number(state.min) || 0,
+        maxFromState: (state) =>
+          Math.max(Number(state.min) || 0, Number(state.max) || 0),
+        stepFromState: (state) => Math.max(1, Number(state.step) || 1),
+      },
+      { key: "min", min: 0, max: 1000, step: 1, label: "min", control: "input" },
+      { key: "max", min: 0, max: 1000, step: 1, label: "max", control: "input" },
+      { key: "step", min: 1, max: 100, step: 1, label: "step", control: "input" },
     ],
     showWhen: {
       valueEnd: (state) => str(state, "type") === "range",
@@ -1184,19 +1246,28 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
   tabs: {
     initialState: {
+      tabCount: "3",
       variant: "default",
       size: "default",
       defaultValue: "tab-1",
     },
     selectKeys: {
-      defaultValue: ["tab-1", "tab-2", "tab-3"],
+      tabCount: ["2", "3", "4"],
+      defaultValue: ["tab-1", "tab-2", "tab-3", "tab-4"],
       variant: ["default", "line", "text"],
       size: [...TABS_SIZE_APIS],
     },
+    filterSelectOptions: (state, key, options) => {
+      if (key !== "defaultValue") return options
+      const count = Math.min(4, Math.max(2, Number(state.tabCount) || 3))
+      return options.slice(0, count)
+    },
     renderPreview: (state, ctx) => {
-      const tabValues = ["tab-1", "tab-2", "tab-3"]
-      const tabLabels = ["탭 1", "탭 2", "탭 3"]
-      const active = str(state, "defaultValue")
+      const count = Math.min(4, Math.max(2, Number(state.tabCount) || 3))
+      const tabValues = ["tab-1", "tab-2", "tab-3", "tab-4"].slice(0, count)
+      const tabLabels = ["탭 1", "탭 2", "탭 3", "탭 4"].slice(0, count)
+      const rawActive = str(state, "defaultValue")
+      const active = tabValues.includes(rawActive) ? rawActive : tabValues[0]
 
       return (
         <Tabs
@@ -1223,9 +1294,11 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       )
     },
     buildCode: (state) => {
-      const tabValues = ["tab-1", "tab-2", "tab-3"]
-      const tabLabels = ["탭 1", "탭 2", "탭 3"]
-      const active = str(state, "defaultValue")
+      const count = Math.min(4, Math.max(2, Number(state.tabCount) || 3))
+      const tabValues = ["tab-1", "tab-2", "tab-3", "tab-4"].slice(0, count)
+      const tabLabels = ["탭 1", "탭 2", "탭 3", "탭 4"].slice(0, count)
+      const rawActive = str(state, "defaultValue")
+      const active = tabValues.includes(rawActive) ? rawActive : tabValues[0]
 
       const props = [`defaultValue="${active}"`]
       const listAttrs = playgroundPropAttrs([
@@ -1233,7 +1306,10 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         playgroundPropAttr("size", str(state, "size")),
       ])
       const triggers = tabValues
-        .map((value, index) => `    <TabsTrigger value="${value}">${tabLabels[index]}</TabsTrigger>`)
+        .map(
+          (value, index) =>
+            `    <TabsTrigger value="${value}">${tabLabels[index]}</TabsTrigger>`
+        )
         .join("\n")
 
       return `<Tabs ${props.join(" ")}>\n  <TabsList${listAttrs}>\n${triggers}\n  </TabsList>\n</Tabs>`
@@ -1279,33 +1355,41 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   "dropdown-menu": {
     initialState: {
       align: "start",
-      open: false,
+      open: true,
+      showLabel: true,
+      showIcon: false,
+      itemType: "default",
+      itemVariant: "default",
+    },
+    selectKeys: {
+      align: ["start", "center", "end"],
+      itemType: [
+        "default",
+        "shortcut",
+        "disabled",
+        "RadioItem",
+        "CheckboxItem",
+        "Sub",
+      ],
+      itemVariant: ["default", "destructive"],
+    },
+    showWhen: {
+      showLabel: (state) =>
+        ["default", "RadioItem", "CheckboxItem"].includes(str(state, "itemType")),
+      itemVariant: (state) => str(state, "itemType") === "default",
     },
     renderPreview: (state, ctx) => (
       <DropdownMenu modal={false} {...ctx.bindOpen("open", { pin: true })}>
-        <DropdownMenuTrigger render={<Button variant="outline" />}>
-          메뉴 열기
-          <Icon
-            icon={ICONS.chevronDown}
-            size={controlSizeToIconGlyph("default")}
-            position="inline-end"
-          />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align={str(state, "align") as "start"}>
-          <DropdownMenuGroup>
-            <DropdownMenuLabel>계정</DropdownMenuLabel>
-            <DropdownMenuItem>프로필</DropdownMenuItem>
-            <DropdownMenuItem>설정</DropdownMenuItem>
-          </DropdownMenuGroup>
+        {dropdownMenuPlaygroundTrigger()}
+        <DropdownMenuContent
+          key={`${str(state, "itemType")}-${bool(state, "showLabel")}-${bool(state, "showIcon")}`}
+          align={str(state, "align") as "start"}
+        >
+          {dropdownMenuPlaygroundItems(state)}
         </DropdownMenuContent>
       </DropdownMenu>
     ),
-    buildCode: (state) => {
-      const align = ` align="${str(state, "align")}"`
-      const open = bool(state, "open") ? " open" : ""
-      const glyph = controlSizeToIconGlyph("default")
-      return `<DropdownMenu${open}>\n  <DropdownMenuTrigger asChild>\n    <Button variant="outline">\n      메뉴 열기\n      <Icon icon={ICONS.chevronDown} size="${glyph}" position="inline-end" />\n    </Button>\n  </DropdownMenuTrigger>\n  <DropdownMenuContent${align}>\n    <DropdownMenuGroup>\n      <DropdownMenuLabel>계정</DropdownMenuLabel>\n      <DropdownMenuItem>프로필</DropdownMenuItem>\n      <DropdownMenuItem>설정</DropdownMenuItem>\n    </DropdownMenuGroup>\n  </DropdownMenuContent>\n</DropdownMenu>`
-    },
+    buildCode: (state) => dropdownMenuPlaygroundCode(state),
   },
 
   dialog: {
@@ -1432,63 +1516,6 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       const removable = bool(state, "removable")
       const removableAttr = removable ? " removable" : ""
       return `<Tooltip${removableAttr}>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "children")}\n  </TooltipContent>\n</Tooltip>`
-    },
-  },
-
-  accordion: {
-    initialState: { multiple: false, defaultValue: "item-1" },
-    selectKeys: {
-      defaultValue: ["item-1", "item-2"],
-    },
-    renderPreview: (state, _ctx) => {
-      const multiple = bool(state, "multiple")
-      const defaultValue = str(state, "defaultValue")
-
-      if (multiple) {
-        return (
-          <Accordion
-            key={`multiple-${defaultValue}`}
-            multiple
-            className="w-full max-w-md"
-            defaultValue={[defaultValue]}
-          >
-            <AccordionItem value="item-1">
-              <AccordionTrigger>첫 번째</AccordionTrigger>
-              <AccordionContent>첫 번째 내용</AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger>두 번째</AccordionTrigger>
-              <AccordionContent>두 번째 내용</AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        )
-      }
-
-      return (
-        <Accordion
-          key={`single-${defaultValue}`}
-          className="w-full max-w-md"
-          defaultValue={[defaultValue]}
-        >
-          <AccordionItem value="item-1">
-            <AccordionTrigger>첫 번째</AccordionTrigger>
-            <AccordionContent>첫 번째 내용</AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>두 번째</AccordionTrigger>
-            <AccordionContent>두 번째 내용</AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      )
-    },
-    buildCode: (state) => {
-      const multiple = bool(state, "multiple")
-      const defaultValue = str(state, "defaultValue")
-      const multipleAttr = multiple ? " multiple" : ""
-      const defaultAttr = multiple
-        ? ` defaultValue={["${defaultValue}"]}`
-        : ` defaultValue="${defaultValue}"`
-      return `<Accordion${multipleAttr}${defaultAttr} className="w-full">\n  <AccordionItem value="item-1">...</AccordionItem>\n  <AccordionItem value="item-2">...</AccordionItem>\n</Accordion>`
     },
   },
 

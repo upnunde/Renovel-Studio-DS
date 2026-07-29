@@ -4,11 +4,13 @@ import {
   formatBadgeSizeOption,
   formatRadioSizeOption,
   formatCheckboxSizeOption,
+  formatSwitchSizeOption,
   CONTROL_TEXT_SIZE_APIS,
   CONTROL_FORM_SIZE_APIS,
   TABS_SIZE_APIS,
   RADIO_SIZE_APIS,
   CHECKBOX_SIZE_APIS,
+  SWITCH_SIZE_APIS,
   AVATAR_SIZE_APIS,
   BADGE_SIZE_APIS,
   BADGE_SHAPE_APIS,
@@ -46,6 +48,10 @@ function radioHints(...apis: string[]) {
 
 function checkboxHints(...apis: string[]) {
   return Object.fromEntries(apis.map((api) => [api, formatCheckboxSizeOption(api)]))
+}
+
+function switchHints(...apis: string[]) {
+  return Object.fromEntries(apis.map((api) => [api, formatSwitchSizeOption(api)]))
 }
 
 export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
@@ -304,6 +310,12 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
   switch: {
     slug: "switch",
     properties: [
+      {
+        name: "size",
+        values: [...SWITCH_SIZE_APIS],
+        valueHints: switchHints(...SWITCH_SIZE_APIS),
+        description: "트랙 높이 · sm_h16 · default_h20 · md_h24",
+      },
       { name: "checked", values: ["false", "true"], description: "켜짐/꺼짐" },
       { name: "disabled", values: ["false", "true"], description: "비활성" },
       { name: "caption", values: ["false", "true"], description: "라벨 표시" },
@@ -345,13 +357,27 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       {
         name: "type",
         values: ["default", "range"],
-        description: "단일 값(default) · 구간(range, Material Range Slider)",
+        description:
+          "단일 값(default) · 구간(range ≈ Material Range Slider)",
       },
       { name: "value", values: ["number"], description: "현재 값 (range: 시작)" },
       { name: "valueEnd", values: ["number"], description: "range 종료 값" },
-      { name: "min", values: ["number"], description: "최솟값" },
-      { name: "max", values: ["number"], description: "최댓값" },
-      { name: "step", values: ["number"], description: "단계" },
+      {
+        name: "min",
+        values: ["number"],
+        description: "최솟값 · Material valueRange 하한",
+      },
+      {
+        name: "max",
+        values: ["number"],
+        description: "최댓값 · Material valueRange 상한",
+      },
+      {
+        name: "step",
+        values: ["number"],
+        description:
+          "증가폭(HTML step) · M3 steps(끝점 사이 눈금 개수)와 다름",
+      },
       { name: "disabled", values: ["false", "true"], description: "비활성" },
     ],
   },
@@ -395,13 +421,14 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       {
         name: "variant",
         values: ["default", "secondary", "outline", "ghost"],
-        description: "시각적 위계 · 강조 / 보조 / 윤곽 / 최소",
+        description:
+          "표현 · default(솔리드) / secondary(소프트) / outline(윤곽) / ghost — status와 조합",
       },
       {
         name: "status",
         values: ["default", "success", "warning", "destructive"],
         description:
-          "의미론적 상태 톤 (variant와 직교) · default(무톤) / 성공 / 경고 / 위험",
+          "색 역할 · default면 브랜드·뉴트럴 · 그 외는 variant에 맞게 솔리드/소프트/윤곽/텍스트로 적용",
       },
       {
         name: "size",
@@ -412,7 +439,8 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       {
         name: "shape",
         values: [...BADGE_SHAPE_APIS],
-        description: "circle(rounded-full) · square(rounded-md · md_8)",
+        description:
+          "circle(rounded-full) · square(size별 · h16→xs_2 · h20/h24→sm_4 · h28→md_8)",
       },
       {
         name: "children",
@@ -482,10 +510,19 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         description: "표시 여부 · DropdownMenuTrigger가 aria-expanded 자동 설정",
       },
       {
+        name: "showLabel",
+        values: ["false", "true"],
+        description: "그룹 타이틀(DropdownMenuLabel) 표시 · Playground-only",
+      },
+      {
+        name: "showIcon",
+        values: ["false", "true"],
+        description: "항목 선행 아이콘 · 모든 itemType에 조합 · Playground-only",
+      },
+      {
         name: "itemType",
         values: [
           "default",
-          "leading-icon",
           "shortcut",
           "disabled",
           "RadioItem",
@@ -493,31 +530,12 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
           "Sub",
         ],
         description:
-          "항목 유형 · 텍스트 / 리드 아이콘 / 단축키 / 비활성 / 단일·복수 선택 / 서브메뉴",
+          "항목 유형 · 텍스트 / 단축키 / 비활성 / 단일·복수 선택 / 서브메뉴",
       },
       {
         name: "itemVariant",
         values: ["default", "destructive"],
         description: "메뉴 항목 스타일 (itemType이 default일 때)",
-      },
-      {
-        name: "composition",
-        values: [
-          "Item",
-          "Label",
-          "Separator",
-          "CheckboxItem",
-          "RadioGroup",
-          "Sub",
-          "Shortcut",
-        ],
-        description:
-          "서브 슬롯(메뉴 root API 아님) · 항목 종류·variant는 Item 등 자식에서 조합",
-      },
-      {
-        name: "itemHeight",
-        values: ["md_h32"],
-        description: "메뉴 항목 행 높이 · md_h32",
       },
     ],
   },
@@ -561,40 +579,14 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
   tooltip: {
     slug: "tooltip",
     properties: [
-      {
-        name: "mode",
-        values: ["hover", "removable"],
-        description:
-          "hover · 호버 시에만 잠깐 표시 / removable · 클릭으로 열고 ✕로 닫기",
-        valueHints: {
-          hover: "호버",
-          removable: "X로 닫기",
-        },
-      },
       { name: "side", values: ["top", "right", "bottom", "left"], description: "표시 위치" },
       { name: "open", values: ["false", "true"], description: "표시 여부 (미리보기 고정)" },
-      {
-        name: "text",
-        values: ["xs_g12"],
-        description: "툴팁 글리프 · xs_g12",
-      },
-    ],
-  },
-  accordion: {
-    slug: "accordion",
-    properties: [
-      { name: "type", values: ["single", "multiple"], description: "단일 / 복수 펼침" },
-      { name: "defaultValue", values: ["item-1", "item-2"], description: "초기 펼침 항목" },
+      { name: "removable", values: ["false", "true"], description: "클릭으로 열고 ✕로 닫기" },
     ],
   },
   alert: {
     slug: "alert",
     properties: [
-      {
-        name: "variant",
-        values: ["default"],
-        description: "시각적 위계 · 기본 카드 톤",
-      },
       {
         name: "status",
         values: ["default", "success", "warning", "destructive"],
@@ -659,6 +651,8 @@ export function formatSpecPropertyName(name: string): string {
     captionText: "caption text",
     descriptionLines: "description lines",
     showHeader: "show header",
+    showLabel: "title",
+    showIcon: "icon",
     showContent: "show content",
     showFooter: "show footer",
     showBodyText: "show body text",
@@ -675,7 +669,6 @@ export function formatSpecPropertyName(name: string): string {
     defaultValue: "default value",
     tabCount: "tab count",
     valueEnd: "value end",
-    mode: "동작",
   }
   return labels[name] ?? name
 }

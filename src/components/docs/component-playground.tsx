@@ -74,9 +74,41 @@ export function ComponentPlayground({ slug }: { slug: string }) {
           next.hypertextCount = Math.min(max, Math.max(0, count))
         }
       }
+      if (
+        slug === "slider" &&
+        (key === "min" ||
+          key === "max" ||
+          key === "value" ||
+          key === "valueEnd" ||
+          key === "step")
+      ) {
+        const min = Number(next.min) || 0
+        let max = Number(next.max)
+        if (!Number.isFinite(max)) max = min
+        if (max < min) {
+          next.max = min
+          max = min
+        }
+        const step = Math.max(1, Number(next.step) || 1)
+        next.step = step
+        next.value = Math.min(max, Math.max(min, Number(next.value) || min))
+        next.valueEnd = Math.min(
+          max,
+          Math.max(min, Number(next.valueEnd) || min)
+        )
+      }
       // Button link — 아이콘 type 불가, text로 되돌림
       if (slug === "button" && key === "variant" && value === "link") {
         next.type = "text"
+      }
+      if (slug === "tabs" && (key === "tabCount" || key === "defaultValue")) {
+        const count = Math.min(4, Math.max(2, Number(next.tabCount) || 3))
+        next.tabCount = String(count)
+        const allowed = ["tab-1", "tab-2", "tab-3", "tab-4"].slice(0, count)
+        const active = String(next.defaultValue)
+        if (!allowed.includes(active)) {
+          next.defaultValue = allowed[0]
+        }
       }
       return next
     })
@@ -107,12 +139,21 @@ export function ComponentPlayground({ slug }: { slug: string }) {
     }
 
     if (kind === "number" && numberField) {
-      const min = numberField.min
+      const min = numberField.minFromState
+        ? numberField.minFromState(state)
+        : numberField.min
       const max = numberField.maxFromState
         ? numberField.maxFromState(state)
         : numberField.max
+      const boundedMax = Math.max(min, max)
+      const step = Math.max(
+        1,
+        numberField.stepFromState
+          ? numberField.stepFromState(state)
+          : (numberField.step ?? 1)
+      )
       const current = Math.min(
-        max,
+        boundedMax,
         Math.max(min, Number(state[key] ?? min))
       )
       const label =
@@ -127,8 +168,8 @@ export function ComponentPlayground({ slug }: { slug: string }) {
               clearable={false}
               inputMode="numeric"
               min={min}
-              max={max}
-              step={numberField.step ?? 1}
+              max={boundedMax}
+              step={step}
               value={Number.isFinite(current) ? current : min}
               onChange={(event) => {
                 const raw = event.target.value
@@ -138,15 +179,15 @@ export function ComponentPlayground({ slug }: { slug: string }) {
                 }
                 const next = Number(raw)
                 if (Number.isNaN(next)) return
-                updateState(key, Math.min(max, Math.max(min, next)))
+                updateState(key, Math.min(boundedMax, Math.max(min, next)))
               }}
             />
           ) : (
             <Slider
               type="default"
               min={min}
-              max={Math.max(min, max)}
-              step={numberField.step ?? 1}
+              max={boundedMax}
+              step={step}
               value={[current]}
               onValueChange={(values) => {
                 const next = Array.isArray(values) ? values[0] : values
@@ -155,7 +196,7 @@ export function ComponentPlayground({ slug }: { slug: string }) {
             />
           )}
           <p className="mt-1 text-right font-mono text-sm text-foreground-muted tabular-nums">
-            {formatPlaygroundNumberValue(current, min, max)}
+            {formatPlaygroundNumberValue(current, min, boundedMax)}
           </p>
         </PlaygroundField>
       )
