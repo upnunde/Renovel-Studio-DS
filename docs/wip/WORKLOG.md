@@ -5,9 +5,9 @@
 
 ## 오늘 한 일
 
-- **Radio / Checkbox / Input** — size·Password/File/clear 등 (main 커밋 `30fb0c8`)
-- **스튜디오 자동 감지** — `npm run ds:release` + 깃푸시 규칙 6단계 (태그 릴리스 → sync)
-  - 원인: 스튜디오는 `#v*.*.*` 핀, monorepo main 푸시만으로는 미감지
+- **Tabs** — default 선택 탭 색을 Button default(`inverse-muted`)와 동일하게
+- **Playground** — Properties 표와 컨트롤 순서 정렬 · hypertext max 숫자입력/count 슬라이더 · Label에서 hypertext 제거
+- **스튜디오 감지** — 패키지 변경 포함 → `ds:release`로 태그 릴리스 예정
 
 ## 다음에 할 일
 
@@ -20,7 +20,8 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: main
-- `scripts/ds-release.mjs` · `.cursor/rules/git-push.mdc` · `.github/workflows/notify-upnunde-test.yml`
+- `packages/design-system/src/components/ui/tabs.tsx`
+- `src/components/docs/component-playground.tsx` · `playground-utils.ts` · `playground-registry.tsx`
 
 ## 메모
 
