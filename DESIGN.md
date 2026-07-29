@@ -209,50 +209,21 @@ Tailwind 표준 spacing 네임스페이스와 동일하게 매핑 (`p-5` = 20px,
 | `<Label className="mb-2" />` | 형제 간격을 자식이 소유 | 부모에 `flex flex-col gap-2` |
 | `<Input className="mt-1" />` | 위와 동일 | 위와 동일 |
 | 부모 `gap-2` + 자식 `mb-2` 동시 | 이중 여백 · 예측 불가 | 하나만 유지 (부모 gap 권장) |
-| `<div className="mt-[13px]">` | 토큰 밖 임의 margin | `space.section.sectionHeaderGap.className` 등 시맨틱 사용 |
+| `<div className="mt-[13px]">` | 토큰 밖 임의 margin | 스케일 값(`mt-3` 등)으로 변경 |
 | DS 컴포넌트 정본에 형제용 `mb-*` | DS는 자기 밖 간격을 소유하지 않는다 | 소비자가 부모 gap으로 처리 |
-
-**시맨틱 토큰 사용 (L3):**
-
-```tsx
-import { space } from "design-system/spacing-tokens"
-import { cn } from "design-system/utils"
-
-// 폼 필드 하나
-<div className={cn("flex flex-col", space.form.formLabelGap.className)}>
-  <Label>이메일</Label>
-  <Input type="email" />
-</div>
-
-// 폼 전체 (필드 사이)
-<form className={cn("flex flex-col", space.form.formFieldGap.className)}>
-  <FieldGroup>...</FieldGroup>
-  <FieldGroup>...</FieldGroup>
-</form>
-```
 
 **검증 체크리스트:**
 
 - [ ] 형제 컴포넌트 사이 `mb-*`/`mt-*`가 있는가? → 부모 `gap`으로 이관
 - [ ] 부모 `gap` + 자식 `margin` 이중인가? → 하나로 통합
-- [ ] `mt-[13px]` 같은 임의값? → `space.*` 시맨틱 또는 스케일 값(`mt-3` 등)으로 변경
+- [ ] `mt-[13px]` 같은 임의값? → 스케일 값(`mt-3` 등)으로 변경
 - [ ] DS 컴포넌트 정본에 형제용 `mb-*`? → 제거하고 소비자 부모에 gap 지정
 
-### 2-5-2. 시맨틱 Spacing 사용 규칙 (소비 앱 공통)
+### 2-5-2. 시맨틱 Spacing (7개만 유지)
 
-모든 소비 서비스(리노벨·신규 앱 포함)가 **같은 역할에 같은 토큰**을 쓴다. 값은 `spacing-tokens.ts` · `tokens.css` alias가 정본이고, 아래는 **언제 무엇을 쓰는지**만 고정한다.
+**대부분 원시 토큰(`gap-4`, `p-5` 등)을 직접 사용한다.** 시맨틱 토큰은 반응형이거나 DS 컴포넌트 정본인 경우만 유지.
 
-**정본·소비 방식**
-
-| 층 | 정본 | 소비 |
-|----|------|------|
-| 클래스 (권장) | `space.*.className` (`design-system/spacing-tokens`) | `cn(..., space.layout.pageStackGap.className)` |
-| CSS 변수 | `--space-{name}` (`tokens.css`) | `gap: var(--space-page-stack-gap)` 등 |
-| 반응형 | TS `className`이 breakpoint를 소유 | CSS alias는 **데스크톱 단일값**만 둔다 |
-
-서비스별 임의 `gap-3`·`py-10` 재정의 금지. 밀도·리듬이 부족하면 **토큰 추가를 DS에 요청**하고, 앱에서 로컬 스케일을 만들지 않는다.
-
-#### Layout
+#### 유지되는 시맨틱 토큰
 
 | 토큰 | 쓸 때 | 쓰지 말 때 |
 |------|--------|------------|
@@ -540,7 +511,7 @@ DS 컴포넌트는 자기 밖 간격을 소유하지 않는다. 형제 사이 �
 - 소유권: **[§2-5-1 간격 소유권](#2-5-1-간격-소유권-spacing-ownership)**
 - 역할별 사용: **[§2-5-2 시맨틱 Spacing 사용 규칙](#2-5-2-시맨틱-spacing-사용-규칙-소비-앱-공통)**
 - 금지: `<Label mb-2 />`, `<Input mt-1 />` — 부모에 `flex flex-col gap-2` 로 이관
-- 페이지 레벨은 `space.layout.*`, `space.form.*`, `space.section.*`, `space.overlay.*` 등 시맨틱 토큰 사용
+- 페이지 셸은 `space.layout.*`, Dialog는 `space.overlay.*`, 그 외는 원시 토큰(`gap-4`, `p-5` 등) 사용
 
 ### 4-4. 점진적 마이그레이션 (기존 프로젝트에 적용 시)
 

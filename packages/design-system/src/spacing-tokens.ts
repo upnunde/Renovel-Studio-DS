@@ -111,7 +111,7 @@ function createResponsiveSpaceToken(
   }
 }
 
-/** 페이지 레이아웃 — 최상위 셸·섹션 묶음 */
+/** 페이지 레이아웃 — 앱 셸 정본 */
 export const SEMANTIC_SPACE_LAYOUT = {
   pagePaddingX: createResponsiveSpaceToken(
     "page-padding-x",
@@ -125,18 +125,6 @@ export const SEMANTIC_SPACE_LAYOUT = {
     "10",
     "단순 정적 페이지 상하 여백 (앱 셸·하단 크롬 있는 UI에는 scrollBottom 사용)",
   ),
-  pageStackGap: createResponsiveSpaceToken(
-    "page-stack-gap",
-    "gap-3 lg:gap-5",
-    ["3", "5"],
-    "페이지 내 연속 블록·섹션 기본 수직 리듬 (모바일 12 / 데스크톱 20)",
-  ),
-  sectionGap: createSemanticSpaceToken(
-    "section-gap",
-    "gap-10",
-    "10",
-    "의도적 대형 구분·챕터 브레이크 (랜딩·마케팅)",
-  ),
   scrollBottom: createSemanticSpaceToken(
     "scroll-bottom",
     "pb-20",
@@ -145,75 +133,7 @@ export const SEMANTIC_SPACE_LAYOUT = {
   ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
-/** 섹션 내부 — 카드·패널 단위 */
-export const SEMANTIC_SPACE_SECTION = {
-  sectionPadding: createSemanticSpaceToken(
-    "section-padding",
-    "p-5",
-    "5",
-    "카드·패널 내부 패딩",
-  ),
-  sectionHeaderGap: createSemanticSpaceToken(
-    "section-header-gap",
-    "gap-2",
-    "2",
-    "제목 ↔ 설명 텍스트",
-  ),
-  sectionContentGap: createSemanticSpaceToken(
-    "section-content-gap",
-    "gap-4",
-    "4",
-    "헤더 ↔ 본문 블록",
-  ),
-  sectionStackGap: createSemanticSpaceToken(
-    "section-stack-gap",
-    "gap-5",
-    "5",
-    "섹션 내 블록 수직 묶음",
-  ),
-  sectionStackGapLarge: createSemanticSpaceToken(
-    "section-stack-gap-large",
-    "gap-8",
-    "8",
-    "카드 상세 본문 큰 블록 수직 묶음",
-  ),
-} as const satisfies Record<string, SemanticSpaceToken>
-
-/** 폼 — 필드·컨트롤 묶음 */
-export const SEMANTIC_SPACE_FORM = {
-  formLabelGap: createSemanticSpaceToken(
-    "form-label-gap",
-    "gap-1",
-    "1",
-    "Label ↔ Input (밀착)",
-  ),
-  formFieldGapTight: createSemanticSpaceToken(
-    "form-field-gap-tight",
-    "gap-2",
-    "2",
-    "Label ↔ Helper 등 필드 내 밀착 묶음",
-  ),
-  formFieldGap: createSemanticSpaceToken(
-    "form-field-gap",
-    "gap-4",
-    "4",
-    "필드 단위(Label+Input+Helper) 사이 · 16px 확정",
-  ),
-  formGroupGap: createSemanticSpaceToken(
-    "form-group-gap",
-    "gap-6",
-    "6",
-    "폼 섹션·그룹 사이",
-  ),
-  formGroupGapRelaxed: createSemanticSpaceToken(
-    "form-group-gap-relaxed",
-    "gap-8",
-    "8",
-    "문의·리소스 상세 등 넉넉한 폼 섹션 사이",
-  ),
-} as const satisfies Record<string, SemanticSpaceToken>
-
-/** 오버레이 — 모달·시트·팝오버 본문 인셋 */
+/** 오버레이 — Dialog 정본 인셋 */
 export const SEMANTIC_SPACE_OVERLAY = {
   modalPaddingX: createResponsiveSpaceToken(
     "modal-padding-x",
@@ -227,137 +147,32 @@ export const SEMANTIC_SPACE_OVERLAY = {
     "5",
     "모달·시트 본문 상하 인셋",
   ),
-  modalHeaderPaddingX: createSemanticSpaceToken(
-    "modal-header-padding-x",
-    "px-6",
-    "6",
-    "모달·시트 헤더 좌우 인셋",
-  ),
   modalHeaderPaddingY: createSemanticSpaceToken(
     "modal-header-padding-y",
     "py-4",
     "4",
-    "모달·시트 헤더 상하 인셋 (소비 앱은 DS py-4에 맞춤)",
-  ),
-  modalFooterPaddingX: createSemanticSpaceToken(
-    "modal-footer-padding-x",
-    "px-6",
-    "6",
-    "모달·시트 푸터 좌우 인셋",
+    "모달·시트 헤더 상하 인셋 (DS 정본)",
   ),
   modalFooterPaddingY: createSemanticSpaceToken(
     "modal-footer-padding-y",
     "py-4",
     "4",
-    "모달·시트 푸터 상하 인셋 (소비 앱은 DS py-4에 맞춤)",
-  ),
-  modalBodyStackGap: createSemanticSpaceToken(
-    "modal-body-stack-gap",
-    "gap-6",
-    "6",
-    "모달·시트 본문 세로 스택",
+    "모달·시트 푸터 상하 인셋 (DS 정본)",
   ),
 } as const satisfies Record<string, SemanticSpaceToken>
 
-/** 컨트롤 그룹 — 필터·툴바·칩 행 (밀도 3단) */
-export const SEMANTIC_SPACE_CONTROL = {
-  controlGroupCompact: createSemanticSpaceToken(
-    "control-group-compact",
-    "gap-1",
-    "1",
-    "컴팩트 컨트롤 행 (모바일 필터 칩 행)",
-  ),
-  controlGroupStandard: createSemanticSpaceToken(
-    "control-group-standard",
-    "gap-2",
-    "2",
-    "표준 컨트롤 행 (툴바·칩 그룹)",
-  ),
-  controlGroupResponsive: createResponsiveSpaceToken(
-    "control-group-responsive",
-    "gap-1 lg:gap-2",
-    ["1", "2"],
-    "반응형 컨트롤 행 (모바일 4 / 데스크톱 8)",
-  ),
-} as const satisfies Record<string, SemanticSpaceToken>
-
-/** 리스트·그리드 */
-export const SEMANTIC_SPACE_LIST = {
-  listItemGapCompact: createSemanticSpaceToken(
-    "list-item-gap-compact",
-    "gap-2",
-    "2",
-    "촘촘한 리스트 (메뉴·드롭다운 항목)",
-  ),
-  listItemGap: createSemanticSpaceToken(
-    "list-item-gap",
-    "gap-3",
-    "3",
-    "기본 리스트",
-  ),
-  listItemGapRelaxed: createSemanticSpaceToken(
-    "list-item-gap-relaxed",
-    "gap-5",
-    "5",
-    "느슨한 리스트·카드 그리드",
-  ),
-} as const satisfies Record<string, SemanticSpaceToken>
-
-/** 인라인 — 텍스트·아이콘·뱃지 가로 묶음 */
-export const SEMANTIC_SPACE_INLINE = {
-  inlineIconGap: createSemanticSpaceToken(
-    "inline-icon-gap",
-    "gap-1",
-    "1",
-    "아이콘 ↔ 텍스트 (최소 여백)",
-  ),
-  inlineGap: createSemanticSpaceToken(
-    "inline-gap",
-    "gap-2",
-    "2",
-    "일반 인라인 요소 묶음",
-  ),
-  inlineGapRelaxed: createSemanticSpaceToken(
-    "inline-gap-relaxed",
-    "gap-3",
-    "3",
-    "인라인 요소 넉넉한 묶음",
-  ),
-} as const satisfies Record<string, SemanticSpaceToken>
-
-/** 액션 — 버튼 그룹·툴바 */
-export const SEMANTIC_SPACE_ACTIONS = {
-  actionGap: createSemanticSpaceToken(
-    "action-gap",
-    "gap-2",
-    "2",
-    "버튼·칩 사이",
-  ),
-  actionGroupGap: createSemanticSpaceToken(
-    "action-group-gap",
-    "gap-4",
-    "4",
-    "액션 그룹 사이",
-  ),
-} as const satisfies Record<string, SemanticSpaceToken>
-
-/** 통합 시맨틱 스페이스 — 앱 전역 사용
+/** 통합 시맨틱 스페이스 — 앱 셸·Dialog 정본
  *
- * 사용 규칙: DESIGN.md §2-5-2
- * 사용 예 (앱 셸):
+ * 사용 예:
  *   import { space } from "design-system/spacing-tokens"
- *   <main className={cn(space.layout.pagePaddingX.className, "flex flex-col", space.layout.pageStackGap.className)}>
+ *   <main className={cn(space.layout.pagePaddingX.className, "flex flex-col gap-5")}>
  *   <div className={space.layout.scrollBottom.className} aria-hidden />
+ *
+ * 그 외 간격은 원시 토큰 사용: gap-1, gap-2, gap-4, p-5 등
  */
 export const space = {
   layout: SEMANTIC_SPACE_LAYOUT,
-  section: SEMANTIC_SPACE_SECTION,
-  form: SEMANTIC_SPACE_FORM,
   overlay: SEMANTIC_SPACE_OVERLAY,
-  control: SEMANTIC_SPACE_CONTROL,
-  list: SEMANTIC_SPACE_LIST,
-  inline: SEMANTIC_SPACE_INLINE,
-  actions: SEMANTIC_SPACE_ACTIONS,
 } as const
 
 export type SemanticSpaceGroup = keyof typeof space
@@ -368,14 +183,14 @@ export type SpacingSemanticGroup = {
   tokens: SemanticSpaceToken[]
 }
 
-/** 시맨틱 스페이스 상위 그룹 — 카테고리(h2) → 서브그룹(h3) 2단 위계 */
+/** 시맨틱 스페이스 상위 그룹 */
 export type SpacingSemanticCategory = {
   id: string
   title: string
   groups: SpacingSemanticGroup[]
 }
 
-/** Foundation Spacing Semantic 페이지 — Color Semantic과 동일 2단 위계 */
+/** Foundation Spacing Semantic 페이지 */
 export const SPACING_SEMANTIC_CATEGORIES: SpacingSemanticCategory[] = [
   {
     id: "layout",
@@ -389,28 +204,6 @@ export const SPACING_SEMANTIC_CATEGORIES: SpacingSemanticCategory[] = [
     ],
   },
   {
-    id: "section",
-    title: "Section",
-    groups: [
-      {
-        id: "section-interior",
-        title: "Card · Panel",
-        tokens: Object.values(SEMANTIC_SPACE_SECTION),
-      },
-    ],
-  },
-  {
-    id: "form",
-    title: "Form",
-    groups: [
-      {
-        id: "form-fields",
-        title: "Fields",
-        tokens: Object.values(SEMANTIC_SPACE_FORM),
-      },
-    ],
-  },
-  {
     id: "overlay",
     title: "Overlay",
     groups: [
@@ -418,50 +211,6 @@ export const SPACING_SEMANTIC_CATEGORIES: SpacingSemanticCategory[] = [
         id: "overlay-modal",
         title: "Modal · Sheet",
         tokens: Object.values(SEMANTIC_SPACE_OVERLAY),
-      },
-    ],
-  },
-  {
-    id: "control",
-    title: "Control",
-    groups: [
-      {
-        id: "control-group",
-        title: "Filter · Toolbar",
-        tokens: Object.values(SEMANTIC_SPACE_CONTROL),
-      },
-    ],
-  },
-  {
-    id: "list",
-    title: "List",
-    groups: [
-      {
-        id: "list-items",
-        title: "Item Gap",
-        tokens: Object.values(SEMANTIC_SPACE_LIST),
-      },
-    ],
-  },
-  {
-    id: "inline",
-    title: "Inline",
-    groups: [
-      {
-        id: "inline-horizontal",
-        title: "Horizontal",
-        tokens: Object.values(SEMANTIC_SPACE_INLINE),
-      },
-    ],
-  },
-  {
-    id: "actions",
-    title: "Actions",
-    groups: [
-      {
-        id: "actions-toolbar",
-        title: "Button · Toolbar",
-        tokens: Object.values(SEMANTIC_SPACE_ACTIONS),
       },
     ],
   },

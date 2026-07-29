@@ -9,6 +9,8 @@
 - **Dropdown Menu Playground** — `leading-icon`을 `showIcon` 독립 토글로 분리, `showLabel` 추가, Label 색상 `foreground/30`, Properties 정리(`composition`·`itemHeight` 제거)
 - **Tooltip** — Properties 정리(`mode`·`text` 제거), 컨트롤 순서 변경(side→open→removable)
 - **Alert** — status별 surface 배경 적용(success/warning/destructive), `variant` 제거(단일값)
+- **Spacing Semantic 축소** — 시맨틱 간격 토큰을 33개에서 7개(layout·overlay 핵심만)로 정리하고, 나머지는 원시 토큰(`gap-*`, `p-*`) 사용으로 전환
+- **런타임 오류 수정** — `SEMANTIC_SPACE_SECTION is not defined` 오류를 `src/spacing-tokens.ts` 패키지 re-export 동기화로 해결
 
 ## 다음에 할 일
 
@@ -21,8 +23,8 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: main
-- `packages/design-system/src/components/ui/alert.tsx` · `dropdown-menu.tsx`
-- `src/lib/component-case-specs.ts` · `playground-registry.tsx`
+- `packages/design-system/src/spacing-tokens.ts` · `tokens.css`
+- `src/spacing-tokens.ts` · `DESIGN.md`
 
 ## 메모
 
