@@ -12,7 +12,8 @@
     "lint": "eslint",
     "worklog:snapshot": "sh scripts/snapshot-worklog.sh",
     "handoff:update": "sh scripts/update-handoff.sh",
-    "stitch:generate": "npx tsx scripts/stitch-generate.ts"
+    "stitch:generate": "npx tsx scripts/stitch-generate.ts",
+    "ds:release": "node scripts/ds-release.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

@@ -1,12 +1,23 @@
 ---
-description: 「깃푸시」 요청 시 원격 main을 최신으로 맞춰 팀이 바로 확인할 수 있게 한다.
+description: 「깃푸시」 요청 시 원격 main을 최신으로 맞추고, DS 패키지 릴리스로 스튜디오가 감지하게 한다.
 alwaysApply: true
 ---
 
-# Git 푸시 (팀이 보는 최신본)
+# Git 푸시 (팀이 보는 최신본 + 스튜디오 DS 감지)
 
 사용자가 **깃푸시 / git push / 푸시 / 올려줘** 등을 요청하면 목적은  
-**다른 사람이 `origin/main`만 pull해도 방금 작업한 문서·화면을 바로 확인**하게 하는 것이다.
+**다른 사람이 `origin/main`만 pull해도 방금 작업한 문서·화면을 바로 확인**하고,  
+**리노벨 스튜디오가 새 `design-system` 태그를 감지**하게 하는 것이다.
+
+## 왜 main 푸시만으로는 스튜디오가 안 바뀌나
+
+스튜디오(`upnunde-test/app`)는 다음처럼 **버전 태그**를 핀한다.
+
+```json
+"design-system": "github:upnunde/Renovel-Studio-DS#v0.1.13"
+```
+
+모노레포 `main` 푸시는 docs 사이트용이다. 스튜디오 감지는 **패키지 루트 릴리스 태그(`v*.*.*`)** + Release/dispatch가 필요하다.
 
 ## 절차
 
@@ -15,9 +26,17 @@ alwaysApply: true
 3. diverged / non-fast-forward여도 **로컬 작업본이 팀이 볼 최신**이 되도록  
    `git push --force-with-lease origin HEAD:main` 을 사용한다.
 4. 순수 `--force`는 쓰지 않는다. lease 거절 시 fetch 후 원격이 더 앞서 바뀌었음을 알리고 재확인.
-5. 푸시 후 `git status -sb`로 `main` ↔ `origin/main` 동기화를 확인한다.
+5. `git status -sb`로 `main` ↔ `origin/main` 동기화를 확인한다.
+6. **필수 — 스튜디오 감지:** `packages/design-system/` 변경이 이번 푸시(또는 미반영 작업)에 포함되면  
+   `npm run ds:release` 를 실행한다.  
+   - patch 버전 bump → `release/vX.Y.Z` 브랜치·태그·GitHub Release  
+   - `upnunde-test` `repository_dispatch` + 로컬 `sync:ds`·스튜디오 커밋/푸시  
+   - 스튜디오만 건너뛸 때: `DS_SKIP_STUDIO=1 npm run ds:release`  
+   - docs-only 푸시(패키지 변경 없음)면 `ds:release` 생략 가능.
 
 ## 팀이 최신 확인하는 방법 (안내 시)
+
+### Docs 사이트 (이 저장소 main)
 
 ```bash
 git fetch origin
@@ -31,7 +50,20 @@ npm run dev
 
 → http://localhost:3001
 
+### 리노벨 스튜디오
+
+자동 sync PR이 머지되었거나 로컬 sync가 끝났다면:
+
+```bash
+cd app
+npm install
+npm run dev
+```
+
+수동으로 최신 태그만 맞출 때: `cd app && npm run sync:ds`
+
 ## 금지
 
 - 푸시 요청 없이 임의 push / force-with-lease 금지.
 - `git config` 변경 금지.
+- **패키지 UI/토큰 변경을 main에만 푸시하고 `ds:release`를 빠뜨리지 말 것** (스튜디오 미감지 원인).
