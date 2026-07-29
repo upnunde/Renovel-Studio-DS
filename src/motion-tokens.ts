@@ -93,7 +93,7 @@ export const MOTION_CHOREOGRAPHY: MotionChoreography[] = [
     scenario: "internal-move",
     duration: "short",
     easing: "standard",
-    example: "Switch thumb · Slider thumb · Accordion icon 회전",
+    example: "Switch thumb · Slider thumb · Select chevron 회전",
   },
   {
     scenario: "exit",

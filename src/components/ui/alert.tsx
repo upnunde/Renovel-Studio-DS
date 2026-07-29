@@ -21,11 +21,11 @@ const alertVariants = cva(
       status: {
         default: "",
         success:
-          "bg-card text-success *:data-[slot=alert-description]:text-success/90 *:[svg]:text-current",
+          "bg-success/10 text-success border-success/20 *:data-[slot=alert-description]:text-success/90 *:[svg]:text-current dark:bg-success/20 dark:border-success/30",
         warning:
-          "bg-card text-warning *:data-[slot=alert-description]:text-warning/90 *:[svg]:text-current",
+          "bg-warning/15 text-warning border-warning/25 *:data-[slot=alert-description]:text-warning/90 *:[svg]:text-current dark:bg-warning/20 dark:border-warning/30",
         destructive:
-          "bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
+          "bg-destructive/10 text-destructive border-destructive/20 *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current dark:bg-destructive/20 dark:border-destructive/30",
       },
       type: {
         /** 제목 → 설명 (flex-col) */
