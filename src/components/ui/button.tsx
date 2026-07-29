@@ -1,1 +1,7 @@
-export { Button, buttonVariants } from "design-system/ui/button"
+export {
+  Button,
+  buttonVariants,
+  type ButtonProps,
+  type ButtonTone,
+  type LegacyButtonStatus,
+} from "design-system/ui/button"

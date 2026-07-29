@@ -16,19 +16,19 @@ export const componentDocs: ComponentDoc[] = [
   {
     slug: "button-group",
     title: "Button Group",
-    description: "버튼·입력 세그먼트 그룹",
+    description: "Button을 나란히 묶어 높이·양끝 모서리를 일괄 규정",
     section: "Actions",
   },
   {
     slug: "toggle",
     title: "Toggle",
-    description: "눌림 상태 토글",
+    description: "툴바·아이콘 눌림 상태 (필터·태그는 Chip)",
     section: "Actions",
   },
   {
     slug: "chip",
     title: "Chip",
-    description: "필터·태그 칩",
+    description: "필터·태그·입력 칩 (툴바 눌림은 Toggle)",
     section: "Actions",
   },
   {
@@ -40,7 +40,7 @@ export const componentDocs: ComponentDoc[] = [
   {
     slug: "label",
     title: "Label",
-    description: "필드 라벨 · FieldLabel",
+    description: "필드 라벨 · FieldLabel (도움말은 InputHypertext 조합)",
     section: "Inputs",
   },
   {
@@ -58,19 +58,19 @@ export const componentDocs: ComponentDoc[] = [
   {
     slug: "checkbox",
     title: "Checkbox",
-    description: "체크 선택",
+    description: "체크박스 컨트롤 · 시안은 1개 기준, 라벨은 Label과 조합",
     section: "Inputs",
   },
   {
     slug: "switch",
     title: "Switch",
-    description: "켜짐/꺼짐 전환",
+    description: "켜짐/꺼짐 전환 · 캡션은 Label과 조합",
     section: "Inputs",
   },
   {
     slug: "radio-group",
     title: "Radio Group",
-    description: "단일 선택 라디오",
+    description: "라디오 컨트롤 · 시안은 1개 기준, 여러 개는 소비 측 조합",
     section: "Inputs",
   },
   {
@@ -88,7 +88,7 @@ export const componentDocs: ComponentDoc[] = [
   {
     slug: "avatar",
     title: "Avatar",
-    description: "프로필 이미지",
+    description: "프로필 · Image / Fallback / Icon 슬롯 조합",
     section: "Display",
   },
   {
@@ -112,13 +112,13 @@ export const componentDocs: ComponentDoc[] = [
   {
     slug: "dropdown-menu",
     title: "Dropdown Menu",
-    description: "액션 메뉴",
+    description: "액션 메뉴 셸 · 항목은 Item 등 슬롯 조합",
     section: "Overlays",
   },
   {
     slug: "dialog",
     title: "Dialog",
-    description: "확인·입력 모달",
+    description: "모달 셸 · Header / Content(커스텀) / Footer",
     section: "Overlays",
   },
   {
@@ -142,13 +142,13 @@ export const componentDocs: ComponentDoc[] = [
   {
     slug: "alert",
     title: "Alert",
-    description: "인라인 안내 메시지",
+    description: "페이지에 남는 인라인 안내 (잠깐 뜨는 알림은 Toast)",
     section: "Feedback",
   },
   {
     slug: "sonner",
     title: "Toast",
-    description: "잠깐 뜨는 토스트",
+    description: "잠깐 뜨는 토스트 (고정 안내는 Alert)",
     section: "Feedback",
   },
 ]

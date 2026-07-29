@@ -32,7 +32,7 @@ Material Design 3의 이론적 토대를 **선택적으로** 흡수한다. **명
 | M3 개념 | 적용 | 명명 |
 |---------|------|------|
 | Container 페어 | ✓ | shadcn `{role}-foreground` 형식으로 |
-| Inverse surface | ✓ | `inverse` / `inverse-foreground` |
+| Inverse surface | ✓ | `inverse` / `inverse-foreground` · `inverse-muted` / `inverse-muted-foreground` |
 | Elevation 6단계 | ✓ | `shadow-elevation-10` ~ `-60` |
 | Motion easing 곡선 | ✓ | M3 cubic-bezier 값 그대로 |
 | Motion duration | △ | 3단계만 (short/medium/long) |
@@ -63,6 +63,7 @@ Material Design 3의 이론적 토대를 **선택적으로** 흡수한다. **명
 --muted               / --muted-foreground
 --accent              / --accent-foreground
 --inverse             / --inverse-foreground
+--inverse-muted       / --inverse-muted-foreground
 --success             / --success-foreground
 --warning             / --warning-foreground
 --info                / --info-foreground
@@ -88,7 +89,7 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 |------|-----------|-----|
 | 브랜드 틴트 | `accent` | **Button** outline/ghost/secondary |
 | 무채색 | `muted` | Chip, Tabs, Select, Dropdown, Badge, Toggle |
-| 채움 면 강조 | `primary/80`, `inverse/80` | Button default, Chip pressed |
+| 채움 면 강조 | `primary/80`, `inverse-muted/80` | Button default(neutral), Chip pressed |
 | 위험 | `destructive/20` | destructive variant |
 
 `--hover` 별도 토큰은 없다. 위 시맨틱을 variant별로 선택한다.
@@ -435,7 +436,7 @@ z-toast    /* 500 — 토스트·스낵바 */
 | Typography class | `text-{group}{n}_{weight}` | 언더스코어 고정 | `text-body3_500` |
 | Size token (문서) | `{api}_{axis}{px}` | 문서·Properties | `md_h36`, `xs_g12` |
 | 패키지 export path | `kebab-case` | 파일 stem 일치 | `design-system/ui/radio-group` |
-| Playground state key | `camelCase` | **공백·한글 금지** | `itemType`, `hypertextMax` |
+| Playground state key | `camelCase` | **공백·한글 금지** · Properties와 동일 키 | `variant`, `htmlFor`, `defaultValue` |
 | HTML/React 속성 (spec) | **속성명 그대로** | DOM·코드 생성 일치 | `aria-invalid`, `htmlFor` |
 
 **문서화 예외 (의도적):**
@@ -457,7 +458,7 @@ z-toast    /* 500 — 토스트·스낵바 */
 
 ### 3-4. 컴포넌트 목록 (28개)
 
-**Forms:** input, textarea, label, checkbox, radio-group, switch, slider, select, toggle, chip, email-input
+**Forms:** input, textarea, label, checkbox, radio-group, switch, slider, select, toggle, chip, email-input, password-input, file-input
 
 **Actions:** button, button-group, icon
 
@@ -529,6 +530,8 @@ export function DomainButton({ className, ...props }) {
 ```
 
 CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 합성.
+
+**Button 축:** `variant` = 표현(default 솔리드 · secondary · outline · ghost · link), `tone` = 색(neutral · brand · success · warning · destructive). 솔리드 CTA는 `variant="default"` 하나뿐이며, 브랜드 채움은 `tone="brand"`. `variant="primary"`·`status`는 deprecated alias (`primary` → default+brand, `status` default→neutral).
 
 ### 4-3-1. 간격 규칙
 

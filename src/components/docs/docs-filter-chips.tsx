@@ -32,7 +32,7 @@ export function DocsFilterChips({
       className={cn(className)}
     >
       {options.map((option) => (
-        <Chip key={option.value} value={option.value} size={size}>
+        <Chip key={option.value} value={option.value} size={size} variant="outline">
           {option.label}
         </Chip>
       ))}

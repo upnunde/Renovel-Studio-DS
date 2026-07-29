@@ -8,7 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from "design-system/ui/alert"
 import { Avatar, AvatarFallback, AvatarIcon, AvatarImage } from "design-system/ui/avatar"
 import { Badge } from "design-system/ui/badge"
 import { Button } from "design-system/ui/button"
-import { ButtonGroup, ButtonGroupText } from "design-system/ui/button-group"
+import { ButtonGroup } from "design-system/ui/button-group"
 import { Chip } from "design-system/ui/chip"
 import { Checkbox } from "design-system/ui/checkbox"
 import { Input, InputGroup, InputHypertext } from "design-system/ui/input"
@@ -42,11 +42,13 @@ function PreviewButton() {
 function PreviewButtonGroup() {
   return (
     <div className={previewShell}>
-      <ButtonGroup>
+      <ButtonGroup size="sm">
         <Button size="sm" variant="outline">
           Left
         </Button>
-        <ButtonGroupText>또는</ButtonGroupText>
+        <Button size="sm" variant="outline">
+          Mid
+        </Button>
         <Button size="sm" variant="outline">
           Right
         </Button>
@@ -74,7 +76,7 @@ function PreviewChip() {
       <Chip size="sm" variant="outline">
         Filter
       </Chip>
-      <Chip size="sm" variant="subtle" aria-pressed>
+      <Chip size="sm" variant="fill" aria-pressed>
         Selected
       </Chip>
     </div>
@@ -130,15 +132,8 @@ function PreviewSelect() {
 
 function PreviewCheckbox() {
   return (
-    <div className={cn(previewShell, "gap-4")}>
-      <div className="flex items-center gap-2">
-        <Checkbox defaultChecked id="preview-c1" />
-        <Label htmlFor="preview-c1">선택됨</Label>
-      </div>
-      <div className="flex items-center gap-2">
-        <Checkbox id="preview-c2" />
-        <Label htmlFor="preview-c2">미선택</Label>
-      </div>
+    <div className={previewShell}>
+      <Checkbox size="default" defaultChecked aria-label="옵션" />
     </div>
   )
 }
@@ -161,15 +156,8 @@ function PreviewSwitch() {
 function PreviewRadioGroup() {
   return (
     <div className={previewShell}>
-      <RadioGroup defaultValue="a" className="w-auto gap-2">
-        <div className="flex items-center gap-2">
-          <RadioGroupItem value="a" id="preview-r1" />
-          <Label htmlFor="preview-r1">옵션 A</Label>
-        </div>
-        <div className="flex items-center gap-2">
-          <RadioGroupItem value="b" id="preview-r2" />
-          <Label htmlFor="preview-r2">옵션 B</Label>
-        </div>
+      <RadioGroup defaultValue="on" size="default">
+        <RadioGroupItem value="on" aria-label="옵션" />
       </RadioGroup>
     </div>
   )

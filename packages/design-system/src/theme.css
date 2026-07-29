@@ -15,6 +15,8 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-inverse: var(--inverse);
   --color-inverse-foreground: var(--inverse-foreground);
+  --color-inverse-muted: var(--inverse-muted);
+  --color-inverse-muted-foreground: var(--inverse-muted-foreground);
   --color-foreground-muted: var(--foreground-muted);
   --color-foreground-placeholder: var(--foreground-placeholder);
   --color-foreground-disabled: var(--foreground-disabled);

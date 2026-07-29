@@ -6,7 +6,7 @@
  */
 export const docsType = {
   pageTitle:
-    "mb-0.5 font-heading text-[2rem] leading-10 font-semibold tracking-tight text-foreground",
+    "mb-0.5 font-heading text-[2rem] leading-10 font-bold tracking-tight text-foreground",
   eyebrow:
     "mb-1 text-sm font-medium tracking-widest text-foreground-muted/70",
   pageDescription: "text-sm leading-5 text-foreground-muted",

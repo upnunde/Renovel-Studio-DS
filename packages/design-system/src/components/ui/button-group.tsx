@@ -5,6 +5,10 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { Separator } from "./separator"
 import { cn } from "../../lib/utils"
 
+/**
+ * Button Group — Button을 어떻게 묶는지(높이·양끝 모서리)를 규정하는 컨테이너.
+ * ButtonGroupText / Separator는 부가 슬롯(composition)이며 그룹 본질 API가 아님.
+ */
 const buttonGroupVariants = cva(
   [
     "flex w-fit items-stretch",
@@ -25,9 +29,17 @@ const buttonGroupVariants = cva(
         "2xl":
           "[&>button]:h-12 [&>button]:text-base [&>input]:h-12 [&_button]:h-12",
       },
+      /** 그룹 양끝 모서리 — 중간 세그먼트는 Button의 button-group 규칙으로 각짐 */
+      shape: {
+        square:
+          "[&>:first-child]:rounded-l-md [&>:last-child]:rounded-r-md",
+        circle:
+          "[&>:first-child]:rounded-l-full [&>:last-child]:rounded-r-full",
+      },
     },
     defaultVariants: {
       size: "default",
+      shape: "square",
     },
   }
 )
@@ -35,6 +47,7 @@ const buttonGroupVariants = cva(
 function ButtonGroup({
   className,
   size,
+  shape,
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof buttonGroupVariants>) {
   return (
@@ -42,7 +55,8 @@ function ButtonGroup({
       role="group"
       data-slot="button-group"
       data-size={size ?? "default"}
-      className={cn(buttonGroupVariants({ size }), className)}
+      data-shape={shape ?? "square"}
+      className={cn(buttonGroupVariants({ size, shape }), className)}
       {...props}
     />
   )

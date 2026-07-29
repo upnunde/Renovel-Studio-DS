@@ -15,16 +15,22 @@ import { Badge } from "design-system/ui/badge"
 import { Button } from "design-system/ui/button"
 import {
   ButtonGroup,
-  ButtonGroupSeparator,
-  ButtonGroupText,
 } from "design-system/ui/button-group"
 import { Checkbox } from "design-system/ui/checkbox"
 import { Chip } from "design-system/ui/chip"
 import {
   buildDialogFooterActionsCode,
   DialogFooterActionsPreview,
-  type DialogListStyle,
 } from "@/components/docs/dialog-footer-actions"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "design-system/ui/dialog"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -44,6 +50,8 @@ import {
 import { Icon } from "design-system/ui/icon"
 import { Input, InputGroup, InputHypertext } from "design-system/ui/input"
 import { EmailInput } from "design-system/ui/email-input"
+import { PasswordInput } from "design-system/ui/password-input"
+import { FileInput } from "design-system/ui/file-input"
 import { FieldLabel } from "design-system/ui/field-label"
 import { Label } from "design-system/ui/label"
 import {
@@ -404,28 +412,36 @@ function num(state: PlaygroundState, key: string) {
 export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   button: {
     description:
-      "타입(텍스트·리드 아이콘·아이콘 전용)과 사이즈를 따로 선택합니다. 아이콘 전용은 size에 따라 icon · icon-sm … 으로 출력됩니다.",
+      "variant=표현 · tone=색. 타입(텍스트·리드 아이콘·아이콘 전용)과 사이즈를 따로 선택합니다.",
     initialState: {
       variant: "default",
-      status: "default",
+      tone: "neutral",
       type: "text",
       size: "default",
       shape: "square",
-      label: "Label",
+      children: "Label",
       disabled: false,
       "aria-invalid": false,
     },
-    textKeys: ["label"],
+    textKeys: ["children"],
     selectKeys: {
+      variant: ["default", "secondary", "outline", "ghost", "link"],
+      tone: ["neutral", "brand", "success", "warning", "destructive"],
       type: ["text", "leading-icon", "icon"],
       size: [...CONTROL_TEXT_SIZE_APIS],
       shape: [...BUTTON_SHAPE_APIS],
-      status: ["default", "success", "warning", "destructive"],
+    },
+    // link — 텍스트 전용. leading-icon · icon 비노출
+    filterSelectOptions: (state, key, options) => {
+      if (key !== "type") return options
+      if (str(state, "variant") !== "link") return options
+      return options.filter((option) => option === "text")
     },
     renderPreview: (state, _ctx) => {
       const size = str(state, "size")
-      const label = str(state, "label")
-      const buttonType = str(state, "type")
+      const children = str(state, "children")
+      const isLink = str(state, "variant") === "link"
+      const buttonType = isLink ? "text" : str(state, "type")
       const isIcon = buttonType === "icon"
       const isLeadingIcon = buttonType === "leading-icon"
       const glyph = controlSizeToIconGlyph(size)
@@ -433,44 +449,45 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       return (
         <Button
           variant={str(state, "variant") as "default"}
-          status={str(state, "status") as "default"}
+          tone={str(state, "tone") as "neutral"}
           shape={str(state, "shape") as "square"}
           size={toButtonSize(size, isIcon) as "default"}
           disabled={bool(state, "disabled")}
           aria-invalid={bool(state, "aria-invalid") || undefined}
-          aria-label={isIcon ? label || "버튼" : undefined}
+          aria-label={isIcon ? children || "버튼" : undefined}
         >
           {isIcon ? (
             <Icon icon={ICONS.home} size={glyph} />
           ) : isLeadingIcon ? (
             <>
               <Icon icon={ICONS.home} size={glyph} position="inline-start" />
-              {label || "Label"}
+              {children || "Label"}
             </>
           ) : (
-            label || "Label"
+            children || "Label"
           )}
         </Button>
       )
     },
     buildCode: (state) => {
       const size = str(state, "size")
-      const label = str(state, "label")
-      const buttonType = str(state, "type")
+      const children = str(state, "children")
+      const isLink = str(state, "variant") === "link"
+      const buttonType = isLink ? "text" : str(state, "type")
       const isIcon = buttonType === "icon"
       const isLeadingIcon = buttonType === "leading-icon"
       const realSize = toButtonSize(size, isIcon)
       const glyph = controlSizeToIconGlyph(size)
-      const status = str(state, "status")
+      const tone = str(state, "tone")
       const props = [
         playgroundPropAttr("variant", str(state, "variant")),
         playgroundPropAttr("shape", str(state, "shape")),
         playgroundPropAttr("size", realSize),
       ]
-      if (status !== "default") props.push(playgroundPropAttr("status", status))
+      if (tone !== "neutral") props.push(playgroundPropAttr("tone", tone))
       if (bool(state, "disabled")) props.push("disabled")
       if (bool(state, "aria-invalid")) props.push("aria-invalid")
-      if (isIcon) props.push(`aria-label="${label || "버튼"}"`)
+      if (isIcon) props.push(`aria-label="${children || "버튼"}"`)
       const open = props.length ? ` ${props.join(" ")}` : ""
       const leadingIconLine = `\n  <Icon icon={ICONS.home} size="${glyph}" position="inline-start" />`
       const iconOnlyLine = `\n  <Icon icon={ICONS.home} size="${glyph}" />`
@@ -479,52 +496,39 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         return `<Button${open}>${iconOnlyLine}\n</Button>`
       }
       if (isLeadingIcon) {
-        return `<Button${open}>${leadingIconLine}\n  ${label || "Label"}\n</Button>`
+        return `<Button${open}>${leadingIconLine}\n  ${children || "Label"}\n</Button>`
       }
-      return `<Button${open}>${label || "Label"}</Button>`
+      return `<Button${open}>${children || "Label"}</Button>`
     },
     getPreviewClassName: (state) =>
       bool(state, "aria-invalid") ? "bg-destructive/5" : undefined,
   },
 
   "button-group": {
-    initialState: { size: "default", children: "ButtonGroupText" },
+    description: "Button 그루핑 · size(높이 일괄) · shape(양끝 모서리)",
+    initialState: { size: "default", shape: "square" },
     selectKeys: {
       size: [...CONTROL_TEXT_SIZE_APIS],
-      children: ["Button", "ButtonGroupText"],
+      shape: [...BUTTON_SHAPE_APIS],
     },
     renderPreview: (state, _ctx) => {
       const size = str(state, "size") as "default"
-      const children = str(state, "children")
-
-      if (children === "Button") {
-        return (
-          <ButtonGroup size={size}>
-            <Button variant="outline">왼쪽</Button>
-            <Button variant="outline">오른쪽</Button>
-          </ButtonGroup>
-        )
-      }
+      const shape = str(state, "shape") as "square"
 
       return (
-        <ButtonGroup size={size} className="max-w-xs">
-          <Button variant="outline">이전</Button>
-          <ButtonGroupSeparator />
-          <ButtonGroupText>1 / 3</ButtonGroupText>
-          <ButtonGroupSeparator />
-          <Button variant="outline">다음</Button>
+        <ButtonGroup size={size} shape={shape}>
+          <Button variant="outline">왼쪽</Button>
+          <Button variant="outline">가운데</Button>
+          <Button variant="outline">오른쪽</Button>
         </ButtonGroup>
       )
     },
     buildCode: (state) => {
-      const size = str(state, "size")
-      const sizeAttr = playgroundPropAttrs([playgroundPropAttr("size", size)])
-      const children = str(state, "children")
-
-      if (children === "Button") {
-        return `<ButtonGroup${sizeAttr}>\n  <Button variant="outline">왼쪽</Button>\n  <Button variant="outline">오른쪽</Button>\n</ButtonGroup>`
-      }
-      return `<ButtonGroup${sizeAttr}>\n  <Button variant="outline">이전</Button>\n  <ButtonGroupSeparator />\n  <ButtonGroupText>1 / 3</ButtonGroupText>\n  <ButtonGroupSeparator />\n  <Button variant="outline">다음</Button>\n</ButtonGroup>`
+      const attrs = playgroundPropAttrs([
+        playgroundPropAttr("size", str(state, "size")),
+        playgroundPropAttr("shape", str(state, "shape")),
+      ])
+      return `<ButtonGroup${attrs}>\n  <Button variant="outline">왼쪽</Button>\n  <Button variant="outline">가운데</Button>\n  <Button variant="outline">오른쪽</Button>\n</ButtonGroup>`
     },
   },
 
@@ -533,11 +537,11 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     initialState: {
       variant: "outline",
       size: "default",
-      label: "굵게",
+      children: "굵게",
       pressed: false,
       disabled: false,
     },
-    textKeys: ["label"],
+    textKeys: ["children"],
     renderPreview: (state, ctx) => {
       const size = str(state, "size")
       return (
@@ -546,7 +550,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
           size={size as "default"}
           {...ctx.bindPressed("pressed")}
           disabled={bool(state, "disabled")}
-          aria-label={str(state, "label")}
+          aria-label={str(state, "children")}
         >
           <Icon icon={ICONS.formatBold} size={controlSizeToIconGlyph(size)} />
         </Toggle>
@@ -558,37 +562,37 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         playgroundPropAttr("size", str(state, "size")),
         bool(state, "pressed") ? "pressed" : "",
         bool(state, "disabled") ? "disabled" : "",
-        `aria-label="${str(state, "label")}"`,
+        `aria-label="${str(state, "children")}"`,
       ].filter(Boolean)
       return `<Toggle ${props.join(" ")}>\n  <Icon icon={ICONS.formatBold} size="md" />\n</Toggle>`
     },
   },
 
   chip: {
-    description: "size · sm_h28 / default_h32 · 선택 시 체크 표시",
+    description: "variant(표현) × pressed(선택) · size sm_h32 / md_h36 / xl_h40",
     initialState: {
-      variant: "outline",
+      variant: "fill",
       size: "default",
       shape: "circle",
-      label: "전자제품",
-      selected: false,
+      children: "전자제품",
+      pressed: false,
       removable: false,
       disabled: false,
     },
-    textKeys: ["label"],
+    textKeys: ["children"],
     selectKeys: {
       shape: ["circle", "square"],
     },
     renderPreview: (state, ctx) => (
       <Chip
-        variant={str(state, "variant") as "outline"}
+        variant={str(state, "variant") as "fill"}
         size={str(state, "size") as "default"}
         shape={str(state, "shape") as "circle"}
-        {...ctx.bindPressed("selected")}
+        {...ctx.bindPressed("pressed")}
         disabled={bool(state, "disabled")}
         onRemove={bool(state, "removable") ? () => {} : undefined}
       >
-        {str(state, "label")}
+        {str(state, "children")}
       </Chip>
     ),
     buildCode: (state) => {
@@ -596,12 +600,12 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         playgroundPropAttr("variant", str(state, "variant")),
         playgroundPropAttr("size", str(state, "size")),
         playgroundPropAttr("shape", str(state, "shape")),
-        bool(state, "selected") ? "pressed" : "",
+        bool(state, "pressed") ? "pressed" : "",
         bool(state, "disabled") ? "disabled" : "",
         bool(state, "removable") ? "onRemove={() => {}}" : "",
       ].filter(Boolean)
       const attrs = props.length ? ` ${props.join(" ")}` : ""
-      return `<Chip${attrs}>${str(state, "label")}</Chip>`
+      return `<Chip${attrs}>${str(state, "children")}</Chip>`
     },
   },
 
@@ -639,35 +643,52 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         placeholder: str(state, "placeholder"),
         disabled: bool(state, "disabled"),
         "aria-invalid": bool(state, "aria-invalid") || undefined,
+        "aria-describedby": playgroundBool(state, "hypertext")
+          ? "playground-input-helper"
+          : undefined,
         ...playgroundHypertextInputProps(state),
       }
       const inputKey = `${type}-${playgroundHypertextInputKey(state)}`
       return (
         <InputGroup className="max-w-xs">
-          <Label htmlFor="playground-input">라벨</Label>
           {type === "email" ? (
             <EmailInput key={inputKey} {...commonProps} />
+          ) : type === "password" ? (
+            <PasswordInput key={inputKey} {...commonProps} />
+          ) : type === "file" ? (
+            <FileInput key={inputKey} {...commonProps} />
           ) : (
             <Input key={inputKey} {...commonProps} type={type} />
           )}
-          {playgroundHypertextPreview(state)}
+          {playgroundHypertextPreview(state, "playground-input-helper")}
         </InputGroup>
       )
     },
     buildCode: (state) => {
       const type = str(state, "type")
       const isEmail = type === "email"
-      const tag = isEmail ? "EmailInput" : "Input"
+      const isPassword = type === "password"
+      const isFile = type === "file"
+      const tag = isEmail
+        ? "EmailInput"
+        : isPassword
+          ? "PasswordInput"
+          : isFile
+            ? "FileInput"
+            : "Input"
       const inputProps = [
         playgroundPropAttr("size", str(state, "size")),
-        playgroundPropAttr("type", type),
+        isEmail || isPassword || isFile ? "" : playgroundPropAttr("type", type),
         `placeholder="${str(state, "placeholder")}"`,
         bool(state, "disabled") ? "disabled" : "",
         bool(state, "aria-invalid") ? "aria-invalid" : "",
+        playgroundBool(state, "hypertext")
+          ? `aria-describedby="field-id-helper"`
+          : "",
         ...playgroundHypertextInputCodeProps(state),
       ].filter(Boolean)
       const hypertext = playgroundHypertextCode(state)
-      return `<InputGroup className="max-w-xs">\n  <Label htmlFor="field-id">라벨</Label>\n  <${tag} id="field-id" ${inputProps.join(" ")} />${hypertext}\n</InputGroup>`
+      return `<InputGroup className="max-w-xs">\n  <${tag} id="field-id" ${inputProps.join(" ")} />${hypertext}\n</InputGroup>`
     },
     getPreviewClassName: (state) =>
       bool(state, "aria-invalid") ? "bg-destructive/5" : undefined,
@@ -800,23 +821,23 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     renderPreview: (state, _ctx) => {
       const rows = Math.min(8, Math.max(4, num(state, "rows")))
       return (
-      <InputGroup className="max-w-md">
-        <Textarea
-          key={playgroundHypertextInputKey(state)}
-          id="playground-textarea"
-          rows={rows}
-          placeholder={str(state, "placeholder")}
-          disabled={bool(state, "disabled")}
-          aria-invalid={bool(state, "aria-invalid") || undefined}
-          aria-describedby={
-            playgroundBool(state, "hypertext")
-              ? "playground-textarea-helper"
-              : undefined
-          }
-          {...playgroundHypertextInputProps(state)}
-        />
-        {playgroundHypertextPreview(state, "playground-textarea-helper")}
-      </InputGroup>
+        <InputGroup className="max-w-md">
+          <Textarea
+            key={playgroundHypertextInputKey(state)}
+            id="playground-textarea"
+            rows={rows}
+            placeholder={str(state, "placeholder")}
+            disabled={bool(state, "disabled")}
+            aria-invalid={bool(state, "aria-invalid") || undefined}
+            aria-describedby={
+              playgroundBool(state, "hypertext")
+                ? "playground-textarea-helper"
+                : undefined
+            }
+            {...playgroundHypertextInputProps(state)}
+          />
+          {playgroundHypertextPreview(state, "playground-textarea-helper")}
+        </InputGroup>
       )
     },
     buildCode: (state) => {
@@ -877,62 +898,61 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
   checkbox: {
     initialState: {
-      type: "default",
-      checked: "false",
+      type: "withText",
+      size: "default",
+      checked: true,
       disabled: false,
       "aria-invalid": false,
-      caption: "동의합니다",
     },
-    textKeys: ["caption"],
     selectKeys: {
-      type: ["icon", "default"],
-      checked: ["false", "true"],
-    },
-    showWhen: {
-      caption: (state) => str(state, "type") !== "icon",
+      type: ["default", "withText"],
+      size: ["default", "md"],
     },
     renderPreview: (state, ctx) => {
-      const checked = str(state, "checked")
-      const checkbox = (
+      const withText = str(state, "type") === "withText"
+      const size = str(state, "size") === "md" ? "md" : "default"
+      const checked = bool(state, "checked")
+      const invalid = bool(state, "aria-invalid") || undefined
+      const disabled = bool(state, "disabled")
+
+      const control = (
         <Checkbox
-          id="playground-checkbox"
-          checked={checked === "true"}
-          onCheckedChange={(next) =>
-            ctx.set("checked", next ? "true" : "false")
-          }
-          disabled={bool(state, "disabled")}
-          aria-invalid={bool(state, "aria-invalid") || undefined}
-          aria-label={
-            str(state, "type") === "icon" ? str(state, "caption") : undefined
-          }
+          size={size}
+          checked={checked}
+          onCheckedChange={(next) => ctx.set("checked", next === true)}
+          disabled={disabled}
+          aria-invalid={invalid}
+          aria-label={withText ? undefined : "옵션"}
         />
       )
 
-      if (str(state, "type") === "icon") {
-        return checkbox
+      if (withText) {
+        return (
+          <Label className="flex cursor-pointer items-center gap-2">
+            {control}
+            옵션
+          </Label>
+        )
       }
 
-      return (
-        <div className="flex items-center gap-2">
-          {checkbox}
-          <Label htmlFor="playground-checkbox">{str(state, "caption")}</Label>
-        </div>
-      )
+      return control
     },
     buildCode: (state) => {
-      const checked = str(state, "checked")
+      const withText = str(state, "type") === "withText"
+      const size = str(state, "size") === "md" ? "md" : "default"
       const props = [
-        checked === "true" ? "checked" : "",
+        `size="${size}"`,
+        bool(state, "checked") ? "checked" : "",
         bool(state, "disabled") ? "disabled" : "",
         bool(state, "aria-invalid") ? "aria-invalid" : "",
-        str(state, "type") === "icon"
-          ? `aria-label="${str(state, "caption")}"`
-          : 'id="terms"',
+        withText ? "" : 'aria-label="옵션"',
       ].filter(Boolean)
-      if (str(state, "type") === "icon") {
-        return `<Checkbox ${props.join(" ")} />`
+
+      if (withText) {
+        return `<Label className="flex items-center gap-2">\n  <Checkbox ${props.join(" ")} />\n  옵션\n</Label>`
       }
-      return `<div className="flex items-center gap-2">\n  <Checkbox ${props.join(" ")} />\n  <Label htmlFor="terms">${str(state, "caption")}</Label>\n</div>`
+
+      return `<Checkbox ${props.join(" ")} />`
     },
     getPreviewClassName: (state) =>
       bool(state, "aria-invalid") ? "bg-destructive/5" : undefined,
@@ -942,106 +962,92 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     initialState: {
       checked: false,
       disabled: false,
-      caption: true,
-      captionText: "알림",
     },
-    textKeys: ["captionText"],
-    showWhen: {
-      captionText: (state) => playgroundBool(state, "caption"),
-    },
-    renderPreview: (state, ctx) => {
-      const switchControl = (
-        <Switch
-          id="playground-switch"
-          {...ctx.bindSwitch("checked")}
-          disabled={bool(state, "disabled")}
-        />
-      )
-
-      if (!bool(state, "caption")) {
-        return switchControl
-      }
-
-      return (
-        <div className="flex w-full max-w-xs items-center justify-between gap-4">
-          <Label htmlFor="playground-switch">{str(state, "captionText")}</Label>
-          {switchControl}
-        </div>
-      )
-    },
+    renderPreview: (state, ctx) => (
+      <Switch
+        id="playground-switch"
+        {...ctx.bindSwitch("checked")}
+        disabled={bool(state, "disabled")}
+        aria-label="알림"
+      />
+    ),
     buildCode: (state) => {
       const props = [
-        'id="notifications"',
         bool(state, "checked") ? "checked" : "",
         bool(state, "disabled") ? "disabled" : "",
+        'aria-label="알림"',
       ].filter(Boolean)
-      if (bool(state, "caption")) {
-        return `<div className="flex items-center justify-between gap-4">\n  <Label htmlFor="notifications">${str(state, "captionText")}</Label>\n  <Switch ${props.join(" ")} />\n</div>`
-      }
       return `<Switch ${props.join(" ")} />`
     },
   },
 
   "radio-group": {
     initialState: {
-      type: "default",
-      value: "a",
+      type: "withText",
+      size: "default",
+      checked: true,
       disabled: false,
       "aria-invalid": false,
-      captionA: "옵션 A",
-      captionB: "옵션 B",
     },
-    textKeys: ["captionA", "captionB"],
     selectKeys: {
-      type: ["icon", "default"],
-      value: ["a", "b"],
-    },
-    showWhen: {
-      captionA: (state) => str(state, "type") !== "icon",
-      captionB: (state) => str(state, "type") !== "icon",
+      type: ["default", "withText"],
+      size: ["default", "md"],
     },
     renderPreview: (state, ctx) => {
-      const iconOnly = str(state, "type") === "icon"
+      const withText = str(state, "type") === "withText"
+      const size = str(state, "size") === "md" ? "md" : "default"
+      const checked = bool(state, "checked")
+      const invalid = bool(state, "aria-invalid") || undefined
+      const disabled = bool(state, "disabled")
+
+      const control = (
+        <RadioGroupItem
+          value="on"
+          disabled={disabled}
+          aria-invalid={invalid}
+          aria-label={withText ? undefined : "옵션"}
+        />
+      )
+
       return (
         <RadioGroup
-          {...ctx.bindValue("value")}
-          disabled={bool(state, "disabled")}
-          aria-invalid={bool(state, "aria-invalid") || undefined}
-          className={iconOnly ? "flex max-w-xs flex-row gap-3" : "max-w-xs"}
+          value={checked ? "on" : null}
+          onValueChange={(next) => {
+            ctx.set("checked", next != null)
+          }}
+          size={size}
+          disabled={disabled}
+          aria-invalid={invalid}
+          name="playground-radio"
         >
-          <div className="flex items-center gap-2">
-            <RadioGroupItem
-              value="a"
-              id="rg-a"
-              aria-label={iconOnly ? str(state, "captionA") : undefined}
-            />
-            {iconOnly ? null : (
-              <Label htmlFor="rg-a">{str(state, "captionA")}</Label>
-            )}
-          </div>
-          <div className="flex items-center gap-2">
-            <RadioGroupItem
-              value="b"
-              id="rg-b"
-              aria-label={iconOnly ? str(state, "captionB") : undefined}
-            />
-            {iconOnly ? null : (
-              <Label htmlFor="rg-b">{str(state, "captionB")}</Label>
-            )}
-          </div>
+          {withText ? (
+            <Label className="flex cursor-pointer items-center gap-2">
+              {control}
+              옵션
+            </Label>
+          ) : (
+            control
+          )}
         </RadioGroup>
       )
     },
     buildCode: (state) => {
+      const withText = str(state, "type") === "withText"
+      const size = str(state, "size") === "md" ? "md" : "default"
+      const checked = bool(state, "checked")
       const props = [
-        `defaultValue="${str(state, "value")}"`,
+        checked ? 'value="on"' : "value={null}",
+        `size="${size}"`,
         bool(state, "disabled") ? "disabled" : "",
         bool(state, "aria-invalid") ? "aria-invalid" : "",
+        'name="radio"',
       ].filter(Boolean)
-      if (str(state, "type") === "icon") {
-        return `<RadioGroup ${props.join(" ")} className="flex gap-3">\n  <RadioGroupItem value="a" aria-label="${str(state, "captionA")}" />\n  <RadioGroupItem value="b" aria-label="${str(state, "captionB")}" />\n</RadioGroup>`
+
+      if (withText) {
+        return `<RadioGroup ${props.join(" ")}>\n  <Label className="flex items-center gap-2">\n    <RadioGroupItem value="on" />\n    옵션\n  </Label>\n</RadioGroup>`
       }
-      return `<RadioGroup ${props.join(" ")}>\n  <div className="flex items-center gap-2">\n    <RadioGroupItem value="a" id="a" />\n    <Label htmlFor="a">${str(state, "captionA")}</Label>\n  </div>\n  <div className="flex items-center gap-2">\n    <RadioGroupItem value="b" id="b" />\n    <Label htmlFor="b">${str(state, "captionB")}</Label>\n  </div>\n</RadioGroup>`
+
+      return `<RadioGroup ${props.join(" ")}>\n  <RadioGroupItem value="on" aria-label="옵션" />\n</RadioGroup>`
     },
     getPreviewClassName: (state) =>
       bool(state, "aria-invalid") ? "bg-destructive/5" : undefined,
@@ -1057,13 +1063,14 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       step: 1,
       disabled: false,
     },
-    skipControlKeys: ["min", "max"],
     selectKeys: {
       type: ["default", "range"],
     },
     numberKeys: [
       { key: "value", min: 0, max: 100, step: 1, label: "value" },
       { key: "valueEnd", min: 0, max: 100, step: 1, label: "valueEnd" },
+      { key: "min", min: 0, max: 100, step: 1, label: "min" },
+      { key: "max", min: 0, max: 100, step: 1, label: "max" },
       { key: "step", min: 1, max: 10, step: 1, label: "step" },
     ],
     showWhen: {
@@ -1134,9 +1141,9 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       status: "default",
       size: "default",
       shape: "circle",
-      label: "Badge",
+      children: "Badge",
     },
-    textKeys: ["label"],
+    textKeys: ["children"],
     selectKeys: {
       size: [...BADGE_SIZE_APIS],
       shape: [...BADGE_SHAPE_APIS],
@@ -1149,7 +1156,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         size={str(state, "size") as "default"}
         shape={str(state, "shape") as "circle"}
       >
-        {str(state, "label")}
+        {str(state, "children")}
       </Badge>
     ),
     buildCode: (state) => {
@@ -1160,7 +1167,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         playgroundPropAttr("size", str(state, "size")),
         playgroundPropAttr("shape", str(state, "shape")),
       ])
-      return `<Badge${attrs}>${str(state, "label")}</Badge>`
+      return `<Badge${attrs}>${str(state, "children")}</Badge>`
     },
   },
 
@@ -1197,7 +1204,9 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       )
     },
     buildCode: (state) => {
-      const size = playgroundPropAttrs([playgroundPropAttr("size", str(state, "size"))])
+      const size = playgroundPropAttrs([
+        playgroundPropAttr("size", str(state, "size")),
+      ])
       const type = str(state, "type")
       const image =
         type === "image" ? `\n  <AvatarImage src="…" alt="사용자" />` : ""
@@ -1211,29 +1220,19 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
   tabs: {
     initialState: {
-      tabCount: "2",
       variant: "default",
       size: "default",
       defaultValue: "tab-1",
     },
     selectKeys: {
-      tabCount: ["2", "3", "4"],
-      defaultValue: ["tab-1", "tab-2", "tab-3", "tab-4"],
+      defaultValue: ["tab-1", "tab-2", "tab-3"],
       variant: ["default", "line", "text"],
       size: [...TABS_SIZE_APIS],
     },
-    filterSelectOptions: (state, key, options) => {
-      if (key !== "defaultValue") return options
-      const count = Math.min(4, Math.max(2, Number(state.tabCount) || 2))
-      return options.slice(0, count)
-    },
     renderPreview: (state, ctx) => {
-      const count = Math.min(4, Math.max(2, Number(state.tabCount) || 2))
-      const tabValues = ["tab-1", "tab-2", "tab-3", "tab-4"].slice(0, count)
-      const tabLabels = ["탭 1", "탭 2", "탭 3", "탭 4"]
-      const active = tabValues.includes(str(state, "defaultValue"))
-        ? str(state, "defaultValue")
-        : tabValues[0]
+      const tabValues = ["tab-1", "tab-2", "tab-3"]
+      const tabLabels = ["탭 1", "탭 2", "탭 3"]
+      const active = str(state, "defaultValue")
 
       return (
         <Tabs
@@ -1260,12 +1259,9 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       )
     },
     buildCode: (state) => {
-      const count = Math.min(4, Math.max(2, Number(state.tabCount) || 2))
-      const tabValues = ["tab-1", "tab-2", "tab-3", "tab-4"].slice(0, count)
-      const tabLabels = ["탭 1", "탭 2", "탭 3", "탭 4"]
-      const active = tabValues.includes(str(state, "defaultValue"))
-        ? str(state, "defaultValue")
-        : tabValues[0]
+      const tabValues = ["tab-1", "tab-2", "tab-3"]
+      const tabLabels = ["탭 1", "탭 2", "탭 3"]
+      const active = str(state, "defaultValue")
 
       const props = [`defaultValue="${active}"`]
       const listAttrs = playgroundPropAttrs([
@@ -1319,97 +1315,56 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   "dropdown-menu": {
     initialState: {
       align: "start",
-      itemType: "default",
-      itemVariant: "default",
       open: false,
-    },
-    selectKeys: {
-      itemType: [
-        "default",
-        "leading-icon",
-        "shortcut",
-        "disabled",
-        "RadioItem",
-        "CheckboxItem",
-        "Sub",
-      ],
-    },
-    showWhen: {
-      itemVariant: (state) => str(state, "itemType") === "default",
     },
     renderPreview: (state, ctx) => (
       <DropdownMenu modal={false} {...ctx.bindOpen("open", { pin: true })}>
-        {dropdownMenuPlaygroundTrigger()}
+        <DropdownMenuTrigger render={<Button variant="outline" />}>
+          메뉴 열기
+          <Icon
+            icon={ICONS.chevronDown}
+            size={controlSizeToIconGlyph("default")}
+            position="inline-end"
+          />
+        </DropdownMenuTrigger>
         <DropdownMenuContent align={str(state, "align") as "start"}>
-          {dropdownMenuPlaygroundItems(state)}
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>계정</DropdownMenuLabel>
+            <DropdownMenuItem>프로필</DropdownMenuItem>
+            <DropdownMenuItem>설정</DropdownMenuItem>
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     ),
-    buildCode: dropdownMenuPlaygroundCode,
+    buildCode: (state) => {
+      const align = ` align="${str(state, "align")}"`
+      const open = bool(state, "open") ? " open" : ""
+      const glyph = controlSizeToIconGlyph("default")
+      return `<DropdownMenu${open}>\n  <DropdownMenuTrigger asChild>\n    <Button variant="outline">\n      메뉴 열기\n      <Icon icon={ICONS.chevronDown} size="${glyph}" position="inline-end" />\n    </Button>\n  </DropdownMenuTrigger>\n  <DropdownMenuContent${align}>\n    <DropdownMenuGroup>\n      <DropdownMenuLabel>계정</DropdownMenuLabel>\n      <DropdownMenuItem>프로필</DropdownMenuItem>\n      <DropdownMenuItem>설정</DropdownMenuItem>\n    </DropdownMenuGroup>\n  </DropdownMenuContent>\n</DropdownMenu>`
+    },
   },
 
   dialog: {
+    description: "Header · Content(커스텀) · Footer 셸",
     initialState: {
+      showHeader: true,
       title: "제목",
       description: "설명 텍스트입니다.",
-      showHeader: true,
       showContent: true,
       footerActions: "2",
-      showBodyText: true,
-      bodyText: "본문 영역",
-      showList: false,
-      listStyle: "muted",
-      showConsent: false,
-      consentText: "운영정책에 동의합니다.",
-      showConfirmInput: false,
-      confirmPhrase: "확인했습니다",
     },
-    textKeys: [
-      "title",
-      "description",
-      "bodyText",
-      "consentText",
-      "confirmPhrase",
-    ],
+    textKeys: ["title", "description"],
     selectKeys: {
       footerActions: ["1", "2", "3"],
-      listStyle: ["muted", "numbered"],
     },
-    skipControlKeys: ["open", "pattern"],
     controlGroups: [
       ["showHeader", "title", "description"],
-      [
-        "showContent",
-        "showBodyText",
-        "bodyText",
-        "showList",
-        "listStyle",
-        "showConsent",
-        "consentText",
-        "showConfirmInput",
-        "confirmPhrase",
-      ],
+      ["showContent"],
       ["footerActions"],
     ],
     showWhen: {
       title: (state) => playgroundBool(state, "showHeader"),
       description: (state) => playgroundBool(state, "showHeader"),
-      showBodyText: (state) => playgroundBool(state, "showContent"),
-      bodyText: (state) =>
-        playgroundBool(state, "showContent") &&
-        playgroundBool(state, "showBodyText"),
-      showList: (state) => playgroundBool(state, "showContent"),
-      listStyle: (state) =>
-        playgroundBool(state, "showContent") &&
-        playgroundBool(state, "showList"),
-      showConsent: (state) => playgroundBool(state, "showContent"),
-      consentText: (state) =>
-        playgroundBool(state, "showContent") &&
-        playgroundBool(state, "showConsent"),
-      showConfirmInput: (state) => playgroundBool(state, "showContent"),
-      confirmPhrase: (state) =>
-        playgroundBool(state, "showContent") &&
-        playgroundBool(state, "showConfirmInput"),
     },
     renderPreview: (state) => (
       <DialogFooterActionsPreview
@@ -1419,14 +1374,8 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         description={str(state, "description")}
         showHeader={bool(state, "showHeader")}
         showContent={bool(state, "showContent")}
-        showBodyText={bool(state, "showBodyText")}
-        bodyText={str(state, "bodyText")}
-        showList={bool(state, "showList")}
-        listStyle={str(state, "listStyle") as DialogListStyle}
-        showConsent={bool(state, "showConsent")}
-        consentText={str(state, "consentText")}
-        showConfirmInput={bool(state, "showConfirmInput")}
-        confirmPhrase={str(state, "confirmPhrase")}
+        customContent={bool(state, "showContent")}
+        showBodyText={false}
       />
     ),
     buildCode: (state) =>
@@ -1436,14 +1385,8 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         description: str(state, "description"),
         showHeader: bool(state, "showHeader"),
         showContent: bool(state, "showContent"),
-        showBodyText: bool(state, "showBodyText"),
-        bodyText: str(state, "bodyText"),
-        showList: bool(state, "showList"),
-        listStyle: str(state, "listStyle") as DialogListStyle,
-        showConsent: bool(state, "showConsent"),
-        consentText: str(state, "consentText"),
-        showConfirmInput: bool(state, "showConfirmInput"),
-        confirmPhrase: str(state, "confirmPhrase"),
+        customContent: bool(state, "showContent"),
+        showBodyText: false,
       }),
   },
 
@@ -1471,35 +1414,29 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
   tooltip: {
     initialState: {
-      mode: "hover",
+      removable: false,
       side: "top",
-      tip: "도움말 텍스트",
+      children: "도움말 텍스트",
       open: false,
     },
-    textKeys: ["tip"],
+    textKeys: ["children"],
     selectKeys: {
-      mode: ["hover", "removable"],
       side: ["top", "right", "bottom", "left"],
     },
     renderPreview: (state, ctx) => {
-      const mode = str(state, "mode")
-      const removable = mode === "removable"
+      const removable = bool(state, "removable")
       const forcedOpen = bool(state, "open")
-      // hover(비고정)는 uncontrolled, 그 외는 controlled — 전환 시 key로 리마운트
       const controlled = removable || forcedOpen
 
       return (
         <TooltipProvider delay={0}>
           <Tooltip
-            // mode를 key에 넣지 않음 — 호버↔X로 닫기 전환 시 리마운트로 open이 꺼지는 것 방지
             key={controlled ? "controlled" : "uncontrolled"}
             removable={removable}
             {...(controlled
               ? {
                   open: forcedOpen,
                   onOpenChange: (open, details) => {
-                    // open 고정 중에는 side/tip/mode 변경으로 닫히지 않게 유지
-                    // removable 은 ✕·Esc·바깥 클릭으로만 닫기 허용
                     if (forcedOpen && !open) {
                       if (
                         removable &&
@@ -1520,7 +1457,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
               툴팁
             </TooltipTrigger>
             <TooltipContent side={str(state, "side") as "top"}>
-              {str(state, "tip")}
+              {str(state, "children")}
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -1528,23 +1465,22 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
     buildCode: (state) => {
       const side = ` side="${str(state, "side")}"`
-      const removable = str(state, "mode") === "removable"
+      const removable = bool(state, "removable")
       const removableAttr = removable ? " removable" : ""
-      return `<Tooltip${removableAttr}>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "tip")}\n  </TooltipContent>\n</Tooltip>`
+      return `<Tooltip${removableAttr}>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "children")}\n  </TooltipContent>\n</Tooltip>`
     },
   },
 
   accordion: {
-    initialState: { type: "single", defaultValue: "item-1" },
+    initialState: { multiple: false, defaultValue: "item-1" },
     selectKeys: {
-      type: ["single", "multiple"],
       defaultValue: ["item-1", "item-2"],
     },
     renderPreview: (state, _ctx) => {
-      const type = str(state, "type")
+      const multiple = bool(state, "multiple")
       const defaultValue = str(state, "defaultValue")
 
-      if (type === "multiple") {
+      if (multiple) {
         return (
           <Accordion
             key={`multiple-${defaultValue}`}
@@ -1582,30 +1518,24 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       )
     },
     buildCode: (state) => {
-      const type = str(state, "type")
+      const multiple = bool(state, "multiple")
       const defaultValue = str(state, "defaultValue")
-      const multiple = type === "multiple" ? " multiple" : ""
-      const defaultAttr =
-        type === "multiple"
-          ? ` defaultValue={["${defaultValue}"]}`
-          : ` defaultValue="${defaultValue}"`
-      return `<Accordion${multiple}${defaultAttr} className="w-full">\n  <AccordionItem value="item-1">...</AccordionItem>\n  <AccordionItem value="item-2">...</AccordionItem>\n</Accordion>`
+      const multipleAttr = multiple ? " multiple" : ""
+      const defaultAttr = multiple
+        ? ` defaultValue={["${defaultValue}"]}`
+        : ` defaultValue="${defaultValue}"`
+      return `<Accordion${multipleAttr}${defaultAttr} className="w-full">\n  <AccordionItem value="item-1">...</AccordionItem>\n  <AccordionItem value="item-2">...</AccordionItem>\n</Accordion>`
     },
   },
 
   alert: {
     initialState: {
-      variant: "default",
       status: "default",
       type: "default",
       removable: false,
       duration: "0",
-      title: "알림",
-      description: "추가 설명이 여기에 표시됩니다.",
     },
-    textKeys: ["title", "description"],
     selectKeys: {
-      variant: ["default"],
       status: ["default", "success", "warning", "destructive"],
       type: ["default", "icon"],
       duration: ["0", "3000", "5000"],
@@ -1619,15 +1549,14 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       return (
         <Alert
           key={`${str(state, "type")}-${removable}-${duration}`}
-          variant={str(state, "variant") as "default"}
           status={str(state, "status") as "default"}
           type={str(state, "type") as "default"}
           removable={removable}
           duration={removable ? duration : 0}
           className="w-full max-w-md"
         >
-          <AlertTitle>{str(state, "title")}</AlertTitle>
-          <AlertDescription>{str(state, "description")}</AlertDescription>
+          <AlertTitle>알림</AlertTitle>
+          <AlertDescription>추가 설명이 여기에 표시됩니다.</AlertDescription>
         </Alert>
       )
     },
@@ -1636,13 +1565,12 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       const duration = Number(str(state, "duration") || 0)
       const status = str(state, "status")
       const props = [
-        `variant="${str(state, "variant")}"`,
         status !== "default" ? `status="${status}"` : "",
         `type="${str(state, "type")}"`,
         removable ? "removable" : "",
         removable && duration > 0 ? `duration={${duration}}` : "",
       ].filter(Boolean)
-      return `<Alert ${props.join(" ")}>\n  <AlertTitle>${str(state, "title")}</AlertTitle>\n  <AlertDescription>${str(state, "description")}</AlertDescription>\n</Alert>`
+      return `<Alert ${props.join(" ")}>\n  <AlertTitle>알림</AlertTitle>\n  <AlertDescription>추가 설명이 여기에 표시됩니다.</AlertDescription>\n</Alert>`
     },
   },
 

@@ -1,13 +1,14 @@
 # 작업 일지 (WORKLOG)
 
-> 마지막 갱신: 2026-07-27  
+> 마지막 갱신: 2026-07-29  
 > 다음 세션: Cursor에서 `@docs/wip/WORKLOG.md` 를 붙이고 「이어서」라고 하면 됩니다.
 
 ## 오늘 한 일
 
-- **Docs Overview 분리** — `/foundation` · `/components` Overview, Elevation 페이지, Card 제거, Tooltip mode 등
-- **원격 main** — 모노레포(문서 사이트)로 force-with-lease 반영 · 팀이 `origin/main`으로 최신 화면 확인
-- **깃푸시 규칙** — 「깃푸시」= 원격 main을 로컬 최신으로 맞춤 (`.cursor/rules/git-push.mdc`) · README에 팀 확인 절차
+- **Radio / Checkbox** — size `default_h20`·`md_h24`, type `default`/`withText`, checked 상태, Playground 단일 컨트롤
+- **Input** — `PasswordInput`(표시/숨김), `FileInput`(파일 아이콘·제거), 전 Input clear(✕) 기본
+- **Button** — active 시 `translate-y` 눌림 모션 제거
+- **Chip / tokens** — fill·outline·`inverse-muted` 등 (이전 세션 포함 미커밋분)
 
 ## 다음에 할 일
 
@@ -20,9 +21,9 @@
 
 ## 주요 파일 · 브랜치
 
-- 브랜치: main (= origin/main 정본)
-- 원격: `origin` → upnunde/Renovel-Studio-DS
-- 관련 경로: `README.md` · `.cursor/rules/git-push.mdc`
+- 브랜치: main
+- `packages/design-system/src/components/ui/{radio-group,checkbox,input,password-input,file-input,button,chip}.tsx`
+- `src/components/docs/playground-registry.tsx` · `component-case-specs.ts`
 
 ## 메모
 

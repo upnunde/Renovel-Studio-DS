@@ -174,6 +174,16 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         tokens: [
           { name: "inverse", variable: "--inverse" },
           { name: "inverse-foreground", variable: "--inverse-foreground" },
+          {
+            name: "inverse-muted",
+            variable: "--inverse-muted",
+            role: "Inverse 보조 면 — 2단계",
+          },
+          {
+            name: "inverse-muted-foreground",
+            variable: "--inverse-muted-foreground",
+            role: "inverse-muted 면 위 텍스트·아이콘",
+          },
         ],
       },
     ],

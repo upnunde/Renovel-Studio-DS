@@ -121,6 +121,8 @@ export function DialogFooterActionsPreview({
   showHeader = true,
   showContent = true,
   showFooter = true,
+  /** true면 본문 레시피 대신 빈 커스텀 슬롯 표시 */
+  customContent = false,
   showTargetName = false,
   targetName = "이름 없는 컬렉션",
   showBodyText = true,
@@ -140,18 +142,19 @@ export function DialogFooterActionsPreview({
   showHeader?: boolean
   showContent?: boolean
   showFooter?: boolean
+  customContent?: boolean
   /** 좁은 프리뷰 컨테이너에서 3-way 액션을 세로 스택으로 강제 */
   footerStack?: boolean
   className?: string
 } & DialogBodyComposition) {
-  const hasAnyBody =
+  const hasRecipeBody =
     showTargetName ||
     showBodyText ||
     showList ||
     showConsent ||
     showConfirmInput
 
-  const hasContent = showContent && hasAnyBody
+  const hasContent = showContent && (customContent || hasRecipeBody)
   const contentPad = "w-full px-5 py-2"
 
   return (
@@ -183,11 +186,23 @@ export function DialogFooterActionsPreview({
             !showFooter && "rounded-b-xl"
           )}
         >
-          {showTargetName ? <DialogTargetName name={targetName} /> : null}
-          {showBodyText ? <DialogBodyText text={bodyText} /> : null}
-          {showList ? <DialogListBlock style={listStyle} /> : null}
-          {showConsent ? <DialogConsent text={consentText} /> : null}
-          {showConfirmInput ? <DialogConfirmInput phrase={confirmPhrase} /> : null}
+          {customContent ? (
+            <div className="flex min-h-24 w-full items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 px-4 py-6">
+              <p className="text-caption1_400 text-foreground-muted">
+                Custom content
+              </p>
+            </div>
+          ) : (
+            <>
+              {showTargetName ? <DialogTargetName name={targetName} /> : null}
+              {showBodyText ? <DialogBodyText text={bodyText} /> : null}
+              {showList ? <DialogListBlock style={listStyle} /> : null}
+              {showConsent ? <DialogConsent text={consentText} /> : null}
+              {showConfirmInput ? (
+                <DialogConfirmInput phrase={confirmPhrase} />
+              ) : null}
+            </>
+          )}
         </div>
       ) : null}
       {showFooter ? (
@@ -253,6 +268,7 @@ export function buildDialogFooterActionsCode({
   showHeader,
   showContent,
   showFooter = true,
+  customContent = false,
   showTargetName = false,
   targetName = "이름 없는 컬렉션",
   showBodyText = true,
@@ -270,22 +286,27 @@ export function buildDialogFooterActionsCode({
   showHeader: boolean
   showContent: boolean
   showFooter?: boolean
+  customContent?: boolean
 } & DialogBodyComposition) {
   const header = showHeader
     ? `\n  <DialogHeader>\n    <DialogTitle>${title}</DialogTitle>\n    <DialogDescription>${description}</DialogDescription>\n  </DialogHeader>`
     : ""
 
-  const bodyParts: string[] = []
-  if (showContent) {
+  let content = ""
+  if (showContent && customContent) {
+    content =
+      "\n  {/* Content — 소비처 커스텀 영역 */}\n  <div className=\"grid gap-3\">\n    {/* … */}\n  </div>"
+  } else if (showContent) {
+    const bodyParts: string[] = []
     if (showTargetName) bodyParts.push(targetNameCode(targetName))
     if (showBodyText) bodyParts.push(bodyTextCode(bodyText))
     if (showList) bodyParts.push(listCode(listStyle))
     if (showConsent) bodyParts.push(consentCode(consentText))
     if (showConfirmInput) bodyParts.push(confirmInputCode(confirmPhrase))
+    content = bodyParts.length
+      ? `\n  <div className="grid gap-3">\n${bodyParts.join("\n")}\n  </div>`
+      : ""
   }
-  const content = bodyParts.length
-    ? `\n  <div className="grid gap-3">\n${bodyParts.join("\n")}\n  </div>`
-    : ""
 
   const footer =
     showFooter && footerActions === "1"

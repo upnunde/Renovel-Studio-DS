@@ -19,7 +19,6 @@ const badgeVariants = cva(
           "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-foreground [a[data-hovered=true]]:bg-muted [a[data-hovered=true]]:text-foreground",
         ghost:
           "hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground",
-        link: "text-primary underline-offset-4 hover:underline data-[hovered=true]:underline",
       },
       /**
        * 의미론적 상태 톤 — variant와 직교하는 상태 축.

@@ -5,6 +5,11 @@ import { Input as InputPrimitive } from "@base-ui/react/input"
 import type { VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
+import {
+  InputClearButton,
+  clearNativeInputValue,
+  inputEndActionPadding,
+} from "./input-clear-button"
 import { inputVariants } from "./input"
 
 export const DEFAULT_EMAIL_DOMAINS = [
@@ -18,6 +23,7 @@ export const DEFAULT_EMAIL_DOMAINS = [
 type EmailInputProps = Omit<React.ComponentProps<"input">, "size" | "type"> &
   VariantProps<typeof inputVariants> & {
     domains?: readonly string[]
+    clearable?: boolean
   }
 
 function EmailInput({
@@ -29,13 +35,17 @@ function EmailInput({
   onChange,
   onKeyDown,
   onBlur,
+  disabled,
+  clearable = true,
   ...props
 }: EmailInputProps) {
+  const inputRef = React.useRef<HTMLInputElement>(null)
   const isControlled = value !== undefined
   const [internalValue, setInternalValue] = React.useState(
     String(defaultValue ?? "")
   )
   const current = isControlled ? String(value ?? "") : internalValue
+  const showClear = clearable && !disabled && current.length > 0
 
   const [activeIndex, setActiveIndex] = React.useState(0)
   const [open, setOpen] = React.useState(false)
@@ -83,6 +93,7 @@ function EmailInput({
   return (
     <div className="relative w-full">
       <InputPrimitive
+        ref={inputRef}
         type="email"
         data-slot="email-input"
         role="combobox"
@@ -92,7 +103,12 @@ function EmailInput({
         aria-activedescendant={
           isOpen ? `${listId}-option-${activeIndex}` : undefined
         }
-        className={cn(inputVariants({ size }), className)}
+        disabled={disabled}
+        className={cn(
+          inputVariants({ size }),
+          showClear && inputEndActionPadding(1),
+          className
+        )}
         value={current}
         onChange={(event) => {
           if (!isControlled) setInternalValue(event.target.value)
@@ -128,6 +144,21 @@ function EmailInput({
         }}
         {...props}
       />
+      {showClear ? (
+        <InputClearButton
+          size={size}
+          disabled={disabled}
+          className="right-1"
+          onClick={(event) => {
+            event.preventDefault()
+            const input = inputRef.current
+            if (!input) return
+            if (!isControlled) setInternalValue("")
+            setOpen(false)
+            clearNativeInputValue(input, onChange)
+          }}
+        />
+      ) : null}
       {isOpen ? (
         <ul
           id={listId}

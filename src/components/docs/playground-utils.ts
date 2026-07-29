@@ -164,7 +164,6 @@ export function orderPlaygroundControlKeys(keys: string[]): string[] {
   return [...priority, ...rest]
 }
 
-/** spec.properties + entry.initialState 기준 플레이그라운드 컨트롤 키 (정책: Properties 케이스 전부 노출) */
 export function resolvePlaygroundControlKeys(
   properties: ComponentPropSpec[],
   entry: PlaygroundRegistryLike
@@ -379,19 +378,23 @@ export function getPlaygroundControlLabel(
   key: string,
   state: PlaygroundState
 ) {
-  if (slug === "switch" && key === "captionText") return "캡션명"
-  if (slug === "checkbox" && key === "caption") return "라벨"
-  if (slug === "radio-group" && key === "captionA") return "옵션 A 라벨"
-  if (slug === "radio-group" && key === "captionB") return "옵션 B 라벨"
-  if (slug === "avatar" && key === "initials") return "이니셜"
-  if (slug === "label" && key === "infoText") return "info 문구"
-  if (key === "label") {
+  if (key === "children") {
     if (slug === "button") {
       return isPlaygroundIconOnlyButtonLabel(state) ? "aria-label" : "children"
     }
     if (slug === "toggle") return "aria-label"
     if (slug === "chip" || slug === "badge") return "children"
+    if (slug === "label") return "제목"
+    if (slug === "tooltip") return "tip"
+    return "children"
   }
+  if (slug === "chip" && key === "pressed") return "selected"
+  if (key === "removable") {
+    if (slug === "tooltip") return "동작"
+    return "removable"
+  }
+  if (slug === "avatar" && key === "initials") return "이니셜"
+  if (slug === "label" && key === "infoText") return "info 문구"
   return formatSpecPropertyName(key)
 }
 

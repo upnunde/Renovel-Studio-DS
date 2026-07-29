@@ -63,6 +63,9 @@ import {
   DropdownMenuTrigger,
 } from "design-system/ui/dropdown-menu"
 import { Input, InputGroup, InputHypertext } from "design-system/ui/input"
+import { EmailInput } from "design-system/ui/email-input"
+import { PasswordInput } from "design-system/ui/password-input"
+import { FileInput } from "design-system/ui/file-input"
 import { FieldLabel } from "design-system/ui/field-label"
 import { Label } from "design-system/ui/label"
 import {
@@ -132,8 +135,11 @@ const SHOWCASES: Record<string, ReactNode> = {
     <Showcase slug="button">
       <ComponentCaseGroup title="Variant">
         <ComponentCaseGrid columns={3}>
-          <ComponentCase label="default" tags={["variant: default", "primary"]}>
+          <ComponentCase label="default · neutral" tags={["solid", "tone: neutral"]}>
             <Button>Label</Button>
+          </ComponentCase>
+          <ComponentCase label="default · brand" tags={["solid", "tone: brand"]}>
+            <Button tone="brand">Label</Button>
           </ComponentCase>
           <ComponentCase label="secondary" tags={["variant: secondary"]}>
             <Button variant="secondary">Label</Button>
@@ -150,19 +156,35 @@ const SHOWCASES: Record<string, ReactNode> = {
         </ComponentCaseGrid>
       </ComponentCaseGroup>
 
-      <ComponentCaseGroup title="Status">
-        <ComponentCaseGrid columns={4}>
-          <ComponentCase label="default" tags={["status: default", "무톤"]}>
-            <Button>Label</Button>
+      <ComponentCaseGroup title="Tone × Variant">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="default · success" tags={["solid"]}>
+            <Button tone="success">Label</Button>
           </ComponentCase>
-          <ComponentCase label="success" tags={["status: success"]}>
-            <Button status="success">Label</Button>
+          <ComponentCase label="secondary · brand" tags={["soft"]}>
+            <Button variant="secondary" tone="brand">
+              Label
+            </Button>
           </ComponentCase>
-          <ComponentCase label="warning" tags={["status: warning"]}>
-            <Button status="warning">Label</Button>
+          <ComponentCase label="outline · success" tags={["outline"]}>
+            <Button variant="outline" tone="success">
+              Label
+            </Button>
           </ComponentCase>
-          <ComponentCase label="destructive" tags={["status: destructive"]}>
-            <Button status="destructive">Label</Button>
+          <ComponentCase label="outline · warning" tags={["outline"]}>
+            <Button variant="outline" tone="warning">
+              Label
+            </Button>
+          </ComponentCase>
+          <ComponentCase label="ghost · destructive" tags={["ghost"]}>
+            <Button variant="ghost" tone="destructive">
+              Label
+            </Button>
+          </ComponentCase>
+          <ComponentCase label="link · success" tags={["link"]}>
+            <Button variant="link" tone="success">
+              Label
+            </Button>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
@@ -179,7 +201,7 @@ const SHOWCASES: Record<string, ReactNode> = {
               Label
             </Button>
           </ComponentCase>
-          <ComponentCase label="default → inverse/80" tags={["hover", "inverse/80"]}>
+          <ComponentCase label="default → inverse-muted/80" tags={["hover", "inverse-muted/80"]}>
             <Button variant="default" data-hovered>
               Label
             </Button>
@@ -316,9 +338,28 @@ const SHOWCASES: Record<string, ReactNode> = {
         </ComponentCaseGrid>
       </ComponentCaseGroup>
 
-      <ComponentCaseGroup title="Composition">
+      <ComponentCaseGroup title="Shape">
         <ComponentCaseGrid columns={2}>
-          <ComponentCase label="icon toolbar" tags={["variant: outline"]}>
+          <ComponentCase label="square" tags={["shape: square"]}>
+            <ButtonGroup shape="square">
+              <Button variant="outline">왼쪽</Button>
+              <Button variant="outline">가운데</Button>
+              <Button variant="outline">오른쪽</Button>
+            </ButtonGroup>
+          </ComponentCase>
+          <ComponentCase label="circle" tags={["shape: circle"]}>
+            <ButtonGroup shape="circle">
+              <Button variant="outline">왼쪽</Button>
+              <Button variant="outline">가운데</Button>
+              <Button variant="outline">오른쪽</Button>
+            </ButtonGroup>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Grouping">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="icon toolbar" tags={["Buttons"]}>
             <ButtonGroup>
               <Button size="icon" variant="outline" aria-label="굵게">
                 <Icon icon={ICONS.formatBold} size="md" />
@@ -331,26 +372,31 @@ const SHOWCASES: Record<string, ReactNode> = {
               </Button>
             </ButtonGroup>
           </ComponentCase>
-          <ComponentCase label="with separator">
+          <ComponentCase label="tone mix" tags={["Buttons"]}>
+            <ButtonGroup>
+              <Button tone="brand">저장</Button>
+              <Button variant="outline">취소</Button>
+            </ButtonGroup>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Composition (부가 슬롯)">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="with separator" tags={["composition"]}>
             <ButtonGroup>
               <Button variant="secondary">복사</Button>
               <ButtonGroupSeparator />
               <Button variant="secondary">붙여넣기</Button>
             </ButtonGroup>
           </ComponentCase>
-          <ComponentCase label="with text label">
+          <ComponentCase label="with text label" tags={["composition"]}>
             <ButtonGroup>
               <Button variant="outline">이전</Button>
               <ButtonGroupSeparator />
               <ButtonGroupText>1 / 3</ButtonGroupText>
               <ButtonGroupSeparator />
               <Button variant="outline">다음</Button>
-            </ButtonGroup>
-          </ComponentCase>
-          <ComponentCase label="primary + outline">
-            <ButtonGroup>
-              <Button>저장</Button>
-              <Button variant="outline">취소</Button>
             </ButtonGroup>
           </ComponentCase>
         </ComponentCaseGrid>
@@ -444,58 +490,59 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   chip: (
     <Showcase slug="chip">
-      <ComponentCaseGroup title="Variant">
-        <ComponentCaseGrid columns={3}>
-          <ComponentCase label="outline" tags={["variant: outline"]}>
-            <Chip>전자제품</Chip>
-            <Chip defaultPressed>의류</Chip>
-          </ComponentCase>
-          <ComponentCase label="subtle" tags={["variant: subtle"]}>
-            <Chip variant="subtle">전자제품</Chip>
-            <Chip variant="subtle" defaultPressed>
-              의류
+      <ComponentCaseGroup title="Variant × Pressed">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="fill" tags={["variant: fill", "표현"]}>
+            <Chip variant="fill">미선택</Chip>
+            <Chip variant="fill" defaultPressed>
+              선택
             </Chip>
           </ComponentCase>
-          <ComponentCase label="default" tags={["variant: default", "no icon"]}>
-            <Chip variant="default">기본</Chip>
-            <Chip variant="default" defaultPressed>
-              선택됨
+          <ComponentCase label="outline" tags={["variant: outline"]}>
+            <Chip variant="outline">미선택</Chip>
+            <Chip variant="outline" defaultPressed>
+              선택
             </Chip>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
-      <ComponentCaseGroup title="Hover (snapshot)">
-        <ComponentCaseGrid columns={3}>
-          <ComponentCase label="outline → muted" tags={["hover", "muted"]}>
-            <Chip data-hovered>전자제품</Chip>
-          </ComponentCase>
-          <ComponentCase label="subtle → text 강조" tags={["hover", "muted + foreground"]}>
-            <Chip variant="subtle" data-hovered>
-              전자제품
+      <ComponentCaseGroup title="Hover (snapshot · off)">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="fill → muted" tags={["hover", "muted"]}>
+            <Chip variant="fill" data-hovered>
+              미선택
             </Chip>
           </ComponentCase>
-          <ComponentCase label="default → muted" tags={["hover", "muted"]}>
-            <Chip variant="default" data-hovered>
-              기본
+          <ComponentCase label="outline → muted" tags={["hover", "muted"]}>
+            <Chip variant="outline" data-hovered>
+              미선택
             </Chip>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
 
       <ComponentCaseGroup title="Size">
-        <ComponentCaseGrid columns={2}>
-          <ComponentCase label="sm" tags={["size: sm", "h28"]}>
-            <Chip variant="default" size="sm">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="sm_h32" tags={["size: sm"]}>
+            <Chip variant="fill" size="sm">
               작게
             </Chip>
-            <Chip variant="default" size="sm" defaultPressed>
-              선택됨
+            <Chip variant="fill" size="sm" defaultPressed>
+              선택
             </Chip>
           </ComponentCase>
-          <ComponentCase label="default" tags={["size: default", "h32"]}>
-            <Chip variant="default">기본</Chip>
-            <Chip variant="default" defaultPressed>
-              선택됨
+          <ComponentCase label="md_h36" tags={["size: default"]}>
+            <Chip variant="fill">기본</Chip>
+            <Chip variant="fill" defaultPressed>
+              선택
+            </Chip>
+          </ComponentCase>
+          <ComponentCase label="xl_h40" tags={["size: xl"]}>
+            <Chip variant="fill" size="xl">
+              크게
+            </Chip>
+            <Chip variant="fill" size="xl" defaultPressed>
+              선택
             </Chip>
           </ComponentCase>
         </ComponentCaseGrid>
@@ -504,15 +551,19 @@ const SHOWCASES: Record<string, ReactNode> = {
       <ComponentCaseGroup title="Shape">
         <ComponentCaseGrid columns={2}>
           <ComponentCase label="circle" tags={["shape: circle", "rounded-full"]}>
-            <Chip shape="circle">전자제품</Chip>
-            <Chip shape="circle" defaultPressed>
-              선택됨
+            <Chip variant="outline" shape="circle">
+              전자제품
+            </Chip>
+            <Chip variant="outline" shape="circle" defaultPressed>
+              선택
             </Chip>
           </ComponentCase>
           <ComponentCase label="square" tags={["shape: square", "rounded-md"]}>
-            <Chip shape="square">전자제품</Chip>
-            <Chip shape="square" defaultPressed>
-              선택됨
+            <Chip variant="outline" shape="square">
+              전자제품
+            </Chip>
+            <Chip variant="outline" shape="square" defaultPressed>
+              선택
             </Chip>
           </ComponentCase>
         </ComponentCaseGrid>
@@ -521,15 +572,17 @@ const SHOWCASES: Record<string, ReactNode> = {
       <ComponentCaseGroup title="State">
         <ComponentCaseGrid columns={3}>
           <ComponentCase label="off" tags={["pressed: false"]}>
-            <Chip variant="default">미선택</Chip>
+            <Chip variant="outline">미선택</Chip>
           </ComponentCase>
-          <ComponentCase label="on" tags={["pressed: true", "variant: default"]}>
-            <Chip variant="default" defaultPressed>
-              선택됨
+          <ComponentCase label="on" tags={["pressed: true", "variant: outline"]}>
+            <Chip variant="outline" defaultPressed>
+              선택
             </Chip>
           </ComponentCase>
           <ComponentCase label="disabled" tags={["disabled: true"]}>
-            <Chip disabled>비활성</Chip>
+            <Chip variant="outline" disabled>
+              비활성
+            </Chip>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
@@ -541,16 +594,28 @@ const SHOWCASES: Record<string, ReactNode> = {
             tags={["multiple: true", "filter chip"]}
           >
             <ChipGroup multiple defaultValue={["전자제품"]}>
-              <Chip value="전자제품">전자제품</Chip>
-              <Chip value="의류">의류</Chip>
-              <Chip value="식품">식품</Chip>
+              <Chip variant="outline" value="전자제품">
+                전자제품
+              </Chip>
+              <Chip variant="outline" value="의류">
+                의류
+              </Chip>
+              <Chip variant="outline" value="식품">
+                식품
+              </Chip>
             </ChipGroup>
           </ComponentCase>
           <ComponentCase label="single" tags={["multiple: false", "choice chip"]}>
             <ChipGroup defaultValue={["최신순"]}>
-              <Chip value="최신순">최신순</Chip>
-              <Chip value="인기순">인기순</Chip>
-              <Chip value="가격순">가격순</Chip>
+              <Chip variant="outline" value="최신순">
+                최신순
+              </Chip>
+              <Chip variant="outline" value="인기순">
+                인기순
+              </Chip>
+              <Chip variant="outline" value="가격순">
+                가격순
+              </Chip>
             </ChipGroup>
           </ComponentCase>
         </ComponentCaseGrid>
@@ -559,14 +624,16 @@ const SHOWCASES: Record<string, ReactNode> = {
       <ComponentCaseGroup title="Removable (Input chip)">
         <ComponentCaseGrid columns={2}>
           <ComponentCase label="leading icon + remove">
-            <Chip onRemove={() => toast("삭제: 디자인")}>
+            <Chip variant="outline" onRemove={() => toast("삭제: 디자인")}>
               <Icon icon={ICONS.user} />
               디자인
             </Chip>
-            <Chip onRemove={() => toast("삭제: 개발")}>개발</Chip>
+            <Chip variant="outline" onRemove={() => toast("삭제: 개발")}>
+              개발
+            </Chip>
           </ComponentCase>
-          <ComponentCase label="subtle + remove">
-            <Chip variant="subtle" size="sm" onRemove={() => toast("삭제: 태그")}>
+          <ComponentCase label="fill + remove">
+            <Chip variant="fill" size="sm" onRemove={() => toast("삭제: 태그")}>
               태그
             </Chip>
           </ComponentCase>
@@ -587,6 +654,19 @@ const SHOWCASES: Record<string, ReactNode> = {
               </ComponentCase>
             )
           })}
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Type">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="email" tags={["type: email", "EmailInput"]}>
+            <EmailInput className="max-w-xs" placeholder="name@example.com" />
+          </ComponentCase>
+          <ComponentCase label="password" tags={["type: password", "PasswordInput"]}>
+            <PasswordInput className="max-w-xs" placeholder="비밀번호" defaultValue="password" />
+          </ComponentCase>
+          <ComponentCase label="file" tags={["type: file", "FileInput"]}>
+            <FileInput className="max-w-xs" />
+          </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
       <ComponentCaseGroup title="Hypertext">
@@ -829,38 +909,36 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   checkbox: (
     <Showcase slug="checkbox">
-      <ComponentCaseGroup title="Type">
+      <ComponentCaseGroup title="Size">
         <ComponentCaseGrid columns={2}>
-          <ComponentCase label="icon" tags={["type: icon"]}>
-            <Checkbox aria-label="선택" defaultChecked />
+          <ComponentCase label="default_h20" tags={["size: default"]}>
+            <Checkbox size="default" defaultChecked aria-label="옵션" />
           </ComponentCase>
-          <ComponentCase label="default" tags={["type: default"]}>
-            <div className="flex items-center gap-2">
-              <Checkbox id="c-default" defaultChecked />
-              <Label htmlFor="c-default">선택</Label>
-            </div>
+          <ComponentCase label="md_h24" tags={["size: md"]}>
+            <Checkbox size="md" defaultChecked aria-label="옵션" />
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
       <ComponentCaseGroup title="State">
-        <ComponentCaseGrid columns={3}>
-          <ComponentCase label="16px" tags={["size-4", "16px", "icon: sm_14"]}>
-            <div className="flex items-center gap-2">
-              <Checkbox id="c-off" />
-              <Label htmlFor="c-off">미선택</Label>
-            </div>
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="unchecked" tags={["checked: false"]}>
+            <Checkbox aria-label="옵션" />
           </ComponentCase>
-          <ComponentCase label="checked · 16px" tags={["checked: true", "16px"]}>
-            <div className="flex items-center gap-2">
-              <Checkbox id="c-on" defaultChecked />
-              <Label htmlFor="c-on">선택</Label>
-            </div>
+          <ComponentCase label="checked" tags={["checked: true"]}>
+            <Checkbox defaultChecked aria-label="옵션" />
           </ComponentCase>
-          <ComponentCase label="disabled · 16px" tags={["disabled: true", "16px"]}>
-            <div className="flex items-center gap-2">
-              <Checkbox id="c-dis" disabled />
-              <Label htmlFor="c-dis">비활성</Label>
-            </div>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Composition">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="default" tags={["type: default", "aria-label"]}>
+            <Checkbox defaultChecked aria-label="옵션" />
+          </ComponentCase>
+          <ComponentCase label="with text" tags={["type: withText", "Label"]}>
+            <Label className="flex cursor-pointer items-center gap-2">
+              <Checkbox defaultChecked />
+              옵션
+            </Label>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
@@ -891,29 +969,65 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
+      <ComponentCaseGroup title="Composition (Label)">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="control only" tags={["composition"]}>
+            <Switch aria-label="알림" />
+          </ComponentCase>
+          <ComponentCase label="with Label" tags={["composition", "Label"]}>
+            <div className="flex max-w-xs items-center justify-between gap-4">
+              <Label htmlFor="sw-label">알림</Label>
+              <Switch id="sw-label" />
+            </div>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
     </Showcase>
   ),
 
   "radio-group": (
     <Showcase slug="radio-group">
-      <ComponentCaseGroup title="Type">
+      <ComponentCaseGroup title="Size">
         <ComponentCaseGrid columns={2}>
-          <ComponentCase label="icon" tags={["type: icon"]}>
-            <RadioGroup defaultValue="a" className="flex flex-row gap-3">
-              <RadioGroupItem value="a" aria-label="옵션 A" />
-              <RadioGroupItem value="b" aria-label="옵션 B" />
+          <ComponentCase label="default_h20" tags={["size: default"]}>
+            <RadioGroup defaultValue="on" size="default">
+              <RadioGroupItem value="on" aria-label="옵션" />
             </RadioGroup>
           </ComponentCase>
-          <ComponentCase label="default" tags={["type: default"]}>
-            <RadioGroup defaultValue="a">
-              <div className="flex items-center gap-2">
-                <RadioGroupItem value="a" id="r-a" />
-                <Label htmlFor="r-a">옵션 A</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <RadioGroupItem value="b" id="r-b" />
-                <Label htmlFor="r-b">옵션 B</Label>
-              </div>
+          <ComponentCase label="md_h24" tags={["size: md"]}>
+            <RadioGroup defaultValue="on" size="md">
+              <RadioGroupItem value="on" aria-label="옵션" />
+            </RadioGroup>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="State">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="unchecked" tags={["checked: false"]}>
+            <RadioGroup value={null}>
+              <RadioGroupItem value="on" aria-label="옵션" />
+            </RadioGroup>
+          </ComponentCase>
+          <ComponentCase label="checked" tags={["checked: true"]}>
+            <RadioGroup defaultValue="on">
+              <RadioGroupItem value="on" aria-label="옵션" />
+            </RadioGroup>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Composition">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="default" tags={["type: default", "aria-label"]}>
+            <RadioGroup defaultValue="on">
+              <RadioGroupItem value="on" aria-label="옵션" />
+            </RadioGroup>
+          </ComponentCase>
+          <ComponentCase label="with text" tags={["type: withText", "Label"]}>
+            <RadioGroup defaultValue="on">
+              <Label className="flex cursor-pointer items-center gap-2">
+                <RadioGroupItem value="on" />
+                옵션
+              </Label>
             </RadioGroup>
           </ComponentCase>
         </ComponentCaseGrid>
@@ -949,9 +1063,6 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
           <ComponentCase label="ghost" tags={["variant: ghost", "h20"]}>
             <Badge variant="ghost">ghost</Badge>
-          </ComponentCase>
-          <ComponentCase label="link" tags={["variant: link", "h20"]}>
-            <Badge variant="link">link</Badge>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
@@ -1026,20 +1137,20 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   avatar: (
     <Showcase slug="avatar">
-      <ComponentCaseGroup title="Type">
+      <ComponentCaseGroup title="Composition (슬롯)">
         <ComponentCaseGrid columns={3}>
-          <ComponentCase label="image" tags={["type: image"]}>
+          <ComponentCase label="AvatarImage" tags={["composition"]}>
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" alt="avatar" />
               <AvatarFallback>DS</AvatarFallback>
             </Avatar>
           </ComponentCase>
-          <ComponentCase label="initials" tags={["type: initials"]}>
+          <ComponentCase label="AvatarFallback" tags={["composition"]}>
             <Avatar>
               <AvatarFallback>AB</AvatarFallback>
             </Avatar>
           </ComponentCase>
-          <ComponentCase label="icon" tags={["type: icon"]}>
+          <ComponentCase label="AvatarIcon" tags={["composition"]}>
             <Avatar>
               <AvatarIcon icon={ICONS.user} />
             </Avatar>
@@ -1267,26 +1378,26 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
-      <ComponentCaseGroup title="Item">
+      <ComponentCaseGroup title="Composition — Item 슬롯">
         <ComponentCaseGrid columns={3}>
-          <ComponentCase label="leading icon" tags={["Icon · inline-start"]}>
+          <ComponentCase label="leading icon" tags={["composition", "Icon"]}>
             <DropdownMenuLeadingIconDemo />
           </ComponentCase>
-          <ComponentCase label="shortcut" tags={["DropdownMenuShortcut"]}>
+          <ComponentCase label="shortcut" tags={["composition", "Shortcut"]}>
             <DropdownMenuShortcutDemo />
           </ComponentCase>
-          <ComponentCase label="submenu" tags={["Sub · SubTrigger"]}>
+          <ComponentCase label="submenu" tags={["composition", "Sub"]}>
             <DropdownMenuSubmenuDemo />
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
 
-      <ComponentCaseGroup title="Selection">
+      <ComponentCaseGroup title="Composition — Selection">
         <ComponentCaseGrid columns={3}>
-          <ComponentCase label="single-select" tags={["RadioGroup · RadioItem"]}>
+          <ComponentCase label="single-select" tags={["composition", "RadioItem"]}>
             <DropdownMenuSingleSelectDemo />
           </ComponentCase>
-          <ComponentCase label="multi-select" tags={["CheckboxItem"]}>
+          <ComponentCase label="multi-select" tags={["composition", "CheckboxItem"]}>
             <DropdownMenuMultiSelectDemo />
           </ComponentCase>
           <ComponentCase label="icon + select" tags={["leading-icon · RadioItem"]}>
@@ -1325,94 +1436,99 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   dialog: (
     <Showcase slug="dialog">
-      <ComponentCaseGroup title="Header">
-        <ComponentCase label="showHeader" tags={["title", "description"]} flush>
-          <DialogFooterActionsPreview showHeader />
-        </ComponentCase>
-      </ComponentCaseGroup>
-
-      <ComponentCaseGroup title="Content — 옵션별">
+      <ComponentCaseGroup title="Shell">
         <ComponentCaseGrid columns={2}>
-          <ComponentCase label="showBodyText" tags={["본문 텍스트 한 줄"]} flush>
-            <DialogFooterActionsPreview
-              showContent
-              showBodyText
-              bodyText="본문 영역"
-            />
-          </ComponentCase>
-
           <ComponentCase
-            label="showList · listStyle=muted"
-            tags={["운영정책 목록"]}
+            label="default"
+            tags={["Header", "Content 슬롯", "Footer"]}
             flush
           >
             <DialogFooterActionsPreview
+              showHeader
               showContent
+              customContent
               showBodyText={false}
-              showList
-              listStyle="muted"
+              footerActions="2"
             />
           </ComponentCase>
-
           <ComponentCase
-            label="showList · listStyle=numbered"
-            tags={["공개 유의사항"]}
+            label="header 없음"
+            tags={["Content 슬롯", "Footer"]}
             flush
           >
             <DialogFooterActionsPreview
+              showHeader={false}
               showContent
+              customContent
               showBodyText={false}
-              showList
-              listStyle="numbered"
-            />
-          </ComponentCase>
-
-          <ComponentCase label="showConsent" tags={["동의 체크박스"]} flush>
-            <DialogFooterActionsPreview
-              showContent
-              showBodyText={false}
-              showConsent
-              consentText="운영정책에 동의합니다."
-            />
-          </ComponentCase>
-
-          <ComponentCase
-            label="showConfirmInput"
-            tags={["문구 입력 확인"]}
-            flush
-          >
-            <DialogFooterActionsPreview
-              showContent
-              showBodyText={false}
-              showConfirmInput
-              confirmPhrase="확인했습니다"
+              footerActions="2"
             />
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
 
-      <ComponentCaseGroup title="Footer — footerActions">
+      <ComponentCaseGroup title="Content 패턴">
         <ComponentCaseGrid columns={2}>
-          <ComponentCase label="1" tags={["primary only"]} flush>
+          <ComponentCase label="본문" tags={["텍스트"]} flush>
+            <DialogFooterActionsPreview
+              showContent
+              showBodyText
+              bodyText="이 작업을 진행할까요? 실행 후에는 되돌릴 수 없어요."
+              footerActions="2"
+            />
+          </ComponentCase>
+          <ComponentCase label="목록" tags={["안내 리스트"]} flush>
+            <DialogFooterActionsPreview
+              showContent
+              showBodyText={false}
+              showList
+              listStyle="muted"
+              footerActions="2"
+            />
+          </ComponentCase>
+          <ComponentCase label="동의" tags={["체크박스"]} flush>
+            <DialogFooterActionsPreview
+              showContent
+              showBodyText={false}
+              showConsent
+              consentText="운영정책에 동의합니다."
+              footerActions="2"
+            />
+          </ComponentCase>
+          <ComponentCase label="확인 입력" tags={["문구 입력"]} flush>
+            <DialogFooterActionsPreview
+              showContent
+              showBodyText={false}
+              showConfirmInput
+              confirmPhrase="확인했습니다"
+              footerActions="2"
+            />
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Footer">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="확인" tags={["1"]} flush>
             <DialogFooterActionsPreview
               footerActions="1"
-              showBodyText
+              customContent
+              showBodyText={false}
             />
           </ComponentCase>
-          <ComponentCase label="2" tags={["cancel + primary"]} flush>
+          <ComponentCase label="취소 + 확인" tags={["2"]} flush>
             <DialogFooterActionsPreview
               footerActions="2"
-              showBodyText
+              customContent
+              showBodyText={false}
             />
           </ComponentCase>
-          <ComponentCase
-            label="3"
-            tags={["cancel + secondary + primary"]}
-            flush
-          >
+          <ComponentCase label="3-way" tags={["3"]} flush>
             <DialogFooterActionsPreview
               footerActions="3"
-              showBodyText
+              customContent
+              showBodyText={false}
+              footerStack
             />
           </ComponentCase>
         </ComponentCaseGrid>
@@ -1488,15 +1604,15 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   alert: (
     <Showcase slug="alert">
-      <ComponentCaseGroup title="Type">
+      <ComponentCaseGroup title="Layout">
         <ComponentCaseGrid columns={2}>
-          <ComponentCase label="default" tags={["type: default"]}>
+          <ComponentCase label="default" tags={["type: default", "세로 스택"]}>
             <Alert type="default">
               <AlertTitle>알림</AlertTitle>
               <AlertDescription>아이콘 없는 인라인 메시지</AlertDescription>
             </Alert>
           </ComponentCase>
-          <ComponentCase label="icon" tags={["type: icon"]}>
+          <ComponentCase label="icon" tags={["type: icon", "선행 아이콘"]}>
             <Alert type="icon">
               <AlertTitle>알림</AlertTitle>
               <AlertDescription>아이콘이 포함된 메시지</AlertDescription>
@@ -1556,7 +1672,7 @@ const SHOWCASES: Record<string, ReactNode> = {
 
   sonner: (
     <Showcase slug="sonner">
-      <ComponentCaseGroup title="Type">
+      <ComponentCaseGroup title="Status (toast.type)">
         <ComponentCaseGrid columns={3}>
           <ComponentCase label="default" tags={["type: default"]}>
             <Button variant="outline" onClick={() => toast("기본 토스트")}>

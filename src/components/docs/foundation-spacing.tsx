@@ -72,7 +72,7 @@ export function FoundationSpacingShowcase() {
       <ShowcaseBlock name="Gap">
         <div className={docsSpace.stack}>
           {gapExamples.map((g) => (
-            <div key={g.utility}>
+            <div key={g.utility} className="flex flex-col gap-2">
               <p className={cn(docsSpace.headerBottom, docsType.bodyMuted)}>
                 <span className="font-mono text-foreground">{g.utility}</span>
                 {" · "}

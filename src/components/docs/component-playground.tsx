@@ -58,13 +58,11 @@ export function ComponentPlayground({ slug }: { slug: string }) {
   function updateState(key: string, value: string | boolean | number) {
     setState((current) => {
       const next = { ...current, [key]: value }
-      if (slug === "tabs" && key === "tabCount") {
-        const count = Math.min(4, Math.max(2, Number(value) || 2))
-        const tabValues = ["tab-1", "tab-2", "tab-3", "tab-4"].slice(0, count)
-        const currentDefault = String(next.defaultValue ?? "tab-1")
-        if (!tabValues.includes(currentDefault)) {
-          next.defaultValue = tabValues[0]
-        }
+      if (slug === "textarea" && key === "rows") {
+        next.rows = Math.min(8, Math.max(4, Number(value) || 4))
+      }
+      if (slug === "avatar" && key === "initials") {
+        next.initials = clampAvatarInitials(String(value))
       }
       if (
         (slug === "input" || slug === "label" || slug === "textarea") &&
@@ -76,11 +74,9 @@ export function ComponentPlayground({ slug }: { slug: string }) {
           next.hypertextCount = Math.min(max, Math.max(0, count))
         }
       }
-      if (slug === "textarea" && key === "rows") {
-        next.rows = Math.min(8, Math.max(4, Number(value) || 4))
-      }
-      if (slug === "avatar" && key === "initials") {
-        next.initials = clampAvatarInitials(String(value))
+      // Button link — 아이콘 type 불가, text로 되돌림
+      if (slug === "button" && key === "variant" && value === "link") {
+        next.type = "text"
       }
       return next
     })
@@ -170,7 +166,7 @@ export function ComponentPlayground({ slug }: { slug: string }) {
       return (
         <PlaygroundSwitch
           key={key}
-          label={key}
+          label={getPlaygroundControlLabel(slug, key, state)}
           checked={state[key] === true || state[key] === "true"}
           onCheckedChange={(checked) => updateState(key, checked)}
         />

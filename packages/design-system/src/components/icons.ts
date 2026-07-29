@@ -19,6 +19,7 @@ import {
   Download,
   Eye,
   EyeOff,
+  File,
   FileText,
   Film,
   GripVertical,
@@ -128,6 +129,7 @@ export const ICONS = {
   sparkles: Sparkles,
   messageSquareText: MessageSquareText,
   fileText: FileText,
+  file: File,
 
   // 상태·피드백
   info: Info,
