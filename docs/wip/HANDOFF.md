@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-07-29 17:33:52**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-07-29 18:01:20**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-07-29 17:33:47** — 그럼 DS 컴포넌트 실제 사용되고 있는게 어느정도야?
+- **2026-07-29 18:01:05** — 깃 오류나는지 검토
 
 ## 다음 작업 (Claude Code용)
 
@@ -23,25 +23,48 @@
 - 브랜치: `main`
 
 ```
+ M .cursor/rules/shadcn-design-system.mdc
  M DESIGN.md
  M docs/wip/HANDOFF.md
- M packages/design-system/src/spacing-tokens.ts
+ M packages/design-system/src/theme.css
  M packages/design-system/src/tokens.css
- M src/spacing-tokens.ts
+ M src/components/docs-sidebar.tsx
+ M src/lib/color-tokens.ts
+ M src/lib/semantic-token-sources.ts
+ M src/theme.css
+ M src/tokens.css
 ```
 
 ### diff 요약
 
 ```
- DESIGN.md                                    |  41 +--
- docs/wip/HANDOFF.md                          |  83 +----
- packages/design-system/src/spacing-tokens.ts | 273 +--------------
- packages/design-system/src/tokens.css        |  45 +--
- src/spacing-tokens.ts                        | 495 +--------------------------
- 5 files changed, 53 insertions(+), 884 deletions(-)
+ .cursor/rules/shadcn-design-system.mdc |  2 +-
+ DESIGN.md                              |  5 +---
+ docs/wip/HANDOFF.md                    | 42 ++++++++++++++++++++-------
+ packages/design-system/src/theme.css   |  8 ------
+ packages/design-system/src/tokens.css  | 19 +------------
+ src/components/docs-sidebar.tsx        | 12 ++++----
+ src/lib/color-tokens.ts                | 52 ----------------------------------
+ src/lib/semantic-token-sources.ts      | 31 --------------------
+ src/theme.css                          |  8 ------
+ src/tokens.css                         | 17 -----------
+ 10 files changed, 41 insertions(+), 155 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

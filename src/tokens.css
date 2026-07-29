@@ -246,15 +246,6 @@
   --chart-4: var(--brand-300);
   --chart-5: var(--brand-700);
 
-  /* 사이드바 — 호버·선택은 브랜드 */
-  --sidebar: var(--white);
-  --sidebar-foreground: var(--grayscale-140);
-  --sidebar-primary: var(--brand-500);
-  --sidebar-primary-foreground: var(--white);
-  --sidebar-accent: var(--brand-50);
-  --sidebar-accent-foreground: var(--brand-600);
-  --sidebar-border: var(--grayscale-20);
-  --sidebar-ring: var(--brand-500);
 }
 
 .dark {
@@ -334,12 +325,4 @@
   --chart-4: var(--brand-600);
   --chart-5: var(--brand-200);
 
-  --sidebar: var(--grayscale-140);
-  --sidebar-foreground: var(--grayscale-10);
-  --sidebar-primary: var(--brand-500);
-  --sidebar-primary-foreground: var(--white);
-  --sidebar-accent: var(--brand-800);
-  --sidebar-accent-foreground: var(--brand-100);
-  --sidebar-border: var(--grayscale-130);
-  --sidebar-ring: var(--brand-400);
 }

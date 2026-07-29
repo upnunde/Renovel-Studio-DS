@@ -50,7 +50,7 @@ function NavLink({
         "flex h-9 items-center rounded-full px-3 text-sm transition-colors",
         isActive
           ? "bg-primary font-medium text-primary-foreground"
-          : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[hovered=true]:bg-sidebar-accent data-[hovered=true]:text-sidebar-accent-foreground",
+          : "text-foreground hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground",
         className
       )}
       aria-current={isActive ? "page" : undefined}
@@ -75,7 +75,7 @@ function NavCollapsibleSection({
     <div className="space-y-0.5">
       <Link
         href={defaultHref}
-        className="flex h-9 items-center rounded-full px-3 text-sm text-sidebar-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[hovered=true]:bg-sidebar-accent data-[hovered=true]:text-sidebar-accent-foreground"
+        className="flex h-9 items-center rounded-full px-3 text-sm text-foreground transition-colors hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground"
       >
         {section.label}
       </Link>
@@ -149,7 +149,7 @@ function NavTabPanel({
       {groups.map((group, groupIndex) => (
         <Fragment key={group.title}>
           {groupIndex > 0 ? (
-            <Separator className="my-6 bg-sidebar-border" />
+            <Separator className="my-6 bg-border" />
           ) : null}
           <div>
             <div
@@ -191,7 +191,7 @@ function NavGroups({ activeHref }: { activeHref: string | null }) {
       }}
       className="flex min-h-0 flex-1 flex-col gap-0"
     >
-      <div className="shrink-0 border-b border-sidebar-border px-3 pt-0 pb-[1px]">
+      <div className="shrink-0 border-b border-border px-3 pt-0 pb-[1px]">
         <TabsList variant="line" size="sm" className="w-full">
           {docsNavTabs.map((item) => (
             <TabsTrigger key={item.id} value={item.id}>
@@ -219,7 +219,7 @@ export function DocsSidebar() {
   const activeHref = getActiveDocsNavHref(pathname)
 
   return (
-    <aside className="sticky top-0 flex h-svh w-56 shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar text-sidebar-foreground lg:w-60">
+    <aside className="sticky top-0 flex h-svh w-56 shrink-0 flex-col overflow-hidden border-r border-border bg-background text-foreground lg:w-60">
       <div className="shrink-0 px-4 py-5">
         <Link href="/foundation" className="block space-y-0.5">
           <p className="mb-2 text-xs font-medium uppercase tracking-widest text-foreground-muted">
@@ -231,7 +231,7 @@ export function DocsSidebar() {
 
       <NavGroups activeHref={activeHref} />
 
-      <div className="shrink-0 border-t border-sidebar-border px-4 py-4">
+      <div className="shrink-0 border-t border-border px-4 py-4">
         <div className="flex items-center justify-between gap-2">
           <span className="text-xs text-foreground-muted">Theme</span>
           <ModeToggle />

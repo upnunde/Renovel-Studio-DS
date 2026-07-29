@@ -96,7 +96,7 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 
 ### 2-1c. 시맨틱 alias (중복 제거)
 
-동일 원시값·역할이 겹치는 토큰은 `tokens.css`에서 **alias**로 단일 원천을 가리킨다. shadcn 클래스명(`bg-secondary`, `bg-popover`, `sidebar-*` 등)은 유지하고, 정본 값은 한 곳만 수정한다.
+동일 원시값·역할이 겹치는 토큰은 `tokens.css`에서 **alias**로 단일 원천을 가리킨다. shadcn 클래스명(`bg-secondary`, `bg-popover` 등)은 유지하고, 정본 값은 한 곳만 수정한다.
 
 | Alias | 가리키는 토큰 | 비고 |
 |-------|---------------|------|
@@ -106,9 +106,6 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 | `divider` (라이트) | `grayscale-15` | `border`와 동일 — 구분선 전용 |
 | `disabled` (면, 라이트) | `muted` | 다크는 전용 grayscale |
 | `disabled-border` (라이트) | `border` | |
-| `sidebar` | `background` | |
-| `sidebar-accent` | `accent` | |
-| `sidebar-border` | `border` (라이트) / `grayscale-130` (다크) | 사이드바 구분선 |
 | `secondary-container` (다크) | `muted` | 컴포넌트 미사용, API만 유지 |
 
 문서 Color Semantic 페이지의 **Maps to** 컬럼은 alias 체인을 표시한다.

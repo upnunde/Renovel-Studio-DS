@@ -59,14 +59,6 @@ const LIGHT: Record<string, string> = {
   "--chart-3": "brand-600",
   "--chart-4": "brand-300",
   "--chart-5": "brand-700",
-  "--sidebar": "white",
-  "--sidebar-foreground": "grayscale-140",
-  "--sidebar-primary": "brand-500",
-  "--sidebar-primary-foreground": "white",
-  "--sidebar-accent": "brand-50",
-  "--sidebar-accent-foreground": "brand-600",
-  "--sidebar-border": "grayscale-15",
-  "--sidebar-ring": "brand-500",
 }
 
 const DARK: Record<string, string> = {
@@ -129,14 +121,6 @@ const DARK: Record<string, string> = {
   "--chart-3": "brand-300",
   "--chart-4": "brand-600",
   "--chart-5": "brand-200",
-  "--sidebar": "grayscale-140",
-  "--sidebar-foreground": "grayscale-10",
-  "--sidebar-primary": "brand-500",
-  "--sidebar-primary-foreground": "white",
-  "--sidebar-accent": "brand-800",
-  "--sidebar-accent-foreground": "brand-100",
-  "--sidebar-border": "grayscale-130",
-  "--sidebar-ring": "brand-400",
 }
 
 /** tokens.css 시맨틱 alias — Maps to 컬럼에 체인 표시 */
@@ -148,14 +132,6 @@ const ALIAS_LIGHT: Record<string, string> = {
   "--popover-foreground": "--card-foreground",
   "--disabled": "--muted",
   "--disabled-border": "--border",
-  "--sidebar": "--background",
-  "--sidebar-foreground": "--foreground",
-  "--sidebar-primary": "--primary",
-  "--sidebar-primary-foreground": "--primary-foreground",
-  "--sidebar-accent": "--accent",
-  "--sidebar-accent-foreground": "--accent-foreground",
-  "--sidebar-border": "--border",
-  "--sidebar-ring": "--ring",
 }
 
 const ALIAS_DARK: Record<string, string> = {
@@ -165,13 +141,6 @@ const ALIAS_DARK: Record<string, string> = {
   "--popover": "--card",
   "--popover-foreground": "--card-foreground",
   "--secondary-container": "--muted",
-  "--sidebar": "--background",
-  "--sidebar-foreground": "--foreground",
-  "--sidebar-primary": "--primary",
-  "--sidebar-primary-foreground": "--primary-foreground",
-  "--sidebar-accent": "--accent",
-  "--sidebar-accent-foreground": "--accent-foreground",
-  "--sidebar-ring": "--ring",
 }
 
 function resolveRawSource(
