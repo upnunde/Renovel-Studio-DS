@@ -282,23 +282,23 @@ export const TABS_TEXT_TYPOGRAPHY = TABS_TYPOGRAPHY_BY_SIZE
  * text variant TabsList 항목 간격 — 개별 탭 padding으로 간격 확보, list gap은 0.
  */
 export const TABS_TEXT_LIST_GAP_BY_SIZE = {
-  sm: { className: "gap-0", px: 0, token: "0" },
-  default: { className: "gap-0", px: 0, token: "0" },
-  xl: { className: "gap-0", px: 0, token: "0" },
-  lg: { className: "gap-0", px: 0, token: "0" },
-  "2xl": { className: "gap-0", px: 0, token: "0" },
+  sm: { className: "gap-2", px: 8, token: "2" },
+  default: { className: "gap-3", px: 12, token: "3" },
+  xl: { className: "gap-4", px: 16, token: "4" },
+  lg: { className: "gap-4", px: 16, token: "4" },
+  "2xl": { className: "gap-5", px: 20, token: "5" },
 } as const satisfies Record<
   TabsSizeApi,
   { className: string; px: number; token: string }
 >
 
-/** text variant TabsTrigger 좌우 padding (px) */
+/** @deprecated text variant trigger padding은 제거됨 — list gap으로 전환 */
 export const TABS_TEXT_TRIGGER_PADDING_BY_SIZE = {
-  sm: 4,
-  default: 6,
-  lg: 8,
-  xl: 8,
-  "2xl": 12,
+  sm: 0,
+  default: 0,
+  lg: 0,
+  xl: 0,
+  "2xl": 0,
 } as const satisfies Record<TabsSizeApi, number>
 
 /** @deprecated TABS_TEXT_LIST_GAP_BY_SIZE 사용 */

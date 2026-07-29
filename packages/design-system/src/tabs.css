@@ -59,23 +59,7 @@
     padding-right: 5px;
   }
 
-  /* text — 개별 탭 좌우 padding · list gap은 0 */
-  [data-slot="tabs-list"][data-variant="text"][data-size="sm"] > [data-slot="tabs-trigger"] {
-    padding-inline: 4px;
-  }
-
-  [data-slot="tabs-list"][data-variant="text"][data-size="default"] > [data-slot="tabs-trigger"] {
-    padding-inline: 6px;
-  }
-
-  [data-slot="tabs-list"][data-variant="text"][data-size="lg"] > [data-slot="tabs-trigger"],
-  [data-slot="tabs-list"][data-variant="text"][data-size="xl"] > [data-slot="tabs-trigger"] {
-    padding-inline: 8px;
-  }
-
-  [data-slot="tabs-list"][data-variant="text"][data-size="2xl"] > [data-slot="tabs-trigger"] {
-    padding-inline: 12px;
-  }
+  /* text — padding 없음, list gap으로 간격 확보 */
 }
 
 /**
@@ -195,12 +179,15 @@
 
 [data-slot="tabs-list"][data-variant="line"]
   > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"]):hover,
-[data-slot="tabs-list"][data-variant="text"]
-  > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"]):hover,
 [data-slot="tabs-list"][data-variant="line"]
-  > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"])[data-hovered="true"],
-[data-slot="tabs-list"][data-variant="text"]
   > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"])[data-hovered="true"] {
   color: var(--foreground);
   background-color: var(--muted);
+}
+
+[data-slot="tabs-list"][data-variant="text"]
+  > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"]):hover,
+[data-slot="tabs-list"][data-variant="text"]
+  > [data-slot="tabs-trigger"]:not([data-active]):not([data-state="active"])[data-hovered="true"] {
+  color: var(--foreground);
 }

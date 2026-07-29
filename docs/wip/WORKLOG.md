@@ -12,6 +12,8 @@
 - **Spacing Semantic 축소** — 시맨틱 간격 토큰을 33개에서 7개(layout·overlay 핵심만)로 정리하고, 나머지는 원시 토큰(`gap-*`, `p-*`) 사용으로 전환
 - **런타임 오류 수정** — `SEMANTIC_SPACE_SECTION is not defined` 오류를 `src/spacing-tokens.ts` 패키지 re-export 동기화로 해결
 - **Sidebar 전용 시맨틱 제거** — `sidebar-*` 토큰/테마 매핑/문서 카테고리를 제거하고 `docs-sidebar`를 공통 토큰(`background`, `foreground`, `accent`, `border`)으로 재구성
+- **Tabs text variant 정리** — trigger 좌우 padding을 제거하고 `TabsList` gap으로 간격을 옮겨 정렬을 맞춤
+- **Tabs hover 정리** — text variant는 영역 배경 hover를 제거하고 텍스트 색상만 반응하도록 수정
 
 ## 다음에 할 일
 
@@ -24,8 +26,9 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: main
-- `packages/design-system/src/tokens.css` · `theme.css`
-- `src/components/docs-sidebar.tsx` · `src/lib/color-tokens.ts` · `src/lib/semantic-token-sources.ts`
+- `packages/design-system/src/components/ui/tabs.tsx`
+- `packages/design-system/src/tabs.css`
+- `packages/design-system/src/component-size-tokens.ts`
 
 ## 메모
 
