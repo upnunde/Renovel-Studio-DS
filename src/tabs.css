@@ -13,13 +13,13 @@
 /**
  * line · text variant — size별 타이포 (@layer 밖, utilities보다 우선)
  * component-size-tokens.ts · TABS_TYPOGRAPHY_BY_SIZE 와 1:1
- * 비활성: foreground-disabled · 활성: foreground
+ * 비활성·활성 모두 font-weight 700 · 색만 구분 (disabled / foreground)
  */
 [data-slot="tabs-list"][data-variant="line"][data-size="sm"] > [data-slot="tabs-trigger"],
 [data-slot="tabs-list"][data-variant="text"][data-size="sm"] > [data-slot="tabs-trigger"] {
   font-size: 14px;
   line-height: 20px;
-  font-weight: 400;
+  font-weight: 700;
   color: var(--foreground-disabled);
 }
 
@@ -41,7 +41,7 @@
 [data-slot="tabs-list"][data-variant="text"][data-size="default"] > [data-slot="tabs-trigger"] {
   font-size: 15px;
   line-height: 22px;
-  font-weight: 400;
+  font-weight: 700;
   color: var(--foreground-disabled);
 }
 
@@ -63,7 +63,7 @@
 [data-slot="tabs-list"][data-variant="text"][data-size="xl"] > [data-slot="tabs-trigger"] {
   font-size: 16px;
   line-height: 24px;
-  font-weight: 400;
+  font-weight: 700;
   color: var(--foreground-disabled);
 }
 
@@ -81,33 +81,11 @@
   color: var(--foreground);
 }
 
-[data-slot="tabs-list"][data-variant="line"][data-size="lg"] > [data-slot="tabs-trigger"],
-[data-slot="tabs-list"][data-variant="text"][data-size="lg"] > [data-slot="tabs-trigger"] {
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 500;
-  color: var(--foreground-disabled);
-}
-
-[data-slot="tabs-list"][data-variant="line"][data-size="lg"]
-  > [data-slot="tabs-trigger"][data-active],
-[data-slot="tabs-list"][data-variant="line"][data-size="lg"]
-  > [data-slot="tabs-trigger"][data-state="active"],
-[data-slot="tabs-list"][data-variant="text"][data-size="lg"]
-  > [data-slot="tabs-trigger"][data-active],
-[data-slot="tabs-list"][data-variant="text"][data-size="lg"]
-  > [data-slot="tabs-trigger"][data-state="active"] {
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 700;
-  color: var(--foreground);
-}
-
 [data-slot="tabs-list"][data-variant="line"][data-size="2xl"] > [data-slot="tabs-trigger"],
 [data-slot="tabs-list"][data-variant="text"][data-size="2xl"] > [data-slot="tabs-trigger"] {
   font-size: 20px;
   line-height: 28px;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--foreground-disabled);
 }
 

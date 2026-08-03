@@ -7,13 +7,12 @@ import { ICONS } from "../icons"
 import { Button } from "./button"
 import { Icon } from "./icon"
 
-type InputSize = "sm" | "default" | "lg" | "xl" | "2xl" | null | undefined
+type InputSize = "sm" | "default" | "xl" | "2xl" | null | undefined
 
 export function inputEndActionSize(size: InputSize): "icon-xs" | "icon-sm" {
   switch (size) {
     case "sm":
       return "icon-xs"
-    case "lg":
     case "xl":
     case "2xl":
       return "icon-sm"

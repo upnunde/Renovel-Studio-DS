@@ -19,7 +19,6 @@ const inputVariants = cva(
       size: {
         sm: "h-8 rounded-[min(var(--radius-md),12px)] px-2 text-body4_400 !leading-8",
         default: "h-9 text-body3_400 !leading-9",
-        lg: "h-[42px] text-body3_400 !leading-[42px]",
         xl: "h-10 px-3 text-body2_400 !leading-10",
         "2xl": "h-12 px-3 text-body1_400 !leading-12",
       },
