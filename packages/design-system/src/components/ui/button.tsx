@@ -41,7 +41,6 @@ const buttonVariants = cva(
           "h-9 min-w-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         xs: "h-6 min-w-6 gap-1 px-2 text-xs has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-8 min-w-8 gap-1 px-2.5 text-[0.8rem] has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-[42px] min-w-[42px] gap-1.5 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
         xl: "h-10 min-w-10 gap-1.5 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
         "2xl":
           "h-12 min-w-12 gap-2 px-3 text-base has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
@@ -49,7 +48,6 @@ const buttonVariants = cva(
         "icon-xs":
           "aspect-square size-6 w-6 p-0 [&_svg:not([class*='size-'])]:size-3",
         "icon-sm": "aspect-square size-8 w-8 p-0",
-        "icon-lg": "aspect-square size-[42px] w-[42px] p-0",
         "icon-xl": "aspect-square size-10 w-10 p-0",
         "icon-2xl":
           "aspect-square size-12 w-12 p-0 [&_svg:not([class*='size-'])]:size-5",

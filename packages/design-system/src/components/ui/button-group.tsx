@@ -25,7 +25,6 @@ const buttonGroupVariants = cva(
         sm: "[&>button]:h-8 [&>button]:px-2.5 [&>button]:text-[0.8rem] [&>input]:h-8 [&_button]:h-8",
         default: "[&>button]:h-9 [&>input]:h-9 [&_button]:h-9",
         xl: "[&>button]:h-10 [&>input]:h-10 [&_button]:h-10",
-        lg: "[&>button]:h-[42px] [&>input]:h-[42px] [&_button]:h-[42px]",
         "2xl":
           "[&>button]:h-12 [&>button]:text-base [&>input]:h-12 [&_button]:h-12",
       },

@@ -57,14 +57,6 @@ export const CONTROL_SIZE_SCALE: ControlSizeToken[] = [
     description: "대형 폼·터치 영역",
   },
   {
-    label: "lg_h42",
-    api: "lg",
-    heightPx: 42,
-    rem: "2.625rem",
-    tailwind: "h-[42px]",
-    description: "강조 버튼·헤더 액션",
-  },
-  {
     label: "2xl_h48",
     api: "2xl",
     heightPx: 48,
@@ -107,14 +99,6 @@ export const CONTROL_ICON_SIZE_SCALE: ControlSizeToken[] = [
     rem: "2.5rem",
     tailwind: "size-10",
     description: "대형 아이콘 버튼",
-  },
-  {
-    label: "lg_s42",
-    api: "icon-lg",
-    heightPx: 42,
-    rem: "2.625rem",
-    tailwind: "size-[42px]",
-    description: "강조 아이콘 버튼",
   },
   {
     label: "2xl_s48",
@@ -161,8 +145,8 @@ export const ICON_GLYPH_SCALE: IconGlyphToken[] = [
     sizePx: 18,
     rem: "1.125rem",
     variable: "--icon-size-lg",
-    controlLabel: "lg_h42",
-    description: "강조 버튼·헤더 액션",
+    controlLabel: "xl_h40",
+    description: "대형 폼·터치 컨트롤 짝 글리프",
   },
   {
     label: "xl_g20",
@@ -187,7 +171,6 @@ export type ControlTextSizeApi =
   | "sm"
   | "default"
   | "xl"
-  | "lg"
   | "2xl"
 
 /** xs 제외 폼·토글 컨트롤 size API 타입 */
@@ -261,15 +244,14 @@ export type TabsSizeApi = ControlFormSizeApi
 export const TABS_SIZE_APIS = CONTROL_FORM_SIZE_APIS
 
 /**
- * line · text variant 탭 타이포 — TabsList size(h) 단계별 (비활성/활성).
- * 2xl_h48 이 최대 — 하위 size는 body·heading 스케일에 맞춤.
+ * line · text variant 탭 타이포 — TabsList size(h) 단계별.
+ * 비활성·활성 모두 700 — 색상만 구분 (disabled / foreground).
  */
 export const TABS_TYPOGRAPHY_BY_SIZE = {
-  sm: { inactive: "text-body3_400", active: "text-body3_700", label: "14_20" },
-  default: { inactive: "text-body2_400", active: "text-body2_700", label: "15_22" },
-  xl: { inactive: "text-body1_400", active: "text-body1_700", label: "16_24" },
-  lg: { inactive: "text-heading5_500", active: "text-heading5_700", label: "18_26" },
-  "2xl": { inactive: "text-heading4_500", active: "text-heading4_700", label: "20_28" },
+  sm: { inactive: "text-body3_700", active: "text-body3_700", label: "14_20" },
+  default: { inactive: "text-body2_700", active: "text-body2_700", label: "15_22" },
+  xl: { inactive: "text-body1_700", active: "text-body1_700", label: "16_24" },
+  "2xl": { inactive: "text-heading4_700", active: "text-heading4_700", label: "20_28" },
 } as const satisfies Record<
   TabsSizeApi,
   { inactive: string; active: string; label: string }
@@ -279,26 +261,28 @@ export const TABS_TYPOGRAPHY_BY_SIZE = {
 export const TABS_TEXT_TYPOGRAPHY = TABS_TYPOGRAPHY_BY_SIZE
 
 /**
- * text variant TabsList 항목 간격 — 개별 탭 padding으로 간격 확보, list gap은 0.
+ * line · text variant TabsList 항목 간격 — 개별 탭 padding 제거 후 list gap으로 간격 확보.
+ * line/text 동일 값 (text 기준).
  */
 export const TABS_TEXT_LIST_GAP_BY_SIZE = {
-  sm: { className: "gap-0", px: 0, token: "0" },
-  default: { className: "gap-0", px: 0, token: "0" },
-  xl: { className: "gap-0", px: 0, token: "0" },
-  lg: { className: "gap-0", px: 0, token: "0" },
-  "2xl": { className: "gap-0", px: 0, token: "0" },
+  sm: { className: "gap-2", px: 8, token: "2" },
+  default: { className: "gap-3", px: 12, token: "3" },
+  xl: { className: "gap-4", px: 16, token: "4" },
+  "2xl": { className: "gap-5", px: 20, token: "5" },
 } as const satisfies Record<
   TabsSizeApi,
   { className: string; px: number; token: string }
 >
 
-/** text variant TabsTrigger 좌우 padding (px) */
+/** @deprecated TABS_TEXT_LIST_GAP_BY_SIZE 사용 (line·text 공용) */
+export const TABS_LINE_LIST_GAP_BY_SIZE = TABS_TEXT_LIST_GAP_BY_SIZE
+
+/** @deprecated text variant trigger padding은 제거됨 — list gap으로 전환 */
 export const TABS_TEXT_TRIGGER_PADDING_BY_SIZE = {
-  sm: 4,
-  default: 6,
-  lg: 8,
-  xl: 8,
-  "2xl": 12,
+  sm: 0,
+  default: 0,
+  xl: 0,
+  "2xl": 0,
 } as const satisfies Record<TabsSizeApi, number>
 
 /** @deprecated TABS_TEXT_LIST_GAP_BY_SIZE 사용 */
@@ -320,7 +304,6 @@ export function controlSizeToButtonPxClass(api: string): string {
     case "sm":
     case "default":
       return "px-2.5"
-    case "lg":
     case "xl":
     case "2xl":
       return "px-3"
@@ -396,9 +379,8 @@ export function iconGlyphCaseMeta(api: string) {
 }
 
 /** 텍스트 컨트롤 size → Icon size prop
- *  컨트롤은 용도별 6단계(xs/sm/default/xl/lg/2xl), 글리프는 시각 단위 5단계.
- *  xl(h40)·lg(h42)는 2px 차이라 같은 글리프(lg=18px)를 공유한다 — 두 단계의 차이는
- *  높이가 아니라 용도(폼·터치 vs 강조·헤더 액션)이기 때문.
+ *  컨트롤 5단계(xs/sm/default/xl/2xl), 글리프 5단계.
+ *  xl(h40) → lg(18px) 글리프.
  */
 export function controlSizeToIconGlyph(
   api: string
@@ -408,7 +390,6 @@ export function controlSizeToIconGlyph(
       return "xs"
     case "sm":
       return "sm"
-    case "lg":
     case "xl":
       return "lg"
     case "2xl":
@@ -419,7 +400,7 @@ export function controlSizeToIconGlyph(
 }
 
 /** 아이콘 전용 버튼 size → Icon size prop
- *  매핑 의도는 controlSizeToIconGlyph 와 동일 — icon-xl·icon-lg 모두 lg(18px) 공유.
+ *  매핑 의도는 controlSizeToIconGlyph 와 동일 — icon-xl → lg(18px).
  */
 export function iconButtonSizeToIconGlyph(
   api: string
@@ -429,8 +410,6 @@ export function iconButtonSizeToIconGlyph(
       return "xs"
     case "icon-sm":
       return "sm"
-    case "icon-lg":
-      return "lg"
     case "icon-xl":
       return "lg"
     case "icon-2xl":

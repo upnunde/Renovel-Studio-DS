@@ -241,7 +241,7 @@ const SHOWCASES: Record<string, ReactNode> = {
 
       <ComponentCaseGroup title="Leading icon">
         <ComponentCaseGrid columns={3}>
-          {(["sm", "default", "lg"] as const).map((size) => {
+          {(["sm", "default", "xl"] as const).map((size) => {
             const meta = controlCaseMeta(size)
             return (
               <ComponentCase key={size} label={meta.label} tags={meta.tags}>
@@ -315,8 +315,8 @@ const SHOWCASES: Record<string, ReactNode> = {
               <Button variant="outline">오른쪽</Button>
             </ButtonGroup>
           </ComponentCase>
-          <ComponentCase label="lg (h42)" tags={["size: lg"]}>
-            <ButtonGroup size="lg">
+          <ComponentCase label="xl (h40)" tags={["size: xl"]}>
+            <ButtonGroup size="xl">
               <Button variant="outline">왼쪽</Button>
               <Button variant="outline">가운데</Button>
               <Button variant="outline">오른쪽</Button>
@@ -398,7 +398,7 @@ const SHOWCASES: Record<string, ReactNode> = {
 
       <ComponentCaseGroup title="Button size (개별)">
         <ComponentCaseGrid columns={3}>
-          {(["sm", "default", "lg"] as const).map((size) => {
+          {(["sm", "default", "xl"] as const).map((size) => {
             const meta = controlCaseMeta(size)
             return (
               <ComponentCase key={size} label={meta.label} tags={meta.tags}>
