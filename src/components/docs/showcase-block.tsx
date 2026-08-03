@@ -32,7 +32,7 @@ export function ShowcaseBlock({
           {name ? (
             <Heading
               id={headingId ?? (name ? docsTocId(name) : undefined)}
-              className={cn(docsType.sectionTitle, "scroll-mt-10")}
+              className="scroll-mt-10 text-body1_700 text-foreground"
             >
               {name}
             </Heading>

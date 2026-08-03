@@ -5,9 +5,10 @@
 
 ## 오늘 한 일
 
-- **Tabs line/text gap 통일** — list gap을 text 기준으로 공유하고, line 투명 border를 제거해 체감 간격 맞춤
-- **Tabs line/text 타이포** — 비활성·활성 모두 font-weight 700으로 통일 (색만 구분)
-- **컨트롤 size `lg_h42` 제거** — Button/Input/Select/Toggle/Tabs/ButtonGroup과 토큰·쇼케이스·DESIGN.md에서 42px 단계 삭제 (스케일 5단계)
+- **Color Semantic 문서** — Preview를 프레임(배경) 스와치로 통일, M3 표기 컬럼·Surface/On Surface 분류, 카테고리 좌측 보더 wrapper 제거
+- **DESIGN.md** — 코드=shadcn / 표기=M3 이원 원칙·매핑표 정리
+- **Typography Token 표기** — `heading1_32_700` 형식만 표시하도록 단순화
+- **ShowcaseBlock 제목** — `text-body1_700` 적용
 
 ## 다음에 할 일
 
@@ -20,9 +21,8 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: main
-- `packages/design-system/src/component-size-tokens.ts`
-- `packages/design-system/src/components/ui/{button,button-group,input,select,toggle,tabs}.tsx`
-- `DESIGN.md`
+- `src/lib/color-tokens.ts` · `src/components/color-semantic-palette.tsx`
+- `DESIGN.md` · `packages/design-system/src/typography-display.ts`
 
 ## 메모
 

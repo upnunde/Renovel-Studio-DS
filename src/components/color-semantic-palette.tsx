@@ -44,27 +44,24 @@ function SemanticTokenRow({ token }: { token: ColorToken }) {
   const { resolvedTheme } = useTheme()
   const theme = resolvedTheme === "dark" ? "dark" : "light"
   const source = getSemanticTokenSource(token.variable, theme)
-  const isForeground =
-    token.name.endsWith("-foreground") || token.name === "foreground"
 
   return (
     <DocsTableRow>
       <DocsTableTd>
-        <DocsColorSwatch
-          className={cn(
-            "flex items-center justify-center text-sm font-medium",
-            isForeground && "bg-background"
-          )}
-          style={
-            isForeground
-              ? { color: `var(${token.variable})` }
-              : { background: `var(${token.variable})` }
-          }
-        >
-          {isForeground ? "Aa" : null}
-        </DocsColorSwatch>
+        <DocsColorSwatch style={{ background: `var(${token.variable})` }} />
       </DocsTableTd>
-      <DocsTableTd mono>{token.name}</DocsTableTd>
+      <DocsTableTd>
+        {token.m3 ? (
+          <div className="flex flex-col gap-0.5">
+            <span className="font-medium">{token.m3}</span>
+            <span className={cn(docsType.tableMono, "text-foreground-muted")}>
+              {token.name}
+            </span>
+          </div>
+        ) : (
+          <span className={docsType.tableMono}>{token.name}</span>
+        )}
+      </DocsTableTd>
       <DocsTableTd mono muted>
         {token.variable}
       </DocsTableTd>
@@ -82,7 +79,7 @@ function SemanticTokenGroup({ group }: { group: TokenGroup }) {
         <DocsTableHead>
           <DocsTableHeaderRow>
             <DocsTableTh>Preview</DocsTableTh>
-            <DocsTableTh>Token</DocsTableTh>
+            <DocsTableTh>Token (M3)</DocsTableTh>
             <DocsTableTh>Variable</DocsTableTh>
             <DocsTableTh>Role</DocsTableTh>
             <DocsTableTh>Maps to</DocsTableTh>
@@ -103,15 +100,16 @@ function SemanticTokenCategory({ category }: { category: TokenCategory }) {
     <section className={docsSpace.stackGap}>
       <h2
         id={category.id}
-        className={cn(docsType.sectionTitle, "scroll-mt-10")}
+        className={cn(
+          docsType.sectionTitle,
+          "scroll-mt-10 border-b border-border pb-3"
+        )}
       >
         {category.title}
       </h2>
-      <div className={docsSpace.stack}>
-        {category.groups.map((group) => (
-          <SemanticTokenGroup key={group.id} group={group} />
-        ))}
-      </div>
+      {category.groups.map((group) => (
+        <SemanticTokenGroup key={group.id} group={group} />
+      ))}
     </section>
   )
 }

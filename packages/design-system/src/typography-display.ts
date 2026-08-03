@@ -1,8 +1,8 @@
 import type { FontFamilyToken, TypographyToken } from "./typography-tokens"
 
-/** text-body3_500 · body3_500 · 14/20px · 500 */
+/** heading1_32_700 · body3_14_500 */
 export function formatTypographyToken(token: TypographyToken): string {
-  return `${token.label} · ${token.className} · ${token.fontSizePx}/${token.lineHeightPx}px · ${token.fontWeight}`
+  return `${token.group}${token.rank}_${token.fontSizePx}_${token.fontWeight}`
 }
 
 /** sans · font-sans · Pretendard Variable · 100–900 */

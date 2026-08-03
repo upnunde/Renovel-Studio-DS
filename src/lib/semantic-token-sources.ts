@@ -7,10 +7,8 @@ const LIGHT: Record<string, string> = {
   "--card-foreground": "grayscale-140",
   "--background-muted": "grayscale-10",
   "--background-muted-foreground": "grayscale-140",
-  "--card-muted": "grayscale-10",
-  "--card-muted-foreground": "grayscale-140",
-  "--popover": "white",
-  "--popover-foreground": "grayscale-140",
+  // --card-muted / --card-muted-foreground / --popover / --popover-foreground:
+  // ALIAS_LIGHT 체인으로 해석 (resolveRawSource가 alias 우선) — 여기 중복 선언 안 함
   "--inverse": "grayscale-130",
   "--inverse-foreground": "white",
   "--inverse-muted": "grayscale-110",
@@ -22,7 +20,7 @@ const LIGHT: Record<string, string> = {
   "--primary-foreground": "white",
   "--primary-container": "brand-100",
   "--primary-container-foreground": "brand-500",
-  "--secondary": "grayscale-10",
+  // --secondary: ALIAS_LIGHT 체인(--muted) 으로 해석 — 중복 선언 안 함
   "--secondary-foreground": "grayscale-140",
   "--secondary-container": "grayscale-110",
   "--secondary-container-foreground": "white",
@@ -50,9 +48,8 @@ const LIGHT: Record<string, string> = {
   "--info-foreground": "white",
   "--border": "grayscale-15",
   "--input": "grayscale-20",
-  "--disabled": "grayscale-10",
+  // --disabled: ALIAS_LIGHT 체인(--muted), --disabled-border: 체인(--border) 으로 해석
   "--disabled-foreground": "grayscale-60",
-  "--disabled-border": "grayscale-15",
   "--ring": "brand-500",
   "--chart-1": "brand-500",
   "--chart-2": "brand-400",
@@ -69,10 +66,8 @@ const DARK: Record<string, string> = {
   "--card-foreground": "grayscale-10",
   "--background-muted": "grayscale-130",
   "--background-muted-foreground": "grayscale-10",
-  "--card-muted": "grayscale-130",
-  "--card-muted-foreground": "grayscale-10",
-  "--popover": "grayscale-140",
-  "--popover-foreground": "grayscale-10",
+  // --card-muted / --card-muted-foreground / --popover / --popover-foreground:
+  // ALIAS_DARK 체인으로 해석 (resolveRawSource가 alias 우선) — 여기 중복 선언 안 함
   "--inverse": "grayscale-10",
   "--inverse-foreground": "grayscale-140",
   "--inverse-muted": "grayscale-20",
@@ -84,9 +79,8 @@ const DARK: Record<string, string> = {
   "--primary-foreground": "white",
   "--primary-container": "brand-800",
   "--primary-container-foreground": "brand-100",
-  "--secondary": "grayscale-130",
+  // --secondary: 체인(--muted), --secondary-container: 체인(--muted) 으로 해석 (ALIAS_DARK)
   "--secondary-foreground": "grayscale-10",
-  "--secondary-container": "grayscale-130",
   "--secondary-container-foreground": "white",
   "--muted": "grayscale-130",
   "--muted-foreground": "grayscale-70",

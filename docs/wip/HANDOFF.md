@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-03 10:46:52**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-03 19:23:41**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-03 10:46:01** — 커밋 깃푸시
+- **2026-08-03 19:23:14** — 커밋 푸시
 
 ## 다음 작업 (Claude Code용)
 
@@ -26,46 +26,38 @@
  M DESIGN.md
  M docs/wip/HANDOFF.md
  M docs/wip/WORKLOG.md
- M packages/design-system/src/component-size-tokens.ts
- M packages/design-system/src/components/ui/button-group.tsx
- M packages/design-system/src/components/ui/button.tsx
- M packages/design-system/src/components/ui/input-clear-button.tsx
- M packages/design-system/src/components/ui/input.tsx
- M packages/design-system/src/components/ui/select.tsx
- M packages/design-system/src/components/ui/tabs.tsx
- M packages/design-system/src/components/ui/toggle.tsx
- M packages/design-system/src/tabs.css
- M src/component-size-tokens.ts
- M src/components/docs/component-showcases.tsx
- M src/components/ui/select.tsx
- M src/components/ui/toggle.tsx
- M src/tabs.css
+ M packages/design-system/src/typography-display.ts
+ M src/components/color-semantic-palette.tsx
+ M src/components/docs/showcase-block.tsx
+ M src/lib/color-tokens.ts
+ M src/lib/semantic-token-sources.ts
+ M src/typography-display.ts
 ```
 
 ### diff 요약
 
 ```
- DESIGN.md                                          |  5 +-
- docs/wip/HANDOFF.md                                | 44 +++++++++-
- docs/wip/WORKLOG.md                                | 20 ++---
- .../design-system/src/component-size-tokens.ts     | 67 ++++------------
- .../src/components/ui/button-group.tsx             |  1 -
- .../design-system/src/components/ui/button.tsx     |  2 -
- .../src/components/ui/input-clear-button.tsx       |  3 +-
- packages/design-system/src/components/ui/input.tsx |  1 -
- .../design-system/src/components/ui/select.tsx     |  4 +-
- packages/design-system/src/components/ui/tabs.tsx  | 37 ++-------
- .../design-system/src/components/ui/toggle.tsx     |  1 -
- packages/design-system/src/tabs.css                | 32 ++------
- src/component-size-tokens.ts                       | 71 ++++++-----------
- src/components/docs/component-showcases.tsx        |  8 +-
- src/components/ui/select.tsx                       |  4 +-
- src/components/ui/toggle.tsx                       |  1 -
- src/tabs.css                                       | 93 ++++------------------
- 17 files changed, 124 insertions(+), 270 deletions(-)
+ DESIGN.md                                        |  50 +++++-
+ docs/wip/HANDOFF.md                              |  62 +++----
+ docs/wip/WORKLOG.md                              |  12 +-
+ packages/design-system/src/typography-display.ts |   4 +-
+ src/components/color-semantic-palette.tsx        |  44 +++--
+ src/components/docs/showcase-block.tsx           |   2 +-
+ src/lib/color-tokens.ts                          | 213 +++++++++++++++--------
+ src/lib/semantic-token-sources.ts                |  20 +--
+ src/typography-display.ts                        |   4 +-
+ 9 files changed, 243 insertions(+), 168 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
+
+
+
 
 
 

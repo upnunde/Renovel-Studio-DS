@@ -17,30 +17,55 @@ shadcn/ui (`base-nova`)의 구조를 **절대 깨지 않는다**. 그 안에서 
 - `variant`/`size`/`asChild` 같은 props 네이밍 변경
 - shadcn 컴포넌트를 다른 추상화로 대체
 - shadcn에 없는 새 패러다임 도입
-- Material 용어(`on-surface`, `text-secondary` 등) 신설
+- **코드 레이어**(CSS 변수·토큰명·클래스·props)에 Material 용어 신설 — 예: `--on-surface`, `bg-on-surface` 같은 CSS 변수·클래스는 만들지 않는다. 실제 토큰명은 shadcn 유전자 유지 (`--background`, `--card`, `bg-muted` 등)
 
 **하는 것:**
 - shadcn 컴포넌트 내부 구현 수정·확장 (스타일, variant 추가, props 추가)
 - 새 variant·새 size 토큰을 shadcn 패턴에 맞춰 추가
 - shadcn 위에 복합 패턴(FormField, PageHeader 등) 구성
 - Material Design 이론을 **토큰·스타일 레이어에서만** 차용 (컴포넌트 API에는 노출 안 함)
+- **문서·팔레트 표기 기준을 Material 3 역할명으로** 제시 — 작업자·디자이너의 인지 기준은 M3(예: `--background`=Surface, `--canvas`=Background). 코드는 shadcn, 표기는 M3. 상세는 §1-2.
 
 ### 1-2. Material Design 부분 차용
 
-Material Design 3의 이론적 토대를 **선택적으로** 흡수한다. **명명은 shadcn 컨벤션을 유지**.
+Material Design 3의 이론적 토대를 **선택적으로** 흡수한다.
 
-| M3 개념 | 적용 | 명명 |
+**명명 이원 원칙 — 코드는 shadcn, 표기는 M3.**
+
+| 레이어 | 기준 | 예 |
+|--------|------|-----|
+| **코드** (CSS 변수·Tailwind 클래스·props) | shadcn 유전자 유지 | `--background`, `bg-card`, `text-muted-foreground` |
+| **문서·팔레트 표기** (작업자·디자이너 인지 기준) | **Material 3 역할명** | Surface, Surface Container High, On Surface Variant |
+
+**왜:** shadcn 토큰명(`background`/`card`/`muted`)은 "면의 역할"이 이름만으로 드러나지 않아 작업자가 혼동한다(예: `canvas` vs `background` 중 무엇이 더 바닥인가). M3 역할 어휘(Background < Surface < Surface Container …)는 위계·용도가 명시적이다. 그래서 **코드의 shadcn 유전자는 그대로 두고**, 사람이 읽는 표기 기준만 M3로 통일한다. 색상 시맨틱 문서(`/foundation/color-semantic`)의 **Token (M3)** 컬럼이 이 매핑의 정본이다.
+
+| M3 개념 | 적용 | 코드 토큰(shadcn) |
 |---------|------|------|
-| Container 페어 | ✓ | shadcn `{role}-foreground` 형식으로 |
-| Inverse surface | ✓ | `inverse` / `inverse-foreground` · `inverse-muted` / `inverse-muted-foreground` |
+| Background | ✓ | `--canvas` |
+| Surface | ✓ | `--background` |
+| Surface Container | ✓ | `--background-muted` · `--card-muted`(= Surface Container (Card)) |
+| Surface (Card·Popover) | ✓ | `--card` · `--popover` — **값은 `background`와 동일**. 깊이는 surface 틴트가 아니라 `shadow-elevation-*`가 담당(§1-2 "Surface container 5단계 ✗"). 표기는 `Surface (Card)` / `Surface (Popover)`로 역할만 구분 |
+| On Surface | ✓ | `--foreground` · `--background-muted-foreground`(On Surface Container) · `--card-foreground`(On Surface (Card)) 등 면별 `On …` |
+| On Surface Muted · Placeholder · Disabled | ✓ | `--foreground-muted` / `--foreground-placeholder` / `--foreground-disabled` (흐린 위계) |
+| Surface Variant / On Surface Variant | ✓ | `--muted` / `--muted-foreground` (무채색 fill) |
+| Secondary / On Secondary | ✓ | `--secondary` / `--secondary-foreground` (muted alias, 역할 분리) |
+| Inverse Surface (+ Container) | ✓ | `--inverse` / `--inverse-muted` + `On Inverse Surface` = `--inverse-foreground` 등 |
+| Primary / On Primary (+ Container) | ✓ | `--primary` / `--primary-foreground` / `--primary-container` |
+| Focus Ring | ✓ | `--ring` (primary 값, 포커스 인디케이터) |
+| Secondary Container (하이라이트) | ✓ | `--accent` (브랜드 틴트) |
+| Error (+ Container) | ✓ | `--destructive` (+ `-container`) |
+| Outline (기본·Strong·Inverse) · Input Outline | ✓ | `--border` / `--border-strong` / `--border-inverse` / `--input` |
+| Outline Variant (+ Strong) | ✓ | `--divider` / `--divider-strong` |
+| Disabled Surface · On Disabled Surface · Disabled Outline | ✓ | `--disabled` / `--disabled-foreground` / `--disabled-border` |
+| Scrim (10·20·30·40) | ✓ | `--dim-10/20/30/40` |
 | Elevation 6단계 | ✓ | `shadow-elevation-10` ~ `-60` |
 | Motion easing 곡선 | ✓ | M3 cubic-bezier 값 그대로 |
 | Motion duration | △ | 3단계만 (short/medium/long) |
-| Scrim/Dim | ✓ | `dim-10/20/30` |
-| Outline + outline-variant | ✓ | `border` + `divider` |
-| Surface container 5단계 | ✗ | 미적용 |
 | State layer 토큰 | ✗ | 미적용 (컴포넌트 내부 처리) |
 | Typography 5-tier | ✗ | heading/body/caption 3-tier (한국 앱 컨벤션) |
+
+> **모든 M3 표기 라벨은 문서 전체에서 고유하다** — 같은 M3 역할을 여러 토큰이 공유하더라도(예: 중립 텍스트는 M3상 전부 On Surface), 표기는 면별·위계별로 세분(`On Surface Container High`, `On Surface Muted` 등)해 표에서 같은 이름이 반복되지 않게 한다. 사용자가 행을 이름만으로 구분할 수 있어야 하기 때문.
+> M3에 대응 역할이 없는 토큰(예: `chart-1~5`)은 표기도 shadcn stem을 그대로 쓴다.
 
 ---
 
@@ -140,11 +165,18 @@ className="hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted dat
 본문보다 흐린 텍스트가 일반 surface 위에 놓일 때 사용. 모두 같은 foreground 패밀리이며 시각적 위계만 다르다.
 
 ```css
---foreground           /* 본문 (grayscale-140) */
+--foreground           /* 본문 (grayscale-140) — On Surface */
 --foreground-muted     /* 보조 텍스트·아이콘 (grayscale-110) */
 --foreground-placeholder  /* input placeholder (grayscale-70) */
 --foreground-disabled  /* 비활성 텍스트 (grayscale-60) */
 ```
+
+**문서 분류: 면과 텍스트를 별도 카테고리로 나눈다.** 색상 시맨틱 문서(`/foundation/color-semantic`)는 M3 레퍼런스처럼 **Surface(면)** 와 **On Surface(텍스트)** 를 동급 카테고리로 분리한다. 두 카테고리 모두 Base / Elevated / Inverse 동일 서브그룹으로 대칭 구성한다.
+
+- **Surface(면)** — `canvas`/`background`/`background-muted` · `card`/`popover`/`card-muted` · `inverse`/`inverse-muted`
+- **On Surface(텍스트)** — `foreground`(본문 기준점)·`background-muted-foreground`·흐린 위계(`-muted`/`-placeholder`/`-disabled`) · `card-foreground`/`popover-foreground`/`card-muted-foreground` · `inverse-foreground`/`inverse-muted-foreground`
+
+`--foreground`는 이 패밀리의 값 기준점(본문)이자 `background`·`canvas`의 On-color다 — background에 전용 `-foreground`가 없어 공용으로 빌려 쓴다. **면↔텍스트 페어 관계는 각 토큰 `role`이 설명하고, 분류는 역할 타입(면/텍스트)으로 한다.** 브랜드·상태 색(primary/secondary/error 등)은 이 규칙과 무관하게 기존 인라인 페어(면+On-color+container)를 유지한다.
 
 **아이콘과 텍스트는 같은 토큰을 사용한다.** surface 위에 올라가는 점이 같으므로 분리하지 않음. `--icon-*` 별도 없음.
 
