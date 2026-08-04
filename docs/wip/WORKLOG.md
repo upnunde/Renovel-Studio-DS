@@ -9,6 +9,7 @@
 - **컴포넌트 스펙 29개** — `packages/design-system/specs/*.spec.json`
 - **PORTING.md · DESIGN.md** — Web/iOS/Android 이식 기준, margin 금지 원칙(§2-5-1a)
 - **스튜디오** — DS `size="lg"` 제거에 맞춰 `xl`/`icon-xl` 교체 푸시 완료 (`upnunde-test`)
+- **FieldLabel** — 타이틀·보조문구 간격 `gap-1`(4px) → `gap-0.5`(2px)
 
 ## 다음에 할 일
 
