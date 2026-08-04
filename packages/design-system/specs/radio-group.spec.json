@@ -1,0 +1,32 @@
+{
+  "$schema": "./README.md",
+  "name": "RadioGroup",
+  "slot": "radio-group",
+  "$description": "OS-중립 RadioGroup 정본. 출처: src/components/ui/radio-group.tsx. RADIO_SIZE_SCALE 공유(Checkbox와 동일). size는 그룹→항목 상속(항목 override 가능).",
+  "role": "radiogroup",
+  "axes": { "size": { "values": ["default", "md"] } },
+  "defaults": { "size": "default" },
+  "groupLayout": { "gap": "{space.2}", "$note": "flex-col gap-2(8px)" },
+  "sizeSpec": {
+    "default": { "outer": 20, "dot": 10 },
+    "md":      { "outer": 24, "dot": 12 }
+  },
+  "styleSpec": {
+    "item": {
+      "rest": { "border": "{input}", "bg": "{background}", "dark": { "bg": "{input}/30" } },
+      "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
+      "checked": { "border": "{primary}", "bg": "{primary}", "fg": "{primary-foreground}" },
+      "disabled": { "border": "{disabled-border}", "bg": "{disabled}", "$ref": "shared.disabledControl" },
+      "disabledChecked": { "border": "{primary}/40", "bg": "{primary}/40" },
+      "invalid": { "border": "{destructive}", "ring": "{destructive}/20", "dark": { "border": "{destructive}/50", "ring": "{destructive}/40" } }
+    },
+    "dot": { "bg": "{primary-foreground}", "$note": "내부 채움 원 (아이콘 아님)" }
+  },
+  "states": ["rest", "focus", "checked", "disabled", "invalid"],
+  "nativeNotes": {
+    "checked": "data-checked. iOS Picker/radio, Compose RadioButton selected.",
+    "sizeInheritance": "그룹 size를 항목이 상속(웹은 React Context). 플랫폼은 그룹 파라미터→항목 전파로.",
+    "hitArea": "after:-inset 터치영역 확장.",
+    "note": "Checkbox와 달리 invalid+checked에서 primary border override 없음."
+  }
+}

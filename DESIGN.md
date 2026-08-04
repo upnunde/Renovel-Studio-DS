@@ -247,6 +247,40 @@ Tailwind 표준 spacing 네임스페이스와 동일하게 매핑 (`p-5` = 20px,
 - [ ] 부모 `gap` + 자식 `margin` 이중인가? → 하나로 통합
 - [ ] `mt-[13px]` 같은 임의값? → 스케일 값(`mt-3` 등)으로 변경
 - [ ] DS 컴포넌트 정본에 형제용 `mb-*`? → 제거하고 소비자 부모에 gap 지정
+- [ ] 새로 추가한 margin이 크로스플랫폼 이식을 깨지 않는가? → **[§2-5-1a](#2-5-1a-크로스플랫폼-이식성-margin-금지-원칙)** 확인
+
+### 2-5-1a. 크로스플랫폼 이식성 (margin 금지 원칙)
+
+**이 DS는 웹(Tailwind)만이 아니라 Android(XML View · Jetpack Compose)·iOS(UIKit · SwiftUI)의 정본을 지향한다.** margin 금지는 웹 청결 규칙이 아니라 **크로스플랫폼 정본이 되기 위한 전제조건**이다.
+
+**왜 — `margin`은 CSS 고유 개념이다.**
+
+| 플랫폼 | `padding` | `gap`(형제 간격) | `margin` |
+|--------|-----------|------------------|----------|
+| Tailwind (Web) | `p-*` | `gap-*` / `space-*` | `m-*` ✓ (여기서만 동작) |
+| Android View (XML) | `android:padding` | (부모가 배치) | `layout_margin` — View 속성 아닌 **LayoutParams**(부모가 존중해야 적용) |
+| Jetpack Compose | `Modifier.padding()` | `Arrangement.spacedBy()` | **없음** |
+| UIKit | `directionalLayoutMargins` | 제약 constant | 임의 뷰 margin **없음** |
+| SwiftUI | `.padding()` | `VStack/HStack(spacing:)` | **없음** |
+
+- **`padding`과 `gap`(spacing/arrangement)은 5개 런타임 전부에 1:1 존재한다.** → 토큰·간격 규칙이 그대로 번역된다.
+- **`margin`은 SwiftUI·Compose에 대응물이 아예 없다.** → 이식하는 사람이 매번 수작업 재해석해야 하고, 판단이 플랫폼마다 갈리면 디자인이 어긋난다.
+- **마진 상쇄(margin collapsing)는 웹에만 있다.** 상쇄에 (암묵적이라도) 의존한 간격은 XML·Swift에서 총간격이 달라진다.
+- **함정:** margin은 웹에서만 잘 동작하므로 Tailwind 작업 중엔 문제가 안 보인다. Compose/SwiftUI로 넘어가는 순간 드러난다.
+
+**원칙:** 형제 간격은 `gap`, 자기 공간은 `padding`. **컴포넌트 정본에 `margin`을 새로 추가하지 않는다.**
+
+**허용된 예외의 플랫폼별 대체 레시피** — §2-5-1이 허용하는 slot·wrapper margin은 웹 정본에선 유지하되, 타 플랫폼 이식 시 아래로 번역한다. 새 예외를 추가할 땐 이 표에 레시피를 함께 적는다.
+
+| 웹 패턴 | 용도 | Compose / SwiftUI 대체 |
+|---------|------|------------------------|
+| `ml-auto` (`dropdown-menu` chevron·shortcut) | flex 여유 흡수해 우측 밀기 | `Spacer()` · `Modifier.weight(1f)` — margin 아님, **레이아웃 요소** |
+| `-mx-5 -mb-5` (`DialogFooter`) | 본문 패딩 밖으로 풀블리드 | 부모 패딩을 footer에 적용 안 함 + footer 자체 풀폭. **음수 padding 금지** |
+| `-mx-1 my-1` (menu·select separator) | 패딩 밖까지 구분선 | Divider를 padding 컨테이너 **밖** 계층에 배치 |
+| `-ml-0.5` (`chip` pressed 아이콘) | 옵티컬 정렬 | `Modifier.offset` / `.offset()` (레이아웃 비영향 시각 보정) |
+| `mt-1` (`email-input` absolute 드롭다운) | 앵커 오프셋 | 각 플랫폼 popover/anchor API의 offset 파라미터 |
+
+> **음수 margin은 패딩으로 전환 불가**(패딩은 음수 없음), **`ml-auto`도 패딩으로 전환 불가**(고정값 ≠ 여유 흡수). 이 예외들은 "부모 div + padding" 리팩터의 대상이 **아니다** — 잘못 전환하면 규칙 위반을 숨기거나(footprint는 그대로) 반응형 정렬이 깨진다.
 
 ### 2-5-2. 시맨틱 Spacing (7개만 유지)
 
@@ -582,6 +616,31 @@ npm run lint   # 린트
 
 ## 7. 파일 정본 위치
 
+### 7-0. 크로스플랫폼 토큰·스펙 정본 (OS 중립)
+
+**이 DS는 Web·iOS·Android 공용을 지향한다.** 그 정본은 OS 중립 JSON이며, 플랫폼 산출물은 여기서 생성한다. 상세 매핑은 **`docs/PORTING.md`**.
+
+| 영역 | 정본 경로 | 비고 |
+|------|----------|------|
+| 원시 토큰 (색·px·duration·easing) | `packages/design-system/tokens/primitives.json` | Tier 1, OS 중립 |
+| 시맨틱 토큰 (light/dark) | `packages/design-system/tokens/semantic.json` | Tier 2, primitives 참조 |
+| 시맨틱 spacing | `packages/design-system/tokens/semantic-spacing.json` | |
+| 타이포그래피 | `packages/design-system/tokens/typography.json` | |
+| 토큰 빌더·검증기 (커스텀) | `packages/design-system/tokens/build.mjs` | `verify`=0-drift 보증, `css/swift/xml`=산출물(iOS 동적색·AOS values/values-night) |
+| 토큰 빌더 (Style Dictionary) | `packages/design-system/tokens/style-dictionary.config.mjs` · `sd-build.mjs` · `sd-verify.mjs` | 업계 표준 파이프라인 병행 |
+| 컴포넌트 스펙 (29개) | `packages/design-system/specs/*.spec.json` (+ `_shared.spec.json`) | OS 중립, 플랫폼 구현의 정본. 스키마: `specs/README.md` |
+
+**검증 명령:**
+- `npm run tokens:verify` — 커스텀 빌더 0-drift + 스펙 참조 무결성
+- `npm run tokens:sd:verify` — Style Dictionary 산출물이 tokens.css와 일치하는지
+- `npm run tokens:check` — 위 전부 (커밋 전 권장)
+
+**불변식:** 세 검증 모두 `0-DRIFT` / `무결성 OK` 여야 한다 = JSON 정본과 웹 `src/tokens.css` 값이 완전 일치(커스텀·SD 파이프라인 양쪽), 스펙의 모든 `{ref}`가 실재 토큰. 웹 산출물이 안 바뀌므로 **기존 소비자(리노벨, v0.1.22 pin) 영향 0**. `src/tokens.css` 는 이제 **"JSON 정본의 웹 산출물"** 성격이며, 값 변경은 JSON에서 하고 verify로 확인한다.
+
+**컴포넌트 스펙 커버리지:** 실제 구현된 29개 컴포넌트 전부. `card`는 DESIGN.md 목록에 있으나 미구현이라 스펙 없음(구현 시 추가). Dialog/Popover/Dropdown/Tooltip/Select는 `_shared.floatingSurface`를 공유 참조. 웹 코드의 shadow(`shadow-md` vs `shadow-elevation-30`)·z-index(`z-50` vs semantic `z-*`) 불일치는 스펙의 `nativeNotes`에 FLAG로 기록됨(웹 코드 미변경 — 별도 결정 대상).
+
+### 7-1. 웹 산출물·구현 정본
+
 | 영역 | 정본 경로 |
 |------|----------|
 | 시맨틱 컬러·spacing·shadow·motion CSS 변수 | `packages/design-system/src/tokens.css` |
@@ -606,12 +665,15 @@ npm run lint   # 린트
 2. **컴포넌트 props·variant 제거** — 소비자 사용 중이면 deprecate 단계 거치기.
 3. **export 경로 변경** — import가 깨짐. 절대 가벼이 변경 금지.
 4. **점진 흡수 원칙** — 다른 시스템(예: 리노벨)을 흡수할 때 "그쪽 정의 그대로"가 아니라 "DS의 최종 정의가 무엇인가" 관점으로 정규화.
+5. **토큰 값 변경은 JSON 정본에서** — `tokens/*.json` 을 고치고 `npm run tokens:verify` 로 0-drift 확인 후, 웹 반영이 필요하면 `tokens/build.mjs css` 산출물을 `src/tokens.css` 에 반영. `src/tokens.css` 만 손으로 고쳐 JSON과 어긋나게 두지 않는다(§7-0). 신규 토큰은 스케일에 없으면 원시 px로 두고 "없는 토큰을 있는 척 참조(ghost ref)"하지 않는다.
 
 ---
 
 ## 9. 관련 문서
 
 - **`DESIGN.md`** — 디자인 시스템 정본 문서 (에이전트 최우선 준수)
+- **`docs/PORTING.md`** — 크로스플랫폼(Web·iOS·Android) 전환 기준·토큰/컴포넌트 매핑
+- `packages/design-system/specs/README.md` — 컴포넌트 스펙 스키마
 - `AGENTS.md` — 에이전트 (Cursor·Claude Code) 핸드오프
 - `CLAUDE.md` — Claude Code 세션 시작 규칙
 - `docs/wip/HANDOFF.md` — Cursor ↔ Claude Code 즉시 컨텍스트

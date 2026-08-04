@@ -1,3 +1,6 @@
 node_modules
 .DS_Store
 *.tsbuildinfo
+
+# 토큰 빌드 산출물 — 정본은 tokens/*.json, dist는 생성물이라 커밋하지 않음
+tokens/dist/

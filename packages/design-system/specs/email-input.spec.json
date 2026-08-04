@@ -1,0 +1,24 @@
+{
+  "$schema": "./README.md",
+  "name": "EmailInput",
+  "slot": "email-input",
+  "$description": "OS-중립 EmailInput 정본. 출처: src/components/ui/email-input.tsx. Input 위 도메인 자동완성. 커스텀 콤보박스(Base UI 아님).",
+  "role": "combobox",
+  "$use": ["input"],
+  "axes": { "size": { "values": ["sm", "default", "xl", "2xl"] } },
+  "defaults": { "size": "default", "clearable": true, "domains": ["gmail.com", "naver.com", "daum.net", "kakao.com", "hanmail.net"] },
+  "styleSpec": {
+    "control": { "$use": "input.styleSpec.control", "$note": "Input과 동일 박스 + combobox ARIA" },
+    "suggestionList": {
+      "rest": { "bg": "{popover}", "fg": "{popover-foreground}", "ring": "{foreground}/10", "radius": "{radius.base}", "minWidth": 128, "padding": "{space.1}", "$note": "커스텀 absolute ul, 포털 아님, 애니메이션 없음, shadow-md(FLAG)" },
+      "option": { "rest": { "radius": "4", "padX": 6, "padY": 4, "gap": 6 }, "active": { "bg": "{muted}", "fg": "{foreground}" }, "localPart": { "fg": "{foreground-muted}" } }
+    },
+    "clearButton": { "$use": "input-clear-button" }
+  },
+  "states": ["rest", "focus", "open", "disabled", "invalid"],
+  "portal": false,
+  "nativeNotes": {
+    "customCombobox": "웹은 role=combobox/listbox/option + 120ms blur 디바운스 + 합성 ChangeEvent. 포털/Base UI 아님. 네이티브는 텍스트필드+인라인 제안리스트(네이티브 선택 패턴)로.",
+    "noPortal": "제안 리스트가 일반 흐름의 absolute ul. 다른 오버레이와 구조 다름 — Popover 변형으로 모델링 금지."
+  }
+}

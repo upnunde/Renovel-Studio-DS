@@ -1,0 +1,31 @@
+{
+  "$schema": "./README.md",
+  "name": "Slider",
+  "slot": "slider",
+  "$description": "OS-중립 Slider 정본. 출처: src/components/ui/slider.tsx. size 축 없음. type=default(1 thumb)/range(2 thumb).",
+  "role": "slider",
+  "axes": { "type": { "values": ["default", "range"], "$note": "thumb 개수 결정" } },
+  "defaults": { "type": "default", "min": 0, "max": 100, "step": 1 },
+  "sizeSpec": {
+    "default": { "trackThickness": 4, "thumb": 16, "hitArea": 8, "controlThickness": 16, "$note": "vertical 시 min 길이 160px" }
+  },
+  "styleSpec": {
+    "track": { "rest": { "bg": "{muted}" } },
+    "range": { "rest": { "bg": "{primary}" } },
+    "thumb": {
+      "rest": { "border": "{ring}", "bg": "{background}", "ring": "{ring}/50", "$note": "정본은 bg-white 리터럴 — 다크 대응 위해 {background} 권장(웹 값은 white와 동일). B: FLAG 참조" },
+      "hover": { "ringWidth": 3 },
+      "focus": { "ringWidth": 3 },
+      "active": { "ringWidth": 3 },
+      "disabled": { "border": "{disabled-border}", "bg": "{disabled}", "$ref": "shared.disabledBlock" }
+    },
+    "controlDisabled": { "opacity": 0.6 }
+  },
+  "states": ["rest", "hover", "focus", "active", "disabled"],
+  "nativeNotes": {
+    "thumbBgWhiteLiteral": "웹 원본은 thumb bg가 semantic 아닌 리터럴 bg-white. iOS/AOS는 {background} 토큰으로 매핑 권장(라이트값 동일, 다크 대응 개선). 원본 수정은 별도 결정.",
+    "orientation": "data-horizontal/vertical. iOS/AOS Slider 방향 파라미터.",
+    "gesture": "드래그·터치는 네이티브 제스처. touch-none은 웹 전용.",
+    "native": "iOS Slider/Compose Slider 네이티브 컴포넌트를 토큰 색으로 테마링 우선."
+  }
+}

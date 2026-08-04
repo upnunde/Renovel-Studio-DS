@@ -1,0 +1,30 @@
+{
+  "$schema": "./README.md",
+  "name": "ButtonGroup",
+  "slot": "button-group",
+  "$description": "OS-중립 ButtonGroup 정본. 출처: src/components/ui/button-group.tsx. 자식 버튼 높이 강제+모서리 병합.",
+  "role": "group",
+  "axes": {
+    "size": { "values": ["xs", "sm", "default", "xl", "2xl"] },
+    "shape": { "values": ["square", "circle"] }
+  },
+  "defaults": { "size": "default", "shape": "square" },
+  "sizeSpec": {
+    "$note": "자식 button/input 높이를 강제. 자체 padding 없음.",
+    "xs": { "childHeight": 24, "childPadX": 8, "fontSize": 12 },
+    "sm": { "childHeight": 32, "childPadX": 10, "fontSize": 12.8 },
+    "default": { "childHeight": 36 },
+    "xl": { "childHeight": 40 },
+    "2xl": { "childHeight": 48, "fontSize": 16 }
+  },
+  "styleSpec": {
+    "cornerMerge": { "$note": "첫 자식 좌측 radius, 마지막 자식 우측 radius, 중간은 rounded-none. square=radius.base, circle=full", "square": "{radius.base}", "circle": "9999" },
+    "text": { "$note": "ButtonGroupText: 라벨 세그먼트", "bg": "{muted}", "fontWeight": 500 },
+    "separator": { "bg": "{input}", "$note": "base Separator({border})와 다른 토큰" }
+  },
+  "states": ["rest"],
+  "nativeNotes": {
+    "childStyling": "웹은 부모가 CSS 자식결합자로 자식 버튼 높이·모서리 제어. 네이티브는 size/shape/position(first|middle|last)을 자식에 명시 전달, 또는 SegmentedControl 컨테이너로.",
+    "shape": "square/circle는 양끝 모서리에만 적용, 중간은 각짐."
+  }
+}

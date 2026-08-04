@@ -1,0 +1,43 @@
+{
+  "$schema": "./README.md",
+  "name": "Select",
+  "slot": "select-trigger",
+  "$description": "OS-중립 Select 정본. 출처: src/components/ui/select.tsx. trigger+content(popover)+item 구조. size는 data-size 기반(cva 아님).",
+  "role": "combobox",
+  "axes": { "size": { "values": ["sm", "default", "xl", "2xl"], "$note": "trigger 높이만 변화, typography는 전 사이즈 text-sm 고정" } },
+  "defaults": { "size": "default" },
+  "sizeSpec": {
+    "sm":      { "height": 32, "padX": 10, "gap": 6, "radius": "10" },
+    "default": { "height": 36, "padX": 10, "gap": 6, "radius": "{radius.base}" },
+    "xl":      { "height": 40, "padX": 10, "gap": 6, "radius": "{radius.base}" },
+    "2xl":     { "height": 48, "padX": 10, "gap": 6, "radius": "{radius.base}" },
+    "$iconGlyph": 16
+  },
+  "styleSpec": {
+    "trigger": {
+      "rest": { "bg": "transparent", "border": "{input}", "icon": "{foreground-muted}", "dark": { "bg": "{input}/30" } },
+      "hover": { "bg": "{muted}", "fg": "{foreground}" },
+      "placeholder": { "fg": "{foreground-placeholder}" },
+      "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
+      "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "icon": "{disabled-foreground}", "$ref": "shared.disabledInteractive" },
+      "invalid": { "border": "{destructive}", "ring": "{destructive}/20", "dark": { "border": "{destructive}/50", "ring": "{destructive}/40" } }
+    },
+    "content": { "rest": { "bg": "{popover}", "fg": "{popover-foreground}", "shadow": "{shadow-elevation-30}", "ring": "{foreground}/10" } },
+    "item": {
+      "rest": { "radius": "4" },
+      "hover": { "bg": "{muted}", "fg": "{foreground}" },
+      "focus": { "bg": "{muted}", "fg": "{foreground}" },
+      "disabled": { "fg": "{foreground-disabled}", "$ref": "shared.disabledItem" }
+    },
+    "label": { "fg": "{foreground-muted}" },
+    "separator": { "bg": "{border}", "$note": "height=stroke-width 0.5px, -mx-1(패딩 밖 풀블리드)" }
+  },
+  "states": ["rest", "hover", "focus", "open", "disabled", "invalid"],
+  "portal": true,
+  "nativeNotes": {
+    "portal": "content는 Portal 플로팅. iOS Menu/.sheet/Picker, Compose ExposedDropdownMenu.",
+    "hover": "웹 전용(+data-hovered). 모바일은 항목 pressed.",
+    "iconGlyphFixed": "trigger chevron·item check가 전 사이즈 16px 고정 (ICON_GLYPH_SCALE 미연동 — 웹 현행 그대로 반영).",
+    "animation": "open=medium/emphasized-decelerate, close=short/emphasized-accelerate, side별 slide."
+  }
+}

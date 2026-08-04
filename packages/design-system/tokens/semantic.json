@@ -1,0 +1,87 @@
+{
+  "$description": "OS-중립 시맨틱 토큰 정본 (Tier 2). light = $value, dark = $extensions.mode.dark. 참조 {a.b}는 CSS에서 var(--a-b), iOS/AOS에서 해당 토큰 상수로 해석된다. alias(예: card-muted → background-muted)는 참조 체인 그대로 둔다.",
+  "$meta": {
+    "tier": "semantic",
+    "source": "packages/design-system/src/tokens.css",
+    "modes": ["light", "dark"],
+    "m3-labels": "docs 표기용 M3 라벨은 src/lib/color-tokens.ts(Token (M3) 컬럼)가 정본. 여기선 코드 stem만 다룬다."
+  },
+
+  "canvas":                       { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{grayscale.150}" } }, "$description": "M3 Background — 최하위 앱 배경 면" },
+  "background":                   { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{grayscale.140}" } }, "$description": "M3 Surface — 기본 페이지 면" },
+  "foreground":                   { "$type": "color", "$value": "{grayscale.140}",  "$extensions": { "mode": { "dark": "{grayscale.10}" } },  "$description": "M3 On Surface — 본문 텍스트·아이콘" },
+  "card":                         { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{grayscale.140}" } }, "$description": "M3 Surface (Card) — 값은 background와 동일, 깊이는 shadow-elevation" },
+  "card-foreground":              { "$type": "color", "$value": "{grayscale.140}",  "$extensions": { "mode": { "dark": "{grayscale.10}" } },  "$description": "M3 On Surface (Card)" },
+  "background-muted":             { "$type": "color", "$value": "{grayscale.10}",   "$extensions": { "mode": { "dark": "{grayscale.130}" } }, "$description": "M3 Surface Container — 페이지·레이아웃 보조 면" },
+  "background-muted-foreground":  { "$type": "color", "$value": "{grayscale.140}",  "$extensions": { "mode": { "dark": "{grayscale.10}" } },  "$description": "M3 On Surface Container — 값은 foreground와 동일" },
+  "card-muted":                   { "$type": "color", "$value": "{background-muted}", "$extensions": { "mode": { "dark": "{background-muted}" } }, "$description": "alias → background-muted (M3 Surface Container (Card))" },
+  "card-muted-foreground":        { "$type": "color", "$value": "{background-muted-foreground}", "$extensions": { "mode": { "dark": "{background-muted-foreground}" } }, "$description": "alias → background-muted-foreground" },
+  "popover":                      { "$type": "color", "$value": "{card}",           "$extensions": { "mode": { "dark": "{card}" } },          "$description": "alias → card (M3 Surface (Popover))" },
+  "popover-foreground":           { "$type": "color", "$value": "{card-foreground}","$extensions": { "mode": { "dark": "{card-foreground}" } },"$description": "alias → card-foreground" },
+
+  "inverse":                      { "$type": "color", "$value": "{grayscale.130}",  "$extensions": { "mode": { "dark": "{grayscale.10}" } },  "$description": "M3 Inverse Surface — 반전 면 (toast·tooltip)" },
+  "inverse-foreground":           { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{grayscale.140}" } }, "$description": "M3 On Inverse Surface" },
+  "inverse-muted":                { "$type": "color", "$value": "{grayscale.110}",  "$extensions": { "mode": { "dark": "{grayscale.20}" } },  "$description": "M3 Inverse Surface Container — 2단계" },
+  "inverse-muted-foreground":     { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{grayscale.140}" } }, "$description": "M3 On Inverse Surface Container" },
+
+  "foreground-muted":             { "$type": "color", "$value": "{grayscale.110}",  "$extensions": { "mode": { "dark": "{grayscale.40}" } },  "$description": "M3 On Surface Variant — 보조 텍스트·아이콘" },
+  "foreground-placeholder":       { "$type": "color", "$value": "{grayscale.70}",   "$extensions": { "mode": { "dark": "{grayscale.80}" } },  "$description": "M3 On Surface Variant (Placeholder)" },
+  "foreground-disabled":          { "$type": "color", "$value": "{grayscale.60}",   "$extensions": { "mode": { "dark": "{grayscale.70}" } },  "$description": "M3 On Surface Variant (Disabled)" },
+
+  "primary":                      { "$type": "color", "$value": "{brand.500}",      "$extensions": { "mode": { "dark": "{brand.500}" } },     "$description": "M3 Primary — 주 액션 면 (filled CTA)" },
+  "primary-foreground":           { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{white}" } },         "$description": "M3 On Primary" },
+
+  "accent":                       { "$type": "color", "$value": "{brand.50}",       "$extensions": { "mode": { "dark": "{brand.800}" } },     "$description": "M3 Secondary Container — 브랜드 호버·포커스·선택 하이라이트" },
+  "accent-foreground":            { "$type": "color", "$value": "{brand.600}",      "$extensions": { "mode": { "dark": "{brand.100}" } },     "$description": "M3 On Secondary Container" },
+  "muted":                        { "$type": "color", "$value": "{grayscale.10}",   "$extensions": { "mode": { "dark": "{grayscale.130}" } }, "$description": "M3 Surface Variant — 무채색 호버·크롬 면" },
+  "muted-foreground":             { "$type": "color", "$value": "{grayscale.90}",   "$extensions": { "mode": { "dark": "{grayscale.70}" } },  "$description": "M3 On Surface Variant (Muted Fill)" },
+  "secondary":                    { "$type": "color", "$value": "{muted}",          "$extensions": { "mode": { "dark": "{muted}" } },         "$description": "alias → muted (M3 Secondary)" },
+  "secondary-foreground":         { "$type": "color", "$value": "{grayscale.140}",  "$extensions": { "mode": { "dark": "{grayscale.10}" } },  "$description": "M3 On Secondary" },
+
+  "destructive":                  { "$type": "color", "$value": "{error.500}",      "$extensions": { "mode": { "dark": "{error.400}" } },     "$description": "M3 Error" },
+  "destructive-foreground":       { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{white}" } },         "$description": "M3 On Error" },
+
+  "success":                      { "$type": "color", "$value": "{success.500}",    "$extensions": { "mode": { "dark": "{success.400}" } },   "$description": "M3 Success" },
+  "success-foreground":           { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{white}" } },         "$description": "M3 On Success" },
+  "warning":                      { "$type": "color", "$value": "{warning.500}",    "$extensions": { "mode": { "dark": "{warning.400}" } },   "$description": "M3 Warning" },
+  "warning-foreground":           { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{white}" } },         "$description": "M3 On Warning" },
+  "info":                         { "$type": "color", "$value": "{info.500}",       "$extensions": { "mode": { "dark": "{info.400}" } },      "$description": "M3 Info" },
+  "info-foreground":              { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{white}" } },         "$description": "M3 On Info" },
+
+  "border":                       { "$type": "color", "$value": "{grayscale.15}",   "$extensions": { "mode": { "dark": "{grayscale.130}" } }, "$description": "M3 Outline — 기본 보더" },
+  "input":                        { "$type": "color", "$value": "{grayscale.20}",   "$extensions": { "mode": { "dark": "{grayscale.110}" } }, "$description": "M3 Input Outline — 인풋·셀렉트 보더" },
+  "ring":                         { "$type": "color", "$value": "{brand.500}",      "$extensions": { "mode": { "dark": "{brand.400}" } },     "$description": "M3 Focus Ring (primary 값)" },
+  "border-strong":                { "$type": "color", "$value": "{grayscale.140}",  "$extensions": { "mode": { "dark": "{grayscale.10}" } },  "$description": "M3 Outline Strong" },
+  "border-inverse":               { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{grayscale.140}" } }, "$description": "M3 Outline Inverse" },
+  "divider":                      { "$type": "color", "$value": "{grayscale.15}",   "$extensions": { "mode": { "dark": "{grayscale.130}" } }, "$description": "M3 Outline Variant — 구분선" },
+  "divider-strong":               { "$type": "color", "$value": "{grayscale.30}",   "$extensions": { "mode": { "dark": "{grayscale.110}" } }, "$description": "M3 Outline Variant Strong" },
+
+  "primary-container":            { "$type": "color", "$value": "{brand.100}",      "$extensions": { "mode": { "dark": "{brand.800}" } },     "$description": "M3 Primary Container" },
+  "primary-container-foreground": { "$type": "color", "$value": "{brand.500}",      "$extensions": { "mode": { "dark": "{brand.100}" } },     "$description": "M3 On Primary Container" },
+  "secondary-container":          { "$type": "color", "$value": "{grayscale.110}",  "$extensions": { "mode": { "dark": "{muted}" } },         "$description": "다크는 muted alias — 컴포넌트 미사용, API만 유지" },
+  "secondary-container-foreground": { "$type": "color", "$value": "{white}",        "$extensions": { "mode": { "dark": "{white}" } },         "$description": "secondary-container 위 텍스트" },
+  "destructive-container":        { "$type": "color", "$value": "{error.100}",      "$extensions": { "mode": { "dark": "{error.800}" } },     "$description": "M3 Error Container" },
+  "destructive-container-foreground": { "$type": "color", "$value": "{error.600}",  "$extensions": { "mode": { "dark": "{error.100}" } },     "$description": "M3 On Error Container" },
+
+  "dim-10":                       { "$type": "color", "$value": "{black-opacity.10}", "$extensions": { "mode": { "dark": "{black-opacity.10}" } }, "$description": "M3 Scrim 10 — 가벼운 호버 백드롭 (라이트·다크 공통)" },
+  "dim-20":                       { "$type": "color", "$value": "{black-opacity.60}", "$extensions": { "mode": { "dark": "{black-opacity.60}" } }, "$description": "M3 Scrim 20 — 모달 배경" },
+  "dim-30":                       { "$type": "color", "$value": "{black-opacity.80}", "$extensions": { "mode": { "dark": "{black-opacity.80}" } }, "$description": "M3 Scrim 30 — 이미지 위 텍스트 보호" },
+  "dim-40":                       { "$type": "color", "$value": "{black-opacity.90}", "$extensions": { "mode": { "dark": "{black-opacity.90}" } }, "$description": "M3 Scrim 40 — 최대 농도" },
+
+  "disabled":                     { "$type": "color", "$value": "{muted}",          "$extensions": { "mode": { "dark": "{grayscale.120}" } }, "$description": "M3 Disabled Surface — 라이트: muted alias, 다크: 전용" },
+  "disabled-foreground":          { "$type": "color", "$value": "{grayscale.60}",   "$extensions": { "mode": { "dark": "{grayscale.70}" } },  "$description": "M3 On Disabled Surface" },
+  "disabled-border":              { "$type": "color", "$value": "{border}",         "$extensions": { "mode": { "dark": "{grayscale.110}" } }, "$description": "M3 Disabled Outline — 라이트: border alias" },
+
+  "chart-1":                      { "$type": "color", "$value": "{brand.500}",      "$extensions": { "mode": { "dark": "{brand.400}" } },     "$description": "차트 시리즈 1 (M3 대응 없음)" },
+  "chart-2":                      { "$type": "color", "$value": "{brand.400}",      "$extensions": { "mode": { "dark": "{brand.500}" } },     "$description": "차트 시리즈 2" },
+  "chart-3":                      { "$type": "color", "$value": "{brand.600}",      "$extensions": { "mode": { "dark": "{brand.300}" } },     "$description": "차트 시리즈 3" },
+  "chart-4":                      { "$type": "color", "$value": "{brand.300}",      "$extensions": { "mode": { "dark": "{brand.600}" } },     "$description": "차트 시리즈 4" },
+  "chart-5":                      { "$type": "color", "$value": "{brand.700}",      "$extensions": { "mode": { "dark": "{brand.200}" } },     "$description": "차트 시리즈 5" },
+
+  "shadow-elevation-10":          { "$type": "shadow", "$value": "0px 1px 2px 1px rgba(0, 0, 0, 0.06)",  "$extensions": { "mode": { "dark": "0px 1px 2px 1px rgba(0, 0, 0, 0.32)" } },  "$description": "카드·인풋 호버" },
+  "shadow-elevation-20":          { "$type": "shadow", "$value": "0px 2px 4px 2px rgba(0, 0, 0, 0.06)",  "$extensions": { "mode": { "dark": "0px 2px 4px 2px rgba(0, 0, 0, 0.32)" } } },
+  "shadow-elevation-30":          { "$type": "shadow", "$value": "0px 4px 8px 3px rgba(0, 0, 0, 0.06)",  "$extensions": { "mode": { "dark": "0px 4px 8px 3px rgba(0, 0, 0, 0.32)" } },  "$description": "드롭다운·팝오버" },
+  "shadow-elevation-40":          { "$type": "shadow", "$value": "0px 8px 12px 4px rgba(0, 0, 0, 0.06)", "$extensions": { "mode": { "dark": "0px 8px 12px 4px rgba(0, 0, 0, 0.32)" } } },
+  "shadow-elevation-50":          { "$type": "shadow", "$value": "0px 8px 16px 6px rgba(0, 0, 0, 0.06)", "$extensions": { "mode": { "dark": "0px 8px 16px 6px rgba(0, 0, 0, 0.32)" } },  "$description": "모달·바텀시트" },
+  "shadow-elevation-60":          { "$type": "shadow", "$value": "0px 12px 24px 8px rgba(0, 0, 0, 0.06)","$extensions": { "mode": { "dark": "0px 12px 24px 8px rgba(0, 0, 0, 0.32)" } } }
+}

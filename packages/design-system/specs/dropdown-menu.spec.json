@@ -1,0 +1,34 @@
+{
+  "$schema": "./README.md",
+  "name": "DropdownMenu",
+  "slot": "dropdown-menu",
+  "$description": "OS-중립 DropdownMenu 정본. 출처: src/components/ui/dropdown-menu.tsx. content+item(+destructive)+checkbox/radio item+separator+shortcut+sub.",
+  "role": "menu",
+  "$use": ["_shared.floatingSurface", "_shared.disabledPresets"],
+  "positioning": { "side": "bottom", "sideOffset": 4, "align": "start", "alignOffset": 0, "sub": { "side": "right", "sideOffset": 0, "alignOffset": -3 } },
+  "parts": {
+    "content": { "rest": { "bg": "{popover}", "fg": "{popover-foreground}", "ring": "{foreground}/10", "radius": "{radius.base}", "minWidth": 128, "padding": "{space.1}" }, "animation": "$use _shared.floatingSurface.animation" },
+    "item": {
+      "variant": ["default", "destructive"],
+      "rest": { "radius": "4", "padX": 6, "padY": 4, "gap": 6, "iconGlyph": 16 },
+      "default": { "hover": { "bg": "{muted}", "fg": "{foreground}" }, "focus": { "bg": "{muted}", "fg": "{foreground}" } },
+      "destructive": { "rest": { "fg": "{destructive}" }, "hover": { "bg": "{destructive}/10", "fg": "{destructive}" }, "dark": { "hover": { "bg": "{destructive}/20" } } },
+      "disabled": { "fg": "{foreground-disabled}", "$ref": "shared.disabledItem" }
+    },
+    "checkboxItem": { "rest": { "padY": 4, "padLeft": 6, "padRight": 32, "gap": 6 }, "hover": { "bg": "{muted}", "fg": "{foreground}" }, "indicator": { "iconGlyph": 16, "$note": "check, 우측 8px" } },
+    "radioItem": { "$note": "checkboxItem과 동일 구조" },
+    "label": { "fg": "{foreground}/30", "$note": "text-xs" },
+    "separator": { "bg": "{border}", "$note": "height=stroke-width, -mx-1 풀블리드" },
+    "shortcut": { "fg": "{foreground-muted}", "focusInItem": { "fg": "{foreground}" } },
+    "subTrigger": { "hover": { "bg": "{muted}", "fg": "{foreground}" }, "open": { "bg": "{muted}", "fg": "{foreground}" }, "chevron": { "iconGlyph": 16 } },
+    "subContent": { "rest": { "bg": "{popover}", "fg": "{popover-foreground}", "ring": "{foreground}/10", "minWidth": 96, "shadow": "shadow-lg", "$note": "부모보다 무거운 그림자" } }
+  },
+  "states": ["rest", "hover", "focus", "open", "disabled"],
+  "portal": true,
+  "nativeNotes": {
+    "portal": "Positioner+Popup, 서브메뉴는 중첩 포털. iOS Menu, Compose DropdownMenu.",
+    "hover": "focus/hover가 동일 muted 처리. 모바일 pressed.",
+    "shadowZ": "shadow-md/lg·z-50 (FLAG, _shared 참조).",
+    "destructive": "위험 항목 별도 톤."
+  }
+}

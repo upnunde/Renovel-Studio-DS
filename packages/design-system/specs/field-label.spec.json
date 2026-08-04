@@ -1,0 +1,28 @@
+{
+  "$schema": "./README.md",
+  "name": "FieldLabel",
+  "slot": "field-label",
+  "$description": "OS-중립 FieldLabel 정본. 출처: src/components/ui/field-label.tsx. Label 위 합성(title+required+info+description).",
+  "role": "group",
+  "axes": { "size": { "values": ["default", "lg"] } },
+  "defaults": { "size": "default" },
+  "sizeSpec": {
+    "default": { "titleTypography": "body2-700", "gap": "{space.1}" },
+    "lg":      { "titleTypography": "heading5-700", "gap": "{space.1}" },
+    "$descriptionTypography": "body4-400",
+    "$infoIcon": 14
+  },
+  "styleSpec": {
+    "title": { "$note": "Label 상속 + size별 typography", "fontWeight": 700 },
+    "required": { "fg": "{destructive}", "$note": "asterisk, aria-hidden" },
+    "description": { "fg": "{foreground-muted}" },
+    "infoTrigger": { "rest": { "fg": "{foreground-muted}" }, "hover": { "fg": "{foreground}" }, "focus": { "ring": "{ring}", "ringWidth": 2 } }
+  },
+  "states": ["rest"],
+  "nativeNotes": {
+    "composition": "Label + Tooltip(info) 합성. iOS/AOS는 라벨 행 + 선택적 info 버튼(팝오버)으로 구현.",
+    "required": "asterisk는 시각 표식(aria-hidden). 실제 required 의미는 컨트롤의 required/aria-required로. 플랫폼도 접근성 required 별도 표기.",
+    "description": "aria-describedby 연결. 최대 3줄.",
+    "infoTooltip": "Portal 툴팁. iOS popover, Compose Popup/Tooltip."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "./README.md",
+  "name": "Checkbox",
+  "slot": "checkbox",
+  "$description": "OS-중립 Checkbox 정본. 출처: src/components/ui/checkbox.tsx. RADIO_SIZE_SCALE 공유(Radio와 동일).",
+  "role": "checkbox",
+  "axes": { "size": { "values": ["default", "md"] } },
+  "defaults": { "size": "default" },
+  "sizeSpec": {
+    "default": { "box": 20, "iconGlyph": 14, "radius": "4" },
+    "md":      { "box": 24, "iconGlyph": 16, "radius": "4" }
+  },
+  "styleSpec": {
+    "rest": { "border": "{input}", "dark": { "bg": "{input}/30" } },
+    "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
+    "checked": { "border": "{primary}", "bg": "{primary}", "fg": "{primary-foreground}" },
+    "disabled": { "border": "{disabled-border}", "bg": "{disabled}", "$ref": "shared.disabledControl" },
+    "disabledChecked": { "border": "{primary}/40", "bg": "{primary}/40" },
+    "invalid": { "border": "{destructive}", "ring": "{destructive}/20", "invalidChecked": { "border": "{primary}" }, "dark": { "border": "{destructive}/50", "ring": "{destructive}/40" } }
+  },
+  "states": ["rest", "focus", "checked", "disabled", "invalid"],
+  "nativeNotes": {
+    "checked": "data-checked. iOS isOn/Toggle, Compose Checkbox checked.",
+    "hitArea": "after:-inset 로 터치영역 확장(12/8px). iOS hitSlop/contentInset, Compose minimumInteractiveComponentSize.",
+    "checkGlyph": "체크 아이콘은 text-current로 primary-foreground 상속."
+  }
+}

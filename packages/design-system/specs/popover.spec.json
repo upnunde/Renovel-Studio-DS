@@ -1,0 +1,22 @@
+{
+  "$schema": "./README.md",
+  "name": "Popover",
+  "slot": "popover",
+  "$description": "OS-중립 Popover 정본. 출처: src/components/ui/popover.tsx. 비모달 플로팅(백드롭 없음).",
+  "role": "dialog",
+  "$use": ["_shared.floatingSurface"],
+  "positioning": { "side": "bottom", "sideOffset": 4, "align": "center", "alignOffset": 0 },
+  "parts": {
+    "content": { "rest": { "bg": "{popover}", "fg": "{popover-foreground}", "ring": "{foreground}/10", "radius": "{radius.base}", "width": 288, "padding": "{space.2}", "gap": 10 }, "animation": "$use _shared.floatingSurface.animation" },
+    "header": { "gap": "{space.0-5}" },
+    "title": { "fontWeight": 500 },
+    "description": { "fg": "{foreground-muted}" }
+  },
+  "states": ["open", "closed"],
+  "portal": true,
+  "nativeNotes": {
+    "portal": "Positioner+Popup 포털, 백드롭 없음. iOS .popover, Compose Popup.",
+    "positioning": "side/align/offset Floating-UI. iOS/AOS anchor positioning.",
+    "shadowZ": "shadow-md·z-50 (FLAG, _shared 참조)."
+  }
+}

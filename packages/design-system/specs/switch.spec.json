@@ -1,0 +1,35 @@
+{
+  "$schema": "./README.md",
+  "name": "Switch",
+  "slot": "switch",
+  "$description": "OS-중립 Switch 정본. 출처: src/components/ui/switch.tsx. SWITCH_SIZE_SCALE. track+thumb.",
+  "role": "switch",
+  "axes": { "size": { "values": ["sm", "default", "md"] } },
+  "defaults": { "size": "default" },
+  "sizeSpec": {
+    "sm":      { "trackW": 28, "trackH": 16, "thumb": 12, "travel": 12, "inset": 2 },
+    "default": { "trackW": 36, "trackH": 20, "thumb": 16, "travel": 16, "inset": 2 },
+    "md":      { "trackW": 44, "trackH": 24, "thumb": 20, "travel": 20, "inset": 2 }
+  },
+  "styleSpec": {
+    "track": {
+      "checked": { "bg": "{primary}" },
+      "unchecked": { "bg": "{input}", "dark": { "bg": "{input}/80" } },
+      "focus": { "ring": "{ring}/50", "ringWidth": 3 },
+      "invalid": { "ring": "{destructive}/20", "dark": { "ring": "{destructive}/40" } },
+      "disabledUnchecked": { "bg": "{disabled}" },
+      "disabledChecked": { "bg": "{primary}/40" }
+    },
+    "thumb": {
+      "rest": { "bg": "{background}" },
+      "dark": { "checked": { "bg": "{primary-foreground}" }, "unchecked": { "bg": "{foreground}" } }
+    }
+  },
+  "states": ["checked", "unchecked", "focus", "disabled", "invalid"],
+  "nativeNotes": {
+    "checked": "data-checked. iOS Toggle(isOn), Compose Switch checked.",
+    "thumbTravel": "translate-x로 thumb 이동. iOS/AOS 네이티브 Switch가 자체 애니메이션 — travel 값은 커스텀 구현 시만 필요.",
+    "focus": "border 없이 ring만(Switch는 보더 없음).",
+    "note": "네이티브 Switch 컴포넌트가 있으면 track/thumb 대신 그것을 토큰 색으로 테마링하는 게 우선."
+  }
+}
