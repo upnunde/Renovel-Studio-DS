@@ -1,0 +1,27 @@
+{
+  "$schema": "./README.md",
+  "name": "FileInput",
+  "slot": "file-input",
+  "$description": "OS-중립 FileInput 정본. 출처: src/components/ui/file-input.tsx. 숨긴 input + 스타일 라벨 트리거.",
+  "role": "button",
+  "$use": ["input"],
+  "axes": { "size": { "values": ["sm", "default", "xl", "2xl"] } },
+  "defaults": { "size": "default", "placeholder": "파일을 선택하세요" },
+  "styleSpec": {
+    "trigger": {
+      "$note": "라벨이 시각 컨트롤 (Input 박스 형태)",
+      "rest": { "bg": "transparent", "border": "{input}", "gap": "{space.2}" },
+      "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "$ref": "shared.disabledField" },
+      "invalid": { "border": "{destructive}", "ring": "{destructive}/20" },
+      "leadingIcon": { "fg": "{foreground}", "iconGlyph": 14 },
+      "labelText": { "empty": { "fg": "{foreground-placeholder}" }, "filled": { "fg": "{foreground}" } }
+    },
+    "clearButton": { "$use": "input-clear-button" }
+  },
+  "states": ["rest", "disabled", "invalid"],
+  "nativeNotes": {
+    "hiddenInput": "웹은 sr-only input[type=file] + 스타일 라벨. 네이티브는 트리거 버튼+선택파일 표시가 OS 문서 피커를 호출.",
+    "peerState": "disabled/invalid를 숨긴 input에서 라벨로 CSS peer 전달. 네이티브는 시각 컨트롤에 직접 prop.",
+    "multi": "다중 선택 시 'N개 파일' 표기."
+  }
+}

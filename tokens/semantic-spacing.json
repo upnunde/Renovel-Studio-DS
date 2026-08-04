@@ -1,0 +1,11 @@
+{
+  "$description": "시맨틱 spacing 토큰 (Tier 2, mode 무관). 앱 셸·Dialog 정본만 유지. 반응형 breakpoint는 각 플랫폼 레이아웃 코드가 담당하고, 여기선 데스크톱 단일값을 둔다.",
+  "$meta": { "tier": "semantic", "source": "packages/design-system/src/tokens.css" },
+  "space-page-padding-x":        { "$type": "dimension", "$value": "{space.5}",  "$description": "페이지·스크롤 셸 좌우 인셋" },
+  "space-page-padding-y":        { "$type": "dimension", "$value": "{space.10}", "$description": "단순 정적 페이지 상하 여백" },
+  "space-scroll-bottom":         { "$type": "dimension", "$value": "{space.20}", "$description": "스크롤 영역 하단 여유" },
+  "space-modal-padding-x":       { "$type": "dimension", "$value": "{space.6}",  "$description": "모달 본문 좌우 인셋" },
+  "space-modal-padding-y":       { "$type": "dimension", "$value": "{space.5}",  "$description": "모달 본문 상하 인셋" },
+  "space-modal-header-padding-y":{ "$type": "dimension", "$value": "{space.4}",  "$description": "모달 헤더 상하 인셋" },
+  "space-modal-footer-padding-y":{ "$type": "dimension", "$value": "{space.4}",  "$description": "모달 푸터 상하 인셋" }
+}

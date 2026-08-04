@@ -1,0 +1,54 @@
+{
+  "$schema": "./README.md",
+  "name": "Badge",
+  "slot": "badge",
+  "$description": "OS-중립 Badge 정본. 출처: src/components/ui/badge.tsx. variant×status compoundVariant 매트릭스.",
+  "role": "status",
+  "axes": {
+    "variant": { "values": ["default", "secondary", "outline", "ghost"] },
+    "status": { "values": ["default", "success", "warning", "destructive"] },
+    "size": { "values": ["sm", "default", "md", "lg"] },
+    "shape": { "values": ["circle", "square"] }
+  },
+  "defaults": { "variant": "default", "status": "default", "size": "default", "shape": "circle" },
+  "sizeSpec": {
+    "sm":      { "height": 16, "padX": 6,  "gap": 2, "typography": "caption2-500", "iconGlyph": 10 },
+    "default": { "height": 20, "padX": 8,  "gap": 4, "typography": "caption2-500", "iconGlyph": 12 },
+    "md":      { "height": 24, "padX": 8,  "gap": 4, "typography": "caption1-500", "iconGlyph": 12 },
+    "lg":      { "height": 28, "padX": 10, "gap": 4, "typography": "body3-500",    "iconGlyph": 14 }
+  },
+  "shapeSpec": {
+    "circle": { "radius": "9999" },
+    "square": { "$note": "size별 radius", "sm": "2", "default": "4", "md": "4", "lg": "8" }
+  },
+  "base": {
+    "border": "1px transparent",
+    "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
+    "invalid": { "border": "{destructive}", "ring": "{destructive}/20" }
+  },
+  "styleSpec": {
+    "$note": "(variant/status) → 상태별 토큰. HOVER는 링크(<a>) Badge일 때만.",
+    "default/default":     { "rest": { "bg": "{primary-container}", "fg": "{primary-container-foreground}" }, "hover": { "bg": "{primary-container}/80" } },
+    "default/success":     { "rest": { "bg": "{success}", "fg": "{success-foreground}" }, "hover": { "bg": "{success}/80" }, "focus": { "ring": "{success}/20" } },
+    "default/warning":     { "rest": { "bg": "{warning}", "fg": "{warning-foreground}" }, "hover": { "bg": "{warning}/80" }, "focus": { "ring": "{warning}/20" } },
+    "default/destructive": { "rest": { "bg": "{destructive}", "fg": "{destructive-foreground}" }, "hover": { "bg": "{destructive}/80" }, "focus": { "ring": "{destructive}/20" } },
+    "secondary/default":     { "rest": { "bg": "{secondary}", "fg": "{secondary-foreground}" }, "hover": { "bg": "{muted}", "fg": "{foreground}" } },
+    "secondary/success":     { "rest": { "bg": "{success}/10", "fg": "{success}" }, "hover": { "bg": "{success}/20" }, "focus": { "ring": "{success}/20" }, "dark": { "rest": { "bg": "{success}/20" } } },
+    "secondary/warning":     { "rest": { "bg": "{warning}/15", "fg": "{warning}" }, "hover": { "bg": "{warning}/25" }, "focus": { "ring": "{warning}/20" }, "dark": { "rest": { "bg": "{warning}/20" } } },
+    "secondary/destructive": { "rest": { "bg": "{destructive}/10", "fg": "{destructive}" }, "hover": { "bg": "{destructive}/20" }, "focus": { "ring": "{destructive}/20" }, "dark": { "rest": { "bg": "{destructive}/20" } } },
+    "outline/default":     { "rest": { "bg": "transparent", "border": "{border}", "fg": "{foreground}" }, "hover": { "bg": "{muted}", "fg": "{foreground}" } },
+    "outline/success":     { "rest": { "bg": "transparent", "border": "{success}/40", "fg": "{success}" }, "hover": { "bg": "{success}/10" }, "focus": { "ring": "{success}/20" } },
+    "outline/warning":     { "rest": { "bg": "transparent", "border": "{warning}/40", "fg": "{warning}" }, "hover": { "bg": "{warning}/15" }, "focus": { "ring": "{warning}/20" } },
+    "outline/destructive": { "rest": { "bg": "transparent", "border": "{destructive}/40", "fg": "{destructive}" }, "hover": { "bg": "{destructive}/10" }, "focus": { "ring": "{destructive}/20" } },
+    "ghost/default":     { "rest": { "bg": "transparent" }, "hover": { "bg": "{muted}", "fg": "{foreground}" } },
+    "ghost/success":     { "rest": { "bg": "transparent", "fg": "{success}" }, "hover": { "bg": "{success}/10" }, "focus": { "ring": "{success}/20" } },
+    "ghost/warning":     { "rest": { "bg": "transparent", "fg": "{warning}" }, "hover": { "bg": "{warning}/15" }, "focus": { "ring": "{warning}/20" } },
+    "ghost/destructive": { "rest": { "bg": "transparent", "fg": "{destructive}" }, "hover": { "bg": "{destructive}/10" }, "focus": { "ring": "{destructive}/20" } }
+  },
+  "states": ["rest", "hover", "focus", "invalid"],
+  "nativeNotes": {
+    "hover": "링크 Badge(<a>)일 때만. 모바일은 대개 비인터랙티브 → hover 생략 가능.",
+    "role": "status/label. iOS accessibilityLabel, Compose semantics.",
+    "typographyInconsistency": "default variant은 프로젝트 타이포 스케일(caption2-500 등) 사용. 일부 컴포넌트가 Tailwind 기본 text-sm 쓰는 것과 구분."
+  }
+}

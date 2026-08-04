@@ -1,0 +1,30 @@
+{
+  "$schema": "./README.md",
+  "name": "Toggle",
+  "slot": "toggle",
+  "$description": "OS-중립 Toggle 정본. 출처: src/components/ui/toggle.tsx. aria-pressed=선택. variant×size.",
+  "role": "button",
+  "axes": {
+    "variant": { "values": ["default", "outline"] },
+    "size": { "values": ["sm", "default", "xl", "2xl"] }
+  },
+  "defaults": { "variant": "default", "size": "default" },
+  "sizeSpec": {
+    "sm":      { "height": 32, "minW": 32, "padX": 10, "gap": 4, "fontSize": 12.8, "iconGlyph": 14, "radius": "12" },
+    "default": { "height": 36, "minW": 36, "padX": 10, "gap": 4, "fontSize": 14, "iconGlyph": 16 },
+    "xl":      { "height": 40, "minW": 40, "padX": 12, "gap": 4, "fontSize": 14, "iconGlyph": 16 },
+    "2xl":     { "height": 48, "minW": 48, "padX": 12, "gap": 4, "fontSize": 16, "iconGlyph": 16 }
+  },
+  "base": { "fontWeight": 500, "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 }, "invalid": { "border": "{destructive}", "ring": "{destructive}/20", "dark": { "ring": "{destructive}/40" } } },
+  "styleSpec": {
+    "default": { "rest": { "bg": "transparent" }, "hover": { "bg": "{muted}", "fg": "{foreground}" }, "pressed": { "bg": "{accent}", "fg": "{accent-foreground}" } },
+    "outline": { "rest": { "bg": "transparent", "border": "{input}" }, "hover": { "bg": "{muted}", "fg": "{foreground}" }, "pressed": { "bg": "{accent}", "fg": "{accent-foreground}" } }
+  },
+  "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "$ref": "shared.disabledInteractive" },
+  "states": ["rest", "hover", "focus", "pressed", "disabled", "invalid"],
+  "nativeNotes": {
+    "pressed": "aria-pressed(선택 상태)=accent 채움. iOS isOn 바인딩, Compose Toggle selected.",
+    "hover": "웹 전용(+data-hovered). 모바일 pressed와 구분 — 선택(pressed/accent)은 유지 상태, hover는 일시.",
+    "iconPadding": "has-data-[icon] :has() 로 아이콘 유무별 패딩. 플랫폼은 명시 로직으로."
+  }
+}

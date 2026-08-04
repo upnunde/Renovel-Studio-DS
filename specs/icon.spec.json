@@ -1,0 +1,24 @@
+{
+  "$schema": "./README.md",
+  "name": "Icon",
+  "slot": "icon",
+  "$description": "OS-중립 Icon 정본. 출처: src/components/ui/icon.tsx. Lucide 글리프, currentColor 상속.",
+  "role": "img",
+  "axes": { "size": { "values": ["xs", "sm", "md", "lg", "xl"] } },
+  "defaults": { "size": "md" },
+  "sizeSpec": {
+    "xs": { "glyph": "{icon-size.xs}" },
+    "sm": { "glyph": "{icon-size.sm}" },
+    "md": { "glyph": "{icon-size.md}" },
+    "lg": { "glyph": "{icon-size.lg}" },
+    "xl": { "glyph": "{icon-size.xl}" }
+  },
+  "styleSpec": { "rest": { "fg": "currentColor", "$note": "부모 텍스트 색 상속, 자체 색 없음. strokeWidth={icon-stroke-width}" } },
+  "states": ["rest"],
+  "nativeNotes": {
+    "color": "currentColor 상속. iOS foregroundColor/tint, Compose tint=LocalContentColor.",
+    "position": "position prop→data-icon은 부모의 아이콘 인접 패딩용 CSS 훅. 네이티브는 leading/trailing 슬롯 로직으로.",
+    "a11y": "기본 aria-hidden, aria-label 주면 노출. iOS accessibilityHidden, Compose contentDescription.",
+    "glyphSource": "Lucide 아이콘 세트. 네이티브도 동일 아이콘 자산 번들 필요."
+  }
+}

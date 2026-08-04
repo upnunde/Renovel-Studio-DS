@@ -1,0 +1,25 @@
+{
+  "$schema": "./README.md",
+  "name": "InputClearButton",
+  "slot": "input-clear",
+  "$description": "OS-중립 InputClearButton 정본. 출처: src/components/ui/input-clear-button.tsx. Input 계열 공유 우측 액션(지우기).",
+  "role": "button",
+  "$use": ["button"],
+  "axes": { "size": { "values": ["sm", "default", "xl", "2xl"] } },
+  "defaults": { "size": "default" },
+  "sizeSpec": {
+    "$note": "input size → icon 버튼 size. 아이콘 close 14px 고정.",
+    "sm": { "buttonSize": "icon-xs(24)" },
+    "default": { "buttonSize": "icon-sm(32)" },
+    "xl": { "buttonSize": "icon-sm(32)" },
+    "2xl": { "buttonSize": "icon-sm(32)" }
+  },
+  "styleSpec": { "rest": { "fg": "{foreground-muted}", "$note": "Button ghost 기반" }, "hover": { "fg": "{foreground}" } },
+  "endPadding": { "$note": "부모 input의 우측 패딩 예약 계약", "0": "none", "1": "pe-9(36)", "2": "pe-16(64)" },
+  "states": ["rest", "hover"],
+  "nativeNotes": {
+    "shared": "Input/Email/Password/File 공유. 위치는 소비자가 지정.",
+    "clearNativeValue": "웹 clearNativeInputValue는 React 제어입력 우회용 DOM 핵 — 네이티브 무의미(일반 상태 업데이트). 시각/동작 스펙에서 제외.",
+    "tabIndex": "Tab 순서 제외(마우스/터치 전용)."
+  }
+}

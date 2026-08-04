@@ -1,0 +1,172 @@
+{
+  "$description": "OS-중립 원시 토큰 정본 (Tier 1). 플랫폼별 산출물(CSS/Swift/XML)은 이 파일에서 생성한다. 값은 tokens.css와 1:1 일치해야 하며, 변경 시 반드시 build/verify로 drift 0을 확인한다.",
+  "$meta": {
+    "tier": "primitive",
+    "source": "packages/design-system/src/tokens.css",
+    "unitless": "px 값은 rem 환산 전 원시 px. rem 환산(÷16)은 CSS 빌더가, pt/dp 매핑은 iOS/AOS 빌더가 담당한다."
+  },
+  "grayscale": {
+    "$type": "color",
+    "10":  { "$value": "#f8f8fc" },
+    "15":  { "$value": "#f1f1f5" },
+    "20":  { "$value": "#e7e7eb" },
+    "30":  { "$value": "#d7d7db" },
+    "40":  { "$value": "#c6c6ca" },
+    "50":  { "$value": "#b6b6ba" },
+    "60":  { "$value": "#a5a5a9" },
+    "70":  { "$value": "#959598" },
+    "80":  { "$value": "#848487" },
+    "90":  { "$value": "#747478" },
+    "100": { "$value": "#636366" },
+    "110": { "$value": "#535356" },
+    "120": { "$value": "#424245" },
+    "130": { "$value": "#323235" },
+    "140": { "$value": "#212124" },
+    "150": { "$value": "#121213" }
+  },
+  "brand": {
+    "$type": "color",
+    "$description": "브랜드 #F642D4 (500 기준) — 버튼·선택·강조 전용",
+    "50":  { "$value": "#fdf2fc" },
+    "100": { "$value": "#fce8f8" },
+    "200": { "$value": "#f9cff0" },
+    "300": { "$value": "#f3a0e3" },
+    "400": { "$value": "#f06ad9" },
+    "500": { "$value": "#f642d4" },
+    "600": { "$value": "#d91bb8" },
+    "700": { "$value": "#b01596" },
+    "800": { "$value": "#780f66" },
+    "950": { "$value": "#3a0532" }
+  },
+  "success": {
+    "$type": "color",
+    "50":  { "$value": "#ecfdf5" },
+    "100": { "$value": "#d1fae5" },
+    "200": { "$value": "#a7f3d0" },
+    "400": { "$value": "#34d399" },
+    "500": { "$value": "#10b981" },
+    "600": { "$value": "#059669" },
+    "800": { "$value": "#065f46" },
+    "950": { "$value": "#022c22" }
+  },
+  "warning": {
+    "$type": "color",
+    "50":  { "$value": "#fffbeb" },
+    "100": { "$value": "#fef3c7" },
+    "200": { "$value": "#fde68a" },
+    "400": { "$value": "#fbbf24" },
+    "500": { "$value": "#f59e0b" },
+    "600": { "$value": "#d97706" },
+    "800": { "$value": "#92400e" },
+    "950": { "$value": "#451a03" }
+  },
+  "info": {
+    "$type": "color",
+    "$description": "안내·정보 (브랜드와 구분되는 스카이 블루)",
+    "50":  { "$value": "#f0f9ff" },
+    "100": { "$value": "#e0f2fe" },
+    "200": { "$value": "#bae6fd" },
+    "400": { "$value": "#38bdf8" },
+    "500": { "$value": "#0ea5e9" },
+    "600": { "$value": "#0284c7" },
+    "800": { "$value": "#075985" },
+    "950": { "$value": "#082f49" }
+  },
+  "error": {
+    "$type": "color",
+    "$description": "오류 · destructive 매핑 원천",
+    "50":  { "$value": "#fef2f2" },
+    "100": { "$value": "#fee2e2" },
+    "200": { "$value": "#fecaca" },
+    "400": { "$value": "#f87171" },
+    "500": { "$value": "#ef4444" },
+    "600": { "$value": "#dc2626" },
+    "800": { "$value": "#991b1b" },
+    "950": { "$value": "#450a0a" }
+  },
+  "white": { "$type": "color", "$value": "#ffffff" },
+  "black": { "$type": "color", "$value": "#000000" },
+  "white-opacity": {
+    "$type": "color",
+    "$description": "rgb(255 255 255 / a%) — a는 아래 표기",
+    "10":  { "$value": "rgb(255 255 255 / 7%)" },
+    "20":  { "$value": "rgb(255 255 255 / 11%)" },
+    "30":  { "$value": "rgb(255 255 255 / 17%)" },
+    "40":  { "$value": "rgb(255 255 255 / 21%)" },
+    "50":  { "$value": "rgb(255 255 255 / 33%)" },
+    "60":  { "$value": "rgb(255 255 255 / 42%)" },
+    "70":  { "$value": "rgb(255 255 255 / 60%)" },
+    "80":  { "$value": "rgb(255 255 255 / 72%)" },
+    "90":  { "$value": "rgb(255 255 255 / 78%)" },
+    "100": { "$value": "rgb(255 255 255 / 82%)" },
+    "110": { "$value": "rgb(255 255 255 / 91%)" },
+    "120": { "$value": "rgb(255 255 255 / 93%)" },
+    "130": { "$value": "rgb(255 255 255 / 98%)" }
+  },
+  "black-opacity": {
+    "$type": "color",
+    "10":  { "$value": "rgb(0 0 0 / 2%)" },
+    "20":  { "$value": "rgb(0 0 0 / 7%)" },
+    "30":  { "$value": "rgb(0 0 0 / 9%)" },
+    "40":  { "$value": "rgb(0 0 0 / 13%)" },
+    "50":  { "$value": "rgb(0 0 0 / 22%)" },
+    "60":  { "$value": "rgb(0 0 0 / 28%)" },
+    "70":  { "$value": "rgb(0 0 0 / 42%)" },
+    "80":  { "$value": "rgb(0 0 0 / 55%)" },
+    "90":  { "$value": "rgb(0 0 0 / 67%)" },
+    "100": { "$value": "rgb(0 0 0 / 75%)" },
+    "110": { "$value": "rgb(0 0 0 / 82%)" },
+    "120": { "$value": "rgb(0 0 0 / 88%)" },
+    "130": { "$value": "rgb(0 0 0 / 93%)" }
+  },
+  "space": {
+    "$type": "dimension",
+    "$description": "Material 결 13단계. px 단위 원시값 — CSS는 rem 환산, iOS/AOS는 pt/dp.",
+    "px":  { "$value": "1px" },
+    "0-5": { "$value": "2px" },
+    "1":   { "$value": "4px" },
+    "2":   { "$value": "8px" },
+    "3":   { "$value": "12px" },
+    "4":   { "$value": "16px" },
+    "5":   { "$value": "20px" },
+    "6":   { "$value": "24px" },
+    "8":   { "$value": "32px" },
+    "10":  { "$value": "40px" },
+    "12":  { "$value": "48px" },
+    "16":  { "$value": "64px" },
+    "20":  { "$value": "80px" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "base": { "$value": "12px", "$description": "--radius 0.75rem" }
+  },
+  "stroke-width": {
+    "$type": "dimension",
+    "$value": "0.5px"
+  },
+  "icon-size": {
+    "$type": "dimension",
+    "$description": "Lucide stroke 글리프 — 컴포넌트 높이와 정렬",
+    "xs": { "$value": "12px" },
+    "sm": { "$value": "14px" },
+    "md": { "$value": "16px" },
+    "lg": { "$value": "18px" },
+    "xl": { "$value": "20px" }
+  },
+  "icon-stroke-width": {
+    "$type": "number",
+    "$value": 1.5
+  },
+  "motion-duration": {
+    "$type": "duration",
+    "short":  { "$value": "100ms", "$description": "인터랙티브 상태·내부 이동·퇴장" },
+    "medium": { "$value": "200ms", "$description": "등장" },
+    "long":   { "$value": "400ms", "$description": "큰 표면 전환" }
+  },
+  "motion-easing": {
+    "$type": "cubicBezier",
+    "standard":                { "$value": [0.2, 0, 0, 1],       "$description": "일반 상태 전환" },
+    "emphasized-decelerate":   { "$value": [0.05, 0.7, 0.1, 1],  "$description": "등장 (천천히 안착)" },
+    "emphasized-accelerate":   { "$value": [0.3, 0, 0.8, 0.15],  "$description": "퇴장 (빠르게 사라짐)" }
+  }
+}

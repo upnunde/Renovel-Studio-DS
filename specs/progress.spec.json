@@ -1,0 +1,21 @@
+{
+  "$schema": "./README.md",
+  "name": "Progress",
+  "slot": "progress",
+  "$description": "OS-중립 Progress 정본. 출처: src/components/ui/progress.tsx. size 축 없음. 읽기전용.",
+  "role": "progressbar",
+  "axes": {},
+  "defaults": {},
+  "sizeSpec": { "default": { "trackHeight": 4, "gap": "{space.2}", "$note": "label행↔track 8px" } },
+  "styleSpec": {
+    "track": { "rest": { "bg": "{muted}", "radius": "9999" } },
+    "indicator": { "rest": { "bg": "{primary}" }, "transition": { "duration": "{motion-duration.short}", "easing": "{motion-easing.standard}" } },
+    "label": { "fontWeight": 500 },
+    "value": { "fg": "{foreground-muted}", "$note": "tabular-nums 우측정렬" }
+  },
+  "states": ["rest"],
+  "nativeNotes": {
+    "readonly": "비인터랙티브 표시. iOS ProgressView, Compose LinearProgressIndicator를 토큰 색으로.",
+    "widthAnim": "indicator 너비 value 기반. 네이티브 progress 컴포넌트가 자체 처리."
+  }
+}

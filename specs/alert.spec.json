@@ -1,0 +1,28 @@
+{
+  "$schema": "./README.md",
+  "name": "Alert",
+  "slot": "alert",
+  "$description": "OS-중립 Alert 정본. 출처: src/components/ui/alert.tsx + alert.css. status별 색, type=default/icon 레이아웃.",
+  "role": "alert",
+  "axes": {
+    "status": { "values": ["default", "success", "warning", "destructive"] },
+    "type": { "values": ["default", "icon"] }
+  },
+  "defaults": { "variant": "default", "status": "default", "type": "default" },
+  "sizeSpec": { "default": { "padding": "{space.4}", "radius": "8", "gap": "{space.0-5}", "iconGlyph": 16 } },
+  "styleSpec": {
+    "default":     { "rest": { "bg": "{card}", "fg": "{card-foreground}", "border": "{border}" } },
+    "success":     { "rest": { "bg": "{success}/10", "fg": "{success}", "border": "{success}/20" }, "description": { "fg": "{success}/90" }, "dark": { "rest": { "bg": "{success}/20", "border": "{success}/30" } } },
+    "warning":     { "rest": { "bg": "{warning}/15", "fg": "{warning}", "border": "{warning}/25" }, "description": { "fg": "{warning}/90" }, "dark": { "rest": { "bg": "{warning}/20", "border": "{warning}/30" } } },
+    "destructive": { "rest": { "bg": "{destructive}/10", "fg": "{destructive}", "border": "{destructive}/20" }, "description": { "fg": "{destructive}/90" }, "dark": { "rest": { "bg": "{destructive}/20", "border": "{destructive}/30" } } },
+    "title": { "fontWeight": 500 },
+    "description": { "fg": "{foreground-muted}", "$note": "status별로 위 오버라이드" },
+    "dismiss": { "rest": { "fg": "{foreground-muted}" }, "hover": { "bg": "{muted}", "fg": "{foreground}" }, "$note": "removable 시 우상단 ✕" }
+  },
+  "states": ["rest"],
+  "nativeNotes": {
+    "iconLayout": "type=icon은 CSS grid(icon | title/desc). 네이티브는 HStack(icon, VStack(title, desc)).",
+    "autoDismiss": "duration prop 시 JS 타이머 자동 닫힘. iOS/AOS 타이머+애니메이션.",
+    "role": "role=alert 라이브영역. iOS accessibilityAnnouncement, Compose liveRegion."
+  }
+}

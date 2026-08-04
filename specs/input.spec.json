@@ -1,0 +1,39 @@
+{
+  "$schema": "./README.md",
+  "name": "Input",
+  "slot": "input",
+  "$description": "OS-중립 Input 정본. 출처: src/components/ui/input.tsx. size별 typography 스케일. clearable/group/hypertext 하위 슬롯.",
+  "role": "textbox",
+  "axes": { "size": { "values": ["sm", "default", "xl", "2xl"] } },
+  "defaults": { "size": "default" },
+  "sizeSpec": {
+    "sm":      { "height": 32, "padX": 8,  "typography": "body4-400", "radius": "8" },
+    "default": { "height": 36, "padX": 10, "typography": "body3-400", "radius": "{radius.base}" },
+    "xl":      { "height": 40, "padX": 12, "typography": "body2-400", "radius": "{radius.base}" },
+    "2xl":     { "height": 48, "padX": 12, "typography": "body1-400", "radius": "{radius.base}" }
+  },
+  "styleSpec": {
+    "control": {
+      "rest": { "bg": "transparent", "border": "{input}", "fg": "{foreground}", "dark": { "bg": "{input}/30" } },
+      "placeholder": { "fg": "{foreground-placeholder}" },
+      "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
+      "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "placeholder": "{foreground-disabled}", "$ref": "shared.disabledField" },
+      "invalid": { "border": "{destructive}", "ring": "{destructive}/20", "dark": { "border": "{destructive}/50", "ring": "{destructive}/40" } }
+    },
+    "hypertext": {
+      "default": { "fg": "{foreground-muted}", "peerInvalid": { "fg": "{destructive}" } },
+      "error": { "fg": "{destructive}" }
+    }
+  },
+  "clearButton": {
+    "$note": "InputClearButton = Button+Icon(close, size sm=14px). 버튼 크기: sm→icon-xs(24px), 그 외→icon-sm(36px). endPadding pe-9.",
+    "icon": 14
+  },
+  "states": ["rest", "focus", "disabled", "invalid"],
+  "nativeNotes": {
+    "placeholder": "웹 ::placeholder. iOS placeholder, Compose placeholder 파라미터.",
+    "focus": "focus-visible ring. iOS/AOS focus indication.",
+    "peerInvalid": "hypertext가 짝 input의 aria-invalid를 CSS peer로 감지. 플랫폼은 form-field 상태 바인딩으로.",
+    "file": "type=file 스타일은 웹 전용 file: 의사요소. iOS/AOS는 별도 파일 선택 UI."
+  }
+}

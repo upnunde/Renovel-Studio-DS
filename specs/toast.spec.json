@@ -1,0 +1,23 @@
+{
+  "$schema": "./README.md",
+  "name": "Toast",
+  "slot": "toast",
+  "$description": "OS-중립 Toast 정본. 출처: src/components/ui/sonner.tsx(외부 sonner 래퍼). 토큰 브리지만 정의, 렌더는 sonner 내부.",
+  "role": "status",
+  "kinds": ["success", "info", "warning", "error", "loading"],
+  "styleSpec": {
+    "surface": { "bg": "{popover}", "fg": "{popover-foreground}", "border": "{border}", "radius": "{radius.base}" },
+    "icons": {
+      "$note": "kind별 아이콘 md(16px). loading은 회전 애니메이션.",
+      "success": "checkCircle", "info": "info", "warning": "warning", "error": "error", "loading": "loader(spin)"
+    }
+  },
+  "states": ["enter", "visible", "exit"],
+  "portal": true,
+  "nativeNotes": {
+    "thirdParty": "웹은 sonner 패키지 pass-through. 토큰(popover/popover-foreground/border/radius)만 브리지. 스택·스와이프·자동닫힘은 sonner 내부.",
+    "native": "네이티브 Toast는 독립 구현 필요 — 위치/스택/스와이프-dismiss/자동닫힘 타이밍/아이콘셋만 이관 확정.",
+    "z": "§2-10은 z-toast(500) 최상위. 웹 코드엔 명시 안 됨(FLAG).",
+    "icons": "kind별 아이콘은 icons.ts 세트. iOS/AOS 동일 아이콘."
+  }
+}

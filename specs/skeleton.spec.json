@@ -1,0 +1,18 @@
+{
+  "$schema": "./README.md",
+  "name": "Skeleton",
+  "slot": "skeleton",
+  "$description": "OS-중립 Skeleton 정본. 출처: src/components/ui/skeleton.tsx. cva 없음. 크기는 소비자 지정.",
+  "role": "presentation",
+  "axes": {},
+  "defaults": {},
+  "sizeSpec": { "default": { "radius": "8", "$note": "w/h는 소비자가 지정" } },
+  "styleSpec": {
+    "rest": { "bg": "{muted}", "radius": "8", "$note": "animate-pulse(opacity 루프)" }
+  },
+  "states": ["rest"],
+  "nativeNotes": {
+    "pulse": "웹 animate-pulse(opacity 키프레임 루프). iOS Animated opacity/redacted(reason:.placeholder), Compose 무한 opacity/shimmer 애니메이션으로 재구현 필요.",
+    "size": "고유 크기 없음 — 소비처가 w/h 지정."
+  }
+}

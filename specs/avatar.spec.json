@@ -1,0 +1,35 @@
+{
+  "$schema": "./README.md",
+  "name": "Avatar",
+  "slot": "avatar",
+  "$description": "OS-중립 Avatar 정본. 출처: src/components/ui/avatar.tsx. 10단계 size + fallback/badge/group.",
+  "role": "img",
+  "axes": { "size": { "values": ["xs", "sm", "default", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl"] } },
+  "defaults": { "size": "default" },
+  "sizeSpec": {
+    "xs":  { "box": 20, "fallbackFont": 10, "iconGlyph": 12, "badge": 6 },
+    "sm":  { "box": 24, "fallbackFont": 12, "iconGlyph": 12, "badge": 8 },
+    "default": { "box": 32, "fallbackFont": 14, "iconGlyph": 16, "badge": 10 },
+    "md":  { "box": 36, "fallbackFont": 14, "iconGlyph": 18, "badge": 10 },
+    "lg":  { "box": 40, "fallbackFont": 16, "iconGlyph": 20, "badge": 12 },
+    "xl":  { "box": 48, "fallbackFont": 18, "iconGlyph": 24, "badge": 14 },
+    "2xl": { "box": 64, "fallbackFont": 20, "iconGlyph": 32, "badge": 16 },
+    "3xl": { "box": 80, "fallbackFont": 24, "iconGlyph": 40, "badge": 20 },
+    "4xl": { "box": 96, "fallbackFont": 30, "iconGlyph": 48, "badge": 24 },
+    "5xl": { "box": 128, "fallbackFont": 36, "iconGlyph": 64, "badge": 32 }
+  },
+  "styleSpec": {
+    "root": { "rest": { "radius": "9999", "border": "{border}", "$note": "border는 after 의사요소 + mix-blend(라이트 darken/다크 lighten)" } },
+    "image": { "$note": "object-cover, aspect-square, 색 토큰 없음" },
+    "fallback": { "default": { "bg": "{muted}", "fg": "{muted-foreground}" }, "icon": { "$note": "아이콘은 박스 50% 크기(avatar.css 픽셀 override)" } },
+    "badge": { "bg": "{primary}", "fg": "{primary-foreground}", "ring": "{background}", "$note": "ring 2px 컷아웃, 우하단" },
+    "group": { "$note": "-space-x-2 겹침, 각 아바타 ring-2 {background}" },
+    "groupCount": { "bg": "{muted}", "fg": "{muted-foreground}", "ring": "{background}" }
+  },
+  "states": ["rest"],
+  "nativeNotes": {
+    "imageFallback": "이미지 로드 실패 시 fallback. iOS AsyncImage placeholder, Compose SubcomposeAsyncImage.",
+    "blendBorder": "웹 mix-blend 테두리(다크/라이트 blend 스왑). 네이티브는 반투명 보더로 근사.",
+    "autoSize": "badge/groupCount가 부모 size 자동 상속(웹 :has/group). 네이티브는 명시 전달."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "./README.md",
+  "name": "Tabs",
+  "slot": "tabs",
+  "$description": "OS-중립 Tabs 정본. 출처: src/components/ui/tabs.tsx + tabs.css. variant×size. 수평 고정(수직 미지원).",
+  "role": "tablist",
+  "$use": ["_shared.disabledPresets"],
+  "axes": {
+    "variant": { "values": ["default", "line", "text"] },
+    "size": { "values": ["sm", "default", "xl", "2xl"] }
+  },
+  "defaults": { "variant": "default", "size": "default" },
+  "sizeSpec": {
+    "$note": "trigger 높이 공통. default variant은 min-w(정사각)·padding·typography 추가. line/text는 typography가 tabs.css 정본(전부 700).",
+    "sm":      { "height": 32, "listGap": { "default": 4, "line": 8 },  "default": { "padX": 12, "gap": 4, "fontSize": 12.8, "iconGlyph": 14 }, "lineText": { "typography": "body3-700" } },
+    "default": { "height": 36, "listGap": { "default": 6, "line": 12 }, "default": { "padX": 14, "gap": 6, "fontSize": 14, "iconGlyph": 16 }, "lineText": { "typography": "body2-700" } },
+    "xl":      { "height": 40, "listGap": { "default": 8, "line": 16 }, "default": { "padX": 16, "gap": 6, "fontSize": 14, "iconGlyph": 16 }, "lineText": { "typography": "body1-700" } },
+    "2xl":     { "height": 48, "listGap": { "default": 10, "line": 20 },"default": { "padX": 16, "gap": 8, "fontSize": 16, "iconGlyph": 20 }, "lineText": { "typography": "heading4-700" } }
+  },
+  "base": { "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3, "outline": "{ring}" }, "transition": { "duration": "{motion-duration.short}", "easing": "{motion-easing.standard}" } },
+  "styleSpec": {
+    "list": { "fg": "{foreground-muted}" },
+    "default": {
+      "rest": { "bg": "{background}", "border": "{border}", "fg": "{foreground-muted}", "radius": "4", "fontWeight": 500 },
+      "hover": { "bg": "{muted}", "fg": "{foreground}" },
+      "active": { "border": "transparent", "bg": "{inverse-muted}", "fg": "{inverse-muted-foreground}" },
+      "activeHover": { "bg": "{inverse-muted}/80" }
+    },
+    "line": {
+      "rest": { "bg": "transparent", "fg": "{foreground-disabled}" },
+      "hover": { "fg": "{foreground}" },
+      "active": { "fg": "{foreground}", "indicator": { "bg": "{foreground}", "$note": "하단 언더바 2px" } }
+    },
+    "text": {
+      "rest": { "bg": "transparent", "fg": "{foreground-disabled}" },
+      "hover": { "fg": "{foreground}" },
+      "active": { "fg": "{foreground}", "$note": "언더바 없음, 색만" }
+    },
+    "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "$ref": "shared.disabledInteractive" },
+    "content": { "$note": "text-sm" }
+  },
+  "states": ["rest", "hover", "focus", "active", "disabled"],
+  "nativeNotes": {
+    "active": "웹 data-active/data-state=active 이중(마이그레이션 호환). 네이티브는 단일 selected.",
+    "indicator": "line variant 언더바는 웹 ::after 의사요소. 네이티브는 명시 인디케이터 뷰.",
+    "orientation": "현재 수평만 지원(수직은 dead code). 네이티브도 수평 우선.",
+    "lineTextTypography": "line/text 타이포는 tabs.css 정본(700). default는 CVA."
+  }
+}

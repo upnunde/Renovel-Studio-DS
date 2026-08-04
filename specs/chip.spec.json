@@ -1,0 +1,57 @@
+{
+  "$schema": "./README.md",
+  "name": "Chip",
+  "slot": "chip",
+  "$description": "OS-중립 Chip 정본. 출처: src/components/ui/chip.tsx. Toggle 기반(aria-pressed 선택 상태). onRemove 시 shell 구조.",
+  "role": "button",
+  "axes": {
+    "variant": { "values": ["fill", "outline"] },
+    "size": { "values": ["sm", "default", "xl"] },
+    "shape": { "values": ["circle", "square"] }
+  },
+  "defaults": { "variant": "fill", "size": "default", "shape": "circle" },
+  "deprecatedAliases": [
+    { "from": { "variant": "default" }, "to": { "variant": "fill" } }
+  ],
+  "sizeSpec": {
+    "sm":      { "height": 32, "padX": 10, "gap": 4, "fontSize": 12.8, "iconGlyph": 14, "$note": "text-[0.8rem]=12.8px" },
+    "default": { "height": 36, "padX": 12, "gap": 6, "fontSize": 14,   "iconGlyph": 16 },
+    "xl":      { "height": 40, "padX": 14, "gap": 6, "fontSize": 14,   "iconGlyph": 16 }
+  },
+  "shapeSpec": { "circle": { "radius": "9999" }, "square": { "radius": "8" } },
+  "base": {
+    "fontWeight": 500,
+    "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
+    "invalid": { "border": "{destructive}", "ring": "{destructive}/20" }
+  },
+  "styleSpec": {
+    "$note": "selected = aria-pressed=true. fill/outline 모두 selected는 inverse-muted 채움.",
+    "fill": {
+      "rest":     { "bg": "{secondary}", "fg": "{secondary-foreground}", "border": "transparent" },
+      "hover":    { "bg": "{muted}", "fg": "{foreground}" },
+      "selected": { "bg": "{inverse-muted}", "fg": "{inverse-muted-foreground}", "border": "transparent" },
+      "selectedHover": { "bg": "{inverse-muted}/80" }
+    },
+    "outline": {
+      "rest":     { "bg": "{background}", "border": "{border}" },
+      "hover":    { "bg": "{muted}", "fg": "{foreground}" },
+      "selected": { "bg": "{inverse-muted}", "fg": "{inverse-muted-foreground}", "border": "transparent" },
+      "selectedHover": { "bg": "{inverse-muted}/80" }
+    }
+  },
+  "removeButton": {
+    "$note": "onRemove 시 우측 ✕ 버튼",
+    "fg": "currentColor",
+    "rest": { "opacity": 0.8 },
+    "hover": { "opacity": 1 },
+    "disabled": { "opacity": 1, "pointerEvents": "none" }
+  },
+  "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "$ref": "shared.disabledInteractive" },
+  "states": ["rest", "hover", "focus", "selected", "disabled", "invalid"],
+  "nativeNotes": {
+    "selected": "aria-pressed(Toggle). iOS isSelected 바인딩, Compose selected state.",
+    "hover": "웹 전용. 모바일 pressed로 매핑.",
+    "shell": "onRemove 시 chip 본체+삭제버튼 묶는 shell — 선택/비활성 상태를 shell 레벨에서 표현. 플랫폼은 HStack/Row 컨테이너로.",
+    "removeButton": "iOS/AOS trailing 아이콘 버튼으로 구현."
+  }
+}

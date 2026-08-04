@@ -1,0 +1,37 @@
+{
+  "$schema": "./README.md",
+  "name": "_shared",
+  "$description": "여러 컴포넌트가 공유하는 스펙 조각. 개별 스펙에서 $use로 참조(문서적 — 빌더는 각 스펙 자체 값을 우선).",
+  "floatingSurface": {
+    "$description": "Dialog·Popover·DropdownMenu·Select content 공통 플로팅 면 레시피 (Tooltip은 inverse 별도).",
+    "rest": { "bg": "{popover}", "fg": "{popover-foreground}", "ring": "{foreground}/10", "radius": "{radius.base}" },
+    "shadow": { "$note": "코드 현행은 Tailwind shadow-md(팝오버·메뉴)/shadow-lg(서브메뉴). DESIGN.md §2-8은 shadow-elevation-30 권장 — 불일치 존재(웹 코드 미변경, FLAG).", "web": "shadow-md", "designToken": "{shadow-elevation-30}" },
+    "z": { "$note": "코드 현행 raw z-50. DESIGN.md §2-10 semantic은 z-overlay(300)/z-modal(400)/z-dropdown(100) — 불일치(FLAG).", "web": 50, "designToken": "z-overlay|z-modal|z-dropdown" },
+    "animation": {
+      "open": { "duration": "{motion-duration.medium}", "easing": "{motion-easing.emphasized-decelerate}", "$effect": "fade-in + zoom-in-95 + side별 slide" },
+      "closed": { "duration": "{motion-duration.short}", "easing": "{motion-easing.emphasized-accelerate}", "$effect": "fade-out + zoom-out-95" }
+    }
+  },
+  "disabledPresets": {
+    "$description": "src/lib/ui-disabled.ts 대응. 플랫폼은 아래 조합을 disabled 프리셋으로.",
+    "disabledBlock": "pointer-events-none + cursor-not-allowed (색 변화 없음)",
+    "disabledColors": "bg:{disabled} fg:{disabled-foreground} border:{disabled-border}",
+    "disabledInteractive": "disabledBlock + disabledColors",
+    "disabledField": "disabledInteractive + placeholder:{foreground-disabled}",
+    "disabledControl": "disabledBlock + border/bg disabled + checked 시 primary/40",
+    "disabledItem": "disabledBlock + fg:{foreground-disabled}",
+    "disabledLabel": "짝 컨트롤 disabled 반영 → fg:{foreground-disabled}"
+  },
+  "hitArea": {
+    "$description": "Checkbox/Radio/Slider thumb 터치영역 확장. 웹 after:-inset. iOS hitSlop, Compose minimumInteractiveComponentSize.",
+    "control": "12px x / 8px y",
+    "thumb": "8px 전방향"
+  },
+  "nativeNotesGlobal": {
+    "hover": "웹 hover + data-[hovered=true](Base UI). 모바일 hover 없음 → pressed로 매핑.",
+    "focusRing": "웹 focus-visible ring(3px, {ring}/50). iOS focus system, Compose focusable+indication.",
+    "portal": "Dialog/Popover/Dropdown/Tooltip/Select는 Portal 플로팅. iOS sheet/popover, Compose Dialog/Popup.",
+    "shadowZFlag": "shadow/z-index가 웹 코드에서 DS 토큰 대신 Tailwind 기본을 씀(위 FLAG). 네이티브는 Tailwind fallback이 없으므로 designToken 값으로 구현 권장.",
+    "animation": "웹 animate-in/out. iOS transition/matchedGeometry, Compose AnimatedVisibility."
+  }
+}
