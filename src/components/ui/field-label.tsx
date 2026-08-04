@@ -91,7 +91,7 @@ function FieldLabel({
   return (
     <div
       data-slot="field-label"
-      className={cn("inline-flex flex-col items-start gap-1", className)}
+      className={cn("inline-flex flex-col items-start gap-0.5", className)}
       {...props}
     >
       <div
