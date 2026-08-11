@@ -13,7 +13,7 @@ export type IconGlyphToken = {
   /** 문서용 라벨 — 글리프 px (예: md_g16) */
   label: string
   /** Icon 컴포넌트 size prop */
-  api: "xs" | "sm" | "md" | "lg" | "xl"
+  api: "md" | "lg" | "xl"
   sizePx: number
   rem: string
   variable: string
@@ -110,26 +110,8 @@ export const CONTROL_ICON_SIZE_SCALE: ControlSizeToken[] = [
   },
 ]
 
-/** Lucide 글리프 — g(glyph) 기준 */
+/** Lucide 글리프 — g(glyph) 기준. 최소 16px (접근성·광학 가독성). */
 export const ICON_GLYPH_SCALE: IconGlyphToken[] = [
-  {
-    label: "xs_g12",
-    api: "xs",
-    sizePx: 12,
-    rem: "0.75rem",
-    variable: "--icon-size-xs",
-    controlLabel: "xs_h24",
-    description: "최소 버튼·배지·인라인",
-  },
-  {
-    label: "sm_g14",
-    api: "sm",
-    sizePx: 14,
-    rem: "0.875rem",
-    variable: "--icon-size-sm",
-    controlLabel: "sm_h32",
-    description: "소형 버튼·폼 컨트롤",
-  },
   {
     label: "md_g16",
     api: "md",
@@ -379,17 +361,13 @@ export function iconGlyphCaseMeta(api: string) {
 }
 
 /** 텍스트 컨트롤 size → Icon size prop
- *  컨트롤 5단계(xs/sm/default/xl/2xl), 글리프 5단계.
- *  xl(h40) → lg(18px) 글리프.
+ *  글리프 최소 16px(md). 작은 컨트롤(xs/sm)도 글리프는 md로 통일.
+ *  xl(h40) → lg(18px), 2xl(h48) → xl(20px).
  */
 export function controlSizeToIconGlyph(
   api: string
 ): IconGlyphToken["api"] {
   switch (api) {
-    case "xs":
-      return "xs"
-    case "sm":
-      return "sm"
     case "xl":
       return "lg"
     case "2xl":
@@ -400,16 +378,12 @@ export function controlSizeToIconGlyph(
 }
 
 /** 아이콘 전용 버튼 size → Icon size prop
- *  매핑 의도는 controlSizeToIconGlyph 와 동일 — icon-xl → lg(18px).
+ *  매핑 의도는 controlSizeToIconGlyph 와 동일 — 글리프 최소 md(16px).
  */
 export function iconButtonSizeToIconGlyph(
   api: string
 ): IconGlyphToken["api"] {
   switch (api) {
-    case "icon-xs":
-      return "xs"
-    case "icon-sm":
-      return "sm"
     case "icon-xl":
       return "lg"
     case "icon-2xl":

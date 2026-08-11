@@ -84,7 +84,7 @@ function FileInput({
       >
         <Icon
           icon={ICONS.file}
-          size="sm"
+          size="md"
           className="shrink-0 text-foreground"
           aria-hidden
         />

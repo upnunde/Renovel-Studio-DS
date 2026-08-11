@@ -70,7 +70,7 @@ const tabsTriggerDefaultSizeClasses = [
   "group-data-[variant=default]/tabs-list:group-data-[size=sm]/tabs-list:text-[0.8rem]",
   "group-data-[variant=default]/tabs-list:group-data-[size=sm]/tabs-list:has-data-[icon=inline-start]:pl-2",
   "group-data-[variant=default]/tabs-list:group-data-[size=sm]/tabs-list:has-data-[icon=inline-end]:pr-2",
-  "group-data-[variant=default]/tabs-list:group-data-[size=sm]/tabs-list:[&_svg:not([class*='size-'])]:size-3.5",
+  "group-data-[variant=default]/tabs-list:group-data-[size=sm]/tabs-list:[&_svg:not([class*='size-'])]:size-4",
   "group-data-[variant=default]/tabs-list:group-data-[size=default]/tabs-list:gap-1.5",
   "group-data-[variant=default]/tabs-list:group-data-[size=default]/tabs-list:px-3.5",
   "group-data-[variant=default]/tabs-list:group-data-[size=default]/tabs-list:text-sm",

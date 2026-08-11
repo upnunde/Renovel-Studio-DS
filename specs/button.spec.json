@@ -34,13 +34,13 @@
 
   "sizeSpec": {
     "$note": "height=px 원시값. padX/gap: 스케일 토큰이면 {space.x} 참조, 컨트롤 하프스텝(10px=px-2.5, 6px=gap-1.5)은 스케일에 없으므로 px 원시값으로 둔다 — 없는 토큰을 지어내지 않는다(ghost ref 금지). iconGlyph=Icon size prop(icon-tokens).",
-    "xs":       { "height": 24, "minW": 24, "padX": "{space.2}", "gap": "{space.1}",  "fontSize": 12, "iconGlyph": "xs" },
-    "sm":       { "height": 32, "minW": 32, "padX": 10,          "gap": "{space.1}",  "fontSize": 12.8, "iconGlyph": "sm", "$note": "padX px-2.5=10px · text-[0.8rem]=12.8px" },
+    "xs":       { "height": 24, "minW": 24, "padX": "{space.2}", "gap": "{space.1}",  "fontSize": 12, "iconGlyph": "md" },
+    "sm":       { "height": 32, "minW": 32, "padX": 10,          "gap": "{space.1}",  "fontSize": 12.8, "iconGlyph": "md", "$note": "padX px-2.5=10px · text-[0.8rem]=12.8px" },
     "default":  { "height": 36, "minW": 36, "padX": 10,          "gap": 6,            "fontSize": 14, "iconGlyph": "md", "$note": "padX px-2.5=10px · gap gap-1.5=6px" },
     "xl":       { "height": 40, "minW": 40, "padX": "{space.3}", "gap": 6,            "fontSize": 14, "iconGlyph": "lg", "$note": "gap gap-1.5=6px" },
     "2xl":      { "height": 48, "minW": 48, "padX": "{space.3}", "gap": "{space.2}",  "fontSize": 16, "iconGlyph": "xl" },
-    "icon-xs":  { "square": 24, "padX": 0, "iconGlyph": "xs" },
-    "icon-sm":  { "square": 32, "padX": 0, "iconGlyph": "sm" },
+    "icon-xs":  { "square": 24, "padX": 0, "iconGlyph": "md" },
+    "icon-sm":  { "square": 32, "padX": 0, "iconGlyph": "md" },
     "icon":     { "square": 36, "padX": 0, "iconGlyph": "md" },
     "icon-xl":  { "square": 40, "padX": 0, "iconGlyph": "lg" },
     "icon-2xl": { "square": 48, "padX": 0, "iconGlyph": "xl" }

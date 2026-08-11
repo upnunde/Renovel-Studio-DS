@@ -103,7 +103,7 @@ function Alert({
           aria-label="닫기"
           onClick={dismiss}
         >
-          <Icon icon={ICONS.close} size="sm" />
+          <Icon icon={ICONS.close} size="md" />
         </button>
       ) : null}
     </div>

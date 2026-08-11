@@ -8,7 +8,7 @@
   "axes": { "size": { "values": ["sm", "default", "xl", "2xl"] } },
   "defaults": { "size": "default" },
   "sizeSpec": {
-    "$note": "input size → icon 버튼 size. 아이콘 close 14px 고정.",
+    "$note": "input size → icon 버튼 size. 아이콘 close 16px(md) 고정.",
     "sm": { "buttonSize": "icon-xs(24)" },
     "default": { "buttonSize": "icon-sm(32)" },
     "xl": { "buttonSize": "icon-sm(32)" },
