@@ -10,6 +10,9 @@
   --icon-size-md: 1rem;
   --icon-size-lg: 1.125rem;
   --icon-size-xl: 1.25rem;
+  --icon-size-2xl: 1.5rem;
+  --icon-size-3xl: 2rem;
+  --icon-size-4xl: 3rem;
   --icon-stroke-width: 1.5;
 
   /* Motion — duration·easing

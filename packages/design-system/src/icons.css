@@ -14,3 +14,15 @@
   width: var(--icon-size-xl);
   height: var(--icon-size-xl);
 }
+@utility icon-2xl {
+  width: var(--icon-size-2xl);
+  height: var(--icon-size-2xl);
+}
+@utility icon-3xl {
+  width: var(--icon-size-3xl);
+  height: var(--icon-size-3xl);
+}
+@utility icon-4xl {
+  width: var(--icon-size-4xl);
+  height: var(--icon-size-4xl);
+}
