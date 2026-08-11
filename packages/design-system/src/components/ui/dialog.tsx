@@ -95,6 +95,53 @@ const dialogTitleClass = "text-heading5_500"
 const dialogDescriptionClass =
   "text-sm text-foreground-muted *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground *:[a[data-hovered=true]]:text-foreground"
 
+/**
+ * 가로 정렬된 버튼들의 합계 폭이 컨테이너를 넘치는지 감지한다.
+ * 넘치면 세로 배치로 전환하라는 신호(true)를 돌려준다.
+ * 측정은 항상 가로(flex-row) 기준으로 하여, 세로 전환 후에도
+ * 다시 가로에 들어갈 수 있게 되면 가로로 복귀한다.
+ */
+function useFooterOverflow(
+  ref: React.RefObject<HTMLDivElement | null>
+) {
+  const [stacked, setStacked] = React.useState(false)
+
+  React.useLayoutEffect(() => {
+    const el = ref.current
+    if (!el || typeof ResizeObserver === "undefined") return
+
+    const measure = () => {
+      // 가로 기준 실제 콘텐츠 폭 vs 사용 가능 폭.
+      // 세로 상태에서는 세로로 쌓여 scrollWidth가 줄어드므로,
+      // 자식들의 개별 폭 + gap 합으로 가로 필요 폭을 직접 계산한다.
+      const styles = window.getComputedStyle(el)
+      const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0
+      const paddingX =
+        parseFloat(styles.paddingLeft || "0") +
+        parseFloat(styles.paddingRight || "0")
+      const children = Array.from(el.children) as HTMLElement[]
+      if (children.length === 0) return
+
+      const contentWidth =
+        children.reduce((sum, child) => sum + child.offsetWidth, 0) +
+        gap * (children.length - 1)
+      const available = el.clientWidth - paddingX
+
+      setStacked(contentWidth > available)
+    }
+
+    const observer = new ResizeObserver(measure)
+    observer.observe(el)
+    // 자식 크기 변화(버튼 라벨 변경 등)도 반영
+    Array.from(el.children).forEach((child) => observer.observe(child))
+    measure()
+
+    return () => observer.disconnect()
+  }, [ref])
+
+  return stacked
+}
+
 function DialogFooter({
   className,
   showCloseButton = false,
@@ -103,11 +150,20 @@ function DialogFooter({
 }: React.ComponentProps<"div"> & {
   showCloseButton?: boolean
 }) {
+  const ref = React.useRef<HTMLDivElement>(null)
+  const stacked = useFooterOverflow(ref)
+
   return (
     <div
+      ref={ref}
       data-slot="dialog-footer"
+      data-stacked={stacked ? "" : undefined}
       className={cn(
-        "-mx-5 -mb-5 flex flex-col-reverse gap-2 rounded-b-xl p-5 sm:flex-row sm:justify-end",
+        "-mx-5 -mb-5 flex gap-2 rounded-b-xl p-5",
+        // 넘치지 않으면 가로 우측 정렬, 넘치면 세로(역순: 3→2→1) + 전체폭
+        stacked
+          ? "flex-col-reverse [&>*]:w-full"
+          : "flex-row justify-end",
         className
       )}
       {...props}

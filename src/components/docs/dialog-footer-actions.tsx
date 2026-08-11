@@ -143,7 +143,10 @@ export function DialogFooterActionsPreview({
   showContent?: boolean
   showFooter?: boolean
   customContent?: boolean
-  /** 좁은 프리뷰 컨테이너에서 3-way 액션을 세로 스택으로 강제 */
+  /**
+   * @deprecated DialogFooter가 버튼 합계 폭 > 컨테이너일 때 자동으로
+   * 세로(역순) 스택으로 전환한다. 이 prop은 호환용으로만 남으며 동작 없음.
+   */
   footerStack?: boolean
   className?: string
 } & DialogBodyComposition) {
@@ -208,9 +211,8 @@ export function DialogFooterActionsPreview({
       {showFooter ? (
         <DialogFooter
           className={cn(
-            "mx-0 mb-0 mt-auto w-full rounded-b-xl px-5 pt-2 pb-5 sm:items-end sm:justify-end",
-            !showHeader && !hasContent && "rounded-t-xl",
-            footerStack && "sm:flex-col sm:items-end"
+            "mx-0 mb-0 mt-auto w-full rounded-b-xl px-5 pt-2 pb-5",
+            !showHeader && !hasContent && "rounded-t-xl"
           )}
         >
           {footerActions !== "1" ? <Button variant="outline">취소</Button> : null}
