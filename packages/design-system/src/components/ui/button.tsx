@@ -44,13 +44,14 @@ const buttonVariants = cva(
         xl: "h-10 min-w-10 gap-1.5 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
         "2xl":
           "h-12 min-w-12 gap-2 px-3 text-base has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
-        icon: "aspect-square size-9 w-9 p-0",
+        icon: "aspect-square size-9 w-9 p-0 [&_svg:not([class*='size-'])]:size-5",
         "icon-xs":
           "aspect-square size-6 w-6 p-0 [&_svg:not([class*='size-'])]:size-4",
         "icon-sm": "aspect-square size-8 w-8 p-0",
-        "icon-xl": "aspect-square size-10 w-10 p-0",
+        "icon-xl":
+          "aspect-square size-10 w-10 p-0 [&_svg:not([class*='size-'])]:size-5",
         "icon-2xl":
-          "aspect-square size-12 w-12 p-0 [&_svg:not([class*='size-'])]:size-5",
+          "aspect-square size-12 w-12 p-0 [&_svg:not([class*='size-'])]:size-6",
       },
     },
     compoundVariants: [

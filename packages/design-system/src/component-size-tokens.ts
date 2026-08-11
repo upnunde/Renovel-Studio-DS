@@ -13,7 +13,7 @@ export type IconGlyphToken = {
   /** 문서용 라벨 — 글리프 px (예: md_g16) */
   label: string
   /** Icon 컴포넌트 size prop */
-  api: "md" | "lg" | "xl"
+  api: "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl"
   sizePx: number
   rem: string
   variable: string
@@ -136,6 +136,33 @@ export const ICON_GLYPH_SCALE: IconGlyphToken[] = [
     sizePx: 20,
     rem: "1.25rem",
     variable: "--icon-size-xl",
+    controlLabel: "2xl_h48",
+    description: "대형 버튼·아이콘 버튼 짝 글리프",
+  },
+  {
+    label: "2xl_g24",
+    api: "2xl",
+    sizePx: 24,
+    rem: "1.5rem",
+    variable: "--icon-size-2xl",
+    controlLabel: "—",
+    description: "아이콘 버튼 48·강조 액션",
+  },
+  {
+    label: "3xl_g32",
+    api: "3xl",
+    sizePx: 32,
+    rem: "2rem",
+    variable: "--icon-size-3xl",
+    controlLabel: "—",
+    description: "대형 히어로·섹션 헤더",
+  },
+  {
+    label: "4xl_g48",
+    api: "4xl",
+    sizePx: 48,
+    rem: "3rem",
+    variable: "--icon-size-4xl",
     controlLabel: "—",
     description: "빈 상태·일러스트형",
   },
@@ -378,16 +405,19 @@ export function controlSizeToIconGlyph(
 }
 
 /** 아이콘 전용 버튼 size → Icon size prop
- *  매핑 의도는 controlSizeToIconGlyph 와 동일 — 글리프 최소 md(16px).
+ *  Material 기준 아이콘 ≈ 컨테이너의 50%.
+ *  icon-xs(24)·icon-sm(32) → md(16), icon(36)·icon-xl(40) → xl(20),
+ *  icon-2xl(48) → 2xl(24).
  */
 export function iconButtonSizeToIconGlyph(
   api: string
 ): IconGlyphToken["api"] {
   switch (api) {
+    case "icon":
     case "icon-xl":
-      return "lg"
-    case "icon-2xl":
       return "xl"
+    case "icon-2xl":
+      return "2xl"
     default:
       return "md"
   }
