@@ -776,42 +776,44 @@ const SHOWCASES: Record<string, ReactNode> = {
       </ComponentCaseGroup>
 
       <ComponentCaseGroup title="FieldLabel · Usage">
-        <ComponentCase
-          label="settings row"
-          tags={["grid-cols-[auto,1fr]", "FieldLabel + Input"]}
-        >
-          <div className="grid w-full max-w-md grid-cols-[auto,1fr] items-start gap-4">
-            <FieldLabel
-              htmlFor="field-expression"
-              required
-              description="다양한 감정을 표현할 수 있는 표정을 여러 장까지 등록해 둘 수 있어요. (최대 10개)"
-            >
-              표정
-            </FieldLabel>
-            <Input id="field-expression" placeholder="입력" />
-          </div>
-        </ComponentCase>
-        <ComponentCase label="InputGroup" tags={["FieldLabel", "Input", "InputHypertext"]}>
-          <InputGroup className="max-w-xs gap-4">
-            <FieldLabel
-              htmlFor="field-id"
-              required
-              descriptionId="field-id-label-desc"
-              description="필드 위 보조문구"
-            >
-              이름
-            </FieldLabel>
-            <Input
-              id="field-id"
-              placeholder="입력"
-              aria-describedby="field-id-label-desc field-id-helper"
-              aria-required
-            />
-            <InputHypertext id="field-id-helper">
-              입력 후 아래 도움말과 구분됩니다.
-            </InputHypertext>
-          </InputGroup>
-        </ComponentCase>
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase
+            label="가로 (horizontal)"
+            tags={["grid-cols-[auto,1fr]", "FieldLabel + Input"]}
+          >
+            <div className="grid w-full grid-cols-[auto,1fr] items-start gap-4">
+              <FieldLabel
+                htmlFor="field-expression"
+                required
+                description="다양한 감정을 표현할 수 있는 표정을 여러 장까지 등록해 둘 수 있어요. (최대 10개)"
+              >
+                표정
+              </FieldLabel>
+              <Input id="field-expression" placeholder="입력" />
+            </div>
+          </ComponentCase>
+          <ComponentCase label="InputGroup" tags={["FieldLabel", "Input", "InputHypertext"]}>
+            <InputGroup className="max-w-xs gap-4">
+              <FieldLabel
+                htmlFor="field-id"
+                required
+                descriptionId="field-id-label-desc"
+                description="필드 위 보조문구"
+              >
+                이름
+              </FieldLabel>
+              <Input
+                id="field-id"
+                placeholder="입력"
+                aria-describedby="field-id-label-desc field-id-helper"
+                aria-required
+              />
+              <InputHypertext id="field-id-helper">
+                입력 후 아래 도움말과 구분됩니다.
+              </InputHypertext>
+            </InputGroup>
+          </ComponentCase>
+        </ComponentCaseGrid>
       </ComponentCaseGroup>
     </Showcase>
   ),

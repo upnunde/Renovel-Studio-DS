@@ -6,8 +6,6 @@ import { cn } from "@/lib/utils"
 const iconSizeVariants = cva("shrink-0 pointer-events-none", {
   variants: {
     size: {
-      xs: "size-3",
-      sm: "size-3.5",
       md: "size-4",
       lg: "size-[1.125rem]",
       xl: "size-5",
@@ -20,7 +18,7 @@ const iconSizeVariants = cva("shrink-0 pointer-events-none", {
 
 export type IconSize = NonNullable<VariantProps<typeof iconSizeVariants>["size"]>
 
-export type IconProps = Omit<LucideProps, "ref"> & {
+export type IconProps = Omit<LucideProps, "ref" | "size"> & {
   icon: LucideIcon
   size?: IconSize
   /**

@@ -17,7 +17,7 @@
     "footer": { "gap": "{space.2}", "$note": "-mx-5 -mb-5 풀블리드, p-5. sm:가로정렬 우측. 음수마진 iOS/AOS는 §2-5-1a 레시피" },
     "title": { "typography": "heading5-500" },
     "description": { "fg": "{foreground-muted}" },
-    "closeButton": { "$note": "Button ghost icon-sm(32px), 우상단, close 아이콘 14px" }
+    "closeButton": { "$note": "Button ghost icon-sm(32px), 우상단, close 아이콘 16px(md)" }
   },
   "states": ["open", "closed"],
   "portal": true,

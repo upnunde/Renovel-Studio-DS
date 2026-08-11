@@ -84,7 +84,7 @@ function PasswordInput({
         className="absolute top-1/2 right-1 z-10 -translate-y-1/2 text-foreground-muted hover:text-foreground"
         onClick={() => setVisible((currentVisible) => !currentVisible)}
       >
-        <Icon icon={visible ? ICONS.eyeOff : ICONS.eye} size="sm" />
+        <Icon icon={visible ? ICONS.eyeOff : ICONS.eye} size="md" />
       </Button>
     </div>
   )

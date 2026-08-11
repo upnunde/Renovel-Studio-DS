@@ -449,7 +449,7 @@ z-toast    /* 500 — 토스트·스낵바 */
 | `xl` | 40 | 대형 폼·터치 영역 |
 | `2xl` | 48 | 최대 폼·모바일 터치 |
 
-아이콘 글리프는 5단계 (`xs_g12` ~ `xl_g20`). 컨트롤 크기와 매핑.
+아이콘 글리프는 3단계 (`md_g16`·`lg_g18`·`xl_g20`), **최소 16px**. 12·14px은 접근성·광학 가독성 때문에 제거됨. 작은 컨트롤도 글리프는 md(16)로 통일.
 
 ### 3-5. 네이밍 표기법
 
@@ -465,7 +465,7 @@ z-toast    /* 500 — 토스트·스낵바 */
 | CSS 변수 | `--kebab-case` | semantic·scale | `--foreground-muted`, `--space-5` |
 | `data-slot` | `kebab-case` | `{slug}-{part}` | `dropdown-menu-item`, `field-label-description` |
 | Typography class | `text-{group}{n}_{weight}` | 언더스코어 고정 | `text-body3_500` |
-| Size token (문서) | `{api}_{axis}{px}` | 문서·Properties | `md_h36`, `xs_g12` |
+| Size token (문서) | `{api}_{axis}{px}` | 문서·Properties | `md_h36`, `md_g16` |
 | 패키지 export path | `kebab-case` | 파일 stem 일치 | `design-system/ui/radio-group` |
 | Playground state key | `camelCase` | **공백·한글 금지** · Properties와 동일 키 | `variant`, `htmlFor`, `defaultValue` |
 | HTML/React 속성 (spec) | **속성명 그대로** | DOM·코드 생성 일치 | `aria-invalid`, `htmlFor` |

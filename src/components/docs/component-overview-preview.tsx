@@ -239,7 +239,7 @@ function PreviewDropdownMenu() {
         <div className="flex items-center gap-2 rounded-md bg-accent px-2 py-1.5 text-accent-foreground">
           <span className="size-4 shrink-0 rounded-sm bg-primary/20" />
           목록
-          <Icon icon={ICONS.check} size="sm" className="ml-auto" />
+          <Icon icon={ICONS.check} size="md" className="ml-auto" />
         </div>
         <div className="flex items-center gap-2 px-2 py-1.5 text-foreground-muted">
           <span className="size-4 shrink-0 rounded-sm bg-muted" />
@@ -308,9 +308,9 @@ function PreviewSonner() {
   return (
     <div className={previewShell}>
       <div className="flex w-full max-w-[220px] items-center gap-2 rounded-lg border border-border bg-foreground px-3 py-2.5 text-background shadow-md">
-        <Icon icon={ICONS.info} size="sm" />
+        <Icon icon={ICONS.info} size="md" />
         <span className="flex-1 text-xs">토스트</span>
-        <Icon icon={ICONS.close} size="sm" className="opacity-70" />
+        <Icon icon={ICONS.close} size="md" className="opacity-70" />
       </div>
     </div>
   )

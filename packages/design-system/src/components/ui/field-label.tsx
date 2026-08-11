@@ -124,7 +124,7 @@ function FieldLabel({
               >
                 <Icon
                   icon={ICONS.info}
-                  size="sm"
+                  size="md"
                   className="pointer-events-none"
                 />
               </TooltipTrigger>

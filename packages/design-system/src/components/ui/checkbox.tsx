@@ -43,7 +43,7 @@ function Checkbox({
         data-slot="checkbox-indicator"
         className="grid place-content-center text-current transition-none"
       >
-        <Icon icon={ICONS.check} size={size === "md" ? "md" : "sm"} />
+        <Icon icon={ICONS.check} size="md" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   )

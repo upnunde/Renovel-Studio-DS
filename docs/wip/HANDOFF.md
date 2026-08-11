@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-04 15:59:18**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-11 16:18:34**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-04 15:59:02** — 커밋 푸시
+- **2026-08-11 16:17:48** — 커밋 깃푸시
 
 ## 다음 작업 (Claude Code용)
 
@@ -20,24 +20,58 @@
 
 ## Git 상태
 
-- 브랜치: `main`
+- 브랜치: `chore/icon-glyph-min-16`
 
 ```
+M  DESIGN.md
  M docs/wip/HANDOFF.md
  M docs/wip/WORKLOG.md
- M packages/design-system/src/components/ui/field-label.tsx
+M  packages/design-system/specs/button.spec.json
+M  packages/design-system/specs/dialog.spec.json
+M  packages/design-system/specs/input-clear-button.spec.json
+M  packages/design-system/specs/input.spec.json
+M  packages/design-system/specs/password-input.spec.json
+M  packages/design-system/src/component-size-tokens.ts
+M  packages/design-system/src/components/ui/alert.tsx
+M  packages/design-system/src/components/ui/button.tsx
+M  packages/design-system/src/components/ui/checkbox.tsx
+M  packages/design-system/src/components/ui/chip.tsx
+M  packages/design-system/src/components/ui/dialog.tsx
+M  packages/design-system/src/components/ui/field-label.tsx
+M  packages/design-system/src/components/ui/file-input.tsx
+M  packages/design-system/src/components/ui/icon.tsx
+M  packages/design-system/src/components/ui/input-clear-button.tsx
+M  packages/design-system/src/components/ui/password-input.tsx
+M  packages/design-system/src/components/ui/tabs.tsx
+M  packages/design-system/src/components/ui/toggle.tsx
+M  packages/design-system/src/components/ui/tooltip.tsx
+M  packages/design-system/src/icons.css
+M  packages/design-system/src/tokens.css
+M  src/component-size-tokens.ts
+M  src/components/docs/component-overview-preview.tsx
+ M src/components/docs/component-showcases.tsx
+M  src/components/docs/foundation-icons.tsx
+M  src/components/ui/dialog.tsx
+M  src/components/ui/icon.tsx
+M  src/components/ui/toggle.tsx
+M  src/icons.css
+M  src/tokens.css
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 28 +++++++++-------------
- docs/wip/WORKLOG.md                                |  1 +
- .../src/components/ui/field-label.tsx              |  2 +-
- 3 files changed, 13 insertions(+), 18 deletions(-)
+ docs/wip/HANDOFF.md                         | 17 +++----
+ docs/wip/WORKLOG.md                         | 16 +++----
+ src/components/docs/component-showcases.tsx | 74 +++++++++++++++--------------
+ 3 files changed, 54 insertions(+), 53 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
 
 
 

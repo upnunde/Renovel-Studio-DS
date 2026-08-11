@@ -54,7 +54,7 @@ function InputClearButton({
       )}
       onClick={onClick}
     >
-      <Icon icon={ICONS.close} size="sm" />
+      <Icon icon={ICONS.close} size="md" />
     </Button>
   )
 }

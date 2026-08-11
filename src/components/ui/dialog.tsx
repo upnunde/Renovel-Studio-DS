@@ -71,7 +71,7 @@ function DialogContent({
               />
             }
           >
-            <Icon icon={ICONS.close} size="sm" />
+            <Icon icon={ICONS.close} size="md" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}

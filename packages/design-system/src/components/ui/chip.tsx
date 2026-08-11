@@ -28,7 +28,7 @@ const chipVariants = cva(
         default: `${chipFillResting} ${chipSelected}`,
       },
       size: {
-        sm: "h-8 gap-1 px-2.5 text-[0.8rem] [&_svg:not([class*='size-'])]:size-3.5",
+        sm: "h-8 gap-1 px-2.5 text-[0.8rem] [&_svg:not([class*='size-'])]:size-4",
         default: "h-9 px-3 [&_svg:not([class*='size-'])]:size-4",
         xl: "h-10 gap-1.5 px-3.5 [&_svg:not([class*='size-'])]:size-4",
       },
@@ -75,7 +75,6 @@ function Chip({
 }: TogglePrimitive.Props & ChipBaseProps) {
   const resolvedVariant = resolveChipVariant(variant)
   const withCheck = showCheck ?? false
-  const checkSize = size === "sm" ? "sm" : "md"
   const isDisabled = Boolean(props.disabled)
 
   const inner = (
@@ -83,7 +82,7 @@ function Chip({
       {withCheck ? (
         <Icon
           icon={ICONS.check}
-          size={checkSize}
+          size="md"
           className="hidden -ml-0.5 group-aria-pressed/chip:block"
         />
       ) : null}
@@ -123,7 +122,7 @@ function Chip({
           "group/chip inline-flex h-full items-center gap-1.5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
           size === "sm" ? "pr-1 pl-2.5" : size === "xl" ? "pr-2 pl-3.5" : "pr-1.5 pl-3",
           size === "sm"
-            ? "[&_svg:not([class*='size-'])]:size-3.5"
+            ? "[&_svg:not([class*='size-'])]:size-4"
             : "[&_svg:not([class*='size-'])]:size-4"
         )}
         {...props}
@@ -140,7 +139,7 @@ function Chip({
           size === "sm" ? "pr-2 pl-0.5" : size === "xl" ? "pr-3 pl-1" : "pr-2.5 pl-1"
         )}
       >
-        <Icon icon={ICONS.close} size={size === "sm" ? "sm" : "md"} />
+        <Icon icon={ICONS.close} size="md" />
       </button>
     </span>
   )

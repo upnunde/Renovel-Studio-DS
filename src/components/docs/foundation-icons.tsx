@@ -1,4 +1,3 @@
-import { LucideIconGallery } from "@/components/docs/lucide-icon-gallery"
 import { ShowcaseBlock } from "@/components/docs/showcase-block"
 import {
   DocsTable,
@@ -10,15 +9,12 @@ import {
   DocsTableTd,
   DocsTableTh,
 } from "@/components/docs/docs-table"
-import { ICON_REGISTRY, ICONS } from "@/components/icons"
+import { ICONS } from "@/components/icons"
 import { Icon } from "design-system/ui/icon"
-import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
+import { docsType } from "@/lib/docs-type"
 import {
-  CONTROL_ICON_SIZE_SCALE,
-  CONTROL_SIZE_SCALE,
   ICON_GLYPH_SCALE,
-  formatControlSizeRow,
   formatIconGlyphOption,
 } from "design-system/icon-tokens"
 import { cn } from "@/lib/utils"
@@ -28,30 +24,6 @@ export function FoundationIconsShowcase() {
 
   return (
     <div className={docsSpace.stack}>
-      <ShowcaseBlock name="Control Size" flush>
-        <DocsTable>
-          <DocsTableColGroup columns={3} />
-          <DocsTableHead>
-            <DocsTableHeaderRow>
-              <DocsTableTh>Token</DocsTableTh>
-              <DocsTableTh>rem</DocsTableTh>
-              <DocsTableTh>Usage</DocsTableTh>
-            </DocsTableHeaderRow>
-          </DocsTableHead>
-          <DocsTableBody>
-            {CONTROL_SIZE_SCALE.map((token) => (
-              <DocsTableRow key={token.api}>
-                <DocsTableTd mono>{formatControlSizeRow(token)}</DocsTableTd>
-                <DocsTableTd mono muted>
-                  {token.rem}
-                </DocsTableTd>
-                <DocsTableTd muted>{token.description}</DocsTableTd>
-              </DocsTableRow>
-            ))}
-          </DocsTableBody>
-        </DocsTable>
-      </ShowcaseBlock>
-
       <ShowcaseBlock name="Icon Glyph Size" flush>
         <DocsTable>
           <DocsTableColGroup columns={2} />
@@ -74,55 +46,24 @@ export function FoundationIconsShowcase() {
         </DocsTable>
       </ShowcaseBlock>
 
-      <ShowcaseBlock name="Icon Button Size" flush>
-        <DocsTable>
-          <DocsTableColGroup columns={2} />
-          <DocsTableHead>
-            <DocsTableHeaderRow>
-              <DocsTableTh>Token</DocsTableTh>
-              <DocsTableTh aria-hidden />
-            </DocsTableHeaderRow>
-          </DocsTableHead>
-          <DocsTableBody>
-            {CONTROL_ICON_SIZE_SCALE.map((token) => (
-              <DocsTableRow key={token.api}>
-                <DocsTableTd mono colSpan={2}>
-                  {formatControlSizeRow(token)}
-                </DocsTableTd>
-              </DocsTableRow>
-            ))}
-          </DocsTableBody>
-        </DocsTable>
+      <ShowcaseBlock name="Icon Set">
+        <div className={cn("flex flex-col sm:flex-row sm:items-center sm:justify-between", docsSpace.gap)}>
+          <p className={docsType.bodyMuted}>
+            아이콘은 Lucide 세트를 사용합니다. 전체 목록·검색은 공식 사이트에서 확인하세요.
+          </p>
+          <a
+            href="https://lucide.dev/icons/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              "shrink-0 underline-offset-4 hover:text-foreground hover:underline data-[hovered=true]:text-foreground data-[hovered=true]:underline",
+              docsType.bodyMuted
+            )}
+          >
+            전체 아이콘 보기 (Lucide) ↗
+          </a>
+        </div>
       </ShowcaseBlock>
-
-      {ICON_REGISTRY.map((group) => (
-        <ShowcaseBlock key={group.id} name={`In use · ${group.title}`}>
-          <div className={cn("grid sm:grid-cols-2 lg:grid-cols-3", docsSpace.gap)}>
-            {group.icons.map((item) => (
-              <div
-                key={item.name}
-                className={cn(
-                  "flex items-center rounded-lg border border-border bg-card",
-                  docsSpace.gap,
-                  docsSpace.cardHeader
-                )}
-              >
-                <div className="flex size-9 shrink-0 items-center justify-center rounded-md bg-muted">
-                  <Icon icon={item.icon} size="md" className="text-foreground" />
-                </div>
-                <div className="min-w-0">
-                  <p className={docsType.tokenName}>{item.name}</p>
-                  <p className={cn("truncate", docsType.tokenMeta)}>
-                    md_g16 · {item.usage}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </ShowcaseBlock>
-      ))}
-
-      <LucideIconGallery />
     </div>
   )
 }

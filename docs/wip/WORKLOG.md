@@ -1,15 +1,13 @@
 # 작업 일지 (WORKLOG)
 
-> 마지막 갱신: 2026-08-04  
+> 마지막 갱신: 2026-08-11  
 > 다음 세션: Cursor에서 `@docs/wip/WORKLOG.md` 를 붙이고 「이어서」라고 하면 됩니다.
 
 ## 오늘 한 일
 
-- **크로스플랫폼 토큰 정본** — `tokens/*.json` + 커스텀/Style Dictionary 빌더·verify (`0-DRIFT`)
-- **컴포넌트 스펙 29개** — `packages/design-system/specs/*.spec.json`
-- **PORTING.md · DESIGN.md** — Web/iOS/Android 이식 기준, margin 금지 원칙(§2-5-1a)
-- **스튜디오** — DS `size="lg"` 제거에 맞춰 `xl`/`icon-xl` 교체 푸시 완료 (`upnunde-test`)
-- **FieldLabel** — 타이틀·보조문구 간격 `gap-1`(4px) → `gap-0.5`(2px)
+- **아이콘 글리프** — `xs`(12)·`sm`(14) 제거, 최소 `md`(16px)로 통일 (접근성·광학)
+- **소비처** — Button/Chip/Dialog/Input 등 `size="xs"|"sm"` → `md` 매핑·스펙·docs 정리
+- **FieldLabel docs** — Usage를 2열 가로 그리드, 라벨 `가로 (horizontal)`
 
 ## 다음에 할 일
 
@@ -22,9 +20,9 @@
 
 ## 주요 파일 · 브랜치
 
-- 브랜치: main
-- `packages/design-system/tokens/` · `packages/design-system/specs/`
-- `docs/PORTING.md` · `DESIGN.md`
+- 브랜치: `chore/icon-glyph-min-16` → main 푸시 예정
+- `packages/design-system/src/component-size-tokens.ts` · `icon.tsx` · `icons.css` · `tokens.css`
+- `DESIGN.md` §3-4 아이콘 글리프
 
 ## 메모
 
