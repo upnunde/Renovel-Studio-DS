@@ -11,6 +11,7 @@ import { Button } from "design-system/ui/button"
 import { ButtonGroup } from "design-system/ui/button-group"
 import { Chip } from "design-system/ui/chip"
 import { Checkbox } from "design-system/ui/checkbox"
+import { FieldLabel } from "design-system/ui/field-label"
 import { Input, InputGroup, InputHypertext } from "design-system/ui/input"
 import { Label } from "design-system/ui/label"
 import { Progress } from "design-system/ui/progress"
@@ -95,9 +96,14 @@ function PreviewInput() {
 
 function PreviewLabel() {
   return (
-    <div className={cn(previewShell, "gap-2")}>
-      <Checkbox defaultChecked id="preview-label" />
-      <Label htmlFor="preview-label">알림 수신</Label>
+    <div className={cn(previewShell, "px-2")}>
+      <FieldLabel
+        htmlFor="preview-field-label"
+        required
+        description="필드 위 보조문구"
+      >
+        타이틀 입력
+      </FieldLabel>
     </div>
   )
 }
@@ -269,12 +275,15 @@ function PreviewDialog() {
 
 function PreviewPopover() {
   return (
-    <div className={cn(previewShell, "relative gap-3")}>
+    <div className={cn(previewShell, "flex-col gap-2")}>
       <Button size="sm" variant="outline">
-        트리거
+        팝오버 열기
       </Button>
-      <div className="rounded-lg border border-border bg-popover px-3 py-2 text-xs shadow-md">
-        팝오버 패널
+      <div className="flex w-full max-w-[200px] flex-col gap-2.5 rounded-lg bg-popover p-2.5 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10">
+        <div className="flex flex-col gap-0.5">
+          <p className="font-medium">팝오버</p>
+          <p className="text-foreground-muted text-xs">트리거 근처 패널</p>
+        </div>
       </div>
     </div>
   )

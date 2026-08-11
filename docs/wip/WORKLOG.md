@@ -5,9 +5,10 @@
 
 ## 오늘 한 일
 
-- **아이콘 글리프** — `xs`(12)·`sm`(14) 제거, 최소 `md`(16px)로 통일 (접근성·광학)
-- **소비처** — Button/Chip/Dialog/Input 등 `size="xs"|"sm"` → `md` 매핑·스펙·docs 정리
-- **FieldLabel docs** — Usage를 2열 가로 그리드, 라벨 `가로 (horizontal)`
+- **아이콘 글리프** — 최소 `md`(16px) 통일 · `v0.1.25`
+- **DialogFooter** — 버튼 넘침 시 세로(역순) 자동 스택
+- **Tooltip** — 화살표(Arrow) 제거, 박스만 노출
+- **Components 개요 미리보기** — Label→FieldLabel, Popover를 실제 면·구조에 맞춤
 
 ## 다음에 할 일
 
@@ -20,12 +21,11 @@
 
 ## 주요 파일 · 브랜치
 
-- 브랜치: `chore/icon-glyph-min-16` → main 푸시 예정
-- `packages/design-system/src/component-size-tokens.ts` · `icon.tsx` · `icons.css` · `tokens.css`
-- `DESIGN.md` §3-4 아이콘 글리프
+- 브랜치: `feat/dialog-footer-responsive-stack` → main 푸시
+- `packages/design-system/src/components/ui/tooltip.tsx` · `dialog.tsx`
+- `src/components/docs/component-overview-preview.tsx`
 
 ## 메모
 
-- 검증: `cd packages/design-system && npm run tokens:check`
 - 개발: `npm run dev` → http://localhost:3001
 - 패키지 릴리스+스튜디오: `npm run ds:release`
