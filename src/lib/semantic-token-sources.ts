@@ -1,14 +1,14 @@
 /** tokens.css :root / .dark 시맨틱 → 원시 토큰 매핑 (정본) */
 const LIGHT: Record<string, string> = {
   "--canvas": "white",
+  "--canvas-muted": "grayscale-15",
   "--background": "white",
   "--foreground": "grayscale-140",
   "--card": "white",
   "--card-foreground": "grayscale-140",
   "--background-muted": "grayscale-10",
   "--background-muted-foreground": "grayscale-140",
-  // --card-muted / --card-muted-foreground / --popover / --popover-foreground:
-  // ALIAS_LIGHT 체인으로 해석 (resolveRawSource가 alias 우선) — 여기 중복 선언 안 함
+  // --card-muted / --popover 계열: ALIAS_LIGHT 체인으로 해석 — 여기 중복 선언 안 함
   "--inverse": "grayscale-130",
   "--inverse-foreground": "white",
   "--inverse-muted": "grayscale-110",
@@ -60,14 +60,14 @@ const LIGHT: Record<string, string> = {
 
 const DARK: Record<string, string> = {
   "--canvas": "grayscale-150",
+  "--canvas-muted": "grayscale-130",
   "--background": "grayscale-140",
   "--foreground": "grayscale-10",
   "--card": "grayscale-140",
   "--card-foreground": "grayscale-10",
   "--background-muted": "grayscale-130",
   "--background-muted-foreground": "grayscale-10",
-  // --card-muted / --card-muted-foreground / --popover / --popover-foreground:
-  // ALIAS_DARK 체인으로 해석 (resolveRawSource가 alias 우선) — 여기 중복 선언 안 함
+  // --card-muted / --popover 계열: ALIAS_DARK 체인으로 해석 — 여기 중복 선언 안 함
   "--inverse": "grayscale-10",
   "--inverse-foreground": "grayscale-140",
   "--inverse-muted": "grayscale-20",
@@ -117,9 +117,10 @@ const DARK: Record<string, string> = {
   "--chart-5": "brand-200",
 }
 
-/** tokens.css 시맨틱 alias — Maps to 컬럼에 체인 표시 */
+/** tokens.css 시맨틱 alias — Maps to는 최종 원시 토큰명만 표시 */
 const ALIAS_LIGHT: Record<string, string> = {
   "--secondary": "--muted",
+  "--canvas-muted-foreground": "--background-muted-foreground",
   "--card-muted": "--background-muted",
   "--card-muted-foreground": "--background-muted-foreground",
   "--popover": "--card",
@@ -130,6 +131,7 @@ const ALIAS_LIGHT: Record<string, string> = {
 
 const ALIAS_DARK: Record<string, string> = {
   "--secondary": "--muted",
+  "--canvas-muted-foreground": "--background-muted-foreground",
   "--card-muted": "--background-muted",
   "--card-muted-foreground": "--background-muted-foreground",
   "--popover": "--card",
@@ -150,9 +152,7 @@ function resolveRawSource(
   const aliasTarget = aliases[variable]
 
   if (aliasTarget) {
-    const raw = resolveRawSource(aliasTarget, theme, visited)
-    const aliasName = aliasTarget.replace(/^--/, "")
-    return `${aliasName} → ${raw}`
+    return resolveRawSource(aliasTarget, theme, visited)
   }
 
   return map[variable] ?? "—"

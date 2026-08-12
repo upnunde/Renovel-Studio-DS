@@ -11,7 +11,7 @@ const iconSizeVariants = cva("shrink-0 pointer-events-none", {
       xl: "size-5",
       "2xl": "size-6",
       "3xl": "size-8",
-      "4xl": "size-12",
+      "4xl": "size-10",
     },
   },
   defaultVariants: {

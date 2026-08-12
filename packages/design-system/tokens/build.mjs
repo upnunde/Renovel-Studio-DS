@@ -145,7 +145,7 @@ function buildCss() {
   // radius/stroke/icon/motion/space
   lightLines.push(`  --radius: ${pxToRem(prim.get("radius.base"))};`);
   lightLines.push(`  --stroke-width: ${prim.get("stroke-width")};`);
-  for (const s of ["xs", "sm", "md", "lg", "xl"])
+  for (const s of ["md", "lg", "xl", "2xl", "3xl", "4xl"])
     lightLines.push(`  --icon-size-${s}: ${pxToRem(prim.get(`icon-size.${s}`))};`);
   lightLines.push(`  --icon-stroke-width: ${prim.get("icon-stroke-width")};`);
   for (const d of ["short", "medium", "long"])
@@ -299,8 +299,10 @@ function writeSwift() {
   L.push(`    public static let base: CGFloat = ${parseFloat(prim.get("radius.base"))}`);
   L.push("}");
   L.push("public enum DSIconSize {");
-  for (const s of ["xs", "sm", "md", "lg", "xl"])
-    L.push(`    public static let ${s}: CGFloat = ${parseFloat(prim.get(`icon-size.${s}`))}`);
+  for (const s of ["md", "lg", "xl", "2xl", "3xl", "4xl"]) {
+    const ident = /^\d/.test(s) ? `xl${s.replace("xl", "")}` : s
+    L.push(`    public static let ${ident}: CGFloat = ${parseFloat(prim.get(`icon-size.${s}`))}`);
+  }
   L.push("}");
   L.push("");
 
@@ -349,7 +351,7 @@ function writeXml() {
   for (const k of ["px", "0-5", "1", "2", "3", "4", "5", "6", "8", "10", "12", "16", "20"])
     dl.push(`    <dimen name="ds_space_${snake(k)}">${parseFloat(prim.get(`space.${k}`))}dp</dimen>`);
   dl.push(`    <dimen name="ds_radius_base">${parseFloat(prim.get("radius.base"))}dp</dimen>`);
-  for (const s of ["xs", "sm", "md", "lg", "xl"])
+  for (const s of ["md", "lg", "xl", "2xl", "3xl", "4xl"])
     dl.push(`    <dimen name="ds_icon_${s}">${parseFloat(prim.get(`icon-size.${s}`))}dp</dimen>`);
   dl.push("</resources>");
   writeFileSync(join(DIST, "res", "values", "ds_dimens.xml"), dl.join("\n") + "\n");

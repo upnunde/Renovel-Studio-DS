@@ -17,8 +17,8 @@ import {
 const fieldLabelTitleVariants = cva("font-bold", {
   variants: {
     size: {
-      /** 15/700 · text-body2_700 */
-      default: "text-body2_700 leading-[22px]",
+      /** 16/700 · text-body1_700 */
+      default: "text-body1_700 leading-[24px]",
       /** 18/700 · text-heading5_700 */
       lg: "text-heading5_700 leading-[26px]",
     },

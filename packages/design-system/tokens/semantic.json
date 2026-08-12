@@ -8,6 +8,8 @@
   },
 
   "canvas":                       { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{grayscale.150}" } }, "$description": "M3 Background — 최하위 앱 배경 면" },
+  "canvas-muted":                 { "$type": "color", "$value": "{grayscale.15}",    "$extensions": { "mode": { "dark": "{grayscale.130}" } }, "$description": "M3 Background Container — 앱 배경 위 보조 면" },
+  "canvas-muted-foreground":      { "$type": "color", "$value": "{background-muted-foreground}", "$extensions": { "mode": { "dark": "{background-muted-foreground}" } }, "$description": "alias → background-muted-foreground (M3 On Background Container)" },
   "background":                   { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{grayscale.140}" } }, "$description": "M3 Surface — 기본 페이지 면" },
   "foreground":                   { "$type": "color", "$value": "{grayscale.140}",  "$extensions": { "mode": { "dark": "{grayscale.10}" } },  "$description": "M3 On Surface — 본문 텍스트·아이콘" },
   "card":                         { "$type": "color", "$value": "{white}",          "$extensions": { "mode": { "dark": "{grayscale.140}" } }, "$description": "M3 Surface (Card) — 값은 background와 동일, 깊이는 shadow-elevation" },
