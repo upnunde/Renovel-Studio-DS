@@ -29,8 +29,8 @@ const chipVariants = cva(
       },
       size: {
         sm: "h-8 gap-1 px-2.5 text-[0.8rem] [&_svg:not([class*='size-'])]:size-4",
-        default: "h-9 px-3 [&_svg:not([class*='size-'])]:size-4",
-        xl: "h-10 gap-1.5 px-3.5 [&_svg:not([class*='size-'])]:size-4",
+        default: "h-9 px-3 [&_svg:not([class*='size-'])]:size-[1.125rem]",
+        xl: "h-10 gap-1.5 px-3.5 [&_svg:not([class*='size-'])]:size-5",
       },
       shape: {
         circle: "rounded-full",
@@ -123,7 +123,9 @@ function Chip({
           size === "sm" ? "pr-1 pl-2.5" : size === "xl" ? "pr-2 pl-3.5" : "pr-1.5 pl-3",
           size === "sm"
             ? "[&_svg:not([class*='size-'])]:size-4"
-            : "[&_svg:not([class*='size-'])]:size-4"
+            : size === "xl"
+              ? "[&_svg:not([class*='size-'])]:size-5"
+              : "[&_svg:not([class*='size-'])]:size-[1.125rem]"
         )}
         {...props}
       >

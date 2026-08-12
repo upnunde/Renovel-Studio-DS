@@ -10,6 +10,9 @@
   --icon-size-md: 1rem;
   --icon-size-lg: 1.125rem;
   --icon-size-xl: 1.25rem;
+  --icon-size-2xl: 1.5rem;
+  --icon-size-3xl: 2rem;
+  --icon-size-4xl: 2.5rem;
   --icon-stroke-width: 1.5;
 
   /* Motion — duration·easing
@@ -61,7 +64,7 @@
 
   /* Grayscale scale — 쿨 블루 틴트 · #F8F8FC (10) → #121213 (150) · 흰 표면은 --white */
   --grayscale-10: #f8f8fc;
-  --grayscale-15: #f1f1f5;
+  --grayscale-15: #f1f4f6;
   --grayscale-20: #e7e7eb;
   --grayscale-30: #d7d7db;
   --grayscale-40: #c6c6ca;
@@ -167,6 +170,8 @@
   --card-foreground: var(--grayscale-140);
   --background-muted: var(--grayscale-10);
   --background-muted-foreground: var(--grayscale-140);
+  --canvas-muted: var(--grayscale-15);
+  --canvas-muted-foreground: var(--background-muted-foreground);
   --card-muted: var(--background-muted);
   --card-muted-foreground: var(--background-muted-foreground);
   --popover: var(--card);
@@ -270,6 +275,8 @@
   --card-foreground: var(--grayscale-10);
   --background-muted: var(--grayscale-130);
   --background-muted-foreground: var(--grayscale-10);
+  --canvas-muted: var(--grayscale-130);
+  --canvas-muted-foreground: var(--background-muted-foreground);
   --card-muted: var(--background-muted);
   --card-muted-foreground: var(--background-muted-foreground);
   --popover: var(--card);
