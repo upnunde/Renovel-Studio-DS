@@ -42,6 +42,7 @@ export function Icon({
     <IconComponent
       data-slot="icon"
       {...(position ? { "data-icon": position } : {})}
+      strokeWidth={1.5}
       className={cn(iconSizeVariants({ size }), className)}
       aria-hidden={props["aria-label"] ? undefined : true}
       {...props}
