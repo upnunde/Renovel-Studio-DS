@@ -42,7 +42,7 @@ Material Design 3의 이론적 토대를 **선택적으로** 흡수한다.
 | M3 개념 | 적용 | 코드 토큰(shadcn) |
 |---------|------|------|
 | Background | ✓ | `--canvas` |
-| Background Container | ✓ | `--canvas-muted` (라이트 grayscale-15) |
+| Background Container | ✓ | `--canvas-muted` (라이트 grayscale-15 · 다크 grayscale-150) |
 | Surface | ✓ | `--background` |
 | Surface Container | ✓ | `--background-muted` · `--card-muted`(= Surface Container (Card)) |
 | Surface (Card·Popover) | ✓ | `--card` · `--popover` — **값은 `background`와 동일**. 깊이는 surface 틴트가 아니라 `shadow-elevation-*`가 담당(§1-2 "Surface container 5단계 ✗"). 표기는 `Surface (Card)` / `Surface (Popover)`로 역할만 구분 |

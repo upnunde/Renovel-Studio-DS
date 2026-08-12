@@ -275,7 +275,7 @@
   --card-foreground: var(--grayscale-10);
   --background-muted: var(--grayscale-130);
   --background-muted-foreground: var(--grayscale-10);
-  --canvas-muted: var(--grayscale-130);
+  --canvas-muted: var(--grayscale-150);
   --canvas-muted-foreground: var(--background-muted-foreground);
   --card-muted: var(--background-muted);
   --card-muted-foreground: var(--background-muted-foreground);

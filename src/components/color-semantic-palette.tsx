@@ -1,7 +1,5 @@
 "use client"
 
-import { useTheme } from "next-themes"
-
 import { ShowcaseBlock } from "@/components/docs/showcase-block"
 import {
   DocsColorSwatch,
@@ -23,26 +21,23 @@ import {
 import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
 import { getSemanticTokenSource } from "@/lib/semantic-token-sources"
+import { useDocsTheme } from "@/lib/use-docs-theme"
 import { cn } from "@/lib/utils"
 
 export function ThemeNote() {
-  const { resolvedTheme } = useTheme()
-  const isDark = resolvedTheme === "dark"
+  const { label } = useDocsTheme()
 
   return (
     <p className={docsType.bodyMuted}>
       현재{" "}
-      <span className="font-medium text-foreground">
-        {isDark ? "Dark" : "Light"}
-      </span>{" "}
-      모드 기준입니다. 테마를 전환하면 아래 값이 갱신됩니다.
+      <span className="font-medium text-foreground">{label}</span> 모드
+      기준입니다. 테마를 전환하면 아래 값이 갱신됩니다.
     </p>
   )
 }
 
 function SemanticTokenRow({ token }: { token: ColorToken }) {
-  const { resolvedTheme } = useTheme()
-  const theme = resolvedTheme === "dark" ? "dark" : "light"
+  const { theme } = useDocsTheme()
   const source = getSemanticTokenSource(token.variable, theme)
 
   return (

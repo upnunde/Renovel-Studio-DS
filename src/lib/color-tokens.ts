@@ -130,7 +130,7 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
             name: "canvas-muted",
             variable: "--canvas-muted",
             m3: "Background Container",
-            role: "앱 배경(Background) 위 보조 면 — grayscale-15 (라이트)",
+            role: "앱 배경(Background) 위 보조 면 — grayscale-15 (라이트) / grayscale-150 (다크)",
           },
           { name: "background", variable: "--background", m3: "Surface", role: "기본 페이지 면" },
           {
