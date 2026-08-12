@@ -274,10 +274,10 @@ export const TABS_TEXT_TYPOGRAPHY = TABS_TYPOGRAPHY_BY_SIZE
  * line/text 동일 값 (text 기준).
  */
 export const TABS_TEXT_LIST_GAP_BY_SIZE = {
-  sm: { className: "gap-2", px: 8, token: "2" },
-  default: { className: "gap-3", px: 12, token: "3" },
-  xl: { className: "gap-4", px: 16, token: "4" },
-  "2xl": { className: "gap-5", px: 20, token: "5" },
+  sm: { className: "gap-3", px: 12, token: "3" },
+  default: { className: "gap-4", px: 16, token: "4" },
+  xl: { className: "gap-5", px: 20, token: "5" },
+  "2xl": { className: "gap-6", px: 24, token: "6" },
 } as const satisfies Record<
   TabsSizeApi,
   { className: string; px: number; token: string }
