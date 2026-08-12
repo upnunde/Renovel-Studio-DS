@@ -16,7 +16,7 @@ export type GrayscaleStep = {
 
 export const GRAYSCALE_SCALE: GrayscaleStep[] = [
   { name: "grayscale-10", variable: "--grayscale-10", hex: "#F8F8FC", role: "은은한 배경 틴트 · muted" },
-  { name: "grayscale-15", variable: "--grayscale-15", hex: "#F1F4F6", role: "border · divider · canvas-muted" },
+  { name: "grayscale-15", variable: "--grayscale-15", hex: "#F1F4F6", role: "border · divider · canvas-muted (라이트)" },
   { name: "grayscale-20", variable: "--grayscale-20", hex: "#E7E7EB", role: "input" },
   { name: "grayscale-30", variable: "--grayscale-30", hex: "#D7D7DB", role: "divider-strong · 구분선 강조" },
   { name: "grayscale-40", variable: "--grayscale-40", hex: "#C6C6CA", role: "비활성 보더" },
@@ -30,7 +30,7 @@ export const GRAYSCALE_SCALE: GrayscaleStep[] = [
   { name: "grayscale-120", variable: "--grayscale-120", hex: "#424245", role: "다크 muted · secondary" },
   { name: "grayscale-130", variable: "--grayscale-130", hex: "#323235", role: "다크 card · elevated surface" },
   { name: "grayscale-140", variable: "--grayscale-140", hex: "#212124", role: "foreground · 다크 배경" },
-  { name: "grayscale-150", variable: "--grayscale-150", hex: "#121213", role: "최심 다크 · 깊은 표면" },
+  { name: "grayscale-150", variable: "--grayscale-150", hex: "#121213", role: "canvas · canvas-muted (다크) · 깊은 표면" },
 ]
 
 /** CSS linear-gradient용 문자열 */
