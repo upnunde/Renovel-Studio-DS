@@ -78,7 +78,10 @@ import {
   TooltipTrigger,
 } from "design-system/ui/tooltip"
 import { toast } from "sonner"
-import { controlSizeToIconGlyph } from "design-system/icon-tokens"
+import {
+  controlSizeToIconGlyph,
+  iconButtonSizeToIconGlyph,
+} from "design-system/icon-tokens"
 import {
   BADGE_SHAPE_APIS,
   BADGE_SIZE_APIS,
@@ -449,7 +452,11 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       const buttonType = isLink ? "text" : str(state, "type")
       const isIcon = buttonType === "icon"
       const isLeadingIcon = buttonType === "leading-icon"
-      const glyph = controlSizeToIconGlyph(size)
+      // 아이콘 전용 버튼은 icon-* 스케일 기준(≈컨테이너 50%),
+      // 리딩 아이콘은 텍스트 컨트롤 기준으로 글리프를 정한다.
+      const glyph = isIcon
+        ? iconButtonSizeToIconGlyph(toButtonSize(size, true))
+        : controlSizeToIconGlyph(size)
 
       return (
         <Button
@@ -482,7 +489,9 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       const isIcon = buttonType === "icon"
       const isLeadingIcon = buttonType === "leading-icon"
       const realSize = toButtonSize(size, isIcon)
-      const glyph = controlSizeToIconGlyph(size)
+      const glyph = isIcon
+        ? iconButtonSizeToIconGlyph(realSize)
+        : controlSizeToIconGlyph(size)
       const tone = str(state, "tone")
       const props = [
         playgroundPropAttr("variant", str(state, "variant")),

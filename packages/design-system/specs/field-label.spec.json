@@ -7,8 +7,8 @@
   "axes": { "size": { "values": ["default", "lg"] } },
   "defaults": { "size": "default" },
   "sizeSpec": {
-    "default": { "titleTypography": "body2-700", "gap": "{space.1}" },
-    "lg":      { "titleTypography": "heading5-700", "gap": "{space.1}" },
+    "default": { "titleTypography": "body1-700", "gap": "{space.0-5}" },
+    "lg":      { "titleTypography": "heading5-700", "gap": "{space.0-5}" },
     "$descriptionTypography": "body4-400",
     "$infoIcon": 14
   },

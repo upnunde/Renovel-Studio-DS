@@ -52,12 +52,7 @@ function SemanticTokenRow({ token }: { token: ColorToken }) {
       </DocsTableTd>
       <DocsTableTd>
         {token.m3 ? (
-          <div className="flex flex-col gap-0.5">
-            <span className="font-medium">{token.m3}</span>
-            <span className={cn(docsType.tableMono, "text-foreground-muted")}>
-              {token.name}
-            </span>
-          </div>
+          <span className="font-medium">{token.m3}</span>
         ) : (
           <span className={docsType.tableMono}>{token.name}</span>
         )}
@@ -66,7 +61,9 @@ function SemanticTokenRow({ token }: { token: ColorToken }) {
         {token.variable}
       </DocsTableTd>
       <DocsTableTd muted>{token.role ?? "—"}</DocsTableTd>
-      <DocsTableTd muted>{source}</DocsTableTd>
+      <DocsTableTd mono muted>
+        {source}
+      </DocsTableTd>
     </DocsTableRow>
   )
 }

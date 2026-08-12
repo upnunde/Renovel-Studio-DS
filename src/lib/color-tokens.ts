@@ -126,6 +126,12 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         title: "Base",
         tokens: [
           { name: "canvas", variable: "--canvas", m3: "Background", role: "최하위 앱 배경 면" },
+          {
+            name: "canvas-muted",
+            variable: "--canvas-muted",
+            m3: "Background Container",
+            role: "앱 배경(Background) 위 보조 면 — grayscale-15 (라이트)",
+          },
           { name: "background", variable: "--background", m3: "Surface", role: "기본 페이지 면" },
           {
             name: "background-muted",
@@ -187,6 +193,12 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
             variable: "--foreground",
             m3: "On Surface",
             role: "background·canvas 면 위 본문 텍스트·아이콘 — grayscale-140 (라이트)",
+          },
+          {
+            name: "canvas-muted-foreground",
+            variable: "--canvas-muted-foreground",
+            m3: "On Background Container",
+            role: "canvas-muted 면 위 텍스트·아이콘 — background-muted-foreground alias",
           },
           {
             name: "background-muted-foreground",

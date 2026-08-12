@@ -718,8 +718,8 @@ const SHOWCASES: Record<string, ReactNode> = {
 
       <ComponentCaseGroup title="FieldLabel · Size">
         <ComponentCaseGrid columns={2}>
-          <ComponentCase label="15_700" tags={["size: default", "text-body2_700"]}>
-            <FieldLabel htmlFor="field-size-15" size="default">
+          <ComponentCase label="16_700" tags={["size: default", "text-body1_700"]}>
+            <FieldLabel htmlFor="field-size-16" size="default">
               타이틀 입력
             </FieldLabel>
           </ComponentCase>
@@ -733,10 +733,10 @@ const SHOWCASES: Record<string, ReactNode> = {
 
       <ComponentCaseGroup title="FieldLabel · 타이틀">
         <ComponentCaseGrid columns={2}>
-          <ComponentCase label="기본" tags={["size: default", "text-body2_700", "15/22px", "700"]}>
+          <ComponentCase label="기본" tags={["size: default", "text-body1_700", "16/24px", "700"]}>
             <FieldLabel htmlFor="field-title-basic">타이틀 입력</FieldLabel>
           </ComponentCase>
-          <ComponentCase label="필수" tags={["size: default", "text-body2_700", "required: true"]}>
+          <ComponentCase label="필수" tags={["size: default", "text-body1_700", "required: true"]}>
             <FieldLabel htmlFor="field-title-required" required>
               타이틀 입력
             </FieldLabel>

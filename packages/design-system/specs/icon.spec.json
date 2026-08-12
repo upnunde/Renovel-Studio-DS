@@ -4,14 +4,15 @@
   "slot": "icon",
   "$description": "OS-중립 Icon 정본. 출처: src/components/ui/icon.tsx. Lucide 글리프, currentColor 상속.",
   "role": "img",
-  "axes": { "size": { "values": ["xs", "sm", "md", "lg", "xl"] } },
+  "axes": { "size": { "values": ["md", "lg", "xl", "2xl", "3xl", "4xl"] } },
   "defaults": { "size": "md" },
   "sizeSpec": {
-    "xs": { "glyph": "{icon-size.xs}" },
-    "sm": { "glyph": "{icon-size.sm}" },
     "md": { "glyph": "{icon-size.md}" },
     "lg": { "glyph": "{icon-size.lg}" },
-    "xl": { "glyph": "{icon-size.xl}" }
+    "xl": { "glyph": "{icon-size.xl}" },
+    "2xl": { "glyph": "{icon-size.2xl}" },
+    "3xl": { "glyph": "{icon-size.3xl}" },
+    "4xl": { "glyph": "{icon-size.4xl}" }
   },
   "styleSpec": { "rest": { "fg": "currentColor", "$note": "부모 텍스트 색 상속, 자체 색 없음. strokeWidth={icon-stroke-width}" } },
   "states": ["rest"],

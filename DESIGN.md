@@ -42,6 +42,7 @@ Material Design 3의 이론적 토대를 **선택적으로** 흡수한다.
 | M3 개념 | 적용 | 코드 토큰(shadcn) |
 |---------|------|------|
 | Background | ✓ | `--canvas` |
+| Background Container | ✓ | `--canvas-muted` (라이트 grayscale-15) |
 | Surface | ✓ | `--background` |
 | Surface Container | ✓ | `--background-muted` · `--card-muted`(= Surface Container (Card)) |
 | Surface (Card·Popover) | ✓ | `--card` · `--popover` — **값은 `background`와 동일**. 깊이는 surface 틴트가 아니라 `shadow-elevation-*`가 담당(§1-2 "Surface container 5단계 ✗"). 표기는 `Surface (Card)` / `Surface (Popover)`로 역할만 구분 |
@@ -77,6 +78,7 @@ Material Design 3의 이론적 토대를 **선택적으로** 흡수한다.
 
 ```css
 --background          /* — */
+--canvas-muted        / --canvas-muted-foreground
 --card                / --card-foreground
 --popover             / --popover-foreground
 --primary             / --primary-foreground
@@ -133,7 +135,7 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 | `disabled-border` (라이트) | `border` | |
 | `secondary-container` (다크) | `muted` | 컴포넌트 미사용, API만 유지 |
 
-문서 Color Semantic 페이지의 **Maps to** 컬럼은 alias 체인을 표시한다.
+문서 Color Semantic 페이지의 **Maps to** 컬럼은 최종 원시 컬러 토큰명만 표시한다 (`white`, `grayscale-15` 등). alias 체인은 코드에만 둔다.
 
 ### 2-1b. Hover 표현 표준 (컴포넌트·문서 공통)
 
@@ -173,8 +175,8 @@ className="hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted dat
 
 **문서 분류: 면과 텍스트를 별도 카테고리로 나눈다.** 색상 시맨틱 문서(`/foundation/color-semantic`)는 M3 레퍼런스처럼 **Surface(면)** 와 **On Surface(텍스트)** 를 동급 카테고리로 분리한다. 두 카테고리 모두 Base / Elevated / Inverse 동일 서브그룹으로 대칭 구성한다.
 
-- **Surface(면)** — `canvas`/`background`/`background-muted` · `card`/`popover`/`card-muted` · `inverse`/`inverse-muted`
-- **On Surface(텍스트)** — `foreground`(본문 기준점)·`background-muted-foreground`·흐린 위계(`-muted`/`-placeholder`/`-disabled`) · `card-foreground`/`popover-foreground`/`card-muted-foreground` · `inverse-foreground`/`inverse-muted-foreground`
+- **Surface(면)** — `canvas`/`canvas-muted`/`background`/`background-muted` · `card`/`popover`/`card-muted` · `inverse`/`inverse-muted`
+- **On Surface(텍스트)** — `foreground`(본문 기준점)·`canvas-muted-foreground`·`background-muted-foreground`·흐린 위계(`-muted`/`-placeholder`/`-disabled`) · `card-foreground`/`popover-foreground`/`card-muted-foreground` · `inverse-foreground`/`inverse-muted-foreground`
 
 `--foreground`는 이 패밀리의 값 기준점(본문)이자 `background`·`canvas`의 On-color다 — background에 전용 `-foreground`가 없어 공용으로 빌려 쓴다. **면↔텍스트 페어 관계는 각 토큰 `role`이 설명하고, 분류는 역할 타입(면/텍스트)으로 한다.** 브랜드·상태 색(primary/secondary/error 등)은 이 규칙과 무관하게 기존 인라인 페어(면+On-color+container)를 유지한다.
 
@@ -449,7 +451,17 @@ z-toast    /* 500 — 토스트·스낵바 */
 | `xl` | 40 | 대형 폼·터치 영역 |
 | `2xl` | 48 | 최대 폼·모바일 터치 |
 
-아이콘 글리프는 6단계 (`md_g16`·`lg_g18`·`xl_g20`·`2xl_g24`·`3xl_g32`·`4xl_g48`), **최소 16px**. 12·14px은 접근성·광학 가독성 때문에 제거됨. 작은 컨트롤도 글리프는 md(16)로 통일. 아이콘 버튼은 Material 기준 아이콘 ≈ 컨테이너 50% (icon-sm 32→md16, icon 36·icon-xl 40→xl20, icon-2xl 48→2xl24).
+아이콘 글리프는 6단계 (`md_g16`·`lg_g18`·`xl_g20`·`2xl_g24`·`3xl_g32`·`4xl_g40`), **최소 16px**(단 텍스트+아이콘 xs 버튼은 12px 예외). 12·14px 글리프 토큰은 접근성·광학 가독성 때문에 제거됨.
+
+**버튼 아이콘 규격 — `md_h36`부터 24px 적용:**
+
+| 버튼 size | 높이 | Icon Only | Text+Icon | Gap |
+|-----------|------|-----------|-----------|-----|
+| xs | 24 | 16 | 12 | 4 |
+| sm | 32 | 20 | 16 | 4 |
+| md/default | 36 | 24 | 24 | 6 |
+| xl | 40 | 24 | 24 | 6 |
+| 2xl | 48 | 24 | 24 | 8 |
 
 ### 3-5. 네이밍 표기법
 

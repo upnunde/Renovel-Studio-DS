@@ -158,10 +158,10 @@ export const ICON_GLYPH_SCALE: IconGlyphToken[] = [
     description: "대형 히어로·섹션 헤더",
   },
   {
-    label: "4xl_g48",
+    label: "4xl_g40",
     api: "4xl",
-    sizePx: 48,
-    rem: "3rem",
+    sizePx: 40,
+    rem: "2.5rem",
     variable: "--icon-size-4xl",
     controlLabel: "—",
     description: "빈 상태·일러스트형",
@@ -387,35 +387,36 @@ export function iconGlyphCaseMeta(api: string) {
   }
 }
 
-/** 텍스트 컨트롤 size → Icon size prop
- *  글리프 최소 16px(md). 작은 컨트롤(xs/sm)도 글리프는 md로 통일.
- *  xl(h40) → lg(18px), 2xl(h48) → xl(20px).
+/** 텍스트+아이콘 버튼 size → Icon size prop
+ *  md_h36부터 24px(2xl) 적용. sm(h32) → md(16), default(h36)·xl(h40)·2xl(h48) → 2xl(24).
+ *  xs(h24)는 12px이나 글리프 스케일 최소가 16px이라 md로 폴백
+ *  (버튼 CSS는 size-3=12px 직접 지정 — 접근성 최소 16 원칙의 예외).
  */
 export function controlSizeToIconGlyph(
   api: string
 ): IconGlyphToken["api"] {
   switch (api) {
+    case "default":
     case "xl":
-      return "lg"
     case "2xl":
-      return "xl"
+      return "2xl"
     default:
       return "md"
   }
 }
 
 /** 아이콘 전용 버튼 size → Icon size prop
- *  Material 기준 아이콘 ≈ 컨테이너의 50%.
- *  icon-xs(24)·icon-sm(32) → md(16), icon(36)·icon-xl(40) → xl(20),
- *  icon-2xl(48) → 2xl(24).
+ *  md_h36부터 24px(2xl) 적용. icon-xs(24) → md(16), icon-sm(32) → xl(20),
+ *  icon(36)·icon-xl(40)·icon-2xl(48) → 2xl(24).
  */
 export function iconButtonSizeToIconGlyph(
   api: string
 ): IconGlyphToken["api"] {
   switch (api) {
+    case "icon-sm":
+      return "xl"
     case "icon":
     case "icon-xl":
-      return "xl"
     case "icon-2xl":
       return "2xl"
     default:

@@ -13,7 +13,7 @@ const tableClass = cn(
 )
 
 const thClass = cn(docsSpace.tableHeaderCell, docsType.tableHeader)
-const tdClass = cn(docsSpace.tableCell, "align-top")
+const tdClass = cn(docsSpace.tableCell, "align-middle")
 
 export function DocsTable({
   children,
