@@ -6,6 +6,12 @@ import { ShowcaseBlock } from "@/components/docs/showcase-block"
 import { DocsFilterChips } from "@/components/docs/docs-filter-chips"
 import { Icon } from "design-system/ui/icon"
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "design-system/ui/tooltip"
+import {
   LUCIDE_ICON_CATALOG,
   LUCIDE_ICON_COMMON_COUNT,
 } from "@/lib/lucide-icon-catalog"
@@ -19,23 +25,26 @@ function IconTile({ name }: { name: string }) {
   if (!LucideIcon) return null
 
   return (
-    <button
-      type="button"
-      onClick={() => navigator.clipboard.writeText(name)}
-      title={`${name} — 클릭하여 이름 복사`}
-      className={cn(
-        "flex w-full flex-col items-center rounded-lg border border-transparent text-center transition-colors",
-        docsSpace.pad,
-        "hover:border-border hover:bg-muted/50 data-[hovered=true]:border-border data-[hovered=true]:bg-muted/50"
-      )}
-    >
-      <span className="flex size-9 items-center justify-center rounded-md bg-muted">
-        <Icon icon={LucideIcon} size="md" className="text-foreground" />
-      </span>
-      <span className={cn("line-clamp-2 w-full leading-tight", docsType.tokenMeta)}>
-        {name}
-      </span>
-    </button>
+    <TooltipProvider delay={0}>
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <button
+              type="button"
+              onClick={() => navigator.clipboard.writeText(name)}
+              className={cn(
+                "flex aspect-square w-full items-center justify-center rounded-lg border border-transparent transition-colors",
+                "hover:border-border hover:bg-muted/50 data-[hovered=true]:border-border data-[hovered=true]:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              )}
+            />
+          }
+          aria-label={`${name} — 클릭하여 이름 복사`}
+        >
+          <Icon icon={LucideIcon} size="2xl" className="text-foreground" />
+        </TooltipTrigger>
+        <TooltipContent side="top">{name}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   )
 }
 

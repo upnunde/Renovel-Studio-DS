@@ -1,4 +1,14 @@
 /**
+ * 아이콘 stroke 규칙 (서비스·DS 전역) — 모든 Lucide 아이콘은 1.5px stroke.
+ * lucide SVG의 stroke-width="2" presentation attribute를 CSS로 덮는다
+ * (CSS가 presentation attribute보다 우선순위 높음 → !important 불필요).
+ * 직접 렌더(<ICONS.x />)·Icon 컴포넌트 경로 모두 커버.
+ */
+.lucide {
+  stroke-width: 1.5px;
+}
+
+/**
  * 아이콘 크기 @utility — icon-tokens.ts 와 동기화
  * 사용: className="icon-md"
  */
