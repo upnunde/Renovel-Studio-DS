@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-12 11:07:03**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-12 16:13:42**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,14 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-12 11:06:44** — <Badge variant="secondary" size="md" shape="circle">Badge</Badge> 이거로 재적용
+- **2026-08-12 16:13:08** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-card[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.border-b border-border lg:border-r lg:border-b-0 .pace-y-5 p-5 > div > div.pace-y-3 > div.flex flex-col gap-1[2] > div.flex flex-wrap item.-center gap-2 > button.group/chip inline-flex min-w-12 .hrink-0 item.-center ju.tify-center border font-medium white.pace-nowrap bg-clip-padding tran.ition-all duration-.hort ea.e-.tandard outline-none .elect-none focu.-vi.ible:border-ring focu.-vi.ible:ring-3 focu.-vi.ible:ring-ring/50 di.abled:pointer-event.-none di.abled:cur.or-not-allowed data-di.abled:pointer-event.-none data-di.abled:cur.or-not-allowed aria-di.abled:pointer-event.-none aria-di.abled:cur.or-not-allowed di.abled:bg-di.abled di.abled:text-di.abled-foreground di.abled:border-di.abled-border data-di.abled:bg-di.abled data-di.abled:text-di.abled-foreground data-di.abled:border-di.abled-border aria-di.abled:bg-di.abled aria-di.abled:text-di.abled-foreground aria-di.abled:border-di.abled-border aria-invalid:border-de.tructive aria-invalid:ring-3 aria-invalid:ring-de.tructive/20 [&_.vg]:pointer-event.-none [&_.vg]:.hrink-0 border-border bg-background hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-pre.ed:border-tran.parent aria-pre.ed:bg-inver.e-muted aria-pre.ed:text-inver.e-muted-foreground aria-pre.ed:hover:bg-inver.e-muted/80 aria-pre.ed:data-[hovered=true]:bg-inver.e-muted/80 h-8 gap-1 px-2.5 text-[0.8rem] [&_.vg:not([cla.*='.ize-'])]:.ize-4 rounded-full[1]
+Position: top=831px, left=352px, width=48px, height=32px
+React Component: CompositeItem
+HTML Element: <button type="button" aria-disabled="false" tabindex="0" aria-pressed="true" data-slot="chip" class="group/chip inline-flex min-w-12 shrink-0 items-center justify-center border font-medium whitespace-nowrap bg-clip-padding transition-all duration-short ease-standard outline-none select-none focus-vis…" data-pressed="" data-cursor-element-id="cursor-el-9">line</button> 라인타입의 언더라인 표식을 DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-card[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.flex min-h-48 flex-col > div.flex min-h-[400px] w-full flex-1 item.-center ju.tify-center gap-3 px-5 py-10 > div.group/tab. flex gap-2 data-horizontal:flex-col w-fit max-w-md > div.group/tab.-li.t inline-flex w-fit item.-center text-foreground-muted group-data-vertical/tab.:h-fit group-data-vertical/tab.:flex-col ju.tify-.tart rounded-none bg-tran.parent p-0 gap-2 > button#base-ui-_r_14f_
+Position: top=835px, left=777px, width=22px, height=32px
+React Component: TabsTab
+HTML Element: <button type="button" data-active="" data-orientation="horizontal" data-activation-direction="none" aria-disabled="false" tabindex="0" role="tab" aria-selected="true" id="base-ui-_r_14f_" data-composite-item-active="" data-slot="tabs-trigger" class="relative inline-flex items-center justify-center whitespace-nowrap transition-all duration-short ease-standard focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visib…" aria-controls="base-ui-_r_14i_" data-cursor-element-id="cursor-el-8">탭 1</button> div 안쪽에 노출되도록 해줘
+지금은 밖에 있어서 너무 간격이 넓어 보임
 
 ## 다음 작업 (Claude Code용)
 
@@ -20,28 +27,31 @@
 
 ## Git 상태
 
-- 브랜치: `feat/button-icon-size-spec`
+- 브랜치: `main`
 
 ```
  M docs/wip/HANDOFF.md
+ M packages/design-system/specs/tabs.spec.json
  M packages/design-system/src/component-size-tokens.ts
- M packages/design-system/src/components/ui/button.tsx
+ M packages/design-system/src/components/ui/tabs.tsx
  M src/component-size-tokens.ts
- M src/components/docs/component-case-docs.tsx
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 70 ++++------------------
- .../design-system/src/component-size-tokens.ts     |  4 +-
- .../design-system/src/components/ui/button.tsx     |  4 +-
- src/component-size-tokens.ts                       |  4 +-
- src/components/docs/component-case-docs.tsx        |  2 +-
- 5 files changed, 21 insertions(+), 63 deletions(-)
+ docs/wip/HANDOFF.md                                | 35 ++++++++++++++--------
+ packages/design-system/specs/tabs.spec.json        |  2 +-
+ .../design-system/src/component-size-tokens.ts     |  8 ++---
+ packages/design-system/src/components/ui/tabs.tsx  |  2 +-
+ src/component-size-tokens.ts                       |  8 ++---
+ 5 files changed, 32 insertions(+), 23 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
 
 
 
