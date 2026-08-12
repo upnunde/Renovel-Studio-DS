@@ -388,7 +388,7 @@ export function iconGlyphCaseMeta(api: string) {
 }
 
 /** 텍스트+아이콘 버튼 size → Icon size prop
- *  md_h36부터 24px(2xl) 적용. sm(h32) → md(16), default(h36)·xl(h40)·2xl(h48) → 2xl(24).
+ *  sm(h32) → md(16), default(h36) → lg(18), xl(h40) → xl(20), 2xl(h48) → 2xl(24).
  *  xs(h24)는 12px이나 글리프 스케일 최소가 16px이라 md로 폴백
  *  (버튼 CSS는 size-3=12px 직접 지정 — 접근성 최소 16 원칙의 예외).
  */
@@ -397,7 +397,9 @@ export function controlSizeToIconGlyph(
 ): IconGlyphToken["api"] {
   switch (api) {
     case "default":
+      return "lg"
     case "xl":
+      return "xl"
     case "2xl":
       return "2xl"
     default:

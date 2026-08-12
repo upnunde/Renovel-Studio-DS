@@ -63,7 +63,7 @@ export function ComponentSpecTable({ spec }: { spec: ComponentCaseSpec }) {
               <DocsTableTd>
                 <div className={cn("flex flex-wrap", docsSpace.inlineGap)}>
                   {sortPlaygroundOptionValues(prop.values, prop.name).map((value) => (
-                    <Badge key={value} variant="outline" className="font-mono text-sm">
+                    <Badge key={value} variant="secondary" size="md" shape="circle">
                       {formatPropValue(prop, value)}
                     </Badge>
                   ))}
