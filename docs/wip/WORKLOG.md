@@ -1,13 +1,12 @@
 # 작업 일지 (WORKLOG)
 
-> 마지막 갱신: 2026-08-12  
+> 마지막 갱신: 2026-08-13  
 > 다음 세션: Cursor에서 `@docs/wip/WORKLOG.md` 를 붙이고 「이어서」라고 하면 됩니다.
 
 ## 오늘 한 일
 
-- **다크 `--canvas-muted`** — `grayscale-130` → `grayscale-150` (라이트는 `grayscale-15` 유지)
-- **Color Semantic hydration** — `useDocsTheme`로 mount 전 Light 고정, ThemeNote·Maps to SSR 불일치 해소
-- 정본 동기화 — `tokens.css` · `semantic.json` · `semantic-token-sources` · `DESIGN.md` · grayscale role
+- **Alert `status="primary"`** — 브랜드 톤 알림 추가 (primary/10 · border · dark 오버라이드)
+- 스펙·Playground·쇼케이스 Status 케이스 동기화
 
 ## 다음에 할 일
 
@@ -17,13 +16,12 @@
 ## 막힌 것 · 결정 필요
 
 - 패키지 소비는 **릴리스 태그** 경로 — docs `main`과 혼동하지 말 것
-- 다크에서 `canvas`와 `canvas-muted`가 동일 `grayscale-150` — 위계 분리가 필요하면 재조정
 
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
-- `packages/design-system/src/tokens.css` · `tokens/semantic.json`
-- `src/lib/use-docs-theme.ts` · `src/components/color-semantic-palette.tsx`
+- `packages/design-system/src/components/ui/alert.tsx` · `specs/alert.spec.json`
+- `src/lib/component-case-specs.ts` · playground-registry · component-showcases
 
 ## 메모
 

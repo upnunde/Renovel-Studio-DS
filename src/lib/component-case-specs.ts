@@ -589,9 +589,9 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
     properties: [
       {
         name: "status",
-        values: ["default", "success", "warning", "destructive"],
+        values: ["default", "primary", "success", "warning", "destructive"],
         description:
-          "의미론적 상태 톤 · default(무톤) / 성공 / 경고 / 위험",
+          "의미론적 상태 톤 · default(무톤) / primary(브랜드) / 성공 / 경고 / 위험",
       },
       {
         name: "type",

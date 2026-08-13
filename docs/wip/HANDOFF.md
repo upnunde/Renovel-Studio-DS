@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-12 18:41:31**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-12 19:00:10**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,20 +11,45 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-12** — 다크 `--canvas-muted`를 grayscale-130 → **150**으로 변경 (라이트 15 유지)
-- Color Semantic ThemeNote hydration mismatch 수정 (`useDocsTheme`)
-- **머지 커밋 깃푸시** 요청
+- **2026-08-12 18:59:02** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-card[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.border-b border-border lg:border-r lg:border-b-0 .pace-y-5 p-5 > div > div.pace-y-3 > div.flex flex-col gap-1[0] > div.flex flex-wrap item.-center gap-2
+Position: top=492px, left=281px, width=231px, height=72px
+React Component: CompositeList
+HTML Element: <div data-orientation="horizontal" role="group" data-slot="chip-group" class="flex flex-wrap items-center gap-2" data-cursor-element-id="cursor-el-1">default success warning destructive</div> 프라이머리 옵션 하나 더 추가
 
 ## 다음 작업 (Claude Code용)
 
 - WORKLOG의 「다음에 할 일」 참고
-- 다크 `canvas`/`canvas-muted` 동일 150 — 위계 분리가 필요하면 재조정
+- Cursor에서 명시한 후속 작업이 있으면 위 요청 목록 우선
 
 ## Git 상태
 
-- 브랜치: `main` (커밋·푸시·ds:release 직전)
+- 브랜치: `main`
+
+```
+ M docs/wip/HANDOFF.md
+ M packages/design-system/specs/alert.spec.json
+ M packages/design-system/src/components/ui/alert.tsx
+ M src/components/docs/component-showcases.tsx
+ M src/components/docs/playground-registry.tsx
+ M src/lib/component-case-specs.ts
+```
+
+### diff 요약
+
+```
+ docs/wip/HANDOFF.md                                | 23 ++++++++++++++++------
+ packages/design-system/specs/alert.spec.json       |  3 ++-
+ packages/design-system/src/components/ui/alert.tsx |  4 +++-
+ src/components/docs/component-showcases.tsx        |  6 ++++++
+ src/components/docs/playground-registry.tsx        |  2 +-
+ src/lib/component-case-specs.ts                    |  4 ++--
+ 6 files changed, 31 insertions(+), 11 deletions(-)
+```
 
 ## Claude Code 상태
+
+
+
 
 
 

@@ -16,10 +16,12 @@ const alertVariants = cva(
       },
       /**
        * 의미론적 상태 톤 — 시각 위계(variant)와 직교하는 상태 축.
-       * default 는 톤 없음. success·warning·destructive 는 각 상태 색으로 오버라이드.
+       * default 는 톤 없음. primary·success·warning·destructive 는 각 상태 색으로 오버라이드.
        */
       status: {
         default: "",
+        primary:
+          "bg-primary/10 text-primary border-primary/20 *:data-[slot=alert-description]:text-primary/90 *:[svg]:text-current dark:bg-primary/20 dark:border-primary/30",
         success:
           "bg-success/10 text-success border-success/20 *:data-[slot=alert-description]:text-success/90 *:[svg]:text-current dark:bg-success/20 dark:border-success/30",
         warning:

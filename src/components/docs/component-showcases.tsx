@@ -1656,6 +1656,12 @@ const SHOWCASES: Record<string, ReactNode> = {
               <AlertDescription>기본 카드 톤</AlertDescription>
             </Alert>
           </ComponentCase>
+          <ComponentCase label="primary" tags={["status: primary"]}>
+            <Alert status="primary" type="icon">
+              <AlertTitle>안내</AlertTitle>
+              <AlertDescription>브랜드 톤 알림입니다</AlertDescription>
+            </Alert>
+          </ComponentCase>
           <ComponentCase label="success" tags={["status: success"]}>
             <Alert status="success" type="icon">
               <AlertTitle>완료</AlertTitle>

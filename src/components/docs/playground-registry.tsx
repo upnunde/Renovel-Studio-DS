@@ -1536,7 +1536,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       duration: "0",
     },
     selectKeys: {
-      status: ["default", "success", "warning", "destructive"],
+      status: ["default", "primary", "success", "warning", "destructive"],
       type: ["default", "icon"],
       duration: ["0", "3000", "5000"],
     },
