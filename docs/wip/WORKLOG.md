@@ -6,10 +6,8 @@
 ## 오늘 한 일
 
 - **시맨틱 분류** — Background(`canvas`) / Surface(`background`) / Content(`foreground` 위계)로 문서·토큰 분리. 값은 유지, 이름·역할만 정렬
-- **rest 면** — 컴포넌트 rest의 `bg-muted` → `bg-background-muted`. hover/focus의 `bg-muted`는 유지
-- **`--input` 제거** — Border 위계로 통합. 컴포넌트는 `border-border-emphasis`. `--input`은 alias만
-- **Content** — `text-background-muted-foreground` 등 면-짝 글자를 `text-foreground`로 정리. Hover·Inverse·Primary 페어는 유지
-- Color Semantic 문서·`DESIGN.md` §2-1·§2-2·패키지 UI·docs 쇼케이스 동기화
+- **윤곽 rest** — outline·보더 컨트롤 면을 `bg-transparent`로 통일. 다크 `{border-emphasis}/30` 채움 제거 (Chip/Input/Select/Textarea/Checkbox/Radio/Tabs default)
+- Color Semantic ShowcaseBlock 헤더 보조설명 삭제. 역할은 표 Role 컬럼만 유지
 
 ## 다음에 할 일
 
@@ -21,13 +19,13 @@
 
 - 패키지 소비는 **릴리스 태그** 경로 — docs `main`과 혼동하지 말 것
 - `bg-background`는 Surface. 앱 바닥은 `bg-canvas`만 (컴포넌트에 canvas 금지)
+- 윤곽 rest는 Surface가 아님 (`bg-transparent`)
 
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
-- `packages/design-system/src/tokens.css` · `tokens/semantic.json` · `theme.css`
-- `packages/design-system/src/components/ui/*`
-- `src/lib/color-tokens.ts` · `DESIGN.md` §2-1·§2-2
+- `packages/design-system/src/components/ui/{button,badge,chip,input,select,textarea,checkbox,radio-group,tabs}.tsx`
+- `DESIGN.md` rest 면 원칙 · `src/lib/color-tokens.ts` · `showcase-block.tsx`
 
 ## 메모
 

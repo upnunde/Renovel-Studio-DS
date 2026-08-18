@@ -14,8 +14,6 @@ export type ColorToken = {
 export type TokenGroup = {
   id: string
   title: string
-  /** 그룹 헤더 보조 설명 — 시맨틱 기준·사용 규칙 */
-  description?: string
   tokens: ColorToken[]
 }
 
@@ -126,7 +124,6 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
       {
         id: "background-base",
         title: "Base",
-        description: "브라우저·앱 바닥. Surface(카드·모달)가 아님.",
         tokens: [
           { name: "canvas", variable: "--canvas", m3: "Background", role: "브라우저·앱 최하위 면" },
           { name: "canvas-muted", variable: "--canvas-muted", m3: "Background Container", role: "바닥 위 보조 면" },
@@ -141,7 +138,6 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
       {
         id: "surface-base",
         title: "Base",
-        description: "Background 위에 뜨는 컨테이너 면. 글자 토큰과 1:1이 아님.",
         tokens: [
           { name: "background", variable: "--background", m3: "Surface", role: "카드·모달·패널 면" },
           { name: "background-muted", variable: "--background-muted", m3: "Surface Container", role: "컨테이너 안 보조 면" },
@@ -164,8 +160,6 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
       {
         id: "content-hierarchy",
         title: "Hierarchy",
-        description:
-          "Background·Surface 위에 공통. 면과 1:1이 아님. Inverse·Primary·Hover는 기존 페어.",
         tokens: [
           { name: "foreground", variable: "--foreground", m3: "On Surface", role: "주요 텍스트·아이콘" },
           { name: "foreground-muted", variable: "--foreground-muted", m3: "On Surface Muted", role: "본문·보조 텍스트·아이콘" },
@@ -175,7 +169,6 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
       {
         id: "content-inverse",
         title: "On Inverse",
-        description: "Inverse 면과 1:1 페어 — 기존 규칙 유지.",
         tokens: [
           { name: "inverse-foreground", variable: "--inverse-foreground", m3: "On Inverse Surface", role: "Inverse 위 텍스트" },
           { name: "inverse-muted-foreground", variable: "--inverse-muted-foreground", m3: "On Inverse Surface Container", role: "Inverse Container 위 텍스트" },

@@ -115,6 +115,8 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 
 **rest 면 원칙 (필수):** `--muted` / `bg-muted`는 **호버·포커스·열림·키보드 하이라이트**에만 쓴다. 기본 면(rest)에는 Surface 패밀리만 쓴다 (`bg-background`, `bg-background-muted`). 값이 같아도 역할을 섞지 않는다. Surface 2단으로 해결되면 3번째 Surface를 만들지 않는다.
 
+**윤곽(outline) rest는 Surface가 아니다.** `variant="outline"`과 보더만 있는 컨트롤(Input·Select·Textarea·Checkbox·Radio, Tabs default rest)은 `bg-transparent`다. 다크에서도 `{border-emphasis}/30`으로 면을 올리지 않는다.
+
 **호버 매핑 (컴포넌트 CVA):**
 
 | 톤 | 호버 토큰 | 예 |

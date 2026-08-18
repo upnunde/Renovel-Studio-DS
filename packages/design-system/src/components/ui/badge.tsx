@@ -18,7 +18,7 @@ const badgeVariants = cva(
       variant: {
         default: "",
         secondary: "",
-        outline: "",
+        outline: "bg-transparent",
         ghost: "",
       },
       status: {
@@ -104,7 +104,7 @@ const badgeVariants = cva(
         variant: "outline",
         status: "default",
         class:
-          "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-foreground [a[data-hovered=true]]:bg-muted [a[data-hovered=true]]:text-foreground",
+          "border-border bg-transparent text-foreground [a]:hover:bg-muted [a]:hover:text-foreground [a[data-hovered=true]]:bg-muted [a[data-hovered=true]]:text-foreground",
       },
       {
         variant: "outline",

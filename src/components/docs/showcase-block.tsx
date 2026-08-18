@@ -1,13 +1,11 @@
 import { type ReactNode } from "react"
 
-import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
 import { docsTocId } from "@/lib/docs-toc-id"
 import { cn } from "@/lib/utils"
 
 export function ShowcaseBlock({
   name,
-  description,
   children,
   className,
   flush,
@@ -15,7 +13,6 @@ export function ShowcaseBlock({
   headingId,
 }: {
   name?: string
-  description?: string
   children: ReactNode
   className?: string
   /** 테이블 등 가장자리까지 채우는 콘텐츠 */
@@ -27,21 +24,14 @@ export function ShowcaseBlock({
 }) {
   return (
     <section className="overflow-hidden rounded-xl border border-border bg-background">
-      {name || description ? (
+      {name ? (
         <div className={cn("border-b bg-background-muted/30", docsSpace.cardHeader)}>
-          {name ? (
-            <Heading
-              id={headingId ?? (name ? docsTocId(name) : undefined)}
-              className="scroll-mt-10 text-body1_700 text-foreground"
-            >
-              {name}
-            </Heading>
-          ) : null}
-          {description ? (
-            <p className={cn(docsType.sectionDescription, name && "mt-1")}>
-              {description}
-            </p>
-          ) : null}
+          <Heading
+            id={headingId ?? docsTocId(name)}
+            className="scroll-mt-10 text-body1_700 text-foreground"
+          >
+            {name}
+          </Heading>
         </div>
       ) : null}
       <div className={cn(flush ? "overflow-x-auto" : docsSpace.pad, className)}>{children}</div>
