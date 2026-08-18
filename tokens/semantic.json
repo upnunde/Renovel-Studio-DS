@@ -37,7 +37,7 @@
   "accent-foreground":            { "$type": "color", "$value": "{brand.600}",      "$extensions": { "mode": { "dark": "{brand.100}" } },     "$description": "M3 On Secondary Container" },
   "muted-low":                    { "$type": "color", "$value": "{grayscale.5}",    "$extensions": { "mode": { "dark": "{grayscale.140}" } }, "$description": "hover low — 아주 약한 무채색 hover 면" },
   "muted-low-foreground":         { "$type": "color", "$value": "{grayscale.90}",   "$extensions": { "mode": { "dark": "{grayscale.70}" } },  "$description": "on hover low" },
-  "muted":                        { "$type": "color", "$value": "{grayscale.10}",   "$extensions": { "mode": { "dark": "{grayscale.130}" } }, "$description": "hover — 무채색 호버 면 (rest 기본면으로 쓰지 않음)" },
+  "muted":                        { "$type": "color", "$value": "{grayscale.15}",   "$extensions": { "mode": { "dark": "{grayscale.130}" } }, "$description": "hover — 무채색 호버 면 (rest 기본면으로 쓰지 않음)" },
   "muted-foreground":             { "$type": "color", "$value": "{grayscale.90}",   "$extensions": { "mode": { "dark": "{grayscale.70}" } },  "$description": "on hover" },
   "muted-strong":                 { "$type": "color", "$value": "{grayscale.20}",   "$extensions": { "mode": { "dark": "{grayscale.120}" } }, "$description": "hover variant — rest가 Surface Container라 hover와 값이 같을 때" },
   "muted-strong-foreground":      { "$type": "color", "$value": "{grayscale.140}", "$extensions": { "mode": { "dark": "{grayscale.10}" } },  "$description": "on hover variant" },
