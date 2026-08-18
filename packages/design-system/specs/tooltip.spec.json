@@ -2,7 +2,7 @@
   "$schema": "./README.md",
   "name": "Tooltip",
   "slot": "tooltip",
-  "$description": "OS-중립 Tooltip 정본. 출처: src/components/ui/tooltip.tsx. inverse 면(다른 오버레이와 달리). removable=핀 고정.",
+  "$description": "OS-중립 Tooltip 정본. 출처: src/components/ui/tooltip.tsx. inverse 면. open=상시 노출, 미지정=hover. removable=✕.",
   "role": "tooltip",
   "positioning": { "side": "top", "sideOffset": 4, "align": "center", "alignOffset": 0, "delay": 0 },
   "parts": {
@@ -17,7 +17,7 @@
   "nativeNotes": {
     "surface": "다른 오버레이와 달리 inverse 면(어두운 배경+밝은 텍스트).",
     "arrow": "미사용 — 둥근 박스만 노출 (화살표/꼬리 없음).",
-    "removable": "핀 고정 툴팁 — hover/focus 이탈로 안 닫히고 esc/외부클릭/명령으로만. 네이티브 프리미티브 없음, 명시 재구현 필요.",
+    "removable": "✕ 노출 전용. hover/focus 이탈·바깥 클릭으로 안 닫힘. 닫기는 ✕ 또는 Esc. open과 직교(상시는 open, hover는 open 미지정).",
     "openStates": "웹은 delayed-open(hover)과 open(controlled) 2속성. 네이티브는 단일 open으로.",
     "z": "raw z-50 (FLAG)."
   }

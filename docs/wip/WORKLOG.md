@@ -5,9 +5,9 @@
 
 ## 오늘 한 일
 
-- **시맨틱 분류** — Background(`canvas`) / Surface(`background`) / Content(`foreground` 위계)로 문서·토큰 분리. 값은 유지, 이름·역할만 정렬
-- **윤곽 rest** — outline·보더 컨트롤 면을 `bg-transparent`로 통일. 다크 `{border-emphasis}/30` 채움 제거 (Chip/Input/Select/Textarea/Checkbox/Radio/Tabs default)
-- Color Semantic ShowcaseBlock 헤더 보조설명 삭제. 역할은 표 Role 컬럼만 유지
+- **Tooltip** — ✕는 `removable`일 때만 노출. `open`은 상시 노출, 미지정은 hover(removable이면 클릭). 바깥 클릭으로 안 닫힘
+- **윤곽 rest** — outline·보더 컨트롤 면을 `bg-transparent`로 통일
+- Color Semantic ShowcaseBlock 헤더 보조설명 삭제
 
 ## 다음에 할 일
 
@@ -24,8 +24,8 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
-- `packages/design-system/src/components/ui/{button,badge,chip,input,select,textarea,checkbox,radio-group,tabs}.tsx`
-- `DESIGN.md` rest 면 원칙 · `src/lib/color-tokens.ts` · `showcase-block.tsx`
+- `packages/design-system/src/components/ui/tooltip.tsx` · `specs/tooltip.spec.json`
+- `src/components/docs/playground-registry.tsx` · `component-showcases.tsx`
 
 ## 메모
 

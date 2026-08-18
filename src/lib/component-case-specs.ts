@@ -580,8 +580,8 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
     slug: "tooltip",
     properties: [
       { name: "side", values: ["top", "right", "bottom", "left"], description: "표시 위치" },
-      { name: "open", values: ["false", "true"], description: "표시 여부 (미리보기 고정)" },
-      { name: "removable", values: ["false", "true"], description: "클릭으로 열고 ✕로 닫기" },
+      { name: "open", values: ["false", "true"], description: "상시 노출 · false면 hover(또는 removable이면 클릭)" },
+      { name: "removable", values: ["false", "true"], description: "✕ 표시 · ✕·Esc로 닫기 · 바깥 클릭으로 안 닫힘" },
     ],
   },
   alert: {

@@ -1618,6 +1618,14 @@ const SHOWCASES: Record<string, ReactNode> = {
             <TooltipContent>짧은 설명</TooltipContent>
           </Tooltip>
         </ComponentCase>
+        <ComponentCase label="open" tags={["open: true"]}>
+          <Tooltip open>
+            <TooltipTrigger render={<Button variant="outline" />}>
+              툴팁
+            </TooltipTrigger>
+            <TooltipContent>상시 노출</TooltipContent>
+          </Tooltip>
+        </ComponentCase>
         <ComponentCase label="removable" tags={["removable: true"]}>
           <Tooltip removable>
             <TooltipTrigger render={<Button variant="outline" />}>

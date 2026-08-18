@@ -1483,29 +1483,24 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     renderPreview: (state, ctx) => {
       const removable = bool(state, "removable")
       const forcedOpen = bool(state, "open")
-      const controlled = removable || forcedOpen
 
       return (
         <TooltipProvider delay={0}>
           <Tooltip
-            key={controlled ? "controlled" : "uncontrolled"}
+            key={`${forcedOpen ? "open" : "auto"}-${removable ? "removable" : "plain"}`}
             removable={removable}
-            {...(controlled
+            {...(forcedOpen
               ? {
-                  open: forcedOpen,
+                  open: true,
                   onOpenChange: (open, details) => {
-                    if (forcedOpen && !open) {
-                      if (
-                        removable &&
-                        (details.reason === "imperative-action" ||
-                          details.reason === "escape-key" ||
-                          details.reason === "outside-press")
-                      ) {
-                        ctx.set("open", false)
-                      }
-                      return
+                    if (
+                      !open &&
+                      removable &&
+                      (details.reason === "imperative-action" ||
+                        details.reason === "escape-key")
+                    ) {
+                      ctx.set("open", false)
                     }
-                    ctx.set("open", open)
                   },
                 }
               : {})}
@@ -1523,8 +1518,9 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     buildCode: (state) => {
       const side = ` side="${str(state, "side")}"`
       const removable = bool(state, "removable")
-      const removableAttr = removable ? " removable" : ""
-      return `<Tooltip${removableAttr}>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "children")}\n  </TooltipContent>\n</Tooltip>`
+      const open = bool(state, "open")
+      const attrs = `${removable ? " removable" : ""}${open ? " open" : ""}`
+      return `<Tooltip${attrs}>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "children")}\n  </TooltipContent>\n</Tooltip>`
     },
   },
 
