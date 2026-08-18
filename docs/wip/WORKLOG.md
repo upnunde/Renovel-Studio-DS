@@ -5,6 +5,8 @@
 
 ## 오늘 한 일
 
+- **Grayscale token** — `grayscale-5`(`#FCFCFF`) 원시 토큰 추가, 그레이스케일 스케일 16단계로 확장
+- **Hover semantic** — 라이트 테마 `hover`(`muted`) 매핑을 `grayscale-5`로 상향 조정
 - **Avatar image** — 이미지 타입에만 `black-opacity-10` inset dim 고정. 모드 전환 영향 없이 유지
 - **Tooltip** — ✕는 `removable`일 때만 노출. `open`은 상시 노출, 미지정은 hover(removable이면 클릭). 바깥 클릭으로 안 닫힘
 - **윤곽 rest** — outline·보더 컨트롤 면을 `bg-transparent`로 통일
@@ -25,6 +27,9 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
+- `packages/design-system/tokens/primitives.json` · `semantic.json`
+- `packages/design-system/src/tokens.css` · `grayscale-colors.ts`
+- `src/lib/semantic-token-sources.ts`
 - `packages/design-system/src/components/ui/avatar.tsx` · `specs/avatar.spec.json`
 - `packages/design-system/src/components/ui/tooltip.tsx` · `specs/tooltip.spec.json`
 - `src/components/docs/playground-registry.tsx` · `component-showcases.tsx`

@@ -7,6 +7,7 @@
   },
   "grayscale": {
     "$type": "color",
+    "5":   { "$value": "#fcfcff" },
     "10":  { "$value": "#f8f8fc" },
     "15":  { "$value": "#f1f4f6" },
     "20":  { "$value": "#e7e7eb" },

@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-18 16:40:50**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-18 17:02:21**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,32 +11,54 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-18 16:39:28** — 방금 작업 취소 화이트 토근 추가한거
+- **2026-08-18 17:01:53** — 커밋 푸시
 
 ## 다음 작업 (Claude Code용)
 
-- Avatar 이미지 딤(`black-opacity-10`)은 커밋·릴리스 대상. 스튜디오는 새 태그 핀 후 확인
+- WORKLOG의 「다음에 할 일」 참고
+- Cursor에서 명시한 후속 작업이 있으면 위 요청 목록 우선
 
 ## Git 상태
 
 - 브랜치: `main`
 
 ```
+ M DESIGN.md
  M docs/wip/HANDOFF.md
+ M docs/wip/WORKLOG.md
  M packages/design-system/specs/avatar.spec.json
- M packages/design-system/src/components/ui/avatar.tsx
+ M packages/design-system/src/grayscale-colors.ts
+ M packages/design-system/src/tokens.css
+ M packages/design-system/tokens/primitives.json
+ M packages/design-system/tokens/semantic.json
+ M src/grayscale-colors.ts
+ M src/lib/semantic-token-sources.ts
+ M src/tokens.css
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 40 ++++++++++++----------
- packages/design-system/specs/avatar.spec.json      |  2 +-
- .../design-system/src/components/ui/avatar.tsx     |  2 +-
- 3 files changed, 24 insertions(+), 20 deletions(-)
+ DESIGN.md                                      |  2 +-
+ docs/wip/HANDOFF.md                            | 40 ++++++++++++++++++++------
+ docs/wip/WORKLOG.md                            |  5 ++++
+ packages/design-system/specs/avatar.spec.json  |  2 +-
+ packages/design-system/src/grayscale-colors.ts |  3 +-
+ packages/design-system/src/tokens.css          |  5 ++--
+ packages/design-system/tokens/primitives.json  |  1 +
+ packages/design-system/tokens/semantic.json    |  2 +-
+ src/grayscale-colors.ts                        |  3 +-
+ src/lib/semantic-token-sources.ts              |  2 +-
+ src/tokens.css                                 |  5 ++--
+ 11 files changed, 51 insertions(+), 19 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
 
 
 
@@ -584,5 +606,5 @@
 
 ## 다음 작업 (Cursor용)
 
-- 리노벨 스튜디오: 구 시맨틱 클래스 대체. Avatar 이미지 타입은 고정 dim 유지 확인
+- (Claude Code가 Cursor 에이전트에 넘길 일이 있으면 여기 기록)
 

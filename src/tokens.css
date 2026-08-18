@@ -48,7 +48,8 @@
   --space-16: 4rem;
   --space-20: 5rem;
 
-  /* Grayscale scale — 쿨 블루 틴트 · #F8F8FC (10) → #121213 (150) · 흰 표면은 --white */
+  /* Grayscale scale — 쿨 블루 틴트 · #FCFCFF (5) → #121213 (150) · 흰 표면은 --white */
+  --grayscale-5: #fcfcff;
   --grayscale-10: #f8f8fc;
   --grayscale-15: #f1f4f6;
   --grayscale-20: #e7e7eb;
@@ -186,7 +187,7 @@
    */
   --secondary: var(--grayscale-15);
   --secondary-foreground: var(--grayscale-140);
-  --muted: var(--grayscale-15);
+  --muted: var(--grayscale-5);
   --muted-foreground: var(--grayscale-90);
   --muted-strong: var(--grayscale-20);
   --muted-strong-foreground: var(--grayscale-140);
