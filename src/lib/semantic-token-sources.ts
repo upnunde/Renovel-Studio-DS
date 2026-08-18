@@ -23,7 +23,7 @@ const LIGHT: Record<string, string> = {
   "--secondary-container-foreground": "white",
   "--muted-low": "grayscale-5",
   "--muted-low-foreground": "grayscale-90",
-  "--muted": "grayscale-10",
+  "--muted": "grayscale-15",
   "--muted-foreground": "grayscale-90",
   "--muted-strong": "grayscale-20",
   "--muted-strong-foreground": "grayscale-140",

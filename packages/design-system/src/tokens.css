@@ -204,7 +204,7 @@
   --accent-foreground: var(--brand-600);
   --muted-low: var(--grayscale-5);
   --muted-low-foreground: var(--grayscale-90);
-  --muted: var(--grayscale-10);
+  --muted: var(--grayscale-15);
   --muted-foreground: var(--grayscale-90);
   --muted-strong: var(--grayscale-20);
   --muted-strong-foreground: var(--grayscale-140);

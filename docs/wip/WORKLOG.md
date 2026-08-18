@@ -6,7 +6,7 @@
 ## 오늘 한 일
 
 - **Grayscale token** — `grayscale-5`(`#FCFCFF`) 원시 토큰 추가, 그레이스케일 스케일 16단계로 확장
-- **Hover semantic** — 기존 `hover`/`hover variant` 매핑은 유지하고, `muted-low` / `muted-low-foreground` 저강도 hover 토큰 추가
+- **Hover semantic** — `muted-low` / `muted-low-foreground` 저강도 hover 토큰 추가, 기본 `hover`(`muted`)는 `grayscale-15`로 조정
 - **Avatar image** — 이미지 타입에만 `black-opacity-10` inset dim 고정. 모드 전환 영향 없이 유지
 - **Tooltip** — ✕는 `removable`일 때만 노출. `open`은 상시 노출, 미지정은 hover(removable이면 클릭). 바깥 클릭으로 안 닫힘
 - **윤곽 rest** — outline·보더 컨트롤 면을 `bg-transparent`로 통일
