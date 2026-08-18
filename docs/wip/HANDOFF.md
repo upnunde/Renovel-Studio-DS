@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-18 15:14:27**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-18 16:40:50**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,13 +11,11 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-18 15:12:22** — 툴팁컴포넌트는 
-1. removable 활성화 되어야 x가 노출되어야 해.
-2. 상황에 따라 상시 노출일 수도 있고 호버했을 때 노출이 될 수도 있어.
+- **2026-08-18 16:39:28** — 방금 작업 취소 화이트 토근 추가한거
 
 ## 다음 작업 (Claude Code용)
 
-- Tooltip open/removable 직교는 커밋·릴리스 대상. 스튜디오는 새 태그 핀 후 확인
+- Avatar 이미지 딤(`black-opacity-10`)은 커밋·릴리스 대상. 스튜디오는 새 태그 핀 후 확인
 
 ## Git 상태
 
@@ -25,26 +23,23 @@
 
 ```
  M docs/wip/HANDOFF.md
- M packages/design-system/specs/tooltip.spec.json
- M packages/design-system/src/components/ui/tooltip.tsx
- M src/components/docs/component-showcases.tsx
- M src/components/docs/playground-registry.tsx
- M src/lib/component-case-specs.ts
+ M packages/design-system/specs/avatar.spec.json
+ M packages/design-system/src/components/ui/avatar.tsx
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 73 ++++++----------------
- packages/design-system/specs/tooltip.spec.json     |  4 +-
- .../design-system/src/components/ui/tooltip.tsx    | 25 ++++----
- src/components/docs/component-showcases.tsx        |  8 +++
- src/components/docs/playground-registry.tsx        | 30 ++++-----
- src/lib/component-case-specs.ts                    |  4 +-
- 6 files changed, 57 insertions(+), 87 deletions(-)
+ docs/wip/HANDOFF.md                                | 40 ++++++++++++----------
+ packages/design-system/specs/avatar.spec.json      |  2 +-
+ .../design-system/src/components/ui/avatar.tsx     |  2 +-
+ 3 files changed, 24 insertions(+), 20 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
 
 
 
@@ -589,5 +584,5 @@
 
 ## 다음 작업 (Cursor용)
 
-- 리노벨 스튜디오: 구 시맨틱 클래스 대체. Tooltip은 removable일 때만 ✕, open은 상시 노출
+- 리노벨 스튜디오: 구 시맨틱 클래스 대체. Avatar 이미지 타입은 고정 dim 유지 확인
 

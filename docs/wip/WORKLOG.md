@@ -5,6 +5,7 @@
 
 ## 오늘 한 일
 
+- **Avatar image** — 이미지 타입에만 `black-opacity-10` inset dim 고정. 모드 전환 영향 없이 유지
 - **Tooltip** — ✕는 `removable`일 때만 노출. `open`은 상시 노출, 미지정은 hover(removable이면 클릭). 바깥 클릭으로 안 닫힘
 - **윤곽 rest** — outline·보더 컨트롤 면을 `bg-transparent`로 통일
 - Color Semantic ShowcaseBlock 헤더 보조설명 삭제
@@ -24,6 +25,7 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
+- `packages/design-system/src/components/ui/avatar.tsx` · `specs/avatar.spec.json`
 - `packages/design-system/src/components/ui/tooltip.tsx` · `specs/tooltip.spec.json`
 - `src/components/docs/playground-registry.tsx` · `component-showcases.tsx`
 
