@@ -23,7 +23,7 @@
   "portal": true,
   "nativeNotes": {
     "portal": "overlay+popup 포털. iOS .sheet/.fullScreenCover, Compose Dialog.",
-    "z": "코드 raw z-50. §2-10 semantic은 z-modal(400). FLAG(_shared 참조).",
+    "z": "overlay=z-overlay(300), content=z-modal(400). 토스트(z-toast 500)만 위.",
     "centering": "웹 transform 센터링. 네이티브는 프레젠테이션 기본 중앙/시트.",
     "a11y": "aria-labelledby/describedby 자동. iOS/AOS 접근성 제목·설명 연결."
   }

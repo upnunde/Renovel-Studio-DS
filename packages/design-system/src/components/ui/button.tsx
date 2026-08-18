@@ -12,14 +12,16 @@ import { uiDisabledInteractive } from "../../lib/ui-disabled"
  * @deprecated status → tone (default→neutral, success|warning|destructive 동일)
  */
 const buttonVariants = cva(
-  `group/button inline-flex shrink-0 items-center justify-center border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledInteractive} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
+  // border-transparent 로 outline과 박스 높이를 맞춘다. 채움은 기본 clip(border-box) —
+  // bg-clip-padding 이면 투명 보더만큼 솔리드가 작아 보인다.
+  `group/button inline-flex shrink-0 items-center justify-center border border-transparent text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledInteractive} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
   {
     variants: {
       variant: {
         /** solid CTA — 색은 tone */
         default: "",
         secondary: "",
-        outline: "bg-transparent",
+        outline: "bg-transparent bg-clip-padding",
         ghost: "",
         link: "underline underline-offset-4",
         /** @deprecated default + tone=brand 로 해석 */

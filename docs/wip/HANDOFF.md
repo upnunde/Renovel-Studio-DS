@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-18 17:41:41**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-18 18:03:03**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-18 17:40:55** — 변경내용 v0.1.39 버전으로 재업로드 해줘
+- (최근 Cursor 요청 없음)
 
 ## 다음 작업 (Claude Code용)
 
@@ -24,28 +24,32 @@
 
 ```
  M docs/wip/HANDOFF.md
+ M docs/wip/WORKLOG.md
+ M packages/design-system/specs/button.spec.json
+ M packages/design-system/specs/dialog.spec.json
+ M packages/design-system/src/components/ui/button.tsx
  M packages/design-system/src/components/ui/dialog.tsx
- M src/components/docs/component-playground.tsx
- M src/components/docs/dialog-footer-actions.tsx
- M src/components/docs/playground-registry.tsx
- M src/components/docs/playground-utils.ts
  M src/components/ui/dialog.tsx
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 26 +++++++++++++++-------
- .../design-system/src/components/ui/dialog.tsx     |  2 +-
- src/components/docs/component-playground.tsx       | 13 +++++++++++
- src/components/docs/dialog-footer-actions.tsx      | 10 ++++++++-
- src/components/docs/playground-registry.tsx        |  4 +++-
- src/components/docs/playground-utils.ts            |  4 +++-
- src/components/ui/dialog.tsx                       |  2 +-
- 7 files changed, 48 insertions(+), 13 deletions(-)
+ docs/wip/HANDOFF.md                                | 31 ++++++++++++----------
+ docs/wip/WORKLOG.md                                |  3 +++
+ packages/design-system/specs/button.spec.json      |  5 ++++
+ packages/design-system/specs/dialog.spec.json      |  2 +-
+ .../design-system/src/components/ui/button.tsx     |  6 +++--
+ .../design-system/src/components/ui/dialog.tsx     |  4 +--
+ src/components/ui/dialog.tsx                       |  4 +--
+ 7 files changed, 34 insertions(+), 21 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
 
 
 

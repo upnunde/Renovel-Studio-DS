@@ -5,6 +5,8 @@
 
 ## 오늘 한 일
 
+- **Button 시각 높이** — 솔리드가 `bg-clip-padding`+투명 보더 때문에 outline보다 2px 작아 보이던 문제 수정. 채움은 border-box, outline만 padding-box
+- **Dialog z-index** — `z-50` → overlay `z-overlay`(300), content `z-modal`(400). 앱 sticky/overlay 위로, 토스트만 위
 - **Grayscale token** — `grayscale-5`(`#FCFCFF`) 원시 토큰 추가, 그레이스케일 스케일 16단계로 확장
 - **Hover semantic** — `muted-low` / `muted-low-foreground` 저강도 hover 토큰 추가, 기본 `hover`(`muted`)는 `grayscale-15`로 조정
 - **Dialog title** — `DialogTitle` 타이포를 `text-heading4_700`으로 상향
@@ -33,6 +35,7 @@
 - `packages/design-system/tokens/primitives.json` · `semantic.json`
 - `packages/design-system/src/tokens.css` · `theme.css`
 - `src/lib/semantic-token-sources.ts` · `color-tokens.ts` · `playground-snippet.ts`
+- `packages/design-system/src/components/ui/button.tsx` · `specs/button.spec.json`
 - `packages/design-system/src/components/ui/dialog.tsx`
 - `packages/design-system/src/components/ui/avatar.tsx` · `specs/avatar.spec.json`
 - `packages/design-system/src/components/ui/tooltip.tsx` · `specs/tooltip.spec.json`
