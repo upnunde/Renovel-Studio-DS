@@ -1,6 +1,6 @@
 /**
  * 그레이스케일 컬러 스케일 정본
- * 기준: grayscale-10 #F8F8FC → grayscale-150 #121213 (흰 표면은 absolute --white)
+ * 기준: grayscale-5 #FCFCFF → grayscale-150 #121213 (흰 표면은 absolute --white)
  * R=G 동일 luminance + B 채널에 은은한 쿨 블루 오프셋 (#F1F4F6 패턴)
  * tokens.css · color-tokens.ts 와 동기화
  */
@@ -15,6 +15,7 @@ export type GrayscaleStep = {
 }
 
 export const GRAYSCALE_SCALE: GrayscaleStep[] = [
+  { name: "grayscale-5", variable: "--grayscale-5", hex: "#FCFCFF", role: "가장 밝은 배경 베이스" },
   { name: "grayscale-10", variable: "--grayscale-10", hex: "#F8F8FC", role: "은은한 배경 틴트 · muted" },
   { name: "grayscale-15", variable: "--grayscale-15", hex: "#F1F4F6", role: "border · divider · canvas-muted (라이트)" },
   { name: "grayscale-20", variable: "--grayscale-20", hex: "#E7E7EB", role: "border-emphasis · 컨트롤 윤곽" },
