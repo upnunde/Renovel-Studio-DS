@@ -90,7 +90,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-const dialogTitleClass = "text-heading5_500"
+const dialogTitleClass = "text-heading4_700"
 
 const dialogDescriptionClass =
   "text-sm text-foreground-muted *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground *:[a[data-hovered=true]]:text-foreground"

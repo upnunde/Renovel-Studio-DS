@@ -6,6 +6,7 @@ import { Input } from "design-system/ui/input"
 import { Slider } from "design-system/ui/slider"
 import { DocsFilterChips } from "@/components/docs/docs-filter-chips"
 import { getComponentCaseSpec } from "@/lib/component-case-specs"
+import { formatPlaygroundSnippet } from "@/lib/playground-snippet"
 
 import { getPlaygroundEntry } from "./playground-registry"
 import {
@@ -48,7 +49,10 @@ export function ComponentPlayground({ slug }: { slug: string }) {
     setState(mergedInitialState)
   }, [slug, mergedInitialState])
 
-  const code = useMemo(() => entry?.buildCode(state) ?? "", [entry, state])
+  const code = useMemo(
+    () => (entry ? formatPlaygroundSnippet(entry.buildCode(state)) : ""),
+    [entry, state]
+  )
 
   if (!entry || !spec) return null
 

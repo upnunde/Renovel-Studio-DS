@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-18 17:17:28**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-18 17:35:49**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,10 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-18 17:16:36** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-10 > section.flex flex-col gap-5[4] > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > table.w-full table-fixed border-collap.e text-left text-.m leading-5 min-w-[40rem] > tbody > tr.border-b border-border/60 la.t:border-0[2] > td.px-5 py-5 align-middle[1]
-Position: top=617px, left=454px, width=192px, height=81px
-React Component: DocsTableTd
-HTML Element: <td class="px-5 py-5 align-middle" data-cursor-element-id="cursor-el-31">hover</td> 호버 컬러토근을 	grayscale-15로 변경
+- **2026-08-18 17:35:25** — 커밋 깃푸시
 
 ## 다음 작업 (Claude Code용)
 
@@ -28,23 +25,29 @@ HTML Element: <td class="px-5 py-5 align-middle" data-cursor-element-id="cursor-
 ```
  M docs/wip/HANDOFF.md
  M docs/wip/WORKLOG.md
- M packages/design-system/src/tokens.css
- M packages/design-system/tokens/semantic.json
- M src/lib/semantic-token-sources.ts
+ M packages/design-system/src/components/ui/dialog.tsx
+ M src/components/docs/component-playground.tsx
+ M src/components/ui/dialog.tsx
+?? src/lib/playground-snippet.ts
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                         | 26 +++++---------------------
- docs/wip/WORKLOG.md                         |  2 +-
- packages/design-system/src/tokens.css       |  2 +-
- packages/design-system/tokens/semantic.json |  2 +-
- src/lib/semantic-token-sources.ts           |  2 +-
- 5 files changed, 9 insertions(+), 25 deletions(-)
+ docs/wip/HANDOFF.md                                | 30 +++++++++++-----------
+ docs/wip/WORKLOG.md                                |  2 ++
+ .../design-system/src/components/ui/dialog.tsx     |  2 +-
+ src/components/docs/component-playground.tsx       |  6 ++++-
+ src/components/ui/dialog.tsx                       |  2 +-
+ 5 files changed, 24 insertions(+), 18 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
 
 
 

@@ -7,6 +7,8 @@
 
 - **Grayscale token** — `grayscale-5`(`#FCFCFF`) 원시 토큰 추가, 그레이스케일 스케일 16단계로 확장
 - **Hover semantic** — `muted-low` / `muted-low-foreground` 저강도 hover 토큰 추가, 기본 `hover`(`muted`)는 `grayscale-15`로 조정
+- **Dialog title** — `DialogTitle` 타이포를 `text-heading4_700`으로 상향
+- **Playground Code** — 복사 시 `design-system/ui/*` import가 붙는 스튜디오 붙여넣기용 스니펫(`playground-snippet.ts`) 적용
 - **Avatar image** — 이미지 타입에만 `black-opacity-10` inset dim 고정. 모드 전환 영향 없이 유지
 - **Tooltip** — ✕는 `removable`일 때만 노출. `open`은 상시 노출, 미지정은 hover(removable이면 클릭). 바깥 클릭으로 안 닫힘
 - **윤곽 rest** — outline·보더 컨트롤 면을 `bg-transparent`로 통일
@@ -29,7 +31,8 @@
 - 브랜치: `main`
 - `packages/design-system/tokens/primitives.json` · `semantic.json`
 - `packages/design-system/src/tokens.css` · `theme.css`
-- `src/lib/semantic-token-sources.ts` · `color-tokens.ts`
+- `src/lib/semantic-token-sources.ts` · `color-tokens.ts` · `playground-snippet.ts`
+- `packages/design-system/src/components/ui/dialog.tsx`
 - `packages/design-system/src/components/ui/avatar.tsx` · `specs/avatar.spec.json`
 - `packages/design-system/src/components/ui/tooltip.tsx` · `specs/tooltip.spec.json`
 - `src/components/docs/playground-registry.tsx` · `component-showcases.tsx`
