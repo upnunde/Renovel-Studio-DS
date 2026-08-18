@@ -14,7 +14,7 @@
   "styleSpec": {
     "track": {
       "checked": { "bg": "{primary}" },
-      "unchecked": { "bg": "{input}", "dark": { "bg": "{input}/80" } },
+      "unchecked": { "bg": "{border-emphasis}", "dark": { "bg": "{border-emphasis}/80" } },
       "focus": { "ring": "{ring}/50", "ringWidth": 3 },
       "invalid": { "ring": "{destructive}/20", "dark": { "ring": "{destructive}/40" } },
       "disabledUnchecked": { "bg": "{disabled}" },

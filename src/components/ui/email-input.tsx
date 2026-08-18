@@ -163,7 +163,7 @@ function EmailInput({
         <ul
           id={listId}
           role="listbox"
-          className="absolute top-full left-0 z-50 mt-1 max-h-(--available-height) w-full min-w-32 overflow-x-hidden overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-none"
+          className="absolute top-full left-0 z-50 mt-1 max-h-(--available-height) w-full min-w-32 overflow-x-hidden overflow-y-auto rounded-lg bg-background p-1 text-foreground shadow-md ring-1 ring-foreground/10 outline-none"
         >
           {suggestions.map((domain, index) => (
             <li

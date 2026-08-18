@@ -18,7 +18,7 @@
   "base": { "fontWeight": 500, "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 }, "invalid": { "border": "{destructive}", "ring": "{destructive}/20", "dark": { "ring": "{destructive}/40" } } },
   "styleSpec": {
     "default": { "rest": { "bg": "transparent" }, "hover": { "bg": "{muted}", "fg": "{foreground}" }, "pressed": { "bg": "{accent}", "fg": "{accent-foreground}" } },
-    "outline": { "rest": { "bg": "transparent", "border": "{input}" }, "hover": { "bg": "{muted}", "fg": "{foreground}" }, "pressed": { "bg": "{accent}", "fg": "{accent-foreground}" } }
+    "outline": { "rest": { "bg": "transparent", "border": "{border-emphasis}" }, "hover": { "bg": "{muted}", "fg": "{foreground}" }, "pressed": { "bg": "{accent}", "fg": "{accent-foreground}" } }
   },
   "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "$ref": "shared.disabledInteractive" },
   "states": ["rest", "hover", "focus", "pressed", "disabled", "invalid"],

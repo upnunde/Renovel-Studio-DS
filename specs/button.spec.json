@@ -69,19 +69,19 @@
     "default/warning":     { "rest": { "bg": "{warning}", "fg": "{warning-foreground}" }, "hover": { "bg": "{warning}/80" }, "focus": { "border": "{warning}/40", "ring": "{warning}/20" } },
     "default/destructive": { "rest": { "bg": "{destructive}", "fg": "{destructive-foreground}" }, "hover": { "bg": "{destructive}/80" }, "focus": { "border": "{destructive}/40", "ring": "{destructive}/20" } },
 
-    "secondary/neutral":     { "rest": { "bg": "{secondary}", "fg": "{secondary-foreground}" }, "hover": { "bg": "{accent}", "fg": "{accent-foreground}" }, "expanded": { "bg": "{accent}", "fg": "{accent-foreground}" } },
+    "secondary/neutral":     { "rest": { "bg": "{background-muted}", "fg": "{foreground}" }, "hover": { "bg": "{muted-strong}", "fg": "{muted-strong-foreground}" }, "expanded": { "bg": "{muted-strong}", "fg": "{muted-strong-foreground}" } },
     "secondary/brand":       { "rest": { "bg": "{primary-container}", "fg": "{primary-container-foreground}" }, "hover": { "bg": "{primary-container}/80" }, "focus": { "border": "{primary}/40", "ring": "{primary}/20" } },
     "secondary/success":     { "rest": { "bg": "{success}/10", "fg": "{success}" }, "hover": { "bg": "{success}/20" }, "focus": { "border": "{success}/40", "ring": "{success}/20" }, "dark": { "rest": { "bg": "{success}/20" }, "hover": { "bg": "{success}/30" } } },
     "secondary/warning":     { "rest": { "bg": "{warning}/15", "fg": "{warning}" }, "hover": { "bg": "{warning}/25" }, "focus": { "border": "{warning}/40", "ring": "{warning}/20" }, "dark": { "rest": { "bg": "{warning}/20" }, "hover": { "bg": "{warning}/30" } } },
     "secondary/destructive": { "rest": { "bg": "{destructive}/10", "fg": "{destructive}" }, "hover": { "bg": "{destructive}/20" }, "focus": { "border": "{destructive}/40", "ring": "{destructive}/20" }, "dark": { "rest": { "bg": "{destructive}/20" }, "hover": { "bg": "{destructive}/30" } } },
 
-    "outline/neutral":     { "rest": { "bg": "transparent", "border": "{border}" }, "hover": { "bg": "{accent}", "fg": "{accent-foreground}" }, "expanded": { "bg": "{accent}", "fg": "{accent-foreground}" }, "dark": { "rest": { "border": "{input}" }, "hover": { "bg": "{accent}" } } },
+    "outline/neutral":     { "rest": { "bg": "transparent", "border": "{border}" }, "hover": { "bg": "{muted}", "fg": "{foreground}" }, "expanded": { "bg": "{muted}", "fg": "{foreground}" }, "dark": { "rest": { "border": "{border-emphasis}" }, "hover": { "bg": "{muted}" } } },
     "outline/brand":       { "rest": { "bg": "transparent", "border": "{primary}/40", "fg": "{primary}" }, "hover": { "bg": "{primary}/10", "fg": "{primary}" }, "focus": { "border": "{primary}/40", "ring": "{primary}/20" } },
     "outline/success":     { "rest": { "bg": "transparent", "border": "{success}/40", "fg": "{success}" }, "hover": { "bg": "{success}/10", "fg": "{success}" }, "focus": { "border": "{success}/40", "ring": "{success}/20" }, "dark": { "hover": { "bg": "{success}/15" } } },
     "outline/warning":     { "rest": { "bg": "transparent", "border": "{warning}/40", "fg": "{warning}" }, "hover": { "bg": "{warning}/15", "fg": "{warning}" }, "focus": { "border": "{warning}/40", "ring": "{warning}/20" }, "dark": { "hover": { "bg": "{warning}/20" } } },
     "outline/destructive": { "rest": { "bg": "transparent", "border": "{destructive}/40", "fg": "{destructive}" }, "hover": { "bg": "{destructive}/10", "fg": "{destructive}" }, "focus": { "border": "{destructive}/40", "ring": "{destructive}/20" }, "dark": { "hover": { "bg": "{destructive}/15" } } },
 
-    "ghost/neutral":     { "rest": {}, "hover": { "bg": "{accent}", "fg": "{accent-foreground}" }, "expanded": { "bg": "{accent}", "fg": "{accent-foreground}" } },
+    "ghost/neutral":     { "rest": {}, "hover": { "bg": "{muted}", "fg": "{foreground}" }, "expanded": { "bg": "{muted}", "fg": "{foreground}" } },
     "ghost/brand":       { "rest": { "fg": "{primary}" }, "hover": { "bg": "{primary}/10", "fg": "{primary}" }, "focus": { "border": "{primary}/40", "ring": "{primary}/20" } },
     "ghost/success":     { "rest": { "bg": "transparent", "fg": "{success}" }, "hover": { "bg": "{success}/10", "fg": "{success}" }, "focus": { "border": "{success}/40", "ring": "{success}/20" } },
     "ghost/warning":     { "rest": { "bg": "transparent", "fg": "{warning}" }, "hover": { "bg": "{warning}/15", "fg": "{warning}" }, "focus": { "border": "{warning}/40", "ring": "{warning}/20" } },

@@ -10,7 +10,7 @@
   "styleSpec": {
     "trigger": {
       "$note": "라벨이 시각 컨트롤 (Input 박스 형태)",
-      "rest": { "bg": "transparent", "border": "{input}", "gap": "{space.2}" },
+      "rest": { "bg": "transparent", "border": "{border-emphasis}", "gap": "{space.2}" },
       "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "$ref": "shared.disabledField" },
       "invalid": { "border": "{destructive}", "ring": "{destructive}/20" },
       "leadingIcon": { "fg": "{foreground}", "iconGlyph": 14 },

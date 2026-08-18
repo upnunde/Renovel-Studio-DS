@@ -78,7 +78,7 @@ const badgeVariants = cva(
         variant: "secondary",
         status: "default",
         class:
-          "bg-secondary text-secondary-foreground [a]:hover:bg-muted [a]:hover:text-foreground [a[data-hovered=true]]:bg-muted [a[data-hovered=true]]:text-foreground",
+          "bg-background-muted text-foreground [a]:hover:bg-muted-strong [a]:hover:text-muted-strong-foreground [a[data-hovered=true]]:bg-muted-strong [a[data-hovered=true]]:text-muted-strong-foreground",
       },
       {
         variant: "secondary",

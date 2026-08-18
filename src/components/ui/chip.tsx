@@ -14,7 +14,7 @@ const chipSelected =
 
 /** soft 솔리드 — 미선택. 선택은 chipSelected(inverse-muted) */
 const chipFillResting =
-  "border-transparent bg-secondary text-secondary-foreground hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground"
+  "border-transparent bg-background-muted text-foreground hover:bg-muted-strong hover:text-muted-strong-foreground data-[hovered=true]:bg-muted-strong data-[hovered=true]:text-muted-strong-foreground"
 
 const chipVariants = cva(
   `group/chip inline-flex min-w-12 shrink-0 items-center justify-center gap-1.5 border text-sm font-medium whitespace-nowrap bg-clip-padding transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledInteractive} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0`,

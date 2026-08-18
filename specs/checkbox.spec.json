@@ -11,7 +11,7 @@
     "md":      { "box": 24, "iconGlyph": 16, "radius": "4" }
   },
   "styleSpec": {
-    "rest": { "border": "{input}", "dark": { "bg": "{input}/30" } },
+    "rest": { "border": "{border-emphasis}", "dark": { "bg": "{border-emphasis}/30" } },
     "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
     "checked": { "border": "{primary}", "bg": "{primary}", "fg": "{primary-foreground}" },
     "disabled": { "border": "{disabled-border}", "bg": "{disabled}", "$ref": "shared.disabledControl" },

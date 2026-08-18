@@ -23,7 +23,7 @@ function Switch({
       data-slot="switch"
       data-size={size}
       className={cn(
-        `peer group/switch relative inline-flex shrink-0 items-center rounded-full p-0.5 transition-all duration-short ease-standard outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 data-checked:bg-primary data-unchecked:bg-input dark:data-unchecked:bg-input/80 ${uiDisabledBlock} data-disabled:data-unchecked:bg-disabled data-disabled:data-checked:bg-primary/40`,
+        `peer group/switch relative inline-flex shrink-0 items-center rounded-full p-0.5 transition-all duration-short ease-standard outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 data-checked:bg-primary data-unchecked:bg-border-emphasis dark:data-unchecked:bg-border-emphasis/80 ${uiDisabledBlock} data-disabled:data-unchecked:bg-disabled data-disabled:data-checked:bg-primary/40`,
         "data-[size=sm]:h-4 data-[size=sm]:w-7",
         "data-[size=default]:h-5 data-[size=default]:w-9",
         "data-[size=md]:h-6 data-[size=md]:w-11",

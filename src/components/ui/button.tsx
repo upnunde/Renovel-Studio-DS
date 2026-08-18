@@ -93,7 +93,7 @@ const buttonVariants = cva(
         variant: "secondary",
         tone: "neutral",
         class:
-          "bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
+          "bg-background-muted text-foreground hover:bg-muted-strong hover:text-muted-strong-foreground data-[hovered=true]:bg-muted-strong data-[hovered=true]:text-muted-strong-foreground aria-expanded:bg-muted-strong aria-expanded:text-muted-strong-foreground",
       },
       {
         variant: "secondary",
@@ -125,7 +125,7 @@ const buttonVariants = cva(
         variant: "outline",
         tone: "neutral",
         class:
-          "border-border bg-transparent hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground dark:border-input dark:hover:bg-accent dark:data-[hovered=true]:bg-accent",
+          "border-border bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-border-emphasis dark:hover:bg-muted dark:data-[hovered=true]:bg-muted",
       },
       {
         variant: "outline",
@@ -157,7 +157,7 @@ const buttonVariants = cva(
         variant: "ghost",
         tone: "neutral",
         class:
-          "hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
+          "hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
       },
       {
         variant: "ghost",
@@ -184,36 +184,36 @@ const buttonVariants = cva(
           "bg-transparent text-destructive hover:bg-destructive/10 hover:text-destructive data-[hovered=true]:bg-destructive/10 data-[hovered=true]:text-destructive focus-visible:border-destructive/40 focus-visible:ring-destructive/20",
       },
 
-      // —— link (텍스트만) ——
+      // —— link (텍스트만) — surface 변화 없이 hover 시 텍스트 색만 darken(/80) ——
       {
         variant: "link",
         tone: "neutral",
         class:
-          "bg-transparent text-primary hover:bg-transparent data-[hovered=true]:bg-transparent",
+          "bg-transparent text-primary hover:bg-transparent hover:text-primary/80 data-[hovered=true]:bg-transparent data-[hovered=true]:text-primary/80",
       },
       {
         variant: "link",
         tone: "brand",
         class:
-          "bg-transparent text-primary hover:bg-transparent data-[hovered=true]:bg-transparent",
+          "bg-transparent text-primary hover:bg-transparent hover:text-primary/80 data-[hovered=true]:bg-transparent data-[hovered=true]:text-primary/80",
       },
       {
         variant: "link",
         tone: "success",
         class:
-          "bg-transparent text-success hover:bg-transparent data-[hovered=true]:bg-transparent",
+          "bg-transparent text-success hover:bg-transparent hover:text-success/80 data-[hovered=true]:bg-transparent data-[hovered=true]:text-success/80",
       },
       {
         variant: "link",
         tone: "warning",
         class:
-          "bg-transparent text-warning hover:bg-transparent data-[hovered=true]:bg-transparent",
+          "bg-transparent text-warning hover:bg-transparent hover:text-warning/80 data-[hovered=true]:bg-transparent data-[hovered=true]:text-warning/80",
       },
       {
         variant: "link",
         tone: "destructive",
         class:
-          "bg-transparent text-destructive hover:bg-transparent data-[hovered=true]:bg-transparent",
+          "bg-transparent text-destructive hover:bg-transparent hover:text-destructive/80 data-[hovered=true]:bg-transparent data-[hovered=true]:text-destructive/80",
       },
     ],
     defaultVariants: {
