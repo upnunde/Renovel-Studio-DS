@@ -54,6 +54,11 @@
   "base": {
     "$description": "모든 조합 공통",
     "border": "1px transparent",
+    "backgroundClip": {
+      "filled": "border-box",
+      "outline": "padding-box",
+      "$note": "모든 size는 1px 보더를 예약해 박스 높이를 맞춘다. 채움은 border-box로 칠해 outline 외곽과 같은 시각 높이가 된다. outline만 padding-box(호버 면이 보더 안)."
+    },
     "fontWeight": 500,
     "transition": { "duration": "{motion-duration.short}", "easing": "{motion-easing.standard}" },
     "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
