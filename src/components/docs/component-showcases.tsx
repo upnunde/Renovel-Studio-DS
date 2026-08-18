@@ -185,12 +185,12 @@ const SHOWCASES: Record<string, ReactNode> = {
 
       <ComponentCaseGroup title="Hover (snapshot)">
         <ComponentCaseGrid columns={3}>
-          <ComponentCase label="outline → accent" tags={["hover", "accent"]}>
+          <ComponentCase label="outline → muted" tags={["hover", "muted"]}>
             <Button variant="outline" data-hovered>
               Label
             </Button>
           </ComponentCase>
-          <ComponentCase label="secondary → accent" tags={["hover", "accent"]}>
+          <ComponentCase label="secondary → muted-strong" tags={["hover", "muted-strong"]}>
             <Button variant="secondary" data-hovered>
               Label
             </Button>

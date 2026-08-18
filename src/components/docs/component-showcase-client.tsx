@@ -5,8 +5,8 @@ import dynamic from "next/dynamic"
 function ComponentShowcaseSkeleton() {
   return (
     <div className="space-y-5">
-      <div className="h-56 animate-pulse rounded-xl border border-border bg-muted/20" />
-      <div className="h-72 animate-pulse rounded-xl border border-border bg-muted/20" />
+      <div className="h-56 animate-pulse rounded-xl border border-border bg-background-muted/20" />
+      <div className="h-72 animate-pulse rounded-xl border border-border bg-background-muted/20" />
     </div>
   )
 }

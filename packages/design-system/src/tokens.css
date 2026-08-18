@@ -166,8 +166,8 @@
   --canvas: var(--white);
   --background: var(--white);
   --foreground: var(--grayscale-140);
-  --card: var(--white);
-  --card-foreground: var(--grayscale-140);
+  --card: var(--background);
+  --card-foreground: var(--foreground);
   --background-muted: var(--grayscale-10);
   --background-muted-foreground: var(--grayscale-140);
   --canvas-muted: var(--grayscale-15);
@@ -185,25 +185,27 @@
   --inverse-muted: var(--grayscale-110);
   --inverse-muted-foreground: var(--white);
 
-  /* Foreground 위계 — 모두 같은 foreground 패밀리, 시각적 위계만 다름
-   * 정책: --{role}-foreground 는 짝 surface 안에서만, 위계만 다른 보조 텍스트·아이콘은 이 토큰들로
-   */
+  /* Foreground 위계 — Background·Surface 공통 Content. Inverse·Primary·Hover는 각 면 페어. */
   --foreground-muted: var(--grayscale-110);
   --foreground-placeholder: var(--grayscale-70);
-  --foreground-disabled: var(--grayscale-60);
+  --foreground-disabled: var(--disabled-foreground);
 
   /* 강조 · 액션 — 브랜드 CTA */
   --primary: var(--brand-500);
   --primary-foreground: var(--white);
 
-  /* 상호작용 — Highlight(브랜드) · Fill(무채색) 역할 분리
-   * accent: 브랜드 호버·포커스·선택  ·  muted: 무채색 호버·크롬  ·  secondary: 보조 액션 기본면(bg = muted)
+  /* 상호작용 — Highlight(브랜드) · Hover(무채색) 역할 분리
+   * accent: 브랜드 선택 하이라이트  ·  muted: 무채색 hover  ·  muted-strong: rest가 hover와 같은 원시값일 때
+   * rest 면은 Surface(`background` / `background-muted`). muted를 rest로 쓰지 않는다.
+   * secondary rest = background-muted 이며 현재 muted와 값이 같아 hover는 muted-strong.
    */
   --accent: var(--brand-50);
   --accent-foreground: var(--brand-600);
   --muted: var(--grayscale-10);
   --muted-foreground: var(--grayscale-90);
-  --secondary: var(--muted);
+  --muted-strong: var(--grayscale-20);
+  --muted-strong-foreground: var(--grayscale-140);
+  --secondary: var(--background-muted);
   --secondary-foreground: var(--grayscale-140);
 
   --destructive: var(--error-500);
@@ -216,9 +218,11 @@
   --info: var(--info-500);
   --info-foreground: var(--white);
 
-  /* UI · 경계 — 라이트: border grayscale-15 · input grayscale-20 */
+  /* UI · 경계 — 라이트: border 15 · emphasis 20 · medium 30 */
   --border: var(--grayscale-15);
-  --input: var(--grayscale-20);
+  --border-emphasis: var(--grayscale-20);
+  --border-medium: var(--grayscale-30);
+  --input: var(--border-emphasis);
   --ring: var(--brand-500);
 
   /* Container 페어 — Material container 패턴을 shadcn 페어 컨벤션으로 흡수 */
@@ -253,8 +257,8 @@
   --shadow-elevation-50: 0px 8px 16px 6px rgba(0, 0, 0, 0.06);
   --shadow-elevation-60: 0px 12px 24px 8px rgba(0, 0, 0, 0.06);
 
-  /* 비활성 — 라이트: 면은 muted alias, 전경·보더는 전용 */
-  --disabled: var(--muted);
+  /* 비활성 — 라이트: 면은 Surface Container alias, 전경·보더는 전용 */
+  --disabled: var(--background-muted);
   --disabled-foreground: var(--grayscale-60);
   --disabled-border: var(--border);
 
@@ -271,8 +275,8 @@
   --canvas: var(--grayscale-150);
   --background: var(--grayscale-140);
   --foreground: var(--grayscale-10);
-  --card: var(--grayscale-140);
-  --card-foreground: var(--grayscale-10);
+  --card: var(--background);
+  --card-foreground: var(--foreground);
   --background-muted: var(--grayscale-130);
   --background-muted-foreground: var(--grayscale-10);
   --canvas-muted: var(--grayscale-150);
@@ -289,7 +293,7 @@
 
   --foreground-muted: var(--grayscale-40);
   --foreground-placeholder: var(--grayscale-80);
-  --foreground-disabled: var(--grayscale-70);
+  --foreground-disabled: var(--disabled-foreground);
 
   --primary: var(--brand-500);
   --primary-foreground: var(--white);
@@ -298,7 +302,9 @@
   --accent-foreground: var(--brand-100);
   --muted: var(--grayscale-130);
   --muted-foreground: var(--grayscale-70);
-  --secondary: var(--muted);
+  --muted-strong: var(--grayscale-120);
+  --muted-strong-foreground: var(--grayscale-10);
+  --secondary: var(--background-muted);
   --secondary-foreground: var(--grayscale-10);
 
   --destructive: var(--error-400);
@@ -312,12 +318,14 @@
   --info-foreground: var(--white);
 
   --border: var(--grayscale-130);
-  --input: var(--grayscale-110);
+  --border-emphasis: var(--grayscale-110);
+  --border-medium: var(--grayscale-120);
+  --input: var(--border-emphasis);
   --ring: var(--brand-400);
 
   --primary-container: var(--brand-800);
   --primary-container-foreground: var(--brand-100);
-  --secondary-container: var(--muted);
+  --secondary-container: var(--background-muted);
   --secondary-container-foreground: var(--white);
   --destructive-container: var(--error-800);
   --destructive-container-foreground: var(--error-100);

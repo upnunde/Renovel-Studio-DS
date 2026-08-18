@@ -37,25 +37,24 @@ Material Design 3의 이론적 토대를 **선택적으로** 흡수한다.
 | **코드** (CSS 변수·Tailwind 클래스·props) | shadcn 유전자 유지 | `--background`, `bg-card`, `text-muted-foreground` |
 | **문서·팔레트 표기** (작업자·디자이너 인지 기준) | **Material 3 역할명** | Surface, Surface Container High, On Surface Variant |
 
-**왜:** shadcn 토큰명(`background`/`card`/`muted`)은 "면의 역할"이 이름만으로 드러나지 않아 작업자가 혼동한다(예: `canvas` vs `background` 중 무엇이 더 바닥인가). M3 역할 어휘(Background < Surface < Surface Container …)는 위계·용도가 명시적이다. 그래서 **코드의 shadcn 유전자는 그대로 두고**, 사람이 읽는 표기 기준만 M3로 통일한다. 색상 시맨틱 문서(`/foundation/color-semantic`)의 **Token (M3)** 컬럼이 이 매핑의 정본이다.
+**왜:** shadcn 토큰명(`background`/`card`/`muted`)은 "면의 역할"이 이름만으로 드러나지 않아 작업자가 혼동한다(예: `canvas` vs `background` 중 무엇이 더 바닥인가). M3 역할 어휘(Background < Surface < Surface Container …)는 위계·용도가 명시적이다. 그래서 **코드의 shadcn 유전자는 그대로 두고**, 사람이 읽는 표기 기준만 M3로 통일한다. 색상 시맨틱 문서(`/foundation/color-semantic`)의 **Token name** 컬럼이 이 매핑의 정본이다.
 
 | M3 개념 | 적용 | 코드 토큰(shadcn) |
 |---------|------|------|
 | Background | ✓ | `--canvas` |
 | Background Container | ✓ | `--canvas-muted` (라이트 grayscale-15 · 다크 grayscale-150) |
-| Surface | ✓ | `--background` |
-| Surface Container | ✓ | `--background-muted` · `--card-muted`(= Surface Container (Card)) |
-| Surface (Card·Popover) | ✓ | `--card` · `--popover` — **값은 `background`와 동일**. 깊이는 surface 틴트가 아니라 `shadow-elevation-*`가 담당(§1-2 "Surface container 5단계 ✗"). 표기는 `Surface (Card)` / `Surface (Popover)`로 역할만 구분 |
-| On Surface | ✓ | `--foreground` · `--background-muted-foreground`(On Surface Container) · `--card-foreground`(On Surface (Card)) 등 면별 `On …` |
-| On Surface Muted · Placeholder · Disabled | ✓ | `--foreground-muted` / `--foreground-placeholder` / `--foreground-disabled` (흐린 위계) |
-| Surface Variant / On Surface Variant | ✓ | `--muted` / `--muted-foreground` (무채색 fill) |
-| Secondary / On Secondary | ✓ | `--secondary` / `--secondary-foreground` (muted alias, 역할 분리) |
+| Surface | ✓ | `--background` (`--card`/`--popover` alias — 깊이는 `shadow-elevation-*`) |
+| Surface Container | ✓ | `--background-muted` (`--card-muted` alias) |
+| On Surface (Content 위계) | ✓ | `--foreground` / `--foreground-muted` / `--foreground-placeholder` — Background·Surface 공통. 면과 1:1 아님 |
+| Hover / On Hover | ✓ | `--muted` / `--muted-foreground` |
+| Hover variant / On Hover variant | ✓ | `--muted-strong` / `--muted-strong-foreground` |
+| Secondary / On Secondary | ✓ | `--secondary` / `--secondary-foreground` (`background-muted` alias — rest 면, hover 아님) |
 | Inverse Surface (+ Container) | ✓ | `--inverse` / `--inverse-muted` + `On Inverse Surface` = `--inverse-foreground` 등 |
 | Primary / On Primary (+ Container) | ✓ | `--primary` / `--primary-foreground` / `--primary-container` |
 | Focus Ring | ✓ | `--ring` (primary 값, 포커스 인디케이터) |
 | Secondary Container (하이라이트) | ✓ | `--accent` (브랜드 틴트) |
 | Error (+ Container) | ✓ | `--destructive` (+ `-container`) |
-| Outline (기본·Strong·Inverse) · Input Outline | ✓ | `--border` / `--border-strong` / `--border-inverse` / `--input` |
+| Outline (기본·Emphasis·Medium·Strong·Inverse) | ✓ | `--border` / `--border-emphasis` / `--border-medium` / `--border-strong` / `--border-inverse` |
 | Outline Variant (+ Strong) | ✓ | `--divider` / `--divider-strong` |
 | Disabled Surface · On Disabled Surface · Disabled Outline | ✓ | `--disabled` / `--disabled-foreground` / `--disabled-border` |
 | Scrim (10·20·30·40) | ✓ | `--dim-10/20/30/40` |
@@ -97,7 +96,9 @@ Material Design 3의 이론적 토대를 **선택적으로** 흡수한다.
 --disabled            / --disabled-foreground
 ```
 
-**`{role}-foreground` 는 짝 `{role}` surface 안에서만 사용한다.** 단독으로 "흐린 텍스트" 용도로 쓰지 않는다.
+**유채색·반전·호버 면의 `{role}-foreground` 는 짝 `{role}` 안에서만 사용한다.** (`primary`/`inverse`/`accent`/`muted`/`disabled` 등). 단독으로 "흐린 텍스트" 용도로 쓰지 않는다.
+
+**중립 Background·Surface는 예외다.** `--canvas` / `--background` / `--background-muted` 위에 올리는 글자·아이콘은 Content 위계(`--foreground` / `--foreground-muted` / `--foreground-placeholder`)를 상황에 따라 고른다. 면마다 전용 On-color를 강제하지 않는다. `--canvas-muted-foreground` · `--background-muted-foreground` 는 `--foreground` 계열 alias이며, 새 작업은 Content 토큰을 쓴다.
 
 ### 2-1a. Action · Interaction 역할
 
@@ -106,34 +107,44 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 | 카테고리 | 토큰 | 역할 |
 |----------|------|------|
 | **Action · Primary** | `primary` / `primary-foreground` | 주 액션 면 (filled CTA) |
-| **Interaction · Highlight · Brand** | `accent` / `accent-foreground` | 브랜드 호버·포커스·선택 (**Button** outline/ghost/secondary) |
-| **Interaction · Fill · Neutral** | `muted` / `muted-foreground` | 무채색 호버·크롬 (chip, tabs, select, menu, badge, toggle 등) |
-| **Interaction · Fill · Neutral** | `secondary` / `secondary-foreground` | 보조 버튼·배지 기본면 — **배경값은 `muted`와 동일**, 컴포넌트 의미만 분리 |
+| **Interaction · Highlight · Brand** | `accent` / `accent-foreground` | 브랜드 톤 자체의 강조 — 선택 상태 전용(Toggle `aria-pressed`). **tone="neutral" 호버에는 쓰지 않는다** |
+| **Hover** | `muted` / `muted-foreground` | hover / on hover — rest가 Surface일 때의 호버 (Tabs, Select, Dropdown, Toggle, **Button** outline/ghost(neutral)) |
+| **Hover variant** | `muted-strong` / `muted-strong-foreground` | hover variant — rest가 Surface Container라 현재 hover와 원시값이 같아 상태가 안 보일 때 (**Button** secondary(neutral), Chip fill, Badge secondary) |
+
+**호버 원칙 (필수):** `tone="neutral"`(또는 톤 구분이 없는 컴포넌트)은 **절대 브랜드색(`accent`/`primary`)으로 호버하지 않는다.** 브랜드·상태 톤이 `tone="brand"`/`"success"`/`"warning"`/`"destructive"` 등으로 **명시된 경우에만** 그 색 자체의 틴트(`/80`, `/10` 등)로 호버한다. hover는 항상 `muted`(rest가 Surface) 또는 `muted-strong`(rest가 Surface Container이고 hover와 값이 같을 때) 중 하나다.
+
+**rest 면 원칙 (필수):** `--muted` / `bg-muted`는 **호버·포커스·열림·키보드 하이라이트**에만 쓴다. 기본 면(rest)에는 Surface 패밀리만 쓴다 (`bg-background`, `bg-background-muted`). 값이 같아도 역할을 섞지 않는다. Surface 2단으로 해결되면 3번째 Surface를 만들지 않는다.
 
 **호버 매핑 (컴포넌트 CVA):**
 
-| 패턴 | 호버 토큰 | 예 |
+| 톤 | 호버 토큰 | 예 |
 |------|-----------|-----|
-| 브랜드 틴트 | `accent` | **Button** outline/ghost/secondary |
-| 무채색 | `muted` | Chip, Tabs, Select, Dropdown, Badge, Toggle |
-| 채움 면 강조 | `primary/80`, `inverse-muted/80` | Button default(neutral), Chip pressed |
-| 위험 | `destructive/20` | destructive variant |
+| hover · rest가 Surface | `muted` | Tabs, Select, Dropdown, Toggle, **Button** outline/ghost(neutral) |
+| hover variant · rest가 Surface Container (값 = hover) | `muted-strong` | **Button** secondary(neutral), Chip fill, Badge secondary |
+| neutral · 채움 면(강한 대비) | `primary/80`, `inverse-muted/80` | Button default(neutral), Chip pressed |
+| brand 선택 상태(호버 아님) | `accent` | Toggle `aria-pressed` |
+| brand tone | `primary/10`, `primary-container/80` | Button */brand |
+| status tone(success/warning/destructive) | `{status}/10`~`/30` | `*`/status variant |
 
-`--hover` 별도 토큰은 없다. 위 시맨틱을 variant별로 선택한다.
+`--hover` 별도 토큰은 없다. 위 원칙에 따라 variant·tone별로 선택한다.
 
 ### 2-1c. 시맨틱 alias (중복 제거)
 
-동일 원시값·역할이 겹치는 토큰은 `tokens.css`에서 **alias**로 단일 원천을 가리킨다. shadcn 클래스명(`bg-secondary`, `bg-popover` 등)은 유지하고, 정본 값은 한 곳만 수정한다.
+동일 원시값·역할이 겹치는 토큰은 `tokens.css`에서 **alias**로 단일 원천을 가리킨다. **컴포넌트는 Color Semantic에 있는 클래스만 쓴다.** `bg-card`/`bg-popover`/`bg-secondary` 등 shadcn 이름은 CSS에만 남겨 호환한다.
 
 | Alias | 가리키는 토큰 | 비고 |
 |-------|---------------|------|
-| `secondary` (면) | `muted` | `secondary-foreground`는 별도 (보조 액션 대비) |
+| `secondary` (면) | `background-muted` | 컴포넌트는 `bg-background-muted` + `text-foreground` (hover 토큰 아님) |
+| `card` | `background` | 컴포넌트는 `bg-background` |
+| `card-foreground` | `foreground` | |
 | `card-muted` | `background-muted` | 카드·페이지 보조 면 통일 |
-| `popover` | `card` | 플로팅 = elevated card |
+| `popover` | `card` → `background` | 컴포넌트는 `bg-background` · 깊이는 elevation |
+| `foreground-disabled` | `disabled-foreground` | 비활성 글자는 State 토큰만 |
 | `divider` (라이트) | `grayscale-15` | `border`와 동일 — 구분선 전용 |
-| `disabled` (면, 라이트) | `muted` | 다크는 전용 grayscale |
+| `disabled` (면, 라이트) | `background-muted` | 다크는 전용 grayscale |
 | `disabled-border` (라이트) | `border` | |
-| `secondary-container` (다크) | `muted` | 컴포넌트 미사용, API만 유지 |
+| `secondary-container` (다크) | `background-muted` | 컴포넌트 미사용, API만 유지 |
+| `input` | `border-emphasis` | shadcn 호환 — 컴포넌트는 `border-border-emphasis` |
 
 문서 Color Semantic 페이지의 **Maps to** 컬럼은 최종 원시 컬러 토큰명만 표시한다 (`white`, `grayscale-15` 등). alias 체인은 코드에만 둔다.
 
@@ -162,23 +173,23 @@ className="hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted dat
 2. 스냅샷에서 임의 색상 클래스(`bg-*`)로 직접 덮지 말고, 각 컴포넌트의 `data-[hovered=true]`를 사용한다.
 3. 포인터 hover가 아닌 리스트/메뉴 항목은 기존 `focus:*` 유지 + 필요 시 `data-[hovered=true]:*`를 동일 매핑한다.
 
-### 2-2. Foreground 위계 (단독 사용 가능)
+### 2-2. Background · Surface · Content
 
-본문보다 흐린 텍스트가 일반 surface 위에 놓일 때 사용. 모두 같은 foreground 패밀리이며 시각적 위계만 다르다.
+색상 시맨틱 문서는 면을 **Background**와 **Surface**로 나누고, 그 위 글자·아이콘은 **Content**로 분리한다. Hover·Inverse·Primary 등 기존 페어 규칙은 그대로다.
+
+- **Background** — 브라우저·앱 바닥: `--canvas` / `--canvas-muted`. 카드·모달이 아님.
+- **Surface** — Background 위 컨테이너: `--background` / `--background-muted` (`--card`/`--popover`/`--card-muted`는 alias, 깊이는 elevation). Inverse 면은 기존 페어 유지.
+- **Content** — Background와 Surface **둘 다** 위에 쓰는 글자 위계. 면과 1:1이 아니다.
 
 ```css
---foreground           /* 본문 (grayscale-140) — On Surface */
---foreground-muted     /* 보조 텍스트·아이콘 (grayscale-110) */
---foreground-placeholder  /* input placeholder (grayscale-70) */
---foreground-disabled  /* 비활성 텍스트 (grayscale-60) */
+--foreground              /* 주요 (grayscale-140) */
+--foreground-muted        /* 본문·보조 (grayscale-110) */
+--foreground-placeholder  /* 캡션·힌트 (grayscale-70) — Input 전용 아님 */
 ```
 
-**문서 분류: 면과 텍스트를 별도 카테고리로 나눈다.** 색상 시맨틱 문서(`/foundation/color-semantic`)는 M3 레퍼런스처럼 **Surface(면)** 와 **On Surface(텍스트)** 를 동급 카테고리로 분리한다. 두 카테고리 모두 Base / Elevated / Inverse 동일 서브그룹으로 대칭 구성한다.
+같은 Surface(또는 Background) 위에서 상황에 따라 고른다. 예: `bg-background text-foreground-muted`.
 
-- **Surface(면)** — `canvas`/`canvas-muted`/`background`/`background-muted` · `card`/`popover`/`card-muted` · `inverse`/`inverse-muted`
-- **On Surface(텍스트)** — `foreground`(본문 기준점)·`canvas-muted-foreground`·`background-muted-foreground`·흐린 위계(`-muted`/`-placeholder`/`-disabled`) · `card-foreground`/`popover-foreground`/`card-muted-foreground` · `inverse-foreground`/`inverse-muted-foreground`
-
-`--foreground`는 이 패밀리의 값 기준점(본문)이자 `background`·`canvas`의 On-color다 — background에 전용 `-foreground`가 없어 공용으로 빌려 쓴다. **면↔텍스트 페어 관계는 각 토큰 `role`이 설명하고, 분류는 역할 타입(면/텍스트)으로 한다.** 브랜드·상태 색(primary/secondary/error 등)은 이 규칙과 무관하게 기존 인라인 페어(면+On-color+container)를 유지한다.
+비활성 글자·면은 State `--disabled-foreground`만 쓴다 (`--foreground-disabled`는 그 alias). Inverse·Primary·Accent·Hover 위 글자는 각 면의 `{role}-foreground`를 쓴다. Content를 올리지 않는다.
 
 **아이콘과 텍스트는 같은 토큰을 사용한다.** surface 위에 올라가는 점이 같으므로 분리하지 않음. `--icon-*` 별도 없음.
 
@@ -393,13 +404,17 @@ text-caption{1..2}_{700|500|400}   (caption)
 - `--dim-20` — 모달 배경
 - `--dim-30` — 이미지 위 텍스트 보호
 
+**Border 위계 (범용 윤곽 — 폼 전용 토큰 없음):**
+- `--border` — 기본 보더 (카드·레이아웃)
+- `--border-emphasis` — 인터랙티브·컨트롤 윤곽 (Input·Select·Checkbox 등)
+- `--border-medium` — emphasis와 strong 사이 중간 강조
+- `--border-strong` — 강한 보더
+- `--border-inverse` — 반전 표면 위 보더
+- `--input` — shadcn 호환 alias → `--border-emphasis` (컴포넌트는 `border-border-emphasis` 사용)
+
 **Divider (시각적 분리선 — border와 분리):**
 - `--divider` — 약한 분리선
 - `--divider-strong` — 강한 분리선
-
-**Border 강조·반전:**
-- `--border-strong` — 강한 보더
-- `--border-inverse` — 반전 표면 위 보더
 
 ### 2-10. Z-Index
 

@@ -40,7 +40,7 @@ function PreviewColorSemantic() {
       <span className="rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-primary-foreground">
         Primary
       </span>
-      <span className="rounded-md bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground">
+      <span className="rounded-md bg-background-muted px-2.5 py-1 text-xs font-medium text-foreground">
         Secondary
       </span>
       <span className="rounded-md bg-destructive-container px-2.5 py-1 text-xs font-medium text-destructive-container-foreground">
@@ -72,8 +72,8 @@ function PreviewSpacingSemantic() {
         <div className="flex items-center gap-2">
           <span className="text-caption1_500 text-foreground-muted">gap</span>
           <div className="flex flex-1 gap-2">
-            <span className="h-6 flex-1 rounded-md bg-muted" />
-            <span className="h-6 flex-1 rounded-md bg-muted" />
+            <span className="h-6 flex-1 rounded-md bg-background-muted" />
+            <span className="h-6 flex-1 rounded-md bg-background-muted" />
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -110,10 +110,10 @@ function PreviewIcons() {
 function PreviewRadius() {
   return (
     <div className={cn(previewShell, "gap-3")}>
-      <span className="size-10 rounded-none border border-border bg-muted" aria-hidden />
-      <span className="size-10 rounded-md border border-border bg-muted" aria-hidden />
-      <span className="size-10 rounded-xl border border-border bg-muted" aria-hidden />
-      <span className="size-10 rounded-full border border-border bg-muted" aria-hidden />
+      <span className="size-10 rounded-none border border-border bg-background-muted" aria-hidden />
+      <span className="size-10 rounded-md border border-border bg-background-muted" aria-hidden />
+      <span className="size-10 rounded-xl border border-border bg-background-muted" aria-hidden />
+      <span className="size-10 rounded-full border border-border bg-background-muted" aria-hidden />
     </div>
   )
 }
@@ -122,15 +122,15 @@ function PreviewElevation() {
   return (
     <div className={cn(previewShell, "gap-3")}>
       <span
-        className="size-10 rounded-lg border border-border bg-card shadow-elevation-10"
+        className="size-10 rounded-lg border border-border bg-background shadow-elevation-10"
         aria-hidden
       />
       <span
-        className="size-10 rounded-lg border border-border bg-card shadow-elevation-30"
+        className="size-10 rounded-lg border border-border bg-background shadow-elevation-30"
         aria-hidden
       />
       <span
-        className="size-10 rounded-lg border border-border bg-card shadow-elevation-50"
+        className="size-10 rounded-lg border border-border bg-background shadow-elevation-50"
         aria-hidden
       />
     </div>
@@ -143,7 +143,7 @@ function PreviewMotion() {
       <span className="size-3 rounded-full bg-primary animate-pulse" aria-hidden />
       <div className="flex flex-col gap-1">
         <span className="text-caption1_500 text-foreground">short · medium · long</span>
-        <span className="h-1.5 w-28 overflow-hidden rounded-full bg-muted">
+        <span className="h-1.5 w-28 overflow-hidden rounded-full bg-background-muted">
           <span className="block h-full w-2/3 rounded-full bg-primary/80" />
         </span>
       </div>

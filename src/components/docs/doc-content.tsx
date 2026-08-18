@@ -63,12 +63,12 @@ export function DocGuidelines({
 }) {
   return (
     <div className={cn("grid lg:grid-cols-2", docsSpace.gap)}>
-      <div className={cn("rounded-xl border border-border bg-card", docsSpace.pad)}>
+      <div className={cn("rounded-xl border border-border bg-background", docsSpace.pad)}>
         <p className={cn(docsSpace.headerBottom, docsType.groupLabel)}>When to use</p>
         <DocBulletList items={whenToUse} />
       </div>
       {whenNotToUse && whenNotToUse.length > 0 ? (
-        <div className={cn("rounded-xl border border-border bg-card", docsSpace.pad)}>
+        <div className={cn("rounded-xl border border-border bg-background", docsSpace.pad)}>
           <p className={cn(docsSpace.headerBottom, docsType.groupLabel)}>When not to use</p>
           <DocBulletList items={whenNotToUse} />
         </div>
@@ -94,7 +94,7 @@ export function DocCallout({
         docsType.body,
         variant === "tip"
           ? "border-brand-200 bg-brand-50 text-foreground/90 dark:border-brand-800 dark:bg-brand-950/40"
-          : "border-border bg-muted/30 text-foreground/90"
+          : "border-border bg-background-muted/30 text-foreground/90"
       )}
     >
       {title ? <p className="mb-1 font-medium">{title}</p> : null}
@@ -115,7 +115,7 @@ export function DocCardGrid({
           key={item.href}
           href={item.href}
           className={cn(
-            "group rounded-xl border border-border bg-card transition-colors hover:bg-accent/50 data-[hovered=true]:bg-accent/50",
+            "group rounded-xl border border-border bg-background transition-colors hover:bg-accent/50 data-[hovered=true]:bg-accent/50",
             docsSpace.pad
           )}
         >
@@ -151,7 +151,7 @@ export function DocRelatedLinks({
         <Link
           key={item.href}
           href={item.href}
-          className="rounded-md border border-border bg-muted/30 px-2 py-0.5 font-mono text-sm hover:bg-accent data-[hovered=true]:bg-accent"
+          className="rounded-md border border-border bg-background-muted/30 px-2 py-0.5 font-mono text-sm hover:bg-accent data-[hovered=true]:bg-accent"
         >
           {item.title}
         </Link>

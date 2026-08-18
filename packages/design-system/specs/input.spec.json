@@ -14,7 +14,7 @@
   },
   "styleSpec": {
     "control": {
-      "rest": { "bg": "transparent", "border": "{input}", "fg": "{foreground}", "dark": { "bg": "{input}/30" } },
+      "rest": { "bg": "transparent", "border": "{border-emphasis}", "fg": "{foreground}", "dark": { "bg": "{border-emphasis}/30" } },
       "placeholder": { "fg": "{foreground-placeholder}" },
       "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
       "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "placeholder": "{foreground-disabled}", "$ref": "shared.disabledField" },

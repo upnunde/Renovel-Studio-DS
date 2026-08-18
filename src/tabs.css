@@ -20,7 +20,7 @@
   font-size: 14px;
   line-height: 20px;
   font-weight: 700;
-  color: var(--foreground-disabled);
+  color: var(--disabled-foreground);
 }
 
 [data-slot="tabs-list"][data-variant="line"][data-size="sm"]
@@ -42,7 +42,7 @@
   font-size: 15px;
   line-height: 22px;
   font-weight: 700;
-  color: var(--foreground-disabled);
+  color: var(--disabled-foreground);
 }
 
 [data-slot="tabs-list"][data-variant="line"][data-size="default"]
@@ -64,7 +64,7 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
-  color: var(--foreground-disabled);
+  color: var(--disabled-foreground);
 }
 
 [data-slot="tabs-list"][data-variant="line"][data-size="xl"]
@@ -86,7 +86,7 @@
   font-size: 20px;
   line-height: 28px;
   font-weight: 700;
-  color: var(--foreground-disabled);
+  color: var(--disabled-foreground);
 }
 
 [data-slot="tabs-list"][data-variant="line"][data-size="2xl"]

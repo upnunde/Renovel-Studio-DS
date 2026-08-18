@@ -26,9 +26,9 @@ export function ShowcaseBlock({
   headingId?: string
 }) {
   return (
-    <section className="overflow-hidden rounded-xl border border-border bg-card">
+    <section className="overflow-hidden rounded-xl border border-border bg-background">
       {name || description ? (
-        <div className={cn("border-b bg-muted/30", docsSpace.cardHeader)}>
+        <div className={cn("border-b bg-background-muted/30", docsSpace.cardHeader)}>
           {name ? (
             <Heading
               id={headingId ?? (name ? docsTocId(name) : undefined)}

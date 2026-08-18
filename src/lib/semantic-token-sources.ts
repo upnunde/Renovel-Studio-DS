@@ -4,28 +4,27 @@ const LIGHT: Record<string, string> = {
   "--canvas-muted": "grayscale-15",
   "--background": "white",
   "--foreground": "grayscale-140",
-  "--card": "white",
-  "--card-foreground": "grayscale-140",
   "--background-muted": "grayscale-10",
   "--background-muted-foreground": "grayscale-140",
-  // --card-muted / --popover 계열: ALIAS_LIGHT 체인으로 해석 — 여기 중복 선언 안 함
+  // --card / --card-muted / --popover 계열: ALIAS_LIGHT 체인으로 해석 — 여기 중복 선언 안 함
   "--inverse": "grayscale-130",
   "--inverse-foreground": "white",
   "--inverse-muted": "grayscale-110",
   "--inverse-muted-foreground": "white",
   "--foreground-muted": "grayscale-110",
   "--foreground-placeholder": "grayscale-70",
-  "--foreground-disabled": "grayscale-60",
   "--primary": "brand-500",
   "--primary-foreground": "white",
   "--primary-container": "brand-100",
   "--primary-container-foreground": "brand-500",
-  // --secondary: ALIAS_LIGHT 체인(--muted) 으로 해석 — 중복 선언 안 함
+  // --secondary: ALIAS_LIGHT 체인(--background-muted) 으로 해석 — 중복 선언 안 함
   "--secondary-foreground": "grayscale-140",
   "--secondary-container": "grayscale-110",
   "--secondary-container-foreground": "white",
   "--muted": "grayscale-10",
   "--muted-foreground": "grayscale-90",
+  "--muted-strong": "grayscale-20",
+  "--muted-strong-foreground": "grayscale-140",
   "--accent": "brand-50",
   "--accent-foreground": "brand-600",
   "--destructive": "error-500",
@@ -47,8 +46,10 @@ const LIGHT: Record<string, string> = {
   "--info": "info-500",
   "--info-foreground": "white",
   "--border": "grayscale-15",
-  "--input": "grayscale-20",
-  // --disabled: ALIAS_LIGHT 체인(--muted), --disabled-border: 체인(--border) 으로 해석
+  "--border-emphasis": "grayscale-20",
+  "--border-medium": "grayscale-30",
+  // --input: ALIAS_LIGHT 체인(--border-emphasis) 으로 해석
+  // --disabled: ALIAS_LIGHT 체인(--background-muted), --disabled-border: 체인(--border) 으로 해석
   "--disabled-foreground": "grayscale-60",
   "--ring": "brand-500",
   "--chart-1": "brand-500",
@@ -63,27 +64,26 @@ const DARK: Record<string, string> = {
   "--canvas-muted": "grayscale-150",
   "--background": "grayscale-140",
   "--foreground": "grayscale-10",
-  "--card": "grayscale-140",
-  "--card-foreground": "grayscale-10",
   "--background-muted": "grayscale-130",
   "--background-muted-foreground": "grayscale-10",
-  // --card-muted / --popover 계열: ALIAS_DARK 체인으로 해석 — 여기 중복 선언 안 함
+  // --card / --card-muted / --popover 계열: ALIAS_DARK 체인으로 해석 — 여기 중복 선언 안 함
   "--inverse": "grayscale-10",
   "--inverse-foreground": "grayscale-140",
   "--inverse-muted": "grayscale-20",
   "--inverse-muted-foreground": "grayscale-140",
   "--foreground-muted": "grayscale-40",
   "--foreground-placeholder": "grayscale-80",
-  "--foreground-disabled": "grayscale-70",
   "--primary": "brand-500",
   "--primary-foreground": "white",
   "--primary-container": "brand-800",
   "--primary-container-foreground": "brand-100",
-  // --secondary: 체인(--muted), --secondary-container: 체인(--muted) 으로 해석 (ALIAS_DARK)
+  // --secondary: 체인(--background-muted), --secondary-container: 체인(--background-muted) 으로 해석 (ALIAS_DARK)
   "--secondary-foreground": "grayscale-10",
   "--secondary-container-foreground": "white",
   "--muted": "grayscale-130",
   "--muted-foreground": "grayscale-70",
+  "--muted-strong": "grayscale-120",
+  "--muted-strong-foreground": "grayscale-10",
   "--accent": "brand-800",
   "--accent-foreground": "brand-100",
   "--destructive": "error-400",
@@ -105,7 +105,9 @@ const DARK: Record<string, string> = {
   "--info": "info-400",
   "--info-foreground": "white",
   "--border": "grayscale-130",
-  "--input": "grayscale-110",
+  "--border-emphasis": "grayscale-110",
+  "--border-medium": "grayscale-120",
+  // --input: ALIAS_DARK 체인(--border-emphasis) 으로 해석
   "--disabled": "grayscale-120",
   "--disabled-foreground": "grayscale-70",
   "--disabled-border": "grayscale-110",
@@ -119,24 +121,32 @@ const DARK: Record<string, string> = {
 
 /** tokens.css 시맨틱 alias — Maps to는 최종 원시 토큰명만 표시 */
 const ALIAS_LIGHT: Record<string, string> = {
-  "--secondary": "--muted",
+  "--secondary": "--background-muted",
   "--canvas-muted-foreground": "--background-muted-foreground",
+  "--card": "--background",
+  "--card-foreground": "--foreground",
   "--card-muted": "--background-muted",
   "--card-muted-foreground": "--background-muted-foreground",
   "--popover": "--card",
   "--popover-foreground": "--card-foreground",
-  "--disabled": "--muted",
+  "--disabled": "--background-muted",
   "--disabled-border": "--border",
+  "--foreground-disabled": "--disabled-foreground",
+  "--input": "--border-emphasis",
 }
 
 const ALIAS_DARK: Record<string, string> = {
-  "--secondary": "--muted",
+  "--secondary": "--background-muted",
   "--canvas-muted-foreground": "--background-muted-foreground",
+  "--card": "--background",
+  "--card-foreground": "--foreground",
   "--card-muted": "--background-muted",
   "--card-muted-foreground": "--background-muted-foreground",
   "--popover": "--card",
   "--popover-foreground": "--card-foreground",
-  "--secondary-container": "--muted",
+  "--secondary-container": "--background-muted",
+  "--foreground-disabled": "--disabled-foreground",
+  "--input": "--border-emphasis",
 }
 
 function resolveRawSource(

@@ -74,7 +74,7 @@ function PlaygroundCodeSection({ code }: { code: string }) {
   }
 
   return (
-    <div className={cn("border-t border-border bg-muted/20", docsSpace.pad)}>
+    <div className={cn("border-t border-border bg-background-muted/20", docsSpace.pad)}>
       <div className="mb-2 flex items-center justify-between gap-2">
         <p className={docsType.codeLabel}>Code</p>
         <Button

@@ -19,8 +19,8 @@
   },
   "styleSpec": {
     "cornerMerge": { "$note": "첫 자식 좌측 radius, 마지막 자식 우측 radius, 중간은 rounded-none. square=radius.base, circle=full", "square": "{radius.base}", "circle": "9999" },
-    "text": { "$note": "ButtonGroupText: 라벨 세그먼트", "bg": "{muted}", "fontWeight": 500 },
-    "separator": { "bg": "{input}", "$note": "base Separator({border})와 다른 토큰" }
+    "text": { "$note": "ButtonGroupText: 라벨 세그먼트", "bg": "{background-muted}", "fontWeight": 500 },
+    "separator": { "bg": "{border-emphasis}", "$note": "base Separator({border})와 다른 토큰" }
   },
   "states": ["rest"],
   "nativeNotes": {

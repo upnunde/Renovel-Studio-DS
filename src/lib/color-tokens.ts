@@ -14,6 +14,8 @@ export type ColorToken = {
 export type TokenGroup = {
   id: string
   title: string
+  /** 그룹 헤더 보조 설명 — 시맨틱 기준·사용 규칙 */
+  description?: string
   tokens: ColorToken[]
 }
 
@@ -118,134 +120,65 @@ export const COLOR_PRIMITIVE_GROUPS: TokenGroup[] = [
 /** tokens.css :root / .dark 와 동기화 — 카테고리(h2) → 서브그룹(h3) 2단 위계 */
 export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
   {
+    id: "background",
+    title: "Background",
+    groups: [
+      {
+        id: "background-base",
+        title: "Base",
+        description: "브라우저·앱 바닥. Surface(카드·모달)가 아님.",
+        tokens: [
+          { name: "canvas", variable: "--canvas", m3: "Background", role: "브라우저·앱 최하위 면" },
+          { name: "canvas-muted", variable: "--canvas-muted", m3: "Background Container", role: "바닥 위 보조 면" },
+        ],
+      },
+    ],
+  },
+  {
     id: "surface",
     title: "Surface",
     groups: [
       {
         id: "surface-base",
         title: "Base",
+        description: "Background 위에 뜨는 컨테이너 면. 글자 토큰과 1:1이 아님.",
         tokens: [
-          { name: "canvas", variable: "--canvas", m3: "Background", role: "최하위 앱 배경 면" },
-          {
-            name: "canvas-muted",
-            variable: "--canvas-muted",
-            m3: "Background Container",
-            role: "앱 배경(Background) 위 보조 면 — grayscale-15 (라이트) / grayscale-150 (다크)",
-          },
-          { name: "background", variable: "--background", m3: "Surface", role: "기본 페이지 면" },
-          {
-            name: "background-muted",
-            variable: "--background-muted",
-            m3: "Surface Container",
-            role: "페이지·레이아웃 보조 면",
-          },
-        ],
-      },
-      {
-        id: "surface-elevated",
-        title: "Card · Popover",
-        tokens: [
-          {
-            name: "card",
-            variable: "--card",
-            m3: "Surface (Card)",
-            role: "카드·패널 면 — 값은 background와 동일, 깊이는 shadow-elevation이 담당",
-          },
-          {
-            name: "popover",
-            variable: "--popover",
-            m3: "Surface (Popover)",
-            role: "플로팅 면 (드롭다운·팝오버) — card alias, 깊이는 shadow-elevation-30",
-          },
-          {
-            name: "card-muted",
-            variable: "--card-muted",
-            m3: "Surface Container (Card)",
-            role: "카드 내 보조 면 — background-muted alias",
-          },
+          { name: "background", variable: "--background", m3: "Surface", role: "카드·모달·패널 면" },
+          { name: "background-muted", variable: "--background-muted", m3: "Surface Container", role: "컨테이너 안 보조 면" },
         ],
       },
       {
         id: "surface-inverse",
         title: "Inverse",
         tokens: [
-          { name: "inverse", variable: "--inverse", m3: "Inverse Surface", role: "반전 면 (toast·tooltip)" },
-          {
-            name: "inverse-muted",
-            variable: "--inverse-muted",
-            m3: "Inverse Surface Container",
-            role: "Inverse 보조 면 — 2단계",
-          },
+          { name: "inverse", variable: "--inverse", m3: "Inverse Surface", role: "반전 면" },
+          { name: "inverse-muted", variable: "--inverse-muted", m3: "Inverse Surface Container", role: "반전 보조 면" },
         ],
       },
     ],
   },
   {
-    id: "on-surface",
-    title: "On Surface",
+    id: "content",
+    title: "Content",
     groups: [
       {
-        id: "on-surface-base",
-        title: "Base",
+        id: "content-hierarchy",
+        title: "Hierarchy",
+        description:
+          "Background·Surface 위에 공통. 면과 1:1이 아님. Inverse·Primary·Hover는 기존 페어.",
         tokens: [
-          {
-            name: "foreground",
-            variable: "--foreground",
-            m3: "On Surface",
-            role: "background·canvas 면 위 본문 텍스트·아이콘 — grayscale-140 (라이트)",
-          },
-          {
-            name: "canvas-muted-foreground",
-            variable: "--canvas-muted-foreground",
-            m3: "On Background Container",
-            role: "canvas-muted 면 위 텍스트·아이콘 — background-muted-foreground alias",
-          },
-          {
-            name: "background-muted-foreground",
-            variable: "--background-muted-foreground",
-            m3: "On Surface Container",
-            role: "background-muted 면 위 텍스트·아이콘 — 값은 foreground와 동일",
-          },
-          { name: "foreground-muted", variable: "--foreground-muted", m3: "On Surface Variant", role: "보조 텍스트·아이콘 — grayscale-110 (라이트)" },
-          { name: "foreground-placeholder", variable: "--foreground-placeholder", m3: "On Surface Variant (Placeholder)", role: "placeholder 텍스트 — grayscale-70" },
-          { name: "foreground-disabled", variable: "--foreground-disabled", m3: "On Surface Variant (Disabled)", role: "비활성 텍스트 — M3에선 On Surface @ 38%" },
+          { name: "foreground", variable: "--foreground", m3: "On Surface", role: "주요 텍스트·아이콘" },
+          { name: "foreground-muted", variable: "--foreground-muted", m3: "On Surface Muted", role: "본문·보조 텍스트·아이콘" },
+          { name: "foreground-placeholder", variable: "--foreground-placeholder", m3: "On Surface Hint", role: "캡션·힌트 텍스트·아이콘" },
         ],
       },
       {
-        id: "on-surface-elevated",
-        title: "Card · Popover",
+        id: "content-inverse",
+        title: "On Inverse",
+        description: "Inverse 면과 1:1 페어 — 기존 규칙 유지.",
         tokens: [
-          {
-            name: "card-foreground",
-            variable: "--card-foreground",
-            m3: "On Surface (Card)",
-            role: "card 면 위 텍스트·아이콘 — 값은 foreground와 동일",
-          },
-          {
-            name: "popover-foreground",
-            variable: "--popover-foreground",
-            m3: "On Surface (Popover)",
-            role: "popover 면 위 텍스트·아이콘 — card-foreground alias",
-          },
-          {
-            name: "card-muted-foreground",
-            variable: "--card-muted-foreground",
-            m3: "On Surface Container (Card)",
-            role: "card-muted 면 위 텍스트 — background-muted-foreground alias",
-          },
-        ],
-      },
-      {
-        id: "on-surface-inverse",
-        title: "Inverse",
-        tokens: [
-          { name: "inverse-foreground", variable: "--inverse-foreground", m3: "On Inverse Surface", role: "inverse 면 위 텍스트·아이콘" },
-          {
-            name: "inverse-muted-foreground",
-            variable: "--inverse-muted-foreground",
-            m3: "On Inverse Surface Container",
-            role: "inverse-muted 면 위 텍스트·아이콘",
-          },
+          { name: "inverse-foreground", variable: "--inverse-foreground", m3: "On Inverse Surface", role: "Inverse 위 텍스트" },
+          { name: "inverse-muted-foreground", variable: "--inverse-muted-foreground", m3: "On Inverse Surface Container", role: "Inverse Container 위 텍스트" },
         ],
       },
     ],
@@ -258,30 +191,10 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         id: "action-primary",
         title: "Primary",
         tokens: [
-          {
-            name: "primary",
-            variable: "--primary",
-            m3: "Primary",
-            role: "주 액션 면 (filled 버튼·CTA)",
-          },
-          {
-            name: "primary-foreground",
-            variable: "--primary-foreground",
-            m3: "On Primary",
-            role: "primary 면 위 텍스트·아이콘",
-          },
-          {
-            name: "primary-container",
-            variable: "--primary-container",
-            m3: "Primary Container",
-            role: "저채도 브랜드 컨테이너 면",
-          },
-          {
-            name: "primary-container-foreground",
-            variable: "--primary-container-foreground",
-            m3: "On Primary Container",
-            role: "primary-container 면 위 텍스트·아이콘",
-          },
+          { name: "primary", variable: "--primary", m3: "Primary", role: "주 액션 면" },
+          { name: "primary-foreground", variable: "--primary-foreground", m3: "On Primary", role: "Primary 위 텍스트" },
+          { name: "primary-container", variable: "--primary-container", m3: "Primary Container", role: "저채도 주 액션 면" },
+          { name: "primary-container-foreground", variable: "--primary-container-foreground", m3: "On Primary Container", role: "Primary Container 위 텍스트" },
         ],
       },
     ],
@@ -294,54 +207,19 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         id: "interaction-highlight-brand",
         title: "Highlight · Brand",
         tokens: [
-          {
-            name: "accent",
-            variable: "--accent",
-            m3: "Secondary Container",
-            role: "브랜드 호버·포커스·선택 하이라이트 (outline/ghost/select·menu)",
-          },
-          {
-            name: "accent-foreground",
-            variable: "--accent-foreground",
-            m3: "On Secondary Container",
-            role: "highlight 면 위 텍스트·아이콘",
-          },
-          {
-            name: "ring",
-            variable: "--ring",
-            m3: "Focus Ring",
-            role: "포커스 링 (브랜드) — 모든 포커스 가능 요소 (M3 포커스 인디케이터, primary 값)",
-          },
+          { name: "accent", variable: "--accent", m3: "Secondary Container", role: "브랜드 선택 하이라이트" },
+          { name: "accent-foreground", variable: "--accent-foreground", m3: "On Secondary Container", role: "Highlight 위 텍스트" },
+          { name: "ring", variable: "--ring", m3: "Focus Ring", role: "포커스 링" },
         ],
       },
       {
         id: "interaction-fill-neutral",
-        title: "Fill · Neutral",
+        title: "Hover",
         tokens: [
-          {
-            name: "muted",
-            variable: "--muted",
-            m3: "Surface Variant",
-            role: "무채색 호버·크롬 면 (chip, tabs, skeleton, track) — grayscale-10",
-          },
-          {
-            name: "muted-foreground",
-            variable: "--muted-foreground",
-            m3: "On Surface Variant (Muted Fill)",
-            role: "neutral fill(muted) 면 위 보조 텍스트 — grayscale-90",
-          },
-          {
-            name: "secondary",
-            variable: "--secondary",
-            m3: "Secondary",
-            role: "보조 버튼·배지 기본면 — muted alias (foreground만 별도)",
-          },
-          {
-            name: "secondary-foreground",
-            variable: "--secondary-foreground",
-            m3: "On Secondary",
-            role: "secondary 면 위 텍스트·아이콘",
-          },
+          { name: "muted", variable: "--muted", m3: "hover", role: "기본 호버 면" },
+          { name: "muted-foreground", variable: "--muted-foreground", m3: "on hover", role: "Hover 위 텍스트" },
+          { name: "muted-strong", variable: "--muted-strong", m3: "hover variant", role: "Surface Container rest가 hover와 값이 같아 상태가 안 보일 때" },
+          { name: "muted-strong-foreground", variable: "--muted-strong-foreground", m3: "on hover variant", role: "Hover variant 위 텍스트" },
         ],
       },
     ],
@@ -388,24 +266,9 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         id: "state-disabled",
         title: "Disabled",
         tokens: [
-          {
-            name: "disabled",
-            variable: "--disabled",
-            m3: "Disabled Surface",
-            role: "비활성 면 — 라이트: muted alias, 다크: 전용",
-          },
-          {
-            name: "disabled-foreground",
-            variable: "--disabled-foreground",
-            m3: "On Disabled Surface",
-            role: "비활성 텍스트·아이콘 — M3에선 On Surface @ 38%",
-          },
-          {
-            name: "disabled-border",
-            variable: "--disabled-border",
-            m3: "Disabled Outline",
-            role: "비활성 보더 — 라이트: border alias",
-          },
+          { name: "disabled", variable: "--disabled", m3: "Disabled Surface", role: "비활성 면" },
+          { name: "disabled-foreground", variable: "--disabled-foreground", m3: "On Disabled Surface", role: "비활성 텍스트" },
+          { name: "disabled-border", variable: "--disabled-border", m3: "Disabled Outline", role: "비활성 보더" },
         ],
       },
     ],
@@ -418,24 +281,19 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         id: "ui-border",
         title: "Border",
         tokens: [
-          { name: "border", variable: "--border", m3: "Outline", role: "기본 보더 — grayscale-15 (라이트)" },
+          { name: "border", variable: "--border", m3: "Outline", role: "기본 보더" },
+          { name: "border-emphasis", variable: "--border-emphasis", m3: "Outline Emphasis", role: "인터랙티브·컨트롤 윤곽" },
+          { name: "border-medium", variable: "--border-medium", m3: "Outline Medium", role: "중간 강조 보더" },
           { name: "border-strong", variable: "--border-strong", m3: "Outline Strong", role: "강조 보더" },
-          { name: "border-inverse", variable: "--border-inverse", m3: "Outline Inverse", role: "반전 면 위 보더" },
+          { name: "border-inverse", variable: "--border-inverse", m3: "Outline Inverse", role: "반전 면 보더" },
         ],
       },
       {
         id: "ui-divider",
         title: "Divider",
         tokens: [
-          { name: "divider", variable: "--divider", m3: "Outline Variant", role: "구분선 — grayscale-15 (라이트) / grayscale-130 (다크)" },
+          { name: "divider", variable: "--divider", m3: "Outline Variant", role: "구분선" },
           { name: "divider-strong", variable: "--divider-strong", m3: "Outline Variant Strong", role: "강조 구분선" },
-        ],
-      },
-      {
-        id: "ui-input",
-        title: "Input",
-        tokens: [
-          { name: "input", variable: "--input", m3: "Input Outline", role: "인풋·셀렉트 보더 — 라이트 grayscale-20" },
         ],
       },
     ],
@@ -448,9 +306,9 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         id: "overlay-dim",
         title: "Dim",
         tokens: [
-          { name: "dim-10", variable: "--dim-10", m3: "Scrim 10", role: "가벼운 호버 백드롭" },
+          { name: "dim-10", variable: "--dim-10", m3: "Scrim 10", role: "가벼운 백드롭" },
           { name: "dim-20", variable: "--dim-20", m3: "Scrim 20", role: "모달 배경" },
-          { name: "dim-30", variable: "--dim-30", m3: "Scrim 30", role: "이미지 위 텍스트 보호" },
+          { name: "dim-30", variable: "--dim-30", m3: "Scrim 30", role: "이미지 위 보호" },
           { name: "dim-40", variable: "--dim-40", m3: "Scrim 40", role: "최대 농도" },
         ],
       },

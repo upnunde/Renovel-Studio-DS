@@ -180,11 +180,16 @@
   --primary: var(--brand-500);
   --primary-foreground: var(--white);
 
-  /* 상호작용 — 호버는 브랜드 틴트 */
+  /* 상호작용 — 호버는 브랜드 틴트
+   * muted-strong: 무채색 호버 2단계 — secondary bg가 이미 muted라 hover에 muted를 그대로 쓰면
+   * 색이 같아 인지가 안 됨 → 한 단계 더 짙은 muted-strong으로 무채색 tone의 hover를 표현
+   */
   --secondary: var(--grayscale-15);
   --secondary-foreground: var(--grayscale-140);
   --muted: var(--grayscale-15);
   --muted-foreground: var(--grayscale-90);
+  --muted-strong: var(--grayscale-20);
+  --muted-strong-foreground: var(--grayscale-140);
   --accent: var(--brand-50);
   --accent-foreground: var(--brand-600);
 
@@ -278,6 +283,8 @@
   --secondary-foreground: var(--grayscale-10);
   --muted: var(--grayscale-130);
   --muted-foreground: var(--grayscale-70);
+  --muted-strong: var(--grayscale-120);
+  --muted-strong-foreground: var(--grayscale-10);
   --accent: var(--brand-800);
   --accent-foreground: var(--brand-100);
 

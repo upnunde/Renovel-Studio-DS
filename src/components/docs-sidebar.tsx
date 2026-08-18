@@ -32,7 +32,7 @@ function NavLink({
     return (
       <span
         className={cn(
-          "flex h-9 cursor-not-allowed items-center rounded-full px-3 text-sm text-foreground-disabled",
+          "flex h-9 cursor-not-allowed items-center rounded-full px-3 text-sm text-disabled-foreground",
           className
         )}
         aria-disabled

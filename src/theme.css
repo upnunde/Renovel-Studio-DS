@@ -21,13 +21,15 @@
   --color-inverse-muted-foreground: var(--inverse-muted-foreground);
   --color-foreground-muted: var(--foreground-muted);
   --color-foreground-placeholder: var(--foreground-placeholder);
-  --color-foreground-disabled: var(--foreground-disabled);
+  --color-foreground-disabled: var(--disabled-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-muted-strong: var(--muted-strong);
+  --color-muted-strong-foreground: var(--muted-strong-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
@@ -39,6 +41,8 @@
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
   --color-border: var(--border);
+  --color-border-emphasis: var(--border-emphasis);
+  --color-border-medium: var(--border-medium);
   --color-border-strong: var(--border-strong);
   --color-border-inverse: var(--border-inverse);
   --color-input: var(--input);

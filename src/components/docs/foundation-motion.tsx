@@ -124,14 +124,14 @@ function MotionEasingPreview({
   variable: string
 }) {
   return (
-    <div className="group/preview flex flex-col gap-3 overflow-hidden rounded-lg border border-border bg-card p-3">
+    <div className="group/preview flex flex-col gap-3 overflow-hidden rounded-lg border border-border bg-background p-3">
       <div className="flex flex-col gap-0.5">
         <span className={cn(docsType.tokenName)}>{label}</span>
         <span className={cn("font-mono text-[0.7rem]", docsType.bodyMuted)}>
           {variable}
         </span>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-muted">
+      <div className="h-2 overflow-hidden rounded-full bg-background-muted">
         <span
           aria-hidden
           className="block h-full w-full origin-left -translate-x-full rounded-full bg-primary transition-transform duration-medium group-hover/preview:translate-x-0"

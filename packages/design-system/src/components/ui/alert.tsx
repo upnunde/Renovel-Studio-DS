@@ -12,7 +12,7 @@ const alertVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-card text-card-foreground",
+        default: "bg-background text-foreground",
       },
       /**
        * 의미론적 상태 톤 — 시각 위계(variant)와 직교하는 상태 축.

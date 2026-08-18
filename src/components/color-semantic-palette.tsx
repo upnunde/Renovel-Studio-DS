@@ -65,13 +65,19 @@ function SemanticTokenRow({ token }: { token: ColorToken }) {
 
 function SemanticTokenGroup({ group }: { group: TokenGroup }) {
   return (
-    <ShowcaseBlock name={group.title} headingId={group.id} flush as="h3">
+    <ShowcaseBlock
+      name={group.title}
+      description={group.description}
+      headingId={group.id}
+      flush
+      as="h3"
+    >
       <DocsTable>
         <DocsTableColGroup columns={5} />
         <DocsTableHead>
           <DocsTableHeaderRow>
             <DocsTableTh>Preview</DocsTableTh>
-            <DocsTableTh>Token (M3)</DocsTableTh>
+            <DocsTableTh>Token name</DocsTableTh>
             <DocsTableTh>Variable</DocsTableTh>
             <DocsTableTh>Role</DocsTableTh>
             <DocsTableTh>Maps to</DocsTableTh>

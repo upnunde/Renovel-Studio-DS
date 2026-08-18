@@ -240,7 +240,7 @@ function PreviewSkeleton() {
 function PreviewDropdownMenu() {
   return (
     <div className={previewShell}>
-      <div className="flex min-w-40 flex-col overflow-hidden rounded-lg border border-border bg-popover p-1 text-sm shadow-md">
+      <div className="flex min-w-40 flex-col overflow-hidden rounded-lg border border-border bg-background p-1 text-sm shadow-md">
         <div className="px-2 py-1 text-xs font-medium text-foreground-muted">보기</div>
         <div className="flex items-center gap-2 rounded-md bg-accent px-2 py-1.5 text-accent-foreground">
           <span className="size-4 shrink-0 rounded-sm bg-primary/20" />
@@ -248,7 +248,7 @@ function PreviewDropdownMenu() {
           <Icon icon={ICONS.check} size="md" className="ml-auto" />
         </div>
         <div className="flex items-center gap-2 px-2 py-1.5 text-foreground-muted">
-          <span className="size-4 shrink-0 rounded-sm bg-muted" />
+          <span className="size-4 shrink-0 rounded-sm bg-background-muted" />
           격자
         </div>
       </div>
@@ -259,7 +259,7 @@ function PreviewDropdownMenu() {
 function PreviewDialog() {
   return (
     <div className={previewShell}>
-      <div className="w-full max-w-[200px] rounded-xl border border-border bg-card p-4 shadow-md">
+      <div className="w-full max-w-[200px] rounded-xl border border-border bg-background p-4 shadow-md">
         <p className="text-sm font-medium">다이얼로그</p>
         <p className="mt-1 text-xs text-foreground-muted">모달 콘텐츠 영역</p>
         <div className="mt-3 flex justify-end gap-2">
@@ -279,7 +279,7 @@ function PreviewPopover() {
       <Button size="sm" variant="outline">
         팝오버 열기
       </Button>
-      <div className="flex w-full max-w-[200px] flex-col gap-2.5 rounded-lg bg-popover p-2.5 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10">
+      <div className="flex w-full max-w-[200px] flex-col gap-2.5 rounded-lg bg-background p-2.5 text-sm text-foreground shadow-md ring-1 ring-foreground/10">
         <div className="flex flex-col gap-0.5">
           <p className="font-medium">팝오버</p>
           <p className="text-foreground-muted text-xs">트리거 근처 패널</p>

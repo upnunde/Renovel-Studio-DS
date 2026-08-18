@@ -8,7 +8,7 @@
   "defaults": {},
   "sizeSpec": { "default": { "radius": "8", "$note": "w/h는 소비자가 지정" } },
   "styleSpec": {
-    "rest": { "bg": "{muted}", "radius": "8", "$note": "animate-pulse(opacity 루프)" }
+    "rest": { "bg": "{background-muted}", "radius": "8", "$note": "animate-pulse(opacity 루프)" }
   },
   "states": ["rest"],
   "nativeNotes": {

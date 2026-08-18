@@ -33,7 +33,7 @@ const avatarVariants = cva(
 )
 
 const avatarFallbackVariants = cva(
-  "flex size-full items-center justify-center rounded-full bg-muted text-muted-foreground",
+  "flex size-full items-center justify-center rounded-full bg-background-muted text-background-muted-foreground",
   {
     variants: {
       variant: {
@@ -82,7 +82,7 @@ const avatarBadgeVariants = cva(
 )
 
 const avatarGroupCountVariants = cva(
-  "relative flex shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground ring-2 ring-background",
+  "relative flex shrink-0 items-center justify-center rounded-full bg-background-muted text-background-muted-foreground ring-2 ring-background",
   {
     variants: {
       size: {

@@ -18,7 +18,7 @@ export function FoundationRadiusShowcase() {
   return (
     <div className={docsSpace.stack}>
       <ShowcaseBlock name="Base Radius">
-        <div className={cn("flex h-24 items-center justify-center rounded-lg border border-dashed bg-muted/50", docsType.tableMono)}>
+        <div className={cn("flex h-24 items-center justify-center rounded-lg border border-dashed bg-background-muted/50", docsType.tableMono)}>
           base_{RADIUS_BASE.px} · {RADIUS_BASE.variable} = {RADIUS_BASE.rem} ({RADIUS_BASE.px}px)
         </div>
       </ShowcaseBlock>

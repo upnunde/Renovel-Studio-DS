@@ -82,7 +82,7 @@ export function FoundationSpacingShowcase() {
                 {[1, 2, 3].map((n) => (
                   <div
                     key={n}
-                    className={cn("flex h-8 w-20 shrink-0 items-center justify-center rounded-md bg-muted", docsType.body)}
+                    className={cn("flex h-8 w-20 shrink-0 items-center justify-center rounded-md bg-background-muted", docsType.body)}
                   >
                     {n}
                   </div>

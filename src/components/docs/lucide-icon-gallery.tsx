@@ -79,7 +79,7 @@ export function LucideIconGallery() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="이름으로 필터 (예: Home, Check)"
-            className={cn("h-10 w-full rounded-lg border border-input bg-transparent px-3 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 sm:max-w-xs", docsType.body)}
+            className={cn("h-10 w-full rounded-lg border border-border-emphasis bg-transparent px-3 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 sm:max-w-xs", docsType.body)}
             aria-label="아이콘 검색"
           />
           <a

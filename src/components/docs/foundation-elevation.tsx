@@ -42,10 +42,10 @@ export function FoundationElevationShowcase() {
                 </DocsTableTd>
                 <DocsTableTd muted>{token.description}</DocsTableTd>
                 <DocsTableTd>
-                  <div className="flex h-20 items-center justify-center bg-muted/40 px-4 py-3">
+                  <div className="flex h-20 items-center justify-center bg-background-muted/40 px-4 py-3">
                     <div
                       className={cn(
-                        "flex h-12 w-28 items-center justify-center rounded-lg border border-border bg-card text-caption1_500 text-foreground-muted",
+                        "flex h-12 w-28 items-center justify-center rounded-lg border border-border bg-background text-caption1_500 text-foreground-muted",
                         token.className
                       )}
                     >
@@ -69,11 +69,11 @@ export function FoundationElevationShowcase() {
           {ELEVATION_SCALE.map((token) => (
             <div
               key={token.level}
-              className="flex flex-col items-center gap-3 rounded-xl bg-muted/40 p-5"
+              className="flex flex-col items-center gap-3 rounded-xl bg-background-muted/40 p-5"
             >
               <div
                 className={cn(
-                  "flex size-20 items-center justify-center rounded-xl border border-border bg-card text-body3_500 text-foreground",
+                  "flex size-20 items-center justify-center rounded-xl border border-border bg-background text-body3_500 text-foreground",
                   token.className
                 )}
               >

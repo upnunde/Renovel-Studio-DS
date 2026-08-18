@@ -27,8 +27,8 @@
   "styleSpec": {
     "$note": "selected = aria-pressed=true. fill/outline 모두 selected는 inverse-muted 채움.",
     "fill": {
-      "rest":     { "bg": "{secondary}", "fg": "{secondary-foreground}", "border": "transparent" },
-      "hover":    { "bg": "{muted}", "fg": "{foreground}" },
+      "rest":     { "bg": "{background-muted}", "fg": "{foreground}", "border": "transparent" },
+      "hover":    { "bg": "{muted-strong}", "fg": "{muted-strong-foreground}" },
       "selected": { "bg": "{inverse-muted}", "fg": "{inverse-muted-foreground}", "border": "transparent" },
       "selectedHover": { "bg": "{inverse-muted}/80" }
     },

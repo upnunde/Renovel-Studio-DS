@@ -10,7 +10,7 @@
     "default": { "trackThickness": 4, "thumb": 16, "hitArea": 8, "controlThickness": 16, "$note": "vertical 시 min 길이 160px" }
   },
   "styleSpec": {
-    "track": { "rest": { "bg": "{muted}" } },
+    "track": { "rest": { "bg": "{background-muted}" } },
     "range": { "rest": { "bg": "{primary}" } },
     "thumb": {
       "rest": { "border": "{ring}", "bg": "{background}", "ring": "{ring}/50", "$note": "정본은 bg-white 리터럴 — 다크 대응 위해 {background} 권장(웹 값은 white와 동일). B: FLAG 참조" },

@@ -42,7 +42,7 @@ export function DocsTableHead({ children }: { children: ReactNode }) {
 }
 
 export function DocsTableHeaderRow({ children }: { children: ReactNode }) {
-  return <tr className="border-b bg-muted/40">{children}</tr>
+  return <tr className="border-b bg-background-muted/40">{children}</tr>
 }
 
 export function DocsTableBody({ children }: { children: ReactNode }) {

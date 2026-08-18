@@ -134,8 +134,8 @@ export function ComponentCase({
   flush?: boolean
 }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-card">
-      <div className={cn("flex flex-wrap items-center border-b border-border bg-muted/20", docsSpace.inlineGap, docsSpace.cardHeader)}>
+    <div className="overflow-hidden rounded-xl border border-border bg-background">
+      <div className={cn("flex flex-wrap items-center border-b border-border bg-background-muted/20", docsSpace.inlineGap, docsSpace.cardHeader)}>
         <span className={docsType.tokenName}>{label}</span>
         {tags?.map((tag) => (
           <Badge key={tag} variant="secondary" className="font-mono text-sm">

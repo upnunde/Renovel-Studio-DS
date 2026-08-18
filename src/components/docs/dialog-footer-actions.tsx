@@ -64,7 +64,7 @@ function DialogListBlock({ style }: { style: DialogListStyle }) {
 
   if (style === "muted") {
     return (
-      <div className="w-full rounded-lg bg-muted p-3 text-left">
+      <div className="w-full rounded-lg bg-background-muted p-3 text-left">
         <ul className="space-y-1.5 text-body4_400 text-foreground-muted">
           {items.map((item, index) => (
             <li key={index}>{item}</li>
@@ -75,7 +75,7 @@ function DialogListBlock({ style }: { style: DialogListStyle }) {
   }
 
   return (
-    <div className="w-full rounded-lg bg-muted p-3 text-left">
+    <div className="w-full rounded-lg bg-background-muted p-3 text-left">
       <ul className="space-y-1.5 text-body4_400 text-foreground-muted">
         {items.map((item, index) => (
           <li key={index} className="flex gap-2">
@@ -190,7 +190,7 @@ export function DialogFooterActionsPreview({
           )}
         >
           {customContent ? (
-            <div className="flex min-h-24 w-full items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 px-4 py-6">
+            <div className="flex min-h-24 w-full items-center justify-center rounded-lg border border-dashed border-border bg-background-muted/30 px-4 py-6">
               <p className="text-caption1_400 text-foreground-muted">
                 Custom content
               </p>
@@ -243,7 +243,7 @@ function listCode(style: DialogListStyle) {
 
   if (style === "muted") {
     const rows = items.map((item) => `      <li>${item}</li>`).join("\n")
-    return `  <div className="rounded-lg bg-muted p-3">\n    <ul className="space-y-1.5 text-body4_400 text-foreground-muted">\n${rows}\n    </ul>\n  </div>`
+    return `  <div className="rounded-lg bg-background-muted p-3">\n    <ul className="space-y-1.5 text-body4_400 text-foreground-muted">\n${rows}\n    </ul>\n  </div>`
   }
 
   const rows = items
@@ -252,7 +252,7 @@ function listCode(style: DialogListStyle) {
         `      <li className="flex gap-2">\n        <span className="shrink-0 tabular-nums text-foreground">${index + 1}.</span>\n        <span>${item}</span>\n      </li>`
     )
     .join("\n")
-  return `  <div className="rounded-lg bg-muted p-3">\n    <ul className="space-y-1.5 text-body4_400 text-foreground-muted">\n${rows}\n    </ul>\n  </div>`
+  return `  <div className="rounded-lg bg-background-muted p-3">\n    <ul className="space-y-1.5 text-body4_400 text-foreground-muted">\n${rows}\n    </ul>\n  </div>`
 }
 
 function consentCode(text: string) {

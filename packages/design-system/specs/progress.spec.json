@@ -8,7 +8,7 @@
   "defaults": {},
   "sizeSpec": { "default": { "trackHeight": 4, "gap": "{space.2}", "$note": "label행↔track 8px" } },
   "styleSpec": {
-    "track": { "rest": { "bg": "{muted}", "radius": "9999" } },
+    "track": { "rest": { "bg": "{background-muted}", "radius": "9999" } },
     "indicator": { "rest": { "bg": "{primary}" }, "transition": { "duration": "{motion-duration.short}", "easing": "{motion-easing.standard}" } },
     "label": { "fontWeight": 500 },
     "value": { "fg": "{foreground-muted}", "$note": "tabular-nums 우측정렬" }

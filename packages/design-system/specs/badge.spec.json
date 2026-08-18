@@ -32,7 +32,7 @@
     "default/success":     { "rest": { "bg": "{success}", "fg": "{success-foreground}" }, "hover": { "bg": "{success}/80" }, "focus": { "ring": "{success}/20" } },
     "default/warning":     { "rest": { "bg": "{warning}", "fg": "{warning-foreground}" }, "hover": { "bg": "{warning}/80" }, "focus": { "ring": "{warning}/20" } },
     "default/destructive": { "rest": { "bg": "{destructive}", "fg": "{destructive-foreground}" }, "hover": { "bg": "{destructive}/80" }, "focus": { "ring": "{destructive}/20" } },
-    "secondary/default":     { "rest": { "bg": "{secondary}", "fg": "{secondary-foreground}" }, "hover": { "bg": "{muted}", "fg": "{foreground}" } },
+    "secondary/default":     { "rest": { "bg": "{background-muted}", "fg": "{foreground}" }, "hover": { "bg": "{muted-strong}", "fg": "{muted-strong-foreground}" } },
     "secondary/success":     { "rest": { "bg": "{success}/10", "fg": "{success}" }, "hover": { "bg": "{success}/20" }, "focus": { "ring": "{success}/20" }, "dark": { "rest": { "bg": "{success}/20" } } },
     "secondary/warning":     { "rest": { "bg": "{warning}/15", "fg": "{warning}" }, "hover": { "bg": "{warning}/25" }, "focus": { "ring": "{warning}/20" }, "dark": { "rest": { "bg": "{warning}/20" } } },
     "secondary/destructive": { "rest": { "bg": "{destructive}/10", "fg": "{destructive}" }, "hover": { "bg": "{destructive}/20" }, "focus": { "ring": "{destructive}/20" }, "dark": { "rest": { "bg": "{destructive}/20" } } },

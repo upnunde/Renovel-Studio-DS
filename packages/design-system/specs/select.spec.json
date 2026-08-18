@@ -15,7 +15,7 @@
   },
   "styleSpec": {
     "trigger": {
-      "rest": { "bg": "transparent", "border": "{input}", "icon": "{foreground-muted}", "dark": { "bg": "{input}/30" } },
+      "rest": { "bg": "transparent", "border": "{border-emphasis}", "icon": "{foreground-muted}", "dark": { "bg": "{border-emphasis}/30" } },
       "hover": { "bg": "{muted}", "fg": "{foreground}" },
       "placeholder": { "fg": "{foreground-placeholder}" },
       "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
