@@ -19,7 +19,7 @@ const buttonVariants = cva(
         /** solid CTA — 색은 tone */
         default: "",
         secondary: "",
-        outline: "",
+        outline: "bg-transparent",
         ghost: "",
         link: "underline underline-offset-4",
         /** @deprecated default + tone=brand 로 해석 */

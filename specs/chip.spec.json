@@ -33,7 +33,7 @@
       "selectedHover": { "bg": "{inverse-muted}/80" }
     },
     "outline": {
-      "rest":     { "bg": "{background}", "border": "{border}" },
+      "rest":     { "bg": "transparent", "border": "{border}" },
       "hover":    { "bg": "{muted}", "fg": "{foreground}" },
       "selected": { "bg": "{inverse-muted}", "fg": "{inverse-muted-foreground}", "border": "transparent" },
       "selectedHover": { "bg": "{inverse-muted}/80" }

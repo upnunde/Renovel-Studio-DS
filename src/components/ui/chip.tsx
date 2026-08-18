@@ -23,7 +23,7 @@ const chipVariants = cva(
       variant: {
         /** 솔리드 표현 — off=secondary, on=inverse-muted */
         fill: `${chipFillResting} ${chipSelected}`,
-        outline: `border-border bg-background hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground ${chipSelected}`,
+        outline: `border-border bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground ${chipSelected}`,
         /** @deprecated variant="fill" 사용 */
         default: `${chipFillResting} ${chipSelected}`,
       },

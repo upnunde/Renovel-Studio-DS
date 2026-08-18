@@ -13,7 +13,7 @@ type RadioSize = NonNullable<VariantProps<typeof radioGroupItemVariants>["size"]
 const RadioGroupSizeContext = React.createContext<RadioSize>("default")
 
 const radioGroupItemVariants = cva(
-  `group/radio-group-item peer relative flex aspect-square shrink-0 items-center justify-center rounded-full border border-border-emphasis bg-background outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledControl} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-border-emphasis/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary`,
+  `group/radio-group-item peer relative flex aspect-square shrink-0 items-center justify-center rounded-full border border-border-emphasis bg-transparent outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledControl} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary`,
   {
     variants: {
       size: {
