@@ -209,6 +209,8 @@ export const COLOR_SEMANTIC_CATEGORIES: TokenCategory[] = [
         id: "interaction-fill-neutral",
         title: "Hover",
         tokens: [
+          { name: "muted-low", variable: "--muted-low", m3: "hover low", role: "아주 약한 hover 면" },
+          { name: "muted-low-foreground", variable: "--muted-low-foreground", m3: "on hover low", role: "Hover low 위 텍스트" },
           { name: "muted", variable: "--muted", m3: "hover", role: "기본 호버 면" },
           { name: "muted-foreground", variable: "--muted-foreground", m3: "on hover", role: "Hover 위 텍스트" },
           { name: "muted-strong", variable: "--muted-strong", m3: "hover variant", role: "Surface Container rest가 hover와 값이 같아 상태가 안 보일 때" },

@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-18 17:02:21**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-18 17:08:44**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-18 17:01:53** — 커밋 푸시
+- **2026-08-18 17:08:24** — 커밋 푸시
 
 ## 다음 작업 (Claude Code용)
 
@@ -23,37 +23,38 @@
 - 브랜치: `main`
 
 ```
- M DESIGN.md
  M docs/wip/HANDOFF.md
  M docs/wip/WORKLOG.md
- M packages/design-system/specs/avatar.spec.json
- M packages/design-system/src/grayscale-colors.ts
+ M packages/design-system/src/theme.css
  M packages/design-system/src/tokens.css
- M packages/design-system/tokens/primitives.json
  M packages/design-system/tokens/semantic.json
- M src/grayscale-colors.ts
+ M src/lib/color-tokens.ts
  M src/lib/semantic-token-sources.ts
+ M src/theme.css
  M src/tokens.css
 ```
 
 ### diff 요약
 
 ```
- DESIGN.md                                      |  2 +-
- docs/wip/HANDOFF.md                            | 40 ++++++++++++++++++++------
- docs/wip/WORKLOG.md                            |  5 ++++
- packages/design-system/specs/avatar.spec.json  |  2 +-
- packages/design-system/src/grayscale-colors.ts |  3 +-
- packages/design-system/src/tokens.css          |  5 ++--
- packages/design-system/tokens/primitives.json  |  1 +
- packages/design-system/tokens/semantic.json    |  2 +-
- src/grayscale-colors.ts                        |  3 +-
- src/lib/semantic-token-sources.ts              |  2 +-
- src/tokens.css                                 |  5 ++--
- 11 files changed, 51 insertions(+), 19 deletions(-)
+ docs/wip/HANDOFF.md                         | 38 ++++++++++++++---------------
+ docs/wip/WORKLOG.md                         |  6 ++---
+ packages/design-system/src/theme.css        |  2 ++
+ packages/design-system/src/tokens.css       |  6 ++++-
+ packages/design-system/tokens/semantic.json |  4 ++-
+ src/lib/color-tokens.ts                     |  2 ++
+ src/lib/semantic-token-sources.ts           |  6 ++++-
+ src/theme.css                               |  2 ++
+ src/tokens.css                              |  6 ++++-
+ 9 files changed, 45 insertions(+), 27 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
 
 
 
