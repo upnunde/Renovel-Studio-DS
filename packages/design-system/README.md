@@ -18,7 +18,7 @@ shadcn/ui(Base UI) 기반 **Renovel Studio** 디자인 시스템 npm 패키지�
 특정 버전(태그)을 고정하려면:
 
 ```json
-"design-system": "github:upnunde/Renovel-Studio-DS#v0.1.34"
+"design-system": "github:upnunde/Renovel-Studio-DS#v0.1.35"
 ```
 
 ```bash
@@ -80,7 +80,7 @@ import { cn } from "design-system/utils"
 
 ## 버전
 
-현재 버전: **0.1.34** (`v0.1.34` 태그)
+현재 버전: **0.1.35** (`v0.1.35` 태그)
 
 ## 라이선스
 
