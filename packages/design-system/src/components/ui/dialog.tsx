@@ -93,7 +93,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
 const dialogTitleClass = "text-heading4_700"
 
 const dialogDescriptionClass =
-  "text-sm text-foreground-muted *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground *:[a[data-hovered=true]]:text-foreground"
+  "text-sm whitespace-pre-line text-foreground-muted *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground *:[a[data-hovered=true]]:text-foreground"
 
 /**
  * 가로 정렬된 버튼들의 합계 폭이 컨테이너를 넘치는지 감지한다.

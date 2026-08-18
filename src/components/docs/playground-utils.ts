@@ -153,6 +153,7 @@ const SKIPPED_SPEC_PROPS = new Set([
 export type PlaygroundRegistryLike = {
   initialState: PlaygroundState
   textKeys?: string[]
+  textareaKeys?: string[]
   numberKeys?: PlaygroundNumberField[]
   selectKeys?: Record<string, string[]>
   /** 플레이그라운드 컨트롤에서 제외 (Properties 표에는 유지) */
@@ -230,7 +231,8 @@ export function classifyPlaygroundControlKey(
   key: string,
   properties: ComponentPropSpec[],
   entry: PlaygroundRegistryLike
-): "text" | "number" | "select" | "boolean" | "skip" {
+): "text" | "textarea" | "number" | "select" | "boolean" | "skip" {
+  if (entry.textareaKeys?.includes(key)) return "textarea"
   if (entry.textKeys?.includes(key)) return "text"
   if (entry.numberKeys?.some((field) => field.key === key)) return "number"
   if (entry.selectKeys?.[key]) return "select"

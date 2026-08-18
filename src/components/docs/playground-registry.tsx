@@ -202,6 +202,7 @@ export type PlaygroundRegistryEntry = {
   description?: string
   initialState: PlaygroundState
   textKeys?: string[]
+  textareaKeys?: string[]
   numberKeys?: PlaygroundNumberField[]
   selectKeys?: Record<string, string[]>
   /** 플레이그라운드 컨트롤에서 제외 (Properties 표에는 유지) */
@@ -1410,7 +1411,8 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       showContent: true,
       footerActions: "2",
     },
-    textKeys: ["title", "description"],
+    textKeys: ["title"],
+    textareaKeys: ["description"],
     selectKeys: {
       footerActions: ["1", "2", "3"],
     },

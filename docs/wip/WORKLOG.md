@@ -9,6 +9,7 @@
 - **Hover semantic** — `muted-low` / `muted-low-foreground` 저강도 hover 토큰 추가, 기본 `hover`(`muted`)는 `grayscale-15`로 조정
 - **Dialog title** — `DialogTitle` 타이포를 `text-heading4_700`으로 상향
 - **Playground Code** — 복사 시 `design-system/ui/*` import가 붙는 스튜디오 붙여넣기용 스니펫(`playground-snippet.ts`) 적용
+- **Dialog Playground** — description 컨트롤 Textarea 전환, 설명 줄바꿈(`whitespace-pre-line`) 지원
 - **Avatar image** — 이미지 타입에만 `black-opacity-10` inset dim 고정. 모드 전환 영향 없이 유지
 - **Tooltip** — ✕는 `removable`일 때만 노출. `open`은 상시 노출, 미지정은 hover(removable이면 클릭). 바깥 클릭으로 안 닫힘
 - **윤곽 rest** — outline·보더 컨트롤 면을 `bg-transparent`로 통일

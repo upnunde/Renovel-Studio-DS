@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 
 import { Input } from "design-system/ui/input"
 import { Slider } from "design-system/ui/slider"
+import { Textarea } from "design-system/ui/textarea"
 import { DocsFilterChips } from "@/components/docs/docs-filter-chips"
 import { getComponentCaseSpec } from "@/lib/component-case-specs"
 import { formatPlaygroundSnippet } from "@/lib/playground-snippet"
@@ -135,6 +136,18 @@ export function ComponentPlayground({ slug }: { slug: string }) {
       return (
         <PlaygroundField key={key} label={getPlaygroundControlLabel(slug, key, state)}>
           <Input
+            value={String(state[key] ?? "")}
+            onChange={(event) => updateState(key, event.target.value)}
+          />
+        </PlaygroundField>
+      )
+    }
+
+    if (kind === "textarea") {
+      return (
+        <PlaygroundField key={key} label={getPlaygroundControlLabel(slug, key, state)}>
+          <Textarea
+            rows={3}
             value={String(state[key] ?? "")}
             onChange={(event) => updateState(key, event.target.value)}
           />

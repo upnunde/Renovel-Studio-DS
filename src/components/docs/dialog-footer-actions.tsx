@@ -263,6 +263,14 @@ function confirmInputCode(phrase: string) {
   return `  <div className="grid gap-2">\n    <p className="text-body4_400 text-foreground-muted">아래 내용을 숙지한 후, 입력창에 <span className="font-medium text-foreground">${phrase}</span>를 입력해 주세요.</p>\n    <Input placeholder="${phrase}" autoComplete="off" />\n  </div>`
 }
 
+function dialogDescriptionCode(description: string) {
+  if (!description.includes("\n")) {
+    return `<DialogDescription>${description}</DialogDescription>`
+  }
+  const body = description.replace(/\\/g, "\\\\").replace(/`/g, "\\`")
+  return `<DialogDescription>\n    {\`${body}\`}\n  </DialogDescription>`
+}
+
 export function buildDialogFooterActionsCode({
   footerActions,
   title,
@@ -291,7 +299,7 @@ export function buildDialogFooterActionsCode({
   customContent?: boolean
 } & DialogBodyComposition) {
   const header = showHeader
-    ? `\n  <DialogHeader>\n    <DialogTitle>${title}</DialogTitle>\n    <DialogDescription>${description}</DialogDescription>\n  </DialogHeader>`
+    ? `\n  <DialogHeader>\n    <DialogTitle>${title}</DialogTitle>\n    ${dialogDescriptionCode(description)}\n  </DialogHeader>`
     : ""
 
   let content = ""
