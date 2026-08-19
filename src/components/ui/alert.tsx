@@ -4,11 +4,11 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
-import { Icon } from "./icon"
 import { ICONS } from "../icons"
+import { Icon, type IconSize } from "./icon"
 
 const alertVariants = cva(
-  "group/alert relative w-full rounded-lg border p-(--space-4) text-left text-sm",
+  "group/alert relative w-full rounded-lg border text-left",
   {
     variants: {
       variant: {
@@ -32,17 +32,36 @@ const alertVariants = cva(
       type: {
         /** 제목 → 설명 (flex-col) */
         default: "flex flex-col gap-0.5",
-        /** 1행 아이콘+제목 · 2행 설명 — 레이아웃은 alert.css (flex 유틸과 충돌 방지) */
+        /** 아이콘 선행 — 제목 있으면 2행, 없으면 아이콘+설명 한 줄. 레이아웃은 alert.css */
         icon: "alert-layout-icon",
       },
+      /** 배너 밀도 — 폼 컨트롤 h32/h36과 별개. 한 줄(icon·무제목) 기준 sm≈36 md≈46 lg≈56 */
+      size: {
+        sm: "px-(--space-3) py-(--space-2)",
+        md: "px-(--space-4) py-(--space-3)",
+        lg: "px-(--space-5) py-(--space-4)",
+      },
     },
+    compoundVariants: [
+      { type: "default", size: "lg", class: "gap-1" },
+    ],
     defaultVariants: {
       variant: "default",
       status: "default",
       type: "default",
+      size: "md",
     },
   }
 )
+
+const ALERT_ICON_SIZE: Record<
+  NonNullable<VariantProps<typeof alertVariants>["size"]>,
+  IconSize
+> = {
+  sm: "md",
+  md: "md",
+  lg: "lg",
+}
 
 type AlertProps = React.ComponentProps<"div"> &
   VariantProps<typeof alertVariants> & {
@@ -64,6 +83,7 @@ function Alert({
   variant,
   status = "default",
   type = "default",
+  size = "md",
   removable = false,
   duration = 0,
   onDismiss,
@@ -71,6 +91,7 @@ function Alert({
   ...props
 }: AlertProps) {
   const [open, setOpen] = React.useState(true)
+  const resolvedSize = size ?? "md"
 
   const dismiss = React.useCallback(() => {
     setOpen(false)
@@ -90,18 +111,24 @@ function Alert({
       data-slot="alert"
       data-type={type}
       data-status={status}
+      data-size={resolvedSize}
       data-removable={removable ? "" : undefined}
       role="alert"
-      className={cn(alertVariants({ variant, status, type }), className)}
+      className={cn(
+        alertVariants({ variant, status, type, size: resolvedSize }),
+        className
+      )}
       {...props}
     >
-      {type === "icon" ? <Icon icon={ICONS.info} size="md" /> : null}
+      {type === "icon" ? (
+        <Icon icon={ICONS.info} size={ALERT_ICON_SIZE[resolvedSize]} />
+      ) : null}
       {children}
       {removable ? (
         <button
           type="button"
           data-slot="alert-dismiss"
-          className="absolute top-2 right-2 inline-flex size-5 shrink-0 items-center justify-center rounded-sm text-foreground-muted transition-colors hover:bg-muted hover:text-foreground"
+          className="absolute top-2 right-2 inline-flex size-5 shrink-0 items-center justify-center rounded-sm text-foreground-muted transition-colors hover:bg-muted hover:text-foreground group-data-[size=sm]/alert:top-1.5 group-data-[size=sm]/alert:right-1.5 group-data-[size=lg]/alert:top-2.5 group-data-[size=lg]/alert:right-2.5"
           aria-label="닫기"
           onClick={dismiss}
         >
@@ -117,7 +144,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="alert-title"
       className={cn(
-        "font-medium [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_a[data-hovered=true]]:text-foreground",
+        "group-data-[size=sm]/alert:text-body4_500 group-data-[size=md]/alert:text-body3_500 group-data-[size=lg]/alert:text-body2_500 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_a[data-hovered=true]]:text-foreground",
         className
       )}
       {...props}
@@ -133,7 +160,7 @@ function AlertDescription({
     <div
       data-slot="alert-description"
       className={cn(
-        "text-sm text-balance text-foreground-muted md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_a[data-hovered=true]]:text-foreground [&_p:not(:last-child)]:mb-4",
+        "text-balance text-foreground-muted md:text-pretty group-data-[size=sm]/alert:text-body4_400 group-data-[size=md]/alert:text-body3_400 group-data-[size=lg]/alert:text-body2_400 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_a[data-hovered=true]]:text-foreground [&_p:not(:last-child)]:mb-4",
         className
       )}
       {...props}
@@ -151,4 +178,5 @@ function AlertAction({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-export { Alert, AlertTitle, AlertDescription, AlertAction }
+export { Alert, AlertTitle, AlertDescription, AlertAction, alertVariants }
+export type { AlertProps }

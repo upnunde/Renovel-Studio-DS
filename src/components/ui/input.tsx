@@ -72,6 +72,8 @@ function Input({
       }}
       className={cn(
         inputVariants({ size }),
+        type === "number" &&
+          "[appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
         showClear && inputEndActionPadding(1),
         className
       )}

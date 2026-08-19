@@ -6,10 +6,16 @@
   "role": "alert",
   "axes": {
     "status": { "values": ["default", "primary", "success", "warning", "destructive"] },
-    "type": { "values": ["default", "icon"] }
+    "type": { "values": ["default", "icon"] },
+    "size": { "values": ["sm", "md", "lg"], "$description": "배너 밀도. 폼 h32/h36 스케일과 별개" }
   },
-  "defaults": { "variant": "default", "status": "default", "type": "default" },
-  "sizeSpec": { "default": { "padding": "{space.4}", "radius": "8", "gap": "{space.0-5}", "iconGlyph": 16 } },
+  "defaults": { "variant": "default", "status": "default", "type": "default", "size": "md" },
+  "sizeSpec": {
+    "sm": { "paddingX": "{space.3}", "paddingY": "{space.2}", "title": "body4-500", "description": "body4-400", "iconGlyph": 16, "oneLineHeight": 36 },
+    "md": { "paddingX": "{space.4}", "paddingY": "{space.3}", "title": "body3-500", "description": "body3-400", "iconGlyph": 16, "oneLineHeight": 46 },
+    "lg": { "paddingX": "{space.5}", "paddingY": "{space.4}", "title": "body2-500", "description": "body2-400", "iconGlyph": 18, "oneLineHeight": 56 },
+    "$note": "고정 h 없음. oneLineHeight는 type=icon·무제목·1줄 기준(패딩+보더+줄간격)."
+  },
   "styleSpec": {
     "default":     { "rest": { "bg": "{card}", "fg": "{card-foreground}", "border": "{border}" } },
     "primary":     { "rest": { "bg": "{primary}/10", "fg": "{primary}", "border": "{primary}/20" }, "description": { "fg": "{primary}/90" }, "dark": { "rest": { "bg": "{primary}/20", "border": "{primary}/30" } } },
@@ -22,7 +28,8 @@
   },
   "states": ["rest"],
   "nativeNotes": {
-    "iconLayout": "type=icon은 CSS grid(icon | title/desc). 네이티브는 HStack(icon, VStack(title, desc)).",
+    "iconLayout": "type=icon은 CSS grid. 제목 있으면 1행 icon+title · 2행 desc. 제목 없으면 icon+desc 한 줄(세로 중앙). 네이티브는 HStack(icon, title 없으면 desc / 있으면 VStack(title, desc)).",
+    "size": "sm/md/lg는 좌우 패딩 유지, 상하만 -4px(8/12/16). 폼 컨트롤 높이와 다름. 기본 md.",
     "autoDismiss": "duration prop 시 JS 타이머 자동 닫힘. iOS/AOS 타이머+애니메이션.",
     "role": "role=alert 라이브영역. iOS accessibilityAnnouncement, Compose liveRegion."
   }

@@ -23,6 +23,6 @@
     "composition": "Label + Tooltip(info) 합성. iOS/AOS는 라벨 행 + 선택적 info 버튼(팝오버)으로 구현.",
     "required": "asterisk는 시각 표식(aria-hidden). 실제 required 의미는 컨트롤의 required/aria-required로. 플랫폼도 접근성 required 별도 표기.",
     "description": "aria-describedby 연결. 최대 3줄.",
-    "infoTooltip": "Portal 툴팁. iOS popover, Compose Popup/Tooltip."
+    "infoTooltip": "Portal 툴팁. 문자열 info는 줄바꿈 유지(whitespace-pre-line). iOS popover, Compose Popup/Tooltip."
   }
 }

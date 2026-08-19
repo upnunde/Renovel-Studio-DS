@@ -2,7 +2,9 @@
  * Alert 레이아웃 — Tailwind v4 [data-slot=…] 임의 선택자 파싱 버그 회피
  *
  * default: alert.tsx `flex flex-col gap-0.5`
- * icon (.alert-layout-icon): 1행 아이콘+제목 · 2행 설명(전체 너비)
+ * icon (.alert-layout-icon):
+ *   제목 있음 — 1행 아이콘+제목 · 2행 설명(전체 너비)
+ *   제목 없음 — 아이콘+설명 한 줄(세로 중앙)
  * — `flex` 유틸을 icon 타입에 쓰지 않음 (utilities가 components display:grid 를 덮음)
  */
 @layer components {
@@ -12,11 +14,26 @@
     padding-right: 4.5rem;
   }
 
+  [data-slot="alert"][data-size="sm"]:has([data-slot="alert-action"]),
+  [data-slot="alert"][data-size="sm"]:has([data-slot="alert-dismiss"]) {
+    padding-right: 2.5rem;
+  }
+
+  [data-slot="alert"][data-size="lg"]:has([data-slot="alert-action"]),
+  [data-slot="alert"][data-size="lg"]:has([data-slot="alert-dismiss"]) {
+    padding-right: 5rem;
+  }
+
   .alert-layout-icon {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     column-gap: 0.5rem;
     row-gap: 0.125rem;
+  }
+
+  [data-slot="alert"][data-size="sm"].alert-layout-icon {
+    column-gap: 0.25rem;
+    row-gap: 0;
   }
 
   .alert-layout-icon > [data-slot="icon"] {
@@ -35,5 +52,12 @@
   .alert-layout-icon > [data-slot="alert-description"] {
     grid-column: 1 / -1;
     grid-row: 2;
+  }
+
+  .alert-layout-icon:not(:has([data-slot="alert-title"])) > [data-slot="alert-description"] {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    min-width: 0;
   }
 }

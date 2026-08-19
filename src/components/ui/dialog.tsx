@@ -54,7 +54,7 @@ function DialogContent({
       <DialogPrimitive.Popup
         data-slot="dialog-content"
         className={cn(
-          "fixed top-1/2 left-1/2 z-modal grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-background p-5 text-sm text-foreground ring-1 ring-foreground/10 outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:duration-medium data-open:ease-emphasized-decelerate data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-closed:duration-short data-closed:ease-emphasized-accelerate",
+          "fixed top-1/2 left-1/2 z-modal grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-background p-5 text-sm text-foreground ring-1 ring-foreground/10 outline-none sm:max-w-(--dialog-max-width) data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:duration-medium data-open:ease-emphasized-decelerate data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-closed:duration-short data-closed:ease-emphasized-accelerate",
           className
         )}
         {...props}
@@ -84,16 +84,16 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("flex flex-col gap-2", className)}
+      className={cn("flex flex-col items-center gap-2 text-center", className)}
       {...props}
     />
   )
 }
 
-const dialogTitleClass = "text-heading4_700"
+const dialogTitleClass = "w-full text-center text-heading4_700"
 
 const dialogDescriptionClass =
-  "text-sm whitespace-pre-line text-foreground-muted *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground *:[a[data-hovered=true]]:text-foreground"
+  "w-full text-center text-sm whitespace-pre-line text-foreground-muted *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground *:[a[data-hovered=true]]:text-foreground"
 
 /**
  * 가로 정렬된 버튼들의 합계 폭이 컨테이너를 넘치는지 감지한다.

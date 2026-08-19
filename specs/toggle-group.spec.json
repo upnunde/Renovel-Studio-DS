@@ -1,0 +1,29 @@
+{
+  "$schema": "./README.md",
+  "name": "ToggleGroup",
+  "slot": "toggle-group",
+  "$description": "OS-중립 ToggleGroup 정본. 출처: src/components/ui/toggle-group.tsx. 자식 Toggle 높이 강제+모서리 병합. multiple=false면 단일 선택(Figma Resizing).",
+  "role": "group",
+  "axes": {
+    "size": { "values": ["sm", "default", "xl", "2xl"] },
+    "shape": { "values": ["square", "circle"] },
+    "multiple": { "values": [false, true], "$description": "false=하나만 선택, true=여러 개 동시" }
+  },
+  "defaults": { "size": "default", "shape": "square", "multiple": false },
+  "sizeSpec": {
+    "$note": "자식 button 높이를 강제. 자체 padding 없음.",
+    "sm": { "childHeight": 32, "childMinW": 32, "childPadX": 10 },
+    "default": { "childHeight": 36, "childMinW": 36 },
+    "xl": { "childHeight": 40, "childMinW": 40 },
+    "2xl": { "childHeight": 48, "childMinW": 48, "fontSize": 16 }
+  },
+  "styleSpec": {
+    "cornerMerge": { "$note": "첫 자식 좌측 radius, 마지막 자식 우측 radius, 중간은 rounded-none. square=radius.md, circle=full", "square": "{radius.md}", "circle": "9999" }
+  },
+  "states": ["rest"],
+  "nativeNotes": {
+    "selection": "multiple=false는 exclusive(라디오). iOS SegmentedControl, Compose SingleChoice/MultiChoice.",
+    "childStyling": "웹은 부모가 CSS 자식결합자로 높이·모서리 제어. 네이티브는 size/shape/position(first|middle|last)을 자식에 명시.",
+    "value": "각 Toggle에 value 필수. 그룹 value/defaultValue는 선택된 value 배열."
+  }
+}

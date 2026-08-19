@@ -41,7 +41,7 @@ function mapLegacyStatusToTone(
 
 /**
  * 문서·쇼케이스용 — 포털 없이 다이얼로그 구조만 노출.
- * DialogContent의 정본 max-width (모바일 여백 · sm:max-w-sm) 동일 적용.
+ * DialogContent의 정본 max-width (모바일 여백 · sm:max-w-(--dialog-max-width) = 440px) 동일 적용.
  * min-w: 문서 프리뷰가 그리드 셀 안에서 지나치게 좁아져 뭉개지지 않도록 안전지대.
  */
 export function DialogInlineShell({
@@ -55,7 +55,7 @@ export function DialogInlineShell({
     <div
       data-slot="dialog-inline-shell"
       className={cn(
-        "grid w-full min-w-[16rem] max-w-[calc(100%-2rem)] gap-4 rounded-xl bg-background p-5 text-sm text-foreground ring-1 ring-foreground/10 sm:max-w-sm",
+        "grid w-full min-w-[16rem] max-w-[calc(100%-2rem)] gap-4 rounded-xl bg-background p-5 text-sm text-foreground ring-1 ring-foreground/10 sm:max-w-(--dialog-max-width)",
         className
       )}
     >
@@ -254,7 +254,6 @@ export function DialogAcknowledge({
       onOpenChange={handleOpenChange}
       showCloseButton={showCloseButton}
       contentClassName={contentClassName}
-      maxWidthClass="sm:max-w-md"
     >
         <DialogPatternHeader
           presentation={presentation}
@@ -366,7 +365,6 @@ export function DialogChecklist({
       onOpenChange={handleOpenChange}
       showCloseButton={showCloseButton}
       contentClassName={contentClassName}
-      maxWidthClass="sm:max-w-lg"
     >
         <DialogPatternHeader
           presentation={presentation}
@@ -491,7 +489,6 @@ export function DialogSaveChoice({
       onOpenChange={handleOpenChange}
       showCloseButton={showCloseButton}
       contentClassName={contentClassName}
-      maxWidthClass="sm:max-w-md"
     >
         <DialogPatternHeader
           presentation={presentation}
