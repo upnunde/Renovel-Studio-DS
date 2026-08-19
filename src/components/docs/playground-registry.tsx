@@ -554,12 +554,20 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       variant: "outline",
       tone: "neutral",
       size: "default",
+      withText: false,
+      children: "굵게",
       pressed: false,
       disabled: false,
     },
-    skipControlKeys: ["children"],
+    textKeys: ["children"],
+    showWhen: {
+      children: (state) => playgroundBool(state, "withText"),
+    },
     renderPreview: (state, ctx) => {
       const size = str(state, "size")
+      const withText = playgroundBool(state, "withText")
+      const label = str(state, "children") || "굵게"
+      const glyph = controlSizeToIconGlyph(size)
       return (
         <Toggle
           variant={str(state, "variant") as "outline"}
@@ -567,24 +575,36 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
           size={size as "default"}
           {...ctx.bindPressed("pressed")}
           disabled={bool(state, "disabled")}
-          aria-label="굵게"
+          aria-label={withText ? undefined : label}
         >
-          <Icon icon={ICONS.formatBold} size={controlSizeToIconGlyph(size)} />
+          <Icon
+            icon={ICONS.formatBold}
+            size={glyph}
+            position={withText ? "inline-start" : undefined}
+          />
+          {withText ? label : null}
         </Toggle>
       )
     },
     buildCode: (state) => {
+      const withText = playgroundBool(state, "withText")
+      const label = str(state, "children") || "굵게"
+      const size = str(state, "size")
+      const glyph = "md"
       const props = [
         playgroundPropAttr("variant", str(state, "variant")),
         str(state, "tone") !== "neutral"
           ? playgroundPropAttr("tone", str(state, "tone"))
           : "",
-        playgroundPropAttr("size", str(state, "size")),
+        playgroundPropAttr("size", size),
         bool(state, "pressed") ? "pressed" : "",
         bool(state, "disabled") ? "disabled" : "",
-        'aria-label="굵게"',
+        withText ? "" : `aria-label="${label}"`,
       ].filter(Boolean)
-      return `<Toggle ${props.join(" ")}>\n  <Icon icon={ICONS.formatBold} size="md" />\n</Toggle>`
+      if (withText) {
+        return `<Toggle ${props.join(" ")}>\n  <Icon icon={ICONS.formatBold} size="${glyph}" position="inline-start" />\n  ${label}\n</Toggle>`
+      }
+      return `<Toggle ${props.join(" ")}>\n  <Icon icon={ICONS.formatBold} size="${glyph}" />\n</Toggle>`
     },
   },
 

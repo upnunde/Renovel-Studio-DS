@@ -170,7 +170,7 @@ export function DialogFooterActionsPreview({
       {showHeader ? (
         <DialogHeader
           className={cn(
-            "w-full px-5 pt-5 pb-2",
+            "w-full px-5 pt-8 pb-2",
             "text-center",
             "rounded-t-xl",
             !hasContent && !showFooter && "rounded-b-xl"

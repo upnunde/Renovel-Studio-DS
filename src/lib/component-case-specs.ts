@@ -150,9 +150,15 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         valueHints: controlHints(...CONTROL_FORM_SIZE_APIS),
       },
       {
+        name: "withText",
+        values: ["false", "true"],
+        description:
+          "텍스트 라벨 표시 · Playground-only · 끄면 아이콘 전용(aria-label)",
+      },
+      {
         name: "children",
         values: ["string"],
-        description: "aria-label (아이콘 토글용)",
+        description: "라벨 텍스트 (withText일 때)",
       },
       {
         name: "pressed",
@@ -681,6 +687,7 @@ export function formatSpecPropertyName(name: string): string {
     itemVariant: "item variant",
     itemHeight: "item-height",
     withLabel: "with label",
+    withText: "with text",
     htmlFor: "htmlFor",
     info: "info",
     infoText: "info text",

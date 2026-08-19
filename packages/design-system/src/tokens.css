@@ -60,6 +60,7 @@
   --space-modal-padding-x: var(--space-6);
   --space-modal-padding-y: var(--space-5);
   --space-modal-header-padding-y: var(--space-4);
+  --space-modal-header-padding-top: var(--space-8);
   --space-modal-footer-padding-y: var(--space-4);
   --dialog-max-width: 440px;
 

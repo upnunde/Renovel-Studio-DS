@@ -384,6 +384,7 @@ export function getPlaygroundControlLabel(
       return isPlaygroundIconOnlyButtonLabel(state) ? "aria-label" : "children"
     }
     if (slug === "chip" || slug === "badge") return "children"
+    if (slug === "toggle") return "label"
     if (slug === "label") return "제목"
     if (slug === "tooltip") return "tip"
     return "children"

@@ -340,12 +340,12 @@ Tailwind 표준 spacing 네임스페이스와 동일하게 매핑 (`p-5` = 20px,
 | 토큰 | 역할 |
 |------|------|
 | `modalPaddingX` / `modalPaddingY` | 본문 인셋 (X는 반응형 클래스, Y는 `py-5`) |
-| `modalHeaderPaddingX` / `modalHeaderPaddingY` | 헤더 인셋 — **Y는 `py-4` (DS 정본)** |
+| `modalHeaderPaddingX` / `modalHeaderPaddingY` | 헤더 인셋 — **상단 `pt-8`(32), 그 외 Y는 `space-4`** |
 | `modalFooterPaddingX` / `modalFooterPaddingY` | 푸터 인셋 — **Y는 `py-4` (DS 정본)** |
 | `modalBodyStackGap` | 본문 세로 스택 |
 | `dialogMaxWidth` | Dialog 최대 너비 **440px** (`--dialog-max-width`) |
 
-소비 앱은 헤더·푸터 Y를 DS `py-4`에 맞춘다. `pt-6` / `lg:pt-10` / `pb-5 pt-2` 등 앱 전용 Y는 두지 않는다. pad-x 반응형은 DS `modalPaddingX`를 따른다.
+소비 앱은 헤더 상단을 DS `pt-8`(32)에 맞춘다. 푸터 Y는 `py-4`/`pb-5`. `lg:pt-10` 등 앱 전용 Y는 두지 않는다. pad-x 반응형은 DS `modalPaddingX`를 따른다.
 
 #### Control · Section (요약)
 

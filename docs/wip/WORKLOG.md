@@ -5,11 +5,11 @@
 
 ## 오늘 한 일
 
-- **Toggle Group** — Figma Resizing형 세그먼트. 그룹이 size·shape, Toggle이 variant·tone
-- **Toggle 선택** — `neutral` pressed를 `muted-strong`(아이콘색 유지). Playground에서 aria-label 컨트롤 숨김
-- **Alert** — title on/off, icon+무제목 한 줄 레이아웃, size sm/md/lg, 상하 패딩 -4px
-- **Dialog** — 헤더 중앙 정렬, `--dialog-max-width` 440px, 본문은 세미커스텀 슬롯
-- **Input** — number 스피너 숨김. Label Playground `info 문구`를 Textarea로
+- **Avatar** — 이미지 inset 딤드를 `--black-opacity-20`(7%, 라이트·다크 공통)
+- **Dialog** — 헤더 상단 `pt-8`(32), `--space-modal-header-padding-top`
+- **Toggle** — Playground `with text`. 켜면 아이콘+라벨, 끄면 아이콘 전용(aria-label)
+- **Toggle Group** — Figma Resizing형 세그먼트 (v0.1.41)
+- **Alert** — title on/off, size sm/md/lg (v0.1.41)
 
 ## 다음에 할 일
 

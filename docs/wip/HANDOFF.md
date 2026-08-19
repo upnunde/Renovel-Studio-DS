@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-19 12:39:29**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-19 16:31:31**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,11 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-19 12:36:36** — 그럼 max w 440 적용
+- **2026-08-19 16:29:11** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.flex min-h-48 flex-col > div.flex min-h-[400px] w-full flex-1 item.-center ju.tify-center gap-3 px-5 py-10 > span.group/avatar relative flex .hrink-0 rounded-full .elect-none after:ab.olute after:in.et-0 after:rounded-full after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten .ize-8
+Position: top=769px, left=812px, width=32px, height=32px
+React Component: AvatarRoot
+HTML Element: <span data-slot="avatar" data-size="default" class="group/avatar relative flex shrink-0 rounded-full select-none after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten size-8" data-cursor-element-id="cursor-el-2"></span> 이미지 타입 위에 딤드 적용된거 	black-opacity-20 이걸로 변경
+토근자체로 넣는거니까 다크모드 라이트모드에 영향 없는거 맞지?
 
 ## 다음 작업 (Claude Code용)
 
@@ -26,81 +30,53 @@
  M DESIGN.md
  M docs/wip/HANDOFF.md
  M docs/wip/WORKLOG.md
- M packages/design-system/package.json
- M packages/design-system/specs/alert.spec.json
+ M packages/design-system/specs/avatar.spec.json
  M packages/design-system/specs/dialog.spec.json
- M packages/design-system/specs/field-label.spec.json
- M packages/design-system/specs/input.spec.json
- M packages/design-system/specs/toggle.spec.json
- M packages/design-system/specs/tooltip.spec.json
- M packages/design-system/src/alert.css
- M packages/design-system/src/button-group.css
- M packages/design-system/src/components/ui/alert.tsx
+ M packages/design-system/src/components/ui/avatar.tsx
  M packages/design-system/src/components/ui/dialog-patterns.tsx
  M packages/design-system/src/components/ui/dialog.tsx
- M packages/design-system/src/components/ui/field-label.tsx
- M packages/design-system/src/components/ui/input.tsx
- M packages/design-system/src/components/ui/toggle.tsx
  M packages/design-system/src/tokens.css
  M packages/design-system/tokens/semantic-spacing.json
- M src/alert.css
- M src/components/docs/component-overview-preview.tsx
- M src/components/docs/component-playground.tsx
  M src/components/docs/component-showcases.tsx
  M src/components/docs/dialog-footer-actions.tsx
  M src/components/docs/playground-registry.tsx
  M src/components/docs/playground-utils.ts
- M src/components/ui/alert.tsx
  M src/components/ui/dialog.tsx
- M src/components/ui/toggle.tsx
  M src/lib/component-case-specs.ts
- M src/lib/component-docs.ts
- M src/lib/playground-snippet.ts
-?? packages/design-system/specs/toggle-group.spec.json
-?? packages/design-system/src/components/ui/toggle-group.tsx
-?? src/components/ui/toggle-group.tsx
 ```
 
 ### diff 요약
 
 ```
- DESIGN.md                                          |  16 ++-
- docs/wip/HANDOFF.md                                | 105 ++++++++++++++--
- docs/wip/WORKLOG.md                                |   6 +-
- packages/design-system/package.json                |   1 +
- packages/design-system/specs/alert.spec.json       |  15 ++-
- packages/design-system/specs/dialog.spec.json      |   8 +-
- packages/design-system/specs/field-label.spec.json |   2 +-
- packages/design-system/specs/input.spec.json       |   3 +-
- packages/design-system/specs/toggle.spec.json      |  17 +--
- packages/design-system/specs/tooltip.spec.json     |   2 +-
- packages/design-system/src/alert.css               |  26 +++-
- packages/design-system/src/button-group.css        |  27 ++++-
- packages/design-system/src/components/ui/alert.tsx |  46 +++++--
- .../src/components/ui/dialog-patterns.tsx          |   7 +-
- .../design-system/src/components/ui/dialog.tsx     |   8 +-
- .../src/components/ui/field-label.tsx              |   8 +-
- packages/design-system/src/components/ui/input.tsx |   2 +
- .../design-system/src/components/ui/toggle.tsx     |  38 +++++-
- packages/design-system/src/tokens.css              |   1 +
- .../design-system/tokens/semantic-spacing.json     |   3 +-
- src/alert.css                                      |  26 +++-
- src/components/docs/component-overview-preview.tsx |  26 +++-
- src/components/docs/component-playground.tsx       |   3 +
- src/components/docs/component-showcases.tsx        | 132 ++++++++++++++++++++-
- src/components/docs/dialog-footer-actions.tsx      |   2 +-
- src/components/docs/playground-registry.tsx        |  98 +++++++++++++--
- src/components/docs/playground-utils.ts            |   1 -
- src/components/ui/alert.tsx                        |   2 +
- src/components/ui/dialog.tsx                       |   8 +-
- src/components/ui/toggle.tsx                       |  54 +--------
- src/lib/component-case-specs.ts                    |  44 ++++++-
- src/lib/component-docs.ts                          |   8 +-
- src/lib/playground-snippet.ts                      |   1 +
- 33 files changed, 603 insertions(+), 143 deletions(-)
+ DESIGN.md                                          |  4 +-
+ docs/wip/HANDOFF.md                                | 86 +++++++---------------
+ docs/wip/WORKLOG.md                                |  4 +-
+ packages/design-system/specs/avatar.spec.json      |  2 +-
+ packages/design-system/specs/dialog.spec.json      |  4 +-
+ .../design-system/src/components/ui/avatar.tsx     |  2 +-
+ .../src/components/ui/dialog-patterns.tsx          |  2 +-
+ .../design-system/src/components/ui/dialog.tsx     |  2 +-
+ packages/design-system/src/tokens.css              |  1 +
+ .../design-system/tokens/semantic-spacing.json     |  3 +-
+ src/components/docs/component-showcases.tsx        |  6 ++
+ src/components/docs/dialog-footer-actions.tsx      |  2 +-
+ src/components/docs/playground-registry.tsx        | 32 ++++++--
+ src/components/docs/playground-utils.ts            |  1 +
+ src/components/ui/dialog.tsx                       |  2 +-
+ src/lib/component-case-specs.ts                    |  9 ++-
+ 16 files changed, 84 insertions(+), 78 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
+
+
+
+
 
 
 

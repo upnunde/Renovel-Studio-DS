@@ -429,6 +429,12 @@ const SHOWCASES: Record<string, ReactNode> = {
               <Icon icon={ICONS.formatItalic} size="md" />
             </Toggle>
           </ComponentCase>
+          <ComponentCase label="with text" tags={["withText"]}>
+            <Toggle variant="outline">
+              <Icon icon={ICONS.formatBold} size="md" position="inline-start" />
+              굵게
+            </Toggle>
+          </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
       <ComponentCaseGroup title="Tone">
