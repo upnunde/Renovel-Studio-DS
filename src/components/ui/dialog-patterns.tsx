@@ -55,7 +55,7 @@ export function DialogInlineShell({
     <div
       data-slot="dialog-inline-shell"
       className={cn(
-        "grid w-full min-w-[16rem] max-w-[calc(100%-2rem)] gap-4 rounded-xl bg-background p-5 text-sm text-foreground ring-1 ring-foreground/10 sm:max-w-(--dialog-max-width)",
+        "grid w-full min-w-[16rem] max-w-[calc(100%-2rem)] gap-4 rounded-xl bg-background px-5 pt-8 pb-5 text-sm text-foreground ring-1 ring-foreground/10 sm:max-w-(--dialog-max-width)",
         className
       )}
     >

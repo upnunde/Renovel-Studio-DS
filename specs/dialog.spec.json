@@ -8,12 +8,12 @@
   "parts": {
     "overlay": { "rest": { "bg": "{black}/10", "$note": "backdrop-blur-xs(지원 시)" }, "animation": "$use _shared.floatingSurface.animation" },
     "content": {
-      "rest": { "bg": "{popover}", "fg": "{popover-foreground}", "ring": "{foreground}/10", "radius": "20", "padding": "{space.5}", "gap": "{space.4}" },
+      "rest": { "bg": "{popover}", "fg": "{popover-foreground}", "ring": "{foreground}/10", "radius": "20", "paddingX": "{space.5}", "paddingTop": "{space.8}", "paddingBottom": "{space.5}", "gap": "{space.4}" },
       "maxWidth": { "mobile": "calc(100%-32px)", "desktop": 440 },
       "position": "center (top/left 50% + translate -50%)",
       "animation": "$use _shared.floatingSurface.animation"
     },
-    "header": { "gap": "{space.2}", "align": "center", "textAlign": "center" },
+    "header": { "gap": "{space.2}", "align": "center", "textAlign": "center", "paddingTop": "{space.8}" },
     "footer": { "gap": "{space.2}", "$note": "-mx-5 -mb-5 풀블리드, p-5. sm:가로정렬 우측. 음수마진 iOS/AOS는 §2-5-1a 레시피" },
     "title": { "typography": "heading4-700", "textAlign": "center" },
     "description": { "fg": "{foreground-muted}", "textAlign": "center" },
