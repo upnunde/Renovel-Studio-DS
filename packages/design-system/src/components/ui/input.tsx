@@ -119,7 +119,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
 const inputHypertextVariants = cva("text-body4_400", {
   variants: {
     variant: {
-      default: "text-foreground-muted peer-aria-invalid/input:text-destructive",
+      default: "text-foreground-placeholder peer-aria-invalid/input:text-destructive",
       error: "text-destructive",
     },
   },
@@ -150,7 +150,7 @@ function InputHypertext({
     return (
       <p
         data-slot="input-hypertext"
-        className={cn(inputHypertextVariants({ variant }), className)}
+        className={cn("px-3", inputHypertextVariants({ variant }), className)}
         {...props}
       >
         {message}
@@ -162,7 +162,7 @@ function InputHypertext({
     <div
       data-slot="input-hypertext"
       className={cn(
-        "flex items-start justify-between gap-2",
+        "flex items-start justify-between gap-2 px-3",
         inputHypertextVariants({ variant }),
         className
       )}
@@ -174,7 +174,7 @@ function InputHypertext({
         <span className="min-w-0 flex-1" aria-hidden />
       )}
       <span
-        className="shrink-0 tabular-nums text-foreground-muted"
+        className="shrink-0 tabular-nums text-foreground-placeholder"
         aria-live="polite"
       >
         {count ?? 0}/{max}

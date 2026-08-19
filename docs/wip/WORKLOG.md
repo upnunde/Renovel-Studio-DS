@@ -5,11 +5,11 @@
 
 ## 오늘 한 일
 
-- **Avatar** — 이미지 inset 딤드를 `--black-opacity-20`(7%, 라이트·다크 공통)
-- **Dialog** — 헤더 상단 `pt-8`(32), `--space-modal-header-padding-top`
-- **Toggle** — Playground `with text`. 켜면 아이콘+라벨, 끄면 아이콘 전용(aria-label)
-- **Toggle Group** — Figma Resizing형 세그먼트 (v0.1.41)
-- **Alert** — title on/off, size sm/md/lg (v0.1.41)
+- **Alert** — icon 레이아웃 column-gap 8px·row-gap 4px 토큰화
+- **InputHypertext** — 색상 `foreground-placeholder`(On Surface Hint), 좌우 패딩 12px
+- **Avatar** — 이미지 inset 딤드를 `--black-opacity-20` (v0.1.42)
+- **Dialog** — 헤더 상단 `pt-8`(32) (v0.1.42)
+- **Toggle** — Playground `with text` (v0.1.42)
 
 ## 다음에 할 일
 
