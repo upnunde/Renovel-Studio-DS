@@ -7,5 +7,6 @@
   "space-modal-padding-x":       { "$type": "dimension", "$value": "{space.6}",  "$description": "모달 본문 좌우 인셋" },
   "space-modal-padding-y":       { "$type": "dimension", "$value": "{space.5}",  "$description": "모달 본문 상하 인셋" },
   "space-modal-header-padding-y":{ "$type": "dimension", "$value": "{space.4}",  "$description": "모달 헤더 상하 인셋" },
-  "space-modal-footer-padding-y":{ "$type": "dimension", "$value": "{space.4}",  "$description": "모달 푸터 상하 인셋" }
+  "space-modal-footer-padding-y":{ "$type": "dimension", "$value": "{space.4}",  "$description": "모달 푸터 상하 인셋" },
+  "dialog-max-width":            { "$type": "dimension", "$value": "440px",     "$description": "Dialog 최대 너비 (sm 이상)" }
 }

@@ -107,7 +107,7 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 | 카테고리 | 토큰 | 역할 |
 |----------|------|------|
 | **Action · Primary** | `primary` / `primary-foreground` | 주 액션 면 (filled CTA) |
-| **Interaction · Highlight · Brand** | `accent` / `accent-foreground` | 브랜드 톤 자체의 강조 — 선택 상태 전용(Toggle `aria-pressed`). **tone="neutral" 호버에는 쓰지 않는다** |
+| **Interaction · Highlight · Brand** | `accent` / `accent-foreground` | 브랜드 톤 자체의 강조 — 선택 상태 전용(Toggle `tone="brand"` `aria-pressed`). **tone="neutral" 호버·선택에는 쓰지 않는다** |
 | **Hover** | `muted` / `muted-foreground` | hover / on hover — rest가 Surface일 때의 호버 (Tabs, Select, Dropdown, Toggle, **Button** outline/ghost(neutral)) |
 | **Hover variant** | `muted-strong` / `muted-strong-foreground` | hover variant — rest가 Surface Container라 현재 hover와 원시값이 같아 상태가 안 보일 때 (**Button** secondary(neutral), Chip fill, Badge secondary) |
 
@@ -121,10 +121,11 @@ shadcn 호환 이름을 유지하되, 문서·컴포넌트에서는 **역할**�
 
 | 톤 | 호버 토큰 | 예 |
 |------|-----------|-----|
-| hover · rest가 Surface | `muted` | Tabs, Select, Dropdown, Toggle, **Button** outline/ghost(neutral) |
+| hover · rest가 Surface | `muted` | Tabs, Select, Dropdown, Toggle 미선택, **Button** outline/ghost(neutral) |
 | hover variant · rest가 Surface Container (값 = hover) | `muted-strong` | **Button** secondary(neutral), Chip fill, Badge secondary |
+| Toggle 선택(neutral) | `muted-strong` | Toggle `tone="neutral"` `aria-pressed` — 호버(`muted`)보다 한 단계. Inverse 채움 아님 |
 | neutral · 채움 면(강한 대비) | `primary/80`, `inverse-muted/80` | Button default(neutral), Chip pressed |
-| brand 선택 상태(호버 아님) | `accent` | Toggle `aria-pressed` |
+| brand 선택 상태(호버 아님) | `accent` | **Toggle** `tone="brand"` `aria-pressed` |
 | brand tone | `primary/10`, `primary-container/80` | Button */brand |
 | status tone(success/warning/destructive) | `{status}/10`~`/30` | `*`/status variant |
 
@@ -342,6 +343,7 @@ Tailwind 표준 spacing 네임스페이스와 동일하게 매핑 (`p-5` = 20px,
 | `modalHeaderPaddingX` / `modalHeaderPaddingY` | 헤더 인셋 — **Y는 `py-4` (DS 정본)** |
 | `modalFooterPaddingX` / `modalFooterPaddingY` | 푸터 인셋 — **Y는 `py-4` (DS 정본)** |
 | `modalBodyStackGap` | 본문 세로 스택 |
+| `dialogMaxWidth` | Dialog 최대 너비 **440px** (`--dialog-max-width`) |
 
 소비 앱은 헤더·푸터 Y를 DS `py-4`에 맞춘다. `pt-6` / `lg:pt-10` / `pb-5 pt-2` 등 앱 전용 Y는 두지 않는다. pad-x 반응형은 DS `modalPaddingX`를 따른다.
 
@@ -516,11 +518,11 @@ z-toast    /* 500 — 토스트·스낵바 */
 
 상세·에이전트 규칙: **`.cursor/rules/naming-conventions.mdc`**
 
-### 3-4. 컴포넌트 목록 (28개)
+### 3-4. 컴포넌트 목록 (29개)
 
 **Forms:** input, textarea, label, checkbox, radio-group, switch, slider, select, toggle, chip, email-input, password-input, file-input
 
-**Actions:** button, button-group, icon
+**Actions:** button, button-group, toggle-group, icon
 
 **Display:** badge, avatar, card, alert, progress, skeleton
 
@@ -592,6 +594,10 @@ export function DomainButton({ className, ...props }) {
 CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 합성.
 
 **Button 축:** `variant` = 표현(default 솔리드 · secondary · outline · ghost · link), `tone` = 색(neutral · brand · success · warning · destructive). 솔리드 CTA는 `variant="default"` 하나뿐이며, 브랜드 채움은 `tone="brand"`. `variant="primary"`·`status`는 deprecated alias (`primary` → default+brand, `status` default→neutral).
+
+**Toggle 축:** `variant` = 표현(default 면 없음 · outline), `tone` = 선택 색(neutral · brand). 툴바·세그먼트(Figma Flow)는 `tone="neutral"`(pressed=`muted-strong`, 아이콘은 `foreground` 유지). 브랜드 강조 선택은 `tone="brand"`(pressed=`accent`). 기본 `neutral`. Inverse 채움은 Chip·Button solid에만 쓴다.
+
+**Toggle Group:** Toggle을 붙인 세그먼트. `multiple={false}`(기본)는 Figma Resizing처럼 하나만 선택. `multiple`이면 굵게+기울임처럼 여러 개. 그룹이 `size`·`shape`를 일괄하고, 각 Toggle이 `variant`·`tone`·`value`를 가진다.
 
 ### 4-3-1. 간격 규칙
 

@@ -85,6 +85,7 @@ import { Switch } from "design-system/ui/switch"
 import { Tabs, TabsList, TabsTrigger } from "design-system/ui/tabs"
 import { Textarea } from "design-system/ui/textarea"
 import { Toggle } from "design-system/ui/toggle"
+import { ToggleGroup } from "design-system/ui/toggle-group"
 import {
   Tooltip,
   TooltipContent,
@@ -430,14 +431,28 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
+      <ComponentCaseGroup title="Tone">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="neutral" tags={["tone: neutral", "pressed"]}>
+            <Toggle variant="outline" tone="neutral" defaultPressed aria-label="굵게">
+              <Icon icon={ICONS.formatBold} size="md" />
+            </Toggle>
+          </ComponentCase>
+          <ComponentCase label="brand" tags={["tone: brand", "pressed"]}>
+            <Toggle variant="outline" tone="brand" defaultPressed aria-label="기울임">
+              <Icon icon={ICONS.formatItalic} size="md" />
+            </Toggle>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
       <ComponentCaseGroup title="Hover (snapshot)">
         <ComponentCaseGrid columns={2}>
-          <ComponentCase label="default → accent" tags={["hover", "accent"]}>
+          <ComponentCase label="default → muted" tags={["hover", "muted"]}>
             <Toggle data-hovered aria-label="굵게">
               <Icon icon={ICONS.formatBold} size="md" />
             </Toggle>
           </ComponentCase>
-          <ComponentCase label="outline → accent" tags={["hover", "accent"]}>
+          <ComponentCase label="outline → muted" tags={["hover", "muted"]}>
             <Toggle variant="outline" data-hovered aria-label="기울임">
               <Icon icon={ICONS.formatItalic} size="md" />
             </Toggle>
@@ -476,6 +491,93 @@ const SHOWCASES: Record<string, ReactNode> = {
             <Toggle disabled variant="outline">
               비활성
             </Toggle>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+    </Showcase>
+  ),
+
+  "toggle-group": (
+    <Showcase slug="toggle-group">
+      <ComponentCaseGroup title="Selection">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="single" tags={["multiple: false"]}>
+            <ToggleGroup defaultValue={["fill"]}>
+              <Toggle variant="outline" value="hug" aria-label="Hug">
+                <Icon icon={ICONS.square} size="md" />
+              </Toggle>
+              <Toggle variant="outline" value="fill" aria-label="Fill">
+                <Icon icon={ICONS.menu} size="md" />
+              </Toggle>
+              <Toggle variant="outline" value="fixed" aria-label="Fixed">
+                <Icon icon={ICONS.layers} size="md" />
+              </Toggle>
+            </ToggleGroup>
+          </ComponentCase>
+          <ComponentCase label="multiple" tags={["multiple: true"]}>
+            <ToggleGroup multiple defaultValue={["bold"]}>
+              <Toggle variant="outline" value="bold" aria-label="굵게">
+                <Icon icon={ICONS.formatBold} size="md" />
+              </Toggle>
+              <Toggle variant="outline" value="italic" aria-label="기울임">
+                <Icon icon={ICONS.formatItalic} size="md" />
+              </Toggle>
+              <Toggle variant="outline" value="underline" aria-label="밑줄">
+                <Icon icon={ICONS.formatUnderlined} size="md" />
+              </Toggle>
+            </ToggleGroup>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Size">
+        <ComponentCaseGrid columns={2}>
+          {CONTROL_FORM_SIZE_APIS.map((size) => {
+            const meta = controlCaseMeta(size)
+            return (
+              <ComponentCase key={size} label={meta.label} tags={meta.tags}>
+                <ToggleGroup size={size} defaultValue={["fill"]}>
+                  <Toggle variant="outline" size={size} value="hug" aria-label="Hug">
+                    <Icon icon={ICONS.square} size={controlSizeToIconGlyph(size)} />
+                  </Toggle>
+                  <Toggle variant="outline" size={size} value="fill" aria-label="Fill">
+                    <Icon icon={ICONS.menu} size={controlSizeToIconGlyph(size)} />
+                  </Toggle>
+                  <Toggle variant="outline" size={size} value="fixed" aria-label="Fixed">
+                    <Icon icon={ICONS.layers} size={controlSizeToIconGlyph(size)} />
+                  </Toggle>
+                </ToggleGroup>
+              </ComponentCase>
+            )
+          })}
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Shape">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="square" tags={["shape: square"]}>
+            <ToggleGroup shape="square" defaultValue={["fill"]}>
+              <Toggle variant="outline" value="hug" aria-label="Hug">
+                <Icon icon={ICONS.square} size="md" />
+              </Toggle>
+              <Toggle variant="outline" value="fill" aria-label="Fill">
+                <Icon icon={ICONS.menu} size="md" />
+              </Toggle>
+              <Toggle variant="outline" value="fixed" aria-label="Fixed">
+                <Icon icon={ICONS.layers} size="md" />
+              </Toggle>
+            </ToggleGroup>
+          </ComponentCase>
+          <ComponentCase label="circle" tags={["shape: circle"]}>
+            <ToggleGroup shape="circle" defaultValue={["fill"]}>
+              <Toggle variant="outline" value="hug" aria-label="Hug">
+                <Icon icon={ICONS.square} size="md" />
+              </Toggle>
+              <Toggle variant="outline" value="fill" aria-label="Fill">
+                <Icon icon={ICONS.menu} size="md" />
+              </Toggle>
+              <Toggle variant="outline" value="fixed" aria-label="Fixed">
+                <Icon icon={ICONS.layers} size="md" />
+              </Toggle>
+            </ToggleGroup>
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
@@ -1654,6 +1756,32 @@ const SHOWCASES: Record<string, ReactNode> = {
               <AlertDescription>아이콘이 포함된 메시지</AlertDescription>
             </Alert>
           </ComponentCase>
+          <ComponentCase label="icon · no title" tags={["type: icon", "title 없음"]}>
+            <Alert type="icon">
+              <AlertDescription>
+                불법촬영물 등의 유통 신고 안내 등 콘텐츠 규정에 따라 운영됩니다.
+              </AlertDescription>
+            </Alert>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+      <ComponentCaseGroup title="Size">
+        <ComponentCaseGrid columns={2}>
+          {(
+            [
+              ["sm", "py 8 · body4"],
+              ["md", "py 12 · body3"],
+              ["lg", "py 16 · body2"],
+            ] as const
+          ).map(([size, hint]) => (
+            <ComponentCase key={size} label={size} tags={[`size: ${size}`, hint]}>
+              <Alert type="icon" size={size}>
+                <AlertDescription>
+                  불법촬영물 등의 유통 신고 안내 등 콘텐츠 규정에 따라 운영됩니다.
+                </AlertDescription>
+              </Alert>
+            </ComponentCase>
+          ))}
         </ComponentCaseGrid>
       </ComponentCaseGroup>
       <ComponentCaseGroup title="Status">

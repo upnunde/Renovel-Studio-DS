@@ -23,6 +23,7 @@ import { Switch } from "design-system/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "design-system/ui/tabs"
 import { Textarea } from "design-system/ui/textarea"
 import { Toggle } from "design-system/ui/toggle"
+import { ToggleGroup } from "design-system/ui/toggle-group"
 import type { ComponentDoc } from "@/lib/component-docs"
 import { cn } from "@/lib/utils"
 
@@ -67,6 +68,24 @@ function PreviewToggle() {
       <Toggle size="sm" variant="outline" aria-pressed>
         On
       </Toggle>
+    </div>
+  )
+}
+
+function PreviewToggleGroup() {
+  return (
+    <div className={previewShell}>
+      <ToggleGroup size="sm" defaultValue={["fill"]}>
+        <Toggle size="sm" variant="outline" value="hug">
+          A
+        </Toggle>
+        <Toggle size="sm" variant="outline" value="fill">
+          B
+        </Toggle>
+        <Toggle size="sm" variant="outline" value="fixed">
+          C
+        </Toggle>
+      </ToggleGroup>
     </div>
   )
 }
@@ -305,9 +324,9 @@ function PreviewTooltip() {
 function PreviewAlert() {
   return (
     <div className={cn(previewShell, "px-2")}>
-      <Alert type="icon" className="w-full max-w-[220px] py-3">
-        <AlertTitle className="text-sm">알림</AlertTitle>
-        <AlertDescription className="text-xs">상태 메시지</AlertDescription>
+      <Alert type="icon" size="sm" className="w-full max-w-[220px]">
+        <AlertTitle>알림</AlertTitle>
+        <AlertDescription>상태 메시지</AlertDescription>
       </Alert>
     </div>
   )
@@ -329,6 +348,7 @@ const previewBySlug: Record<ComponentDoc["slug"], () => ReactNode> = {
   button: PreviewButton,
   "button-group": PreviewButtonGroup,
   toggle: PreviewToggle,
+  "toggle-group": PreviewToggleGroup,
   chip: PreviewChip,
   input: PreviewInput,
   label: PreviewLabel,

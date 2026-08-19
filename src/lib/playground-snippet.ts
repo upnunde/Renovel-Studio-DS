@@ -93,6 +93,7 @@ const DS_COMPONENT_IMPORTS: Record<string, string> = {
   TabsTrigger: "design-system/ui/tabs",
   Textarea: "design-system/ui/textarea",
   Toggle: "design-system/ui/toggle",
+  ToggleGroup: "design-system/ui/toggle-group",
   Tooltip: "design-system/ui/tooltip",
   TooltipContent: "design-system/ui/tooltip",
   TooltipProvider: "design-system/ui/tooltip",

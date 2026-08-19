@@ -1,21 +1,15 @@
 # 작업 일지 (WORKLOG)
 
-> 마지막 갱신: 2026-08-18  
+> 마지막 갱신: 2026-08-19  
 > 다음 세션: Cursor에서 `@docs/wip/WORKLOG.md` 를 붙이고 「이어서」라고 하면 됩니다.
 
 ## 오늘 한 일
 
-- **Button 시각 높이** — 솔리드가 `bg-clip-padding`+투명 보더 때문에 outline보다 2px 작아 보이던 문제 수정. 채움은 border-box, outline만 padding-box
-- **Dialog z-index** — `z-50` → overlay `z-overlay`(300), content `z-modal`(400). 앱 sticky/overlay 위로, 토스트만 위
-- **Grayscale token** — `grayscale-5`(`#FCFCFF`) 원시 토큰 추가, 그레이스케일 스케일 16단계로 확장
-- **Hover semantic** — `muted-low` / `muted-low-foreground` 저강도 hover 토큰 추가, 기본 `hover`(`muted`)는 `grayscale-15`로 조정
-- **Dialog title** — `DialogTitle` 타이포를 `text-heading4_700`으로 상향
-- **Playground Code** — 복사 시 `design-system/ui/*` import가 붙는 스튜디오 붙여넣기용 스니펫(`playground-snippet.ts`) 적용
-- **Dialog Playground** — description 컨트롤 Textarea 전환, 설명 줄바꿈(`whitespace-pre-line`) 지원
-- **Avatar image** — 이미지 타입에만 `black-opacity-10` inset dim 고정. 모드 전환 영향 없이 유지
-- **Tooltip** — ✕는 `removable`일 때만 노출. `open`은 상시 노출, 미지정은 hover(removable이면 클릭). 바깥 클릭으로 안 닫힘
-- **윤곽 rest** — outline·보더 컨트롤 면을 `bg-transparent`로 통일
-- Color Semantic ShowcaseBlock 헤더 보조설명 삭제
+- **Toggle Group** — Figma Resizing형 세그먼트. 그룹이 size·shape, Toggle이 variant·tone
+- **Toggle 선택** — `neutral` pressed를 `muted-strong`(아이콘색 유지). Playground에서 aria-label 컨트롤 숨김
+- **Alert** — title on/off, icon+무제목 한 줄 레이아웃, size sm/md/lg, 상하 패딩 -4px
+- **Dialog** — 헤더 중앙 정렬, `--dialog-max-width` 440px, 본문은 세미커스텀 슬롯
+- **Input** — number 스피너 숨김. Label Playground `info 문구`를 Textarea로
 
 ## 다음에 할 일
 
@@ -35,6 +29,7 @@
 - `packages/design-system/tokens/primitives.json` · `semantic.json`
 - `packages/design-system/src/tokens.css` · `theme.css`
 - `src/lib/semantic-token-sources.ts` · `color-tokens.ts` · `playground-snippet.ts`
+- `packages/design-system/src/components/ui/toggle.tsx` · `toggle-group.tsx` · `specs/toggle.spec.json` · `specs/toggle-group.spec.json`
 - `packages/design-system/src/components/ui/button.tsx` · `specs/button.spec.json`
 - `packages/design-system/src/components/ui/dialog.tsx`
 - `packages/design-system/src/components/ui/avatar.tsx` · `specs/avatar.spec.json`

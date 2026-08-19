@@ -22,7 +22,13 @@ export const componentDocs: ComponentDoc[] = [
   {
     slug: "toggle",
     title: "Toggle",
-    description: "툴바·아이콘 눌림 상태 (필터·태그는 Chip)",
+    description: "툴바·아이콘 눌림 상태 (묶음은 Toggle Group, 필터·태그는 Chip)",
+    section: "Actions",
+  },
+  {
+    slug: "toggle-group",
+    title: "Toggle Group",
+    description: "Toggle을 세그먼트로 묶음 — 하나만 선택(Figma Resizing) 또는 여러 개",
     section: "Actions",
   },
   {

@@ -34,6 +34,7 @@
     "placeholder": "웹 ::placeholder. iOS placeholder, Compose placeholder 파라미터.",
     "focus": "focus-visible ring. iOS/AOS focus indication.",
     "peerInvalid": "hypertext가 짝 input의 aria-invalid를 CSS peer로 감지. 플랫폼은 form-field 상태 바인딩으로.",
-    "file": "type=file 스타일은 웹 전용 file: 의사요소. iOS/AOS는 별도 파일 선택 UI."
+    "file": "type=file 스타일은 웹 전용 file: 의사요소. iOS/AOS는 별도 파일 선택 UI.",
+    "number": "type=number 스피너(위·아래 버튼) 숨김. 모바일·작은 높이에서 조작 불가에 가깝고, 값은 키보드 입력."
   }
 }

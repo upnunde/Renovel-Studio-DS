@@ -383,7 +383,6 @@ export function getPlaygroundControlLabel(
     if (slug === "button") {
       return isPlaygroundIconOnlyButtonLabel(state) ? "aria-label" : "children"
     }
-    if (slug === "toggle") return "aria-label"
     if (slug === "chip" || slug === "badge") return "children"
     if (slug === "label") return "제목"
     if (slug === "tooltip") return "tip"

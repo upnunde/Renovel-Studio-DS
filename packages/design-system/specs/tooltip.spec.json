@@ -17,7 +17,7 @@
   "nativeNotes": {
     "surface": "다른 오버레이와 달리 inverse 면(어두운 배경+밝은 텍스트).",
     "arrow": "미사용 — 둥근 박스만 노출 (화살표/꼬리 없음).",
-    "removable": "✕ 노출 전용. hover/focus 이탈·바깥 클릭으로 안 닫힘. 닫기는 ✕ 또는 Esc. open과 직교(상시는 open, hover는 open 미지정).",
+    "removable": "✕ 노출. hover/focus 이탈·바깥 클릭으로 안 닫힘. 닫기는 ✕ 또는 Esc. Playground는 open 켜진 뒤에만 옵션을 노출(종속).",
     "openStates": "웹은 delayed-open(hover)과 open(controlled) 2속성. 네이티브는 단일 open으로.",
     "z": "raw z-50 (FLAG)."
   }

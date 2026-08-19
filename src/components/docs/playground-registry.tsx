@@ -71,6 +71,7 @@ import { Switch } from "design-system/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "design-system/ui/tabs"
 import { Textarea } from "design-system/ui/textarea"
 import { Toggle } from "design-system/ui/toggle"
+import { ToggleGroup } from "design-system/ui/toggle-group"
 import {
   Tooltip,
   TooltipContent,
@@ -548,24 +549,25 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   },
 
   toggle: {
-    description: "size · sm_h32 ~ 2xl_h48",
+    description: "variant × tone × size · sm_h32 ~ 2xl_h48",
     initialState: {
       variant: "outline",
+      tone: "neutral",
       size: "default",
-      children: "굵게",
       pressed: false,
       disabled: false,
     },
-    textKeys: ["children"],
+    skipControlKeys: ["children"],
     renderPreview: (state, ctx) => {
       const size = str(state, "size")
       return (
         <Toggle
           variant={str(state, "variant") as "outline"}
+          tone={str(state, "tone") as "neutral"}
           size={size as "default"}
           {...ctx.bindPressed("pressed")}
           disabled={bool(state, "disabled")}
-          aria-label={str(state, "children")}
+          aria-label="굵게"
         >
           <Icon icon={ICONS.formatBold} size={controlSizeToIconGlyph(size)} />
         </Toggle>
@@ -574,12 +576,68 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     buildCode: (state) => {
       const props = [
         playgroundPropAttr("variant", str(state, "variant")),
+        str(state, "tone") !== "neutral"
+          ? playgroundPropAttr("tone", str(state, "tone"))
+          : "",
         playgroundPropAttr("size", str(state, "size")),
         bool(state, "pressed") ? "pressed" : "",
         bool(state, "disabled") ? "disabled" : "",
-        `aria-label="${str(state, "children")}"`,
+        'aria-label="굵게"',
       ].filter(Boolean)
       return `<Toggle ${props.join(" ")}>\n  <Icon icon={ICONS.formatBold} size="md" />\n</Toggle>`
+    },
+  },
+
+  "toggle-group": {
+    description: "Toggle 세그먼트 · size · shape · multiple",
+    initialState: {
+      size: "default",
+      shape: "square",
+      multiple: false,
+    },
+    selectKeys: {
+      size: [...CONTROL_FORM_SIZE_APIS],
+      shape: [...BUTTON_SHAPE_APIS],
+    },
+    renderPreview: (state, _ctx) => {
+      const size = str(state, "size") as "default"
+      const shape = str(state, "shape") as "square"
+      const multiple = bool(state, "multiple")
+      const glyph = controlSizeToIconGlyph(size)
+
+      return (
+        <ToggleGroup
+          key={multiple ? "multiple" : "single"}
+          size={size}
+          shape={shape}
+          multiple={multiple}
+          defaultValue={multiple ? ["bold"] : ["fill"]}
+        >
+          <Toggle variant="outline" value={multiple ? "bold" : "hug"} size={size} aria-label={multiple ? "굵게" : "Hug"}>
+            <Icon icon={multiple ? ICONS.formatBold : ICONS.square} size={glyph} />
+          </Toggle>
+          <Toggle variant="outline" value={multiple ? "italic" : "fill"} size={size} aria-label={multiple ? "기울임" : "Fill"}>
+            <Icon icon={multiple ? ICONS.formatItalic : ICONS.menu} size={glyph} />
+          </Toggle>
+          <Toggle variant="outline" value={multiple ? "underline" : "fixed"} size={size} aria-label={multiple ? "밑줄" : "Fixed"}>
+            <Icon icon={multiple ? ICONS.formatUnderlined : ICONS.layers} size={glyph} />
+          </Toggle>
+        </ToggleGroup>
+      )
+    },
+    buildCode: (state) => {
+      const size = str(state, "size")
+      const multiple = bool(state, "multiple")
+      const attrs = playgroundPropAttrs([
+        playgroundPropAttr("size", size),
+        playgroundPropAttr("shape", str(state, "shape")),
+        multiple ? "multiple" : "",
+        multiple ? 'defaultValue={["bold"]}' : 'defaultValue={["fill"]}',
+      ])
+      if (multiple) {
+        return `<ToggleGroup${attrs}>\n  <Toggle variant="outline" value="bold" aria-label="굵게">\n    <Icon icon={ICONS.formatBold} size="md" />\n  </Toggle>\n  <Toggle variant="outline" value="italic" aria-label="기울임">\n    <Icon icon={ICONS.formatItalic} size="md" />\n  </Toggle>\n  <Toggle variant="outline" value="underline" aria-label="밑줄">\n    <Icon icon={ICONS.formatUnderlined} size="md" />\n  </Toggle>\n</ToggleGroup>`
+      }
+      return `<ToggleGroup${attrs}>\n  <Toggle variant="outline" value="hug" aria-label="Hug">\n    <Icon icon={ICONS.square} size="md" />\n  </Toggle>\n  <Toggle variant="outline" value="fill" aria-label="Fill">\n    <Icon icon={ICONS.menu} size="md" />\n  </Toggle>\n  <Toggle variant="outline" value="fixed" aria-label="Fixed">\n    <Icon icon={ICONS.layers} size="md" />\n  </Toggle>\n</ToggleGroup>`
     },
   },
 
@@ -719,7 +777,8 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       info: false,
       infoText: "필드에 대한 추가 설명입니다.",
     },
-    textKeys: ["children", "infoText"],
+    textKeys: ["children"],
+    textareaKeys: ["infoText"],
     selectKeys: {
       size: ["default", "lg"],
       descriptionLines: ["1", "2", "3"],
@@ -1427,7 +1486,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
     renderPreview: (state) => (
       <DialogFooterActionsPreview
-        className="w-full max-w-sm"
+        className="w-full max-w-(--dialog-max-width)"
         footerActions={str(state, "footerActions") as "1" | "2" | "3"}
         title={str(state, "title")}
         description={str(state, "description")}
@@ -1482,9 +1541,12 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     selectKeys: {
       side: ["top", "right", "bottom", "left"],
     },
+    showWhen: {
+      removable: (state) => playgroundBool(state, "open"),
+    },
     renderPreview: (state, ctx) => {
-      const removable = bool(state, "removable")
       const forcedOpen = bool(state, "open")
+      const removable = forcedOpen && bool(state, "removable")
 
       return (
         <TooltipProvider delay={0}>
@@ -1519,9 +1581,9 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
     buildCode: (state) => {
       const side = ` side="${str(state, "side")}"`
-      const removable = bool(state, "removable")
       const open = bool(state, "open")
-      const attrs = `${removable ? " removable" : ""}${open ? " open" : ""}`
+      const removable = open && bool(state, "removable")
+      const attrs = `${open ? " open" : ""}${removable ? " removable" : ""}`
       return `<Tooltip${attrs}>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "children")}\n  </TooltipContent>\n</Tooltip>`
     },
   },
@@ -1529,12 +1591,15 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   alert: {
     initialState: {
       status: "default",
+      size: "md",
       type: "default",
+      showTitle: true,
       removable: false,
       duration: "0",
     },
     selectKeys: {
       status: ["default", "primary", "success", "warning", "destructive"],
+      size: ["sm", "md", "lg"],
       type: ["default", "icon"],
       duration: ["0", "3000", "5000"],
     },
@@ -1544,16 +1609,19 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     renderPreview: (state, _ctx) => {
       const removable = bool(state, "removable")
       const duration = Number(str(state, "duration") || 0)
+      const showTitle = playgroundBool(state, "showTitle")
+      const size = str(state, "size") as "md"
       return (
         <Alert
-          key={`${str(state, "type")}-${removable}-${duration}`}
+          key={`${size}-${str(state, "type")}-${showTitle}-${removable}-${duration}`}
           status={str(state, "status") as "default"}
+          size={size}
           type={str(state, "type") as "default"}
           removable={removable}
           duration={removable ? duration : 0}
           className="w-full max-w-md"
         >
-          <AlertTitle>알림</AlertTitle>
+          {showTitle ? <AlertTitle>알림</AlertTitle> : null}
           <AlertDescription>추가 설명이 여기에 표시됩니다.</AlertDescription>
         </Alert>
       )
@@ -1562,13 +1630,17 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       const removable = bool(state, "removable")
       const duration = Number(str(state, "duration") || 0)
       const status = str(state, "status")
+      const size = str(state, "size")
+      const showTitle = playgroundBool(state, "showTitle")
       const props = [
         status !== "default" ? `status="${status}"` : "",
+        size !== "md" ? `size="${size}"` : "",
         `type="${str(state, "type")}"`,
         removable ? "removable" : "",
         removable && duration > 0 ? `duration={${duration}}` : "",
       ].filter(Boolean)
-      return `<Alert ${props.join(" ")}>\n  <AlertTitle>알림</AlertTitle>\n  <AlertDescription>추가 설명이 여기에 표시됩니다.</AlertDescription>\n</Alert>`
+      const title = showTitle ? "  <AlertTitle>알림</AlertTitle>\n" : ""
+      return `<Alert ${props.join(" ")}>\n${title}  <AlertDescription>추가 설명이 여기에 표시됩니다.</AlertDescription>\n</Alert>`
     },
   },
 

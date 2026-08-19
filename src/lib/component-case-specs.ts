@@ -139,6 +139,11 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         description: "배경 없음 / 윤곽",
       },
       {
+        name: "tone",
+        values: ["neutral", "brand"],
+        description: "선택 색 · neutral=muted-strong(Figma) / brand=accent",
+      },
+      {
         name: "size",
         values: [...CONTROL_FORM_SIZE_APIS],
         description: "터치 영역 · sm_h32 ~ 2xl_h48",
@@ -155,6 +160,27 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         description: "눌림·선택 유지 ( data-state=on )",
       },
       { name: "disabled", values: ["false", "true"], description: "비활성" },
+    ],
+  },
+  "toggle-group": {
+    slug: "toggle-group",
+    properties: [
+      {
+        name: "size",
+        values: [...CONTROL_FORM_SIZE_APIS],
+        description: "그룹이 자식 Toggle 높이를 일괄 규정 · sm_h32 ~ 2xl_h48",
+        valueHints: controlHints(...CONTROL_FORM_SIZE_APIS),
+      },
+      {
+        name: "shape",
+        values: [...BUTTON_SHAPE_APIS],
+        description: "그룹 양끝 모서리 · circle(rounded-full) / square(rounded-md)",
+      },
+      {
+        name: "multiple",
+        values: ["false", "true"],
+        description: "false=하나만 선택(Figma Resizing) · true=여러 개 동시(굵게+기울임)",
+      },
     ],
   },
   input: {
@@ -580,8 +606,8 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
     slug: "tooltip",
     properties: [
       { name: "side", values: ["top", "right", "bottom", "left"], description: "표시 위치" },
-      { name: "open", values: ["false", "true"], description: "상시 노출 · false면 hover(또는 removable이면 클릭)" },
-      { name: "removable", values: ["false", "true"], description: "✕ 표시 · ✕·Esc로 닫기 · 바깥 클릭으로 안 닫힘" },
+      { name: "open", values: ["false", "true"], description: "상시 노출 · false면 hover" },
+      { name: "removable", values: ["false", "true"], description: "open일 때만 ✕ 표시 · ✕·Esc로 닫기 · 바깥 클릭으로 안 닫힘" },
     ],
   },
   alert: {
@@ -594,9 +620,22 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
           "의미론적 상태 톤 · default(무톤) / primary(브랜드) / 성공 / 경고 / 위험",
       },
       {
+        name: "size",
+        values: ["sm", "md", "lg"],
+        description:
+          "배너 밀도 · 상하 8/12/16 · body4/3/2 · 한 줄≈36/46/56",
+        valueHints: { sm: "py8_body4", md: "py12_body3", lg: "py16_body2" },
+      },
+      {
         name: "type",
         values: ["default", "icon"],
         description: "레이아웃 · default=제목·설명 세로 / icon=선행 아이콘",
+      },
+      {
+        name: "showTitle",
+        values: ["false", "true"],
+        description:
+          "AlertTitle 표시 · Playground-only · 끄고 type=icon이면 아이콘+설명 한 줄",
       },
       {
         name: "removable",
@@ -651,6 +690,7 @@ export function formatSpecPropertyName(name: string): string {
     captionText: "caption text",
     descriptionLines: "description lines",
     showHeader: "show header",
+    showTitle: "title",
     showLabel: "title",
     showIcon: "icon",
     showContent: "show content",

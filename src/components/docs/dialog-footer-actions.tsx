@@ -163,7 +163,7 @@ export function DialogFooterActionsPreview({
   return (
     <DialogInlineShell
       className={cn(
-        "flex min-h-[200px] w-full max-w-sm flex-col gap-0 p-0",
+        "flex min-h-[200px] w-full max-w-(--dialog-max-width) flex-col gap-0 p-0",
         className
       )}
     >

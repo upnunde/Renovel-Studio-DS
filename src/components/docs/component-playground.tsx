@@ -106,6 +106,9 @@ export function ComponentPlayground({ slug }: { slug: string }) {
       if (slug === "button" && key === "variant" && value === "link") {
         next.type = "text"
       }
+      if (slug === "tooltip" && key === "open" && value === false) {
+        next.removable = false
+      }
       if (slug === "tabs" && (key === "tabCount" || key === "defaultValue")) {
         const count = Math.min(4, Math.max(2, Number(next.tabCount) || 3))
         next.tabCount = String(count)

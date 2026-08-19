@@ -128,7 +128,13 @@ function FieldLabel({
                   className="pointer-events-none"
                 />
               </TooltipTrigger>
-              <TooltipContent side="top">{info}</TooltipContent>
+              <TooltipContent side="top">
+                {typeof info === "string" ? (
+                  <span className="whitespace-pre-line">{info}</span>
+                ) : (
+                  info
+                )}
+              </TooltipContent>
             </Tooltip>
           </TooltipProvider>
         ) : null}
