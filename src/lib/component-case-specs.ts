@@ -238,7 +238,7 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         name: "size",
         values: ["sm", "default", "lg"],
         description:
-          "제목 크기 · sm 15 · default 16 · lg 18 · Input 크기는 고정 · Label↔Input 간격 sm 4 · default·lg 8",
+          "제목 크기 · sm 15 · default 16 · lg 18 · Input 크기는 고정 · Label↔Input 간격 전 size 8px",
         valueHints: {
           sm: "15",
           default: "16",

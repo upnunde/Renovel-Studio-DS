@@ -335,13 +335,13 @@ Tailwind 표준 spacing 네임스페이스와 동일하게 매핑 (`p-5` = 20px,
 
 필드 사이를 12로 줄이려는 로컬 토큰·임의 `gap-3`는 금지. 밀도 조절은 `formFieldGap` / `formFieldGapTight` / `formGroupGap*` 역할 안에서만 한다.
 
-**FieldLabel × Input (합성 가이드)** — 간격은 `InputGroup`이 소유. **Input size는 고정.** 라벨 size만 바꿔도 아래 컨트롤 높이는 그대로, **사이 간격만** 따라간다.
+**FieldLabel × Input (합성 가이드)** — 간격은 `InputGroup`(`gap-2`)이 소유. **Input size는 고정.** 라벨 size와 무관하게 Label ↔ Input은 **8px**.
 
 | FieldLabel | 타이포 | Label ↔ Input |
 |------------|--------|----------------|
-| sm (15) | `text-body2_*` | 4 (`mt-1`) |
-| default (16) | `text-body1_*` | 8 (`mt-2`) |
-| lg (18) | `text-heading5_*` | 8 (`mt-2`) |
+| sm (15) | `text-body2_*` | 8 (`gap-2`) |
+| default (16) | `text-body1_*` | 8 (`gap-2`) |
+| lg (18) | `text-heading5_*` | 8 (`gap-2`) |
 
 제목 ↔ 보조문구는 FieldLabel 내부 `gap-0.5`(2). Input ↔ Hypertext는 8. `InputGroup`에 `gap-4`로 덮어쓰지 않는다.
 

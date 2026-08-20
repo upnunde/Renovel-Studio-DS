@@ -8,7 +8,7 @@
 - **타이포 600** — heading/body/caption 전 스케일에 semibold 합본 추가 (27→38 토큰)
 - **FieldLabel weight** — 500/600/700만 유지 (400 삭제)
 - **FieldLabel sm** — 타이포 14(body3) → **15(body2)**
-- **FieldLabel ↔ Input 간격** — Input 크기는 고정. sm 4px · default·lg 8px (`InputGroup` 소유)
+- **FieldLabel ↔ Input 간격** — 전 size 공통 **8px** (`InputGroup` `gap-2`). Input 크기는 고정
 - **Input 지우기** — 값이 있어도 포커스(focus-within)일 때만 ✕ 노출 (Email·Password·File 포함)
 
 ## 다음에 할 일

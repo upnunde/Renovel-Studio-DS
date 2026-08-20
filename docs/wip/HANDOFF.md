@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-20 14:32:20**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-20 14:36:09**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,10 +11,10 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-20 14:30:55** — 입력 완료된 상태더라도 DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.flex min-h-48 flex-col > div.flex min-h-[400px] w-full flex-1 item.-center ju.tify-center gap-3 px-5 py-10 > div.grid w-full [&>[data-.lot=field-label][data-.ize=.m]+*]:mt-1 [&>[data-.lot=field-label][data-.ize=default]+*]:mt-2 [&>[data-.lot=field-label][data-.ize=lg]+*]:mt-2 [&>[data-.lot=input-hypertext]]:mt-2 ha.-[input:di.abled]:[&_[data-.lot=label]]:pointer-event.-none ha.-[input:di.abled]:[&_[data-.lot=label]]:cur.or-not-allowed ha.-[input:di.abled]:[&_[data-.lot=label]]:text-di.abled-foreground ha.-[textarea:di.abled]:[&_[data-.lot=label]]:pointer-event.-none ha.-[textarea:di.abled]:[&_[data-.lot=label]]:cur.or-not-allowed ha.-[textarea:di.abled]:[&_[data-.lot=label]]:text-di.abled-foreground ha.-[input[data-di.abled]]:[&_[data-.lot=label]]:text-di.abled-foreground ha.-[input[aria-di.abled=true]]:[&_[data-.lot=label]]:text-di.abled-foreground max-w-x > div.relative w-full > button.group/button inline-flex .hrink-0 item.-center ju.tify-center border border-tran.parent text-.m font-medium white.pace-nowrap tran.ition-all duration-.hort ea.e-.tandard outline-none .elect-none focu.-vi.ible:border-ring focu.-vi.ible:ring-3 focu.-vi.ible:ring-ring/50 di.abled:pointer-event.-none di.abled:cur.or-not-allowed data-di.abled:pointer-event.-none data-di.abled:cur.or-not-allowed aria-di.abled:pointer-event.-none aria-di.abled:cur.or-not-allowed di.abled:bg-di.abled di.abled:text-di.abled-foreground di.abled:border-di.abled-border data-di.abled:bg-di.abled data-di.abled:text-di.abled-foreground data-di.abled:border-di.abled-border aria-di.abled:bg-di.abled aria-di.abled:text-di.abled-foreground aria-di.abled:border-di.abled-border aria-invalid:border-de.tructive aria-invalid:ring-3 aria-invalid:ring-de.tructive/20 dark:aria-invalid:border-de.tructive/50 dark:aria-invalid:ring-de.tructive/40 [&_.vg]:pointer-event.-none [&_.vg]:.hrink-0 rounded-md in-data-[.lot=button-group]:rounded-none a.pect-.quare .ize-8 w-8 p-0 [&_.vg:not([cla.*='.ize-'])]:.ize-5 hover:bg-muted data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground ab.olute top-1/2 z-10 -tran.late-y-1/2 text-foreground-muted hover:text-foreground right-1
-Position: top=472px, left=1083px, width=32px, height=32px
-React Component: Button
-HTML Element: <button type="button" tabindex="-1" data-slot="input-clear" data-tone="neutral" aria-label="입력 내용 지우기" class="group/button inline-flex shrink-0 items-center justify-center border border-transparent text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus…" data-cursor-element-id="cursor-el-2"></button> 포커스 일 때에만 노출
+- **2026-08-20 14:36:02** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.flex min-h-48 flex-col > div.flex min-h-[400px] w-full flex-1 item.-center ju.tify-center gap-3 px-5 py-10 > div.grid w-full gap-2 ha.-[input:di.abled]:[&_[data-.lot=label]]:pointer-event.-none ha.-[input:di.abled]:[&_[data-.lot=label]]:cur.or-not-allowed ha.-[input:di.abled]:[&_[data-.lot=label]]:text-di.abled-foreground ha.-[textarea:di.abled]:[&_[data-.lot=label]]:pointer-event.-none ha.-[textarea:di.abled]:[&_[data-.lot=label]]:cur.or-not-allowed ha.-[textarea:di.abled]:[&_[data-.lot=label]]:text-di.abled-foreground ha.-[input[data-di.abled]]:[&_[data-.lot=label]]:text-di.abled-foreground ha.-[input[aria-di.abled=true]]:[&_[data-.lot=label]]:text-di.abled-foreground max-w-x > div.inline-flex flex-col item.-.tart gap-0.5
+Position: top=683px, left=799px, width=320px, height=42px
+React Component: FieldLabel
+HTML Element: <div data-slot="field-label" data-size="sm" class="inline-flex flex-col items-start gap-0.5" data-cursor-element-id="cursor-el-2">타이틀 입력 필요 없는 보조문구는 삭제</div> 이 사이 갭은 몇이야?
 
 ## 다음 작업 (Claude Code용)
 
@@ -26,33 +26,36 @@ HTML Element: <button type="button" tabindex="-1" data-slot="input-clear" data-t
 - 브랜치: `main`
 
 ```
+ M DESIGN.md
  M docs/wip/HANDOFF.md
- M packages/design-system/specs/input-clear-button.spec.json
+ M packages/design-system/docs/SPACING_SEMANTIC.md
+ M packages/design-system/specs/field-label.spec.json
  M packages/design-system/specs/input.spec.json
- M packages/design-system/src/components/ui/email-input.tsx
- M packages/design-system/src/components/ui/file-input.tsx
- M packages/design-system/src/components/ui/input-clear-button.tsx
+ M packages/design-system/src/components/ui/field-label.tsx
  M packages/design-system/src/components/ui/input.tsx
- M packages/design-system/src/components/ui/password-input.tsx
+ M src/components/docs/component-showcases.tsx
  M src/lib/component-case-specs.ts
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 23 +++++-----------------
- .../specs/input-clear-button.spec.json             |  7 ++++---
- packages/design-system/specs/input.spec.json       |  2 +-
- .../src/components/ui/email-input.tsx              |  7 ++++---
- .../design-system/src/components/ui/file-input.tsx |  6 +++---
- .../src/components/ui/input-clear-button.tsx       | 10 ++++++++++
- packages/design-system/src/components/ui/input.tsx |  9 +++++----
- .../src/components/ui/password-input.tsx           |  7 +++++--
+ DESIGN.md                                          |  8 ++---
+ docs/wip/HANDOFF.md                                | 40 ++++++++++++----------
+ packages/design-system/docs/SPACING_SEMANTIC.md    |  2 +-
+ packages/design-system/specs/field-label.spec.json |  4 +--
+ packages/design-system/specs/input.spec.json       |  4 +--
+ .../src/components/ui/field-label.tsx              | 11 +++---
+ packages/design-system/src/components/ui/input.tsx |  1 -
+ src/components/docs/component-showcases.tsx        |  2 +-
  src/lib/component-case-specs.ts                    |  2 +-
- 9 files changed, 38 insertions(+), 35 deletions(-)
+ 9 files changed, 38 insertions(+), 36 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
 
 
 

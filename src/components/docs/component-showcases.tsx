@@ -828,7 +828,7 @@ const SHOWCASES: Record<string, ReactNode> = {
         <ComponentCaseGrid columns={3}>
           <ComponentCase
             label="15"
-            tags={["size: sm", "text-body2_700", "controlGap: 4"]}
+            tags={["size: sm", "text-body2_700", "controlGap: 8"]}
           >
             <InputGroup className="w-full max-w-xs">
               <FieldLabel htmlFor="field-size-15" size="sm">
