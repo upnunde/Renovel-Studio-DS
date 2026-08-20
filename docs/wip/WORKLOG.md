@@ -5,10 +5,9 @@
 
 ## 오늘 한 일
 
-- **Input · Textarea** — Playground `read only` 옵션, readOnly 시 포커스·클릭 차단(`uiReadOnlyField`)
-- **EmailInput · PasswordInput** — readOnly 연동(clear·토글·자동완성 비활성)
-- **Textarea** — design-system re-export, 쇼케이스 read only 케이스
-- **Alert** — icon gap·InputHypertext 스타일 (v0.1.43)
+- **FieldLabel** — size `sm`(14_700 · body3_700) 추가, Playground·쇼케이스 반영
+- **Input · Textarea** — Playground `read only`, 포커스·클릭 차단 (v0.1.44)
+- **EmailInput · PasswordInput** — readOnly 연동 (v0.1.44)
 
 ## 다음에 할 일
 
