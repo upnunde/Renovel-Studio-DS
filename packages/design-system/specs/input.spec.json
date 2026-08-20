@@ -30,8 +30,8 @@
     "icon": 14
   },
   "group": {
-    "gap": 8,
-    "$note": "InputGroup L2 · FieldLabel↔Input · Input↔Hypertext 공통 8px (formFieldGapTight). FieldLabel size별 gap 덮어쓰기 금지. 권장 짝: FieldLabel sm→Input sm, default→default, lg→xl."
+    "gap": { "fieldLabel": { "sm": 4, "default": 8, "lg": 8 }, "hypertext": 8 },
+    "$note": "InputGroup L2 · FieldLabel↔Input은 sm 4 · default·lg 8. Input 크기는 고정. Input↔Hypertext는 8 (formFieldGapTight)."
   },
   "states": ["rest", "focus", "disabled", "invalid"],
   "nativeNotes": {

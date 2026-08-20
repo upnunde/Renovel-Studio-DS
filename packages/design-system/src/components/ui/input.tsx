@@ -6,6 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
 import { uiDisabledField, uiDisabledFieldGroup, uiReadOnlyField, readOnlyFieldHandlers } from "../../lib/ui-disabled"
+import { FIELD_LABEL_CONTROL_GAP_GROUP_CLASS } from "./field-label"
 import {
   InputClearButton,
   clearNativeInputValue,
@@ -118,8 +119,9 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="input-group"
       className={cn(
-        /* FieldLabel↔Input · Input↔Hypertext 모두 8px (formFieldGapTight). 크기별 재정의 금지 */
-        "grid w-full gap-2",
+        "grid w-full",
+        FIELD_LABEL_CONTROL_GAP_GROUP_CLASS,
+        "[&>[data-slot=input-hypertext]]:mt-2",
         uiDisabledFieldGroup,
         className
       )}

@@ -45,19 +45,16 @@ const fieldLabelTitleVariants = cva("", {
   },
 })
 
-/** FieldLabel ↔ Control 간격 · 전 size 공통 8px. InputGroup(L2)이 소유 (`gap-2`). */
-export const FIELD_LABEL_CONTROL_GAP_PX = 8
-export const FIELD_LABEL_CONTROL_GAP_CLASS = "gap-2"
-
-/** FieldLabel size → 권장 Input size. 라벨·컨트롤 스케일을 같이 맞춰 간격이 일정하게 보이게 한다. */
-export const FIELD_LABEL_INPUT_SIZE = {
-  sm: "sm",
-  default: "default",
-  lg: "xl",
+/** FieldLabel ↔ Control 간격. InputGroup(L2)이 소유. Input 크기는 바꾸지 않는다. */
+export const FIELD_LABEL_CONTROL_GAP = {
+  sm: { px: 4, className: "mt-1" },
+  default: { px: 8, className: "mt-2" },
+  lg: { px: 8, className: "mt-2" },
 } as const
 
-export type FieldLabelInputSize =
-  (typeof FIELD_LABEL_INPUT_SIZE)[keyof typeof FIELD_LABEL_INPUT_SIZE]
+/** InputGroup에 적용 — FieldLabel 다음 형제만 size별 간격 */
+export const FIELD_LABEL_CONTROL_GAP_GROUP_CLASS =
+  "[&>[data-slot=field-label][data-size=sm]+*]:mt-1 [&>[data-slot=field-label][data-size=default]+*]:mt-2 [&>[data-slot=field-label][data-size=lg]+*]:mt-2"
 
 const fieldLabelDescriptionClassName =
   "text-body4_400 text-foreground-muted"
@@ -192,9 +189,7 @@ function FieldLabel({
 export {
   FieldLabel,
   fieldLabelTitleVariants,
-  FIELD_LABEL_CONTROL_GAP_CLASS,
-  FIELD_LABEL_CONTROL_GAP_PX,
-  FIELD_LABEL_INPUT_SIZE,
-  type FieldLabelInputSize,
+  FIELD_LABEL_CONTROL_GAP,
+  FIELD_LABEL_CONTROL_GAP_GROUP_CLASS,
   type FieldLabelProps,
 }

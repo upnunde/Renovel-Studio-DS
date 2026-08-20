@@ -828,18 +828,18 @@ const SHOWCASES: Record<string, ReactNode> = {
         <ComponentCaseGrid columns={3}>
           <ComponentCase
             label="14"
-            tags={["size: sm", "text-body3_700", "Input sm", "gap-2"]}
+            tags={["size: sm", "text-body3_700", "controlGap: 4"]}
           >
             <InputGroup className="w-full max-w-xs">
               <FieldLabel htmlFor="field-size-14" size="sm">
                 타이틀 입력
               </FieldLabel>
-              <Input id="field-size-14" size="sm" placeholder="입력" />
+              <Input id="field-size-14" placeholder="입력" />
             </InputGroup>
           </ComponentCase>
           <ComponentCase
             label="16"
-            tags={["size: default", "text-body1_700", "Input default", "gap-2"]}
+            tags={["size: default", "text-body1_700", "controlGap: 8"]}
           >
             <InputGroup className="w-full max-w-xs">
               <FieldLabel htmlFor="field-size-16" size="default">
@@ -850,13 +850,13 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
           <ComponentCase
             label="18"
-            tags={["size: lg", "text-heading5_700", "Input xl", "gap-2"]}
+            tags={["size: lg", "text-heading5_700", "controlGap: 8"]}
           >
             <InputGroup className="w-full max-w-xs">
               <FieldLabel htmlFor="field-size-18" size="lg">
                 타이틀2 입력
               </FieldLabel>
-              <Input id="field-size-18" size="xl" placeholder="입력" />
+              <Input id="field-size-18" placeholder="입력" />
             </InputGroup>
           </ComponentCase>
         </ComponentCaseGrid>

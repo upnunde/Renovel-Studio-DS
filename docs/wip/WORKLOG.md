@@ -6,8 +6,8 @@
 ## 오늘 한 일
 
 - **타이포 600** — heading/body/caption 전 스케일에 semibold 합본 추가 (27→38 토큰)
-- **FieldLabel weight** — 500/600/700만 유지 (400 삭제), Playground·쇼케이스 반영
-- **FieldLabel ↔ Input 간격** — 전 size 공통 8px(`gap-2`). sm→Input sm, default→default, lg→Input xl
+- **FieldLabel weight** — 500/600/700만 유지 (400 삭제)
+- **FieldLabel ↔ Input 간격** — Input 크기는 고정. sm 4px · default·lg 8px (`InputGroup` 소유)
 - **cn/twMerge** — 합본 타이포가 `font-medium`·`leading-*`와 충돌해 두께가 무시되던 문제 수정
 
 ## 다음에 할 일
@@ -25,8 +25,7 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
-- `packages/design-system/src/typography-tokens.ts` · `typography.css` · `tokens/typography.json`
-- `packages/design-system/src/components/ui/field-label.tsx` · `input.tsx` · `lib/utils.ts`
+- `packages/design-system/src/components/ui/field-label.tsx` · `input.tsx`
 - `packages/design-system/specs/field-label.spec.json` · `input.spec.json`
 - `DESIGN.md` · `packages/design-system/docs/SPACING_SEMANTIC.md`
 - `src/components/docs/playground-registry.tsx` · `component-showcases.tsx`

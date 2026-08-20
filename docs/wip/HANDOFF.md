@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-20 14:00:43**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-20 14:11:52**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,10 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-20 13:57:26** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.border-b border-border lg:border-r lg:border-b-0 .pace-y-5 p-5 > div > div.pace-y-3 > div.flex flex-col gap-1[0] > div.flex flex-wrap item.-center gap-2
-Position: top=320px, left=362px, width=231px, height=32px
-React Component: CompositeList
-HTML Element: <div data-orientation="horizontal" role="group" data-slot="chip-group" class="flex flex-wrap items-center gap-2" data-cursor-element-id="cursor-el-3">14 16 18</div> 크기별 하단 인터페이스와의 일관적인 간격을 유지하기 위해서 간격 수치를 가이드화 해야 할 것 같은데
+- **2026-08-20 14:11:17** — 18도 8px
 
 ## 다음 작업 (Claude Code용)
 
@@ -33,42 +30,30 @@ HTML Element: <div data-orientation="horizontal" role="group" data-slot="chip-gr
  M packages/design-system/specs/input.spec.json
  M packages/design-system/src/components/ui/field-label.tsx
  M packages/design-system/src/components/ui/input.tsx
- M packages/design-system/src/lib/utils.ts
- M packages/design-system/src/typography-tokens.ts
- M packages/design-system/src/typography.css
- M packages/design-system/tokens/typography.json
  M src/components/docs/component-showcases.tsx
- M src/components/docs/foundation-typography.tsx
  M src/components/docs/playground-registry.tsx
  M src/lib/component-case-specs.ts
- M src/typography-tokens.ts
- M src/typography.css
 ```
 
 ### diff 요약
 
 ```
- DESIGN.md                                          | 23 ++++++---
- docs/wip/HANDOFF.md                                | 46 ++++++++++++-----
- packages/design-system/docs/SPACING_SEMANTIC.md    |  4 +-
- packages/design-system/specs/field-label.spec.json | 18 ++++---
- packages/design-system/specs/input.spec.json       |  4 ++
- .../src/components/ui/field-label.tsx              | 59 ++++++++++++++++++----
- packages/design-system/src/components/ui/input.tsx |  7 ++-
- packages/design-system/src/lib/utils.ts            | 25 ++++++---
- packages/design-system/src/typography-tokens.ts    | 15 +++++-
- packages/design-system/src/typography.css          | 55 ++++++++++++++++++++
- packages/design-system/tokens/typography.json      | 13 ++++-
- src/components/docs/component-showcases.tsx        | 54 +++++++++++++++++---
- src/components/docs/foundation-typography.tsx      |  2 +-
- src/components/docs/playground-registry.tsx        | 20 +++++++-
- src/lib/component-case-specs.ts                    | 19 +++++--
- src/typography-tokens.ts                           | 15 +++++-
- src/typography.css                                 | 55 ++++++++++++++++++++
- 17 files changed, 368 insertions(+), 66 deletions(-)
+ DESIGN.md                                          | 16 ++++----
+ docs/wip/HANDOFF.md                                | 44 +++++++---------------
+ packages/design-system/docs/SPACING_SEMANTIC.md    |  3 +-
+ packages/design-system/specs/field-label.spec.json |  8 ++--
+ packages/design-system/specs/input.spec.json       |  4 +-
+ .../src/components/ui/field-label.tsx              | 25 +++++-------
+ packages/design-system/src/components/ui/input.tsx |  6 ++-
+ src/components/docs/component-showcases.tsx        | 10 ++---
+ src/components/docs/playground-registry.tsx        | 14 +------
+ src/lib/component-case-specs.ts                    |  2 +-
+ 10 files changed, 51 insertions(+), 81 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
 
 
 
