@@ -237,11 +237,22 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       {
         name: "size",
         values: ["sm", "default", "lg"],
-        description: "제목 타이포 · sm body3_700 · default body1_700 · lg heading5_700",
+        description:
+          "제목 크기 · sm 14 + Input sm · default 16 + Input default · lg 18 + Input xl · 컨트롤 간격은 InputGroup gap-2(8px) 고정",
         valueHints: {
-          sm: "14_700",
-          default: "16_700",
-          lg: "18_700",
+          sm: "14",
+          default: "16",
+          lg: "18",
+        },
+      },
+      {
+        name: "weight",
+        values: ["500", "600", "700"],
+        description: "제목 두께 · 500 medium · 600 semibold · 700 bold",
+        valueHints: {
+          "500": "500",
+          "600": "600",
+          "700": "700",
         },
       },
       {

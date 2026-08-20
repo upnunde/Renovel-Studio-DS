@@ -86,7 +86,7 @@ export function FoundationTypographyShowcase() {
         <div className={cn("p-5 space-y-2", docsType.bodyMuted)}>
           <p>합본 클래스만 사용 — <code>text-body3_500</code> 같은 단일 utility로 size·line-height·font-weight를 묶는다.</p>
           <p>개별 속성 조합(<code>text-sm + font-bold</code> 등) 금지. 폰트 패밀리는 fonts.css에서 전역 적용.</p>
-          <p>27개 utility는 <code>typography.css</code> @utility와 <code>typography-tokens.ts</code> TYPOGRAPHY_SCALE에서 1:1 동기화.</p>
+          <p>38개 utility는 <code>typography.css</code> @utility와 <code>typography-tokens.ts</code> TYPOGRAPHY_SCALE에서 1:1 동기화.</p>
         </div>
       </ShowcaseBlock>
     </div>

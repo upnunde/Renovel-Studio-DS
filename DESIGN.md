@@ -327,13 +327,23 @@ Tailwind 표준 spacing 네임스페이스와 동일하게 매핑 (`p-5` = 20px,
 
 | 토큰 | 역할 | 값 |
 |------|------|-----|
-| `formLabelGap` | Label ↔ Input (필드 **안**) | 4 |
-| `formFieldGapTight` | Helper·힌트 등 필드 **안** 밀착 묶음 | 8 |
+| `formLabelGap` | 짧은 `Label` ↔ Input (체크박스 옆 등) | 4 |
+| `formFieldGapTight` | **FieldLabel ↔ Input** · Input ↔ Helper (필드 **안**) | **8 (확정)** |
 | `formFieldGap` | 필드 단위(Label+Input+Helper) **사이** | **16 (확정)** |
 | `formGroupGap` | 폼 섹션·그룹 사이 | 24 |
 | `formGroupGapRelaxed` | 문의·리소스 상세 등 넉넉한 그룹 사이 | 32 |
 
 필드 사이를 12로 줄이려는 로컬 토큰·임의 `gap-3`는 금지. 밀도 조절은 `formFieldGap` / `formFieldGapTight` / `formGroupGap*` 역할 안에서만 한다.
+
+**FieldLabel × Input (합성 가이드)** — 간격은 `InputGroup`(`gap-2`)이 소유. 라벨 size를 바꿔도 **컨트롤과의 간격은 8px 고정**. 시각 리듬은 Input size를 같이 맞춰 유지한다.
+
+| FieldLabel | 타이포 | 권장 Input | Label ↔ Input |
+|------------|--------|------------|----------------|
+| sm (14) | `text-body3_*` | sm (32) | 8 (`gap-2`) |
+| default (16) | `text-body1_*` | default (36) | 8 (`gap-2`) |
+| lg (18) | `text-heading5_*` | xl (40) | 8 (`gap-2`) |
+
+제목 ↔ 보조문구는 FieldLabel 내부 `gap-0.5`(2). `InputGroup`에 `gap-4` 등 size별 덮어쓰기 금지.
 
 #### Overlay (Modal · Sheet)
 
@@ -354,12 +364,13 @@ Tailwind 표준 spacing 네임스페이스와 동일하게 매핑 (`p-5` = 20px,
 
 ### 2-6. Typography
 
-**합본 단일 클래스만 사용.** size·line-height·font-weight를 묶은 27개 `@utility`.
+**합본 단일 클래스만 사용.** size·line-height·font-weight를 묶은 38개 `@utility`.
 
 ```
-text-heading{1..5}_{700|500}      (heading)
-text-body{1..4}_{700|500|400}      (body)
-text-caption{1..2}_{700|500|400}   (caption)
+text-heading1_{700|600}                 (heading1 — 500·400 없음)
+text-heading{2..5}_{700|600|500}        (heading)
+text-body{1..4}_{700|600|500|400}       (body)
+text-caption{1..2}_{700|600|500|400}    (caption)
 ```
 
 **금지:** 개별 속성 조합 (`text-sm + font-bold` 등). 합본 클래스가 폰트 시스템의 단일 소스.

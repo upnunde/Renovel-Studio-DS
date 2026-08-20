@@ -117,7 +117,12 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="input-group"
-      className={cn("grid w-full gap-2", uiDisabledFieldGroup, className)}
+      className={cn(
+        /* FieldLabel↔Input · Input↔Hypertext 모두 8px (formFieldGapTight). 크기별 재정의 금지 */
+        "grid w-full gap-2",
+        uiDisabledFieldGroup,
+        className
+      )}
       {...props}
     />
   )

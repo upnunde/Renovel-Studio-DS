@@ -5,9 +5,10 @@
 
 ## 오늘 한 일
 
-- **FieldLabel** — size `sm`(14_700 · body3_700) 추가, Playground·쇼케이스 반영
-- **Input · Textarea** — Playground `read only`, 포커스·클릭 차단 (v0.1.44)
-- **EmailInput · PasswordInput** — readOnly 연동 (v0.1.44)
+- **타이포 600** — heading/body/caption 전 스케일에 semibold 합본 추가 (27→38 토큰)
+- **FieldLabel weight** — 500/600/700만 유지 (400 삭제), Playground·쇼케이스 반영
+- **FieldLabel ↔ Input 간격** — 전 size 공통 8px(`gap-2`). sm→Input sm, default→default, lg→Input xl
+- **cn/twMerge** — 합본 타이포가 `font-medium`·`leading-*`와 충돌해 두께가 무시되던 문제 수정
 
 ## 다음에 할 일
 
@@ -24,14 +25,10 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
-- `packages/design-system/tokens/primitives.json` · `semantic.json`
-- `packages/design-system/src/tokens.css` · `theme.css`
-- `src/lib/semantic-token-sources.ts` · `color-tokens.ts` · `playground-snippet.ts`
-- `packages/design-system/src/components/ui/toggle.tsx` · `toggle-group.tsx` · `specs/toggle.spec.json` · `specs/toggle-group.spec.json`
-- `packages/design-system/src/components/ui/button.tsx` · `specs/button.spec.json`
-- `packages/design-system/src/components/ui/dialog.tsx`
-- `packages/design-system/src/components/ui/avatar.tsx` · `specs/avatar.spec.json`
-- `packages/design-system/src/components/ui/tooltip.tsx` · `specs/tooltip.spec.json`
+- `packages/design-system/src/typography-tokens.ts` · `typography.css` · `tokens/typography.json`
+- `packages/design-system/src/components/ui/field-label.tsx` · `input.tsx` · `lib/utils.ts`
+- `packages/design-system/specs/field-label.spec.json` · `input.spec.json`
+- `DESIGN.md` · `packages/design-system/docs/SPACING_SEMANTIC.md`
 - `src/components/docs/playground-registry.tsx` · `component-showcases.tsx`
 
 ## 메모

@@ -9,10 +9,20 @@
   line-height: 38px;
   font-weight: 700;
 }
+@utility text-heading1_600 {
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 600;
+}
 @utility text-heading2_700 {
   font-size: 24px;
   line-height: 34px;
   font-weight: 700;
+}
+@utility text-heading2_600 {
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 600;
 }
 @utility text-heading2_500 {
   font-size: 24px;
@@ -24,6 +34,11 @@
   line-height: 30px;
   font-weight: 700;
 }
+@utility text-heading3_600 {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+}
 @utility text-heading3_500 {
   font-size: 22px;
   line-height: 30px;
@@ -33,6 +48,11 @@
   font-size: 20px;
   line-height: 28px;
   font-weight: 700;
+}
+@utility text-heading4_600 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
 }
 @utility text-heading4_500 {
   font-size: 20px;
@@ -44,6 +64,11 @@
   line-height: 26px;
   font-weight: 700;
 }
+@utility text-heading5_600 {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+}
 @utility text-heading5_500 {
   font-size: 18px;
   line-height: 26px;
@@ -53,6 +78,11 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
+}
+@utility text-body1_600 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
 }
 @utility text-body1_500 {
   font-size: 16px;
@@ -69,6 +99,11 @@
   line-height: 22px;
   font-weight: 700;
 }
+@utility text-body2_600 {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+}
 @utility text-body2_500 {
   font-size: 15px;
   line-height: 22px;
@@ -83,6 +118,11 @@
   font-size: 14px;
   line-height: 20px;
   font-weight: 700;
+}
+@utility text-body3_600 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
 }
 @utility text-body3_500 {
   font-size: 14px;
@@ -99,6 +139,11 @@
   line-height: 18px;
   font-weight: 700;
 }
+@utility text-body4_600 {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+}
 @utility text-body4_500 {
   font-size: 13px;
   line-height: 18px;
@@ -114,6 +159,11 @@
   line-height: 16px;
   font-weight: 700;
 }
+@utility text-caption1_600 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+}
 @utility text-caption1_500 {
   font-size: 12px;
   line-height: 16px;
@@ -128,6 +178,11 @@
   font-size: 11px;
   line-height: 14px;
   font-weight: 700;
+}
+@utility text-caption2_600 {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
 }
 @utility text-caption2_500 {
   font-size: 11px;

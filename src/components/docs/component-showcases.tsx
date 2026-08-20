@@ -826,19 +826,57 @@ const SHOWCASES: Record<string, ReactNode> = {
 
       <ComponentCaseGroup title="FieldLabel · Size">
         <ComponentCaseGrid columns={3}>
-          <ComponentCase label="14_700" tags={["size: sm", "text-body3_700"]}>
-            <FieldLabel htmlFor="field-size-14" size="sm">
+          <ComponentCase
+            label="14"
+            tags={["size: sm", "text-body3_700", "Input sm", "gap-2"]}
+          >
+            <InputGroup className="w-full max-w-xs">
+              <FieldLabel htmlFor="field-size-14" size="sm">
+                타이틀 입력
+              </FieldLabel>
+              <Input id="field-size-14" size="sm" placeholder="입력" />
+            </InputGroup>
+          </ComponentCase>
+          <ComponentCase
+            label="16"
+            tags={["size: default", "text-body1_700", "Input default", "gap-2"]}
+          >
+            <InputGroup className="w-full max-w-xs">
+              <FieldLabel htmlFor="field-size-16" size="default">
+                타이틀 입력
+              </FieldLabel>
+              <Input id="field-size-16" placeholder="입력" />
+            </InputGroup>
+          </ComponentCase>
+          <ComponentCase
+            label="18"
+            tags={["size: lg", "text-heading5_700", "Input xl", "gap-2"]}
+          >
+            <InputGroup className="w-full max-w-xs">
+              <FieldLabel htmlFor="field-size-18" size="lg">
+                타이틀2 입력
+              </FieldLabel>
+              <Input id="field-size-18" size="xl" placeholder="입력" />
+            </InputGroup>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="FieldLabel · Weight">
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="500" tags={["weight: 500", "text-body1_500"]}>
+            <FieldLabel htmlFor="field-weight-500" weight="500">
               타이틀 입력
             </FieldLabel>
           </ComponentCase>
-          <ComponentCase label="16_700" tags={["size: default", "text-body1_700"]}>
-            <FieldLabel htmlFor="field-size-16" size="default">
+          <ComponentCase label="600" tags={["weight: 600", "text-body1_600"]}>
+            <FieldLabel htmlFor="field-weight-600" weight="600">
               타이틀 입력
             </FieldLabel>
           </ComponentCase>
-          <ComponentCase label="18_700" tags={["size: lg", "text-heading5_700"]}>
-            <FieldLabel htmlFor="field-size-18" size="lg">
-              타이틀2 입력
+          <ComponentCase label="700" tags={["weight: 700", "text-body1_700"]}>
+            <FieldLabel htmlFor="field-weight-700" weight="700">
+              타이틀 입력
             </FieldLabel>
           </ComponentCase>
         </ComponentCaseGrid>
@@ -906,7 +944,7 @@ const SHOWCASES: Record<string, ReactNode> = {
             </div>
           </ComponentCase>
           <ComponentCase label="InputGroup" tags={["FieldLabel", "Input", "InputHypertext"]}>
-            <InputGroup className="max-w-xs gap-4">
+            <InputGroup className="max-w-xs">
               <FieldLabel
                 htmlFor="field-id"
                 required

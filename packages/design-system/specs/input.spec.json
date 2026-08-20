@@ -29,6 +29,10 @@
     "$note": "InputClearButton = Button+Icon(close, size md=16px). 버튼 크기: sm→icon-xs(24px), 그 외→icon-sm(36px). endPadding pe-9.",
     "icon": 14
   },
+  "group": {
+    "gap": 8,
+    "$note": "InputGroup L2 · FieldLabel↔Input · Input↔Hypertext 공통 8px (formFieldGapTight). FieldLabel size별 gap 덮어쓰기 금지. 권장 짝: FieldLabel sm→Input sm, default→default, lg→xl."
+  },
   "states": ["rest", "focus", "disabled", "invalid"],
   "nativeNotes": {
     "placeholder": "웹 ::placeholder. iOS placeholder, Compose placeholder 파라미터.",

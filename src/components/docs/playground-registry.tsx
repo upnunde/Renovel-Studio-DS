@@ -46,7 +46,7 @@ import { Input, InputGroup, InputHypertext } from "design-system/ui/input"
 import { EmailInput } from "design-system/ui/email-input"
 import { PasswordInput } from "design-system/ui/password-input"
 import { FileInput } from "design-system/ui/file-input"
-import { FieldLabel } from "design-system/ui/field-label"
+import { FieldLabel, FIELD_LABEL_INPUT_SIZE } from "design-system/ui/field-label"
 import { Label } from "design-system/ui/label"
 import {
   Popover,
@@ -122,6 +122,11 @@ function fieldLabelPlaygroundDescriptionCode(lines: string[]) {
   }
   const body = lines.map((line) => `"${line}"`).join(", ")
   return `description={[${body}]}`
+}
+
+function fieldLabelPlaygroundInputSize(size: string) {
+  if (size === "sm" || size === "lg") return FIELD_LABEL_INPUT_SIZE[size]
+  return FIELD_LABEL_INPUT_SIZE.default
 }
 
 function playgroundHypertextMetrics(state: PlaygroundState) {
@@ -803,6 +808,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   label: {
     initialState: {
       size: "default",
+      weight: "700",
       children: "타이틀 입력",
       required: false,
       description: false,
@@ -814,6 +820,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     textareaKeys: ["infoText"],
     selectKeys: {
       size: ["sm", "default", "lg"],
+      weight: ["500", "600", "700"],
       descriptionLines: ["1", "2", "3"],
     },
     skipControlKeys: ["htmlFor"],
@@ -829,12 +836,15 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         descriptionLines
       )
       const infoText = str(state, "infoText").trim()
+      const labelSize = str(state, "size")
+      const inputSize = fieldLabelPlaygroundInputSize(labelSize)
 
       return (
         <InputGroup className="max-w-xs">
           <FieldLabel
             htmlFor={FIELD_LABEL_PLAYGROUND_ID}
-            size={str(state, "size") as "default"}
+            size={labelSize as "default"}
+            weight={str(state, "weight") as "700"}
             required={bool(state, "required")}
             description={descriptionLines}
             info={bool(state, "info") && infoText ? infoText : undefined}
@@ -844,6 +854,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
           </FieldLabel>
           <Input
             id={FIELD_LABEL_PLAYGROUND_ID}
+            size={inputSize}
             placeholder="입력"
             aria-describedby={describedBy || undefined}
             aria-required={bool(state, "required") || undefined}
@@ -859,8 +870,12 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         descriptionLines
       )
       const infoText = str(state, "infoText").trim()
+      const inputSize = fieldLabelPlaygroundInputSize(str(state, "size"))
       const fieldLabelAttrs = playgroundPropAttrs([
         playgroundPropAttr("size", str(state, "size")),
+        str(state, "weight") !== "700"
+          ? playgroundPropAttr("weight", str(state, "weight"))
+          : "",
         playgroundPropAttr("htmlFor", FIELD_LABEL_PLAYGROUND_ID),
         bool(state, "required") ? "required" : "",
         descriptionLines
@@ -875,6 +890,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       ])
       const inputAttrs = playgroundPropAttrs([
         playgroundPropAttr("id", FIELD_LABEL_PLAYGROUND_ID),
+        playgroundPropAttr("size", inputSize),
         `placeholder="입력"`,
         describedBy ? `aria-describedby="${describedBy}"` : "",
         bool(state, "required") ? "aria-required" : "",
