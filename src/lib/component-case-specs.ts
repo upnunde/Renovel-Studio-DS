@@ -236,9 +236,10 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
     properties: [
       {
         name: "size",
-        values: ["default", "lg"],
-        description: "제목 타이포 · default body1_700 · lg heading5_700",
+        values: ["sm", "default", "lg"],
+        description: "제목 타이포 · sm body3_700 · default body1_700 · lg heading5_700",
         valueHints: {
+          sm: "14_700",
           default: "16_700",
           lg: "18_700",
         },

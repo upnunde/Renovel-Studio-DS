@@ -825,7 +825,12 @@ const SHOWCASES: Record<string, ReactNode> = {
       </ComponentCaseGroup>
 
       <ComponentCaseGroup title="FieldLabel · Size">
-        <ComponentCaseGrid columns={2}>
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="14_700" tags={["size: sm", "text-body3_700"]}>
+            <FieldLabel htmlFor="field-size-14" size="sm">
+              타이틀 입력
+            </FieldLabel>
+          </ComponentCase>
           <ComponentCase label="16_700" tags={["size: default", "text-body1_700"]}>
             <FieldLabel htmlFor="field-size-16" size="default">
               타이틀 입력

@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-20 11:29:52**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-20 12:55:05**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,10 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-20 11:27:06** — 리드온니 상태에선 포커스나 클릭도 안되게 막아줘
+- **2026-08-20 12:53:33** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.border-b border-border lg:border-r lg:border-b-0 .pace-y-5 p-5 > div > div.pace-y-3 > div.flex flex-col gap-1[0] > div.flex flex-wrap item.-center gap-2
+Position: top=344px, left=362px, width=231px, height=32px
+React Component: CompositeList
+HTML Element: <div data-orientation="horizontal" role="group" data-slot="chip-group" class="flex flex-wrap items-center gap-2" data-cursor-element-id="cursor-el-11">16_700 18_700</div> 14_700 케이스 추가해줘
 
 ## 다음 작업 (Claude Code용)
 
@@ -24,36 +27,29 @@
 
 ```
  M docs/wip/HANDOFF.md
- M packages/design-system/specs/textarea.spec.json
- M packages/design-system/src/components/ui/email-input.tsx
- M packages/design-system/src/components/ui/input.tsx
- M packages/design-system/src/components/ui/password-input.tsx
- M packages/design-system/src/components/ui/textarea.tsx
- M packages/design-system/src/lib/ui-disabled.ts
+ M packages/design-system/specs/field-label.spec.json
+ M packages/design-system/src/components/ui/field-label.tsx
  M src/components/docs/component-showcases.tsx
  M src/components/docs/playground-registry.tsx
- M src/components/ui/textarea.tsx
  M src/lib/component-case-specs.ts
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 23 +++++++++------
- packages/design-system/specs/textarea.spec.json    |  3 +-
- .../src/components/ui/email-input.tsx              | 27 ++++++++++++++----
- packages/design-system/src/components/ui/input.tsx | 11 ++++++--
- .../src/components/ui/password-input.tsx           | 18 ++++++++++--
- .../design-system/src/components/ui/textarea.tsx   | 15 ++++++++--
- packages/design-system/src/lib/ui-disabled.ts      | 30 ++++++++++++++++++++
- src/components/docs/component-showcases.tsx        |  5 +++-
- src/components/docs/playground-registry.tsx        | 26 ++++++++++++++---
- src/components/ui/textarea.tsx                     | 33 +---------------------
- src/lib/component-case-specs.ts                    |  4 ++-
- 11 files changed, 135 insertions(+), 60 deletions(-)
+ docs/wip/HANDOFF.md                                | 30 +++++-----------------
+ packages/design-system/specs/field-label.spec.json |  3 ++-
+ .../src/components/ui/field-label.tsx              |  2 ++
+ src/components/docs/component-showcases.tsx        |  7 ++++-
+ src/components/docs/playground-registry.tsx        |  2 +-
+ src/lib/component-case-specs.ts                    |  5 ++--
+ 6 files changed, 20 insertions(+), 29 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
 
 
 

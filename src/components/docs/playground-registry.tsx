@@ -813,7 +813,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     textKeys: ["children"],
     textareaKeys: ["infoText"],
     selectKeys: {
-      size: ["default", "lg"],
+      size: ["sm", "default", "lg"],
       descriptionLines: ["1", "2", "3"],
     },
     skipControlKeys: ["htmlFor"],
