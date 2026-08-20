@@ -205,6 +205,7 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
           "HTML input type · password=PasswordInput · file=FileInput(파일 아이콘)",
       },
       { name: "disabled", values: ["false", "true"], description: "비활성" },
+      { name: "readOnly", values: ["false", "true"], description: "읽기 전용 · 값은 표시·복사 가능, 편집 불가" },
       { name: "aria-invalid", values: ["false", "true"], description: "오류 상태" },
       { name: "placeholder", values: ["string"], description: "빈 값 안내" },
       {
@@ -277,6 +278,7 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       { name: "rows", values: ["number"], description: "기본 높이 (행)" },
       { name: "placeholder", values: ["string"], description: "빈 값 안내" },
       { name: "disabled", values: ["false", "true"], description: "비활성" },
+      { name: "readOnly", values: ["false", "true"], description: "읽기 전용 · 값은 표시·복사 가능, 편집 불가" },
       { name: "aria-invalid", values: ["false", "true"], description: "오류 상태" },
       {
         name: "hypertext",
@@ -688,7 +690,7 @@ export function formatSpecPropertyName(name: string): string {
     itemHeight: "item-height",
     withLabel: "with label",
     withText: "with text",
-    htmlFor: "htmlFor",
+    readOnly: "read only",
     info: "info",
     infoText: "info text",
     hypertextMax: "hypertext max",

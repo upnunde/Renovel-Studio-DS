@@ -1,3 +1,5 @@
+import type * as React from "react"
+
 /**
  * Base UI는 `data-disabled` / `aria-disabled`를 쓰고,
  * 네이티브 컨트롤은 `:disabled`도 지원합니다.
@@ -32,3 +34,31 @@ export const uiDisabledLabel =
 
 /** 메뉴·리스트 아이템 */
 export const uiDisabledItem = `${uiDisabledBlock} data-disabled:text-disabled-foreground`
+
+/** Input·Textarea readOnly — 포커스·클릭 차단, ring 제거 */
+export const uiReadOnlyField =
+  "read-only:pointer-events-none read-only:cursor-default read-only:focus-visible:border-border-emphasis read-only:focus-visible:ring-0"
+
+export function readOnlyFieldHandlers<T extends HTMLElement>(
+  readOnly: boolean | undefined,
+  handlers: {
+    tabIndex?: number
+    onFocus?: React.FocusEventHandler<T>
+    onMouseDown?: React.MouseEventHandler<T>
+  } = {}
+) {
+  if (!readOnly) return handlers
+
+  const { tabIndex, onFocus, onMouseDown } = handlers
+  return {
+    tabIndex: -1,
+    onFocus: (event: React.FocusEvent<T>) => {
+      event.currentTarget.blur()
+      onFocus?.(event)
+    },
+    onMouseDown: (event: React.MouseEvent<T>) => {
+      event.preventDefault()
+      onMouseDown?.(event)
+    },
+  }
+}

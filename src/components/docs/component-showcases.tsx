@@ -934,7 +934,10 @@ const SHOWCASES: Record<string, ReactNode> = {
         </ComponentCase>
       </ComponentCaseGroup>
       <ComponentCaseGroup title="State">
-        <ComponentCaseGrid columns={2}>
+        <ComponentCaseGrid columns={3}>
+          <ComponentCase label="read only" tags={["readOnly"]}>
+            <Textarea className="max-w-md" readOnly defaultValue="입력값" rows={2} />
+          </ComponentCase>
           <ComponentCase label="disabled" tags={["disabled: true"]}>
             <Textarea className="max-w-md" disabled placeholder="비활성" rows={2} />
           </ComponentCase>

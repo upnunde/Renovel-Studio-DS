@@ -147,6 +147,14 @@ function playgroundHypertextInputProps(state: PlaygroundState) {
   }
 }
 
+function playgroundFieldReadOnlyProps(state: PlaygroundState) {
+  const readOnly = playgroundBool(state, "readOnly")
+  const { hasCounter } = playgroundHypertextMetrics(state)
+  if (hasCounter) return playgroundHypertextInputProps(state)
+  if (!readOnly) return {}
+  return { defaultValue: "입력값", readOnly: true as const }
+}
+
 /** hypertext 카운터 on/off 전환 시 controlled↔uncontrolled 경고 방지 — Input을 재마운트 */
 function playgroundHypertextInputKey(state: PlaygroundState) {
   return playgroundHypertextMetrics(state).hasCounter ? "counter" : "plain"
@@ -708,6 +716,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       type: "text",
       placeholder: "입력하세요",
       disabled: false,
+      readOnly: false,
       "aria-invalid": false,
       hypertext: false,
       hypertextText: "8자 이상 입력해 주세요.",
@@ -739,9 +748,9 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         "aria-describedby": playgroundBool(state, "hypertext")
           ? "playground-input-helper"
           : undefined,
-        ...playgroundHypertextInputProps(state),
+        ...playgroundFieldReadOnlyProps(state),
       }
-      const inputKey = `${type}-${playgroundHypertextInputKey(state)}`
+      const inputKey = `${type}-${playgroundHypertextInputKey(state)}-${bool(state, "readOnly")}`
       return (
         <InputGroup className="max-w-xs">
           {type === "email" ? (
@@ -774,6 +783,10 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         isEmail || isPassword || isFile ? "" : playgroundPropAttr("type", type),
         `placeholder="${str(state, "placeholder")}"`,
         bool(state, "disabled") ? "disabled" : "",
+        bool(state, "readOnly") ? "readOnly" : "",
+        !playgroundHypertextMetrics(state).hasCounter && bool(state, "readOnly")
+          ? 'defaultValue="입력값"'
+          : "",
         bool(state, "aria-invalid") ? "aria-invalid" : "",
         playgroundBool(state, "hypertext")
           ? `aria-describedby="field-id-helper"`
@@ -875,6 +888,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       rows: 4,
       placeholder: "여러 줄 입력",
       disabled: false,
+      readOnly: false,
       "aria-invalid": false,
       hypertext: false,
       hypertextText: "8자 이상 입력해 주세요.",
@@ -898,7 +912,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       return (
         <InputGroup className="max-w-md">
           <Textarea
-            key={playgroundHypertextInputKey(state)}
+            key={`${playgroundHypertextInputKey(state)}-${bool(state, "readOnly")}`}
             id="playground-textarea"
             rows={rows}
             placeholder={str(state, "placeholder")}
@@ -909,7 +923,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
                 ? "playground-textarea-helper"
                 : undefined
             }
-            {...playgroundHypertextInputProps(state)}
+            {...playgroundFieldReadOnlyProps(state)}
           />
           {playgroundHypertextPreview(state, "playground-textarea-helper")}
         </InputGroup>
@@ -922,6 +936,10 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
         `rows={${rows}}`,
         `placeholder="${str(state, "placeholder")}"`,
         bool(state, "disabled") ? "disabled" : "",
+        bool(state, "readOnly") ? "readOnly" : "",
+        !playgroundHypertextMetrics(state).hasCounter && bool(state, "readOnly")
+          ? 'defaultValue="입력값"'
+          : "",
         bool(state, "aria-invalid") ? "aria-invalid" : "",
         playgroundBool(state, "hypertext")
           ? `aria-describedby="field-id-helper"`

@@ -5,6 +5,7 @@ import { Input as InputPrimitive } from "@base-ui/react/input"
 import type { VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
+import { readOnlyFieldHandlers } from "../../lib/ui-disabled"
 import {
   InputClearButton,
   clearNativeInputValue,
@@ -36,6 +37,10 @@ function EmailInput({
   onKeyDown,
   onBlur,
   disabled,
+  readOnly,
+  tabIndex,
+  onFocus,
+  onMouseDown,
   clearable = true,
   ...props
 }: EmailInputProps) {
@@ -45,7 +50,7 @@ function EmailInput({
     String(defaultValue ?? "")
   )
   const current = isControlled ? String(value ?? "") : internalValue
-  const showClear = clearable && !disabled && current.length > 0
+  const showClear = clearable && !disabled && !readOnly && current.length > 0
 
   const [activeIndex, setActiveIndex] = React.useState(0)
   const [open, setOpen] = React.useState(false)
@@ -90,6 +95,12 @@ function EmailInput({
     setOpen(false)
   }
 
+  const readOnlyProps = readOnlyFieldHandlers(readOnly, {
+    tabIndex,
+    onFocus,
+    onMouseDown,
+  })
+
   return (
     <div className="relative w-full">
       <InputPrimitive
@@ -104,6 +115,7 @@ function EmailInput({
           isOpen ? `${listId}-option-${activeIndex}` : undefined
         }
         disabled={disabled}
+        readOnly={readOnly}
         className={cn(
           inputVariants({ size }),
           showClear && inputEndActionPadding(1),
@@ -112,17 +124,22 @@ function EmailInput({
         value={current}
         onChange={(event) => {
           if (!isControlled) setInternalValue(event.target.value)
-          setOpen(true)
+          if (!readOnly) setOpen(true)
           onChange?.(event)
         }}
-        onFocus={() => setOpen(true)}
+        onFocus={(event) => {
+          readOnlyProps.onFocus?.(event)
+          if (!readOnly) setOpen(true)
+        }}
         onBlur={(event) => {
-          window.setTimeout(() => setOpen(false), 120)
+          if (!readOnly) window.setTimeout(() => setOpen(false), 120)
           onBlur?.(event)
         }}
+        tabIndex={readOnlyProps.tabIndex}
+        onMouseDown={readOnlyProps.onMouseDown}
         onKeyDown={(event) => {
           onKeyDown?.(event)
-          if (event.defaultPrevented) return
+          if (event.defaultPrevented || readOnly) return
           if (!isOpen) return
           if (event.key === "ArrowDown") {
             event.preventDefault()

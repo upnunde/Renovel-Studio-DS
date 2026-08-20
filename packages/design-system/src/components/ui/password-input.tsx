@@ -5,6 +5,7 @@ import { Input as InputPrimitive } from "@base-ui/react/input"
 import type { VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
+import { readOnlyFieldHandlers } from "../../lib/ui-disabled"
 import { ICONS } from "../icons"
 import { Button } from "./button"
 import { Icon } from "./icon"
@@ -25,6 +26,10 @@ function PasswordInput({
   className,
   size = "default",
   disabled,
+  readOnly,
+  tabIndex,
+  onFocus,
+  onMouseDown,
   clearable = true,
   value,
   defaultValue,
@@ -38,7 +43,12 @@ function PasswordInput({
     String(defaultValue ?? "")
   )
   const current = isControlled ? String(value ?? "") : internalValue
-  const showClear = clearable && !disabled && current.length > 0
+  const showClear = clearable && !disabled && !readOnly && current.length > 0
+  const readOnlyProps = readOnlyFieldHandlers(readOnly, {
+    tabIndex,
+    onFocus,
+    onMouseDown,
+  })
 
   return (
     <div data-slot="password-input" className="relative w-full">
@@ -47,6 +57,7 @@ function PasswordInput({
         type={visible ? "text" : "password"}
         data-slot="input"
         disabled={disabled}
+        readOnly={readOnly}
         value={isControlled ? value : internalValue}
         onChange={(event) => {
           if (!isControlled) setInternalValue(event.target.value)
@@ -58,11 +69,12 @@ function PasswordInput({
           className
         )}
         {...props}
+        {...readOnlyProps}
       />
       {showClear ? (
         <InputClearButton
           size={size}
-          disabled={disabled}
+          disabled={disabled || readOnly}
           className="right-9"
           onClick={(event) => {
             event.preventDefault()
@@ -77,7 +89,7 @@ function PasswordInput({
         type="button"
         variant="ghost"
         size={inputEndActionSize(size)}
-        disabled={disabled}
+        disabled={disabled || readOnly}
         aria-label={visible ? "비밀번호 숨기기" : "비밀번호 표시"}
         aria-pressed={visible}
         tabIndex={-1}

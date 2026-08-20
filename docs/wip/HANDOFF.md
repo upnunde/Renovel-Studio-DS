@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-19 18:06:32**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-20 11:29:52**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-19 18:06:19** — 텍스트필드에 있는 하이퍼텍스트도 동일하게 적용
+- **2026-08-20 11:27:06** — 리드온니 상태에선 포커스나 클릭도 안되게 막아줘
 
 ## 다음 작업 (Claude Code용)
 
@@ -24,22 +24,39 @@
 
 ```
  M docs/wip/HANDOFF.md
- M packages/design-system/src/alert.css
+ M packages/design-system/specs/textarea.spec.json
+ M packages/design-system/src/components/ui/email-input.tsx
  M packages/design-system/src/components/ui/input.tsx
- M src/alert.css
+ M packages/design-system/src/components/ui/password-input.tsx
+ M packages/design-system/src/components/ui/textarea.tsx
+ M packages/design-system/src/lib/ui-disabled.ts
+ M src/components/docs/component-showcases.tsx
+ M src/components/docs/playground-registry.tsx
+ M src/components/ui/textarea.tsx
+ M src/lib/component-case-specs.ts
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 63 +++++++++-------------
- packages/design-system/src/alert.css               |  8 +--
- packages/design-system/src/components/ui/input.tsx |  8 +--
- src/alert.css                                      |  8 +--
- 4 files changed, 37 insertions(+), 50 deletions(-)
+ docs/wip/HANDOFF.md                                | 23 +++++++++------
+ packages/design-system/specs/textarea.spec.json    |  3 +-
+ .../src/components/ui/email-input.tsx              | 27 ++++++++++++++----
+ packages/design-system/src/components/ui/input.tsx | 11 ++++++--
+ .../src/components/ui/password-input.tsx           | 18 ++++++++++--
+ .../design-system/src/components/ui/textarea.tsx   | 15 ++++++++--
+ packages/design-system/src/lib/ui-disabled.ts      | 30 ++++++++++++++++++++
+ src/components/docs/component-showcases.tsx        |  5 +++-
+ src/components/docs/playground-registry.tsx        | 26 ++++++++++++++---
+ src/components/ui/textarea.tsx                     | 33 +---------------------
+ src/lib/component-case-specs.ts                    |  4 ++-
+ 11 files changed, 135 insertions(+), 60 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
 
 
 

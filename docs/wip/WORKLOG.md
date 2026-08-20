@@ -1,15 +1,14 @@
 # 작업 일지 (WORKLOG)
 
-> 마지막 갱신: 2026-08-19  
+> 마지막 갱신: 2026-08-20  
 > 다음 세션: Cursor에서 `@docs/wip/WORKLOG.md` 를 붙이고 「이어서」라고 하면 됩니다.
 
 ## 오늘 한 일
 
-- **Alert** — icon 레이아웃 column-gap 8px·row-gap 4px 토큰화
-- **InputHypertext** — 색상 `foreground-placeholder`(On Surface Hint), 좌우 패딩 12px
-- **Avatar** — 이미지 inset 딤드를 `--black-opacity-20` (v0.1.42)
-- **Dialog** — 헤더 상단 `pt-8`(32) (v0.1.42)
-- **Toggle** — Playground `with text` (v0.1.42)
+- **Input · Textarea** — Playground `read only` 옵션, readOnly 시 포커스·클릭 차단(`uiReadOnlyField`)
+- **EmailInput · PasswordInput** — readOnly 연동(clear·토글·자동완성 비활성)
+- **Textarea** — design-system re-export, 쇼케이스 read only 케이스
+- **Alert** — icon gap·InputHypertext 스타일 (v0.1.43)
 
 ## 다음에 할 일
 
