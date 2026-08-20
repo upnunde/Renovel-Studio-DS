@@ -42,7 +42,7 @@ import { cn } from "design-system/utils"
 | 토큰 | 역할 | 값 |
 |------|------|-----|
 | `formLabelGap` | 짧은 Label ↔ Input (체크박스 옆 등) | 4 |
-| FieldLabel ↔ Input | sm 4 · default·lg 8 (`InputGroup` 소유, Input 크기는 고정) | 4 / 8 |
+| FieldLabel ↔ Input | 전 size 공통 8 (`InputGroup` `gap-2`, Input 크기는 고정) | **8** |
 | `formFieldGapTight` | Input ↔ Helper (필드 **안**) | **8** |
 | `formFieldGap` | 필드 단위 **사이** | **16 (확정)** |
 | `formGroupGap` | 폼 섹션·그룹 사이 | 24 |

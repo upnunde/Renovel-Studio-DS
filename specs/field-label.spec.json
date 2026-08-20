@@ -10,12 +10,12 @@
   },
   "defaults": { "size": "default", "weight": "700" },
   "sizeSpec": {
-    "sm":      { "titleTypography": "body2-{weight}", "titleDescriptionGap": "{space.0-5}", "controlGap": 4 },
+    "sm":      { "titleTypography": "body2-{weight}", "titleDescriptionGap": "{space.0-5}", "controlGap": 8 },
     "default": { "titleTypography": "body1-{weight}", "titleDescriptionGap": "{space.0-5}", "controlGap": 8 },
     "lg":      { "titleTypography": "heading5-{weight}", "titleDescriptionGap": "{space.0-5}", "controlGap": 8 },
     "$descriptionTypography": "body4-400",
     "$infoIcon": 14,
-    "$controlGap": { "sm": 4, "default": 8, "lg": 8, "owner": "InputGroup", "$note": "Label↔Input만 size별. Input 크기는 고정. FieldLabel은 자기 밖 간격을 그리지 않는다." }
+    "$controlGap": { "px": 8, "class": "gap-2", "owner": "InputGroup", "$note": "전 size 공통 8px. Input 크기는 고정. FieldLabel은 자기 밖 간격을 그리지 않는다." }
   },
   "styleSpec": {
     "title": { "$note": "Label 상속 + size×weight 합본 타이포. weight 500/600/700" },

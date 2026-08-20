@@ -122,7 +122,6 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       className={cn(
         "grid w-full",
         FIELD_LABEL_CONTROL_GAP_GROUP_CLASS,
-        "[&>[data-slot=input-hypertext]]:mt-2",
         uiDisabledFieldGroup,
         className
       )}
