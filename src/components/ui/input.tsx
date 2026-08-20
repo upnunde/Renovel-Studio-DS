@@ -10,7 +10,7 @@ import { FIELD_LABEL_CONTROL_GAP_GROUP_CLASS } from "./field-label"
 import {
   InputClearButton,
   clearNativeInputValue,
-  inputEndActionPadding,
+  inputEndActionPaddingWhenFocused,
 } from "./input-clear-button"
 
 const inputVariants = cva(
@@ -32,7 +32,7 @@ const inputVariants = cva(
 
 type InputProps = Omit<React.ComponentProps<"input">, "size"> &
   VariantProps<typeof inputVariants> & {
-    /** 값이 있을 때 우측 지우기 버튼 · file 타입은 제외 */
+    /** 값이 있고 포커스일 때 우측 지우기 버튼 · file 타입은 제외 */
     clearable?: boolean
   }
 
@@ -81,7 +81,7 @@ function Input({
         inputVariants({ size }),
         type === "number" &&
           "[appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
-        showClear && inputEndActionPadding(1),
+        showClear && inputEndActionPaddingWhenFocused(1),
         className
       )}
       {...props}
@@ -94,7 +94,7 @@ function Input({
   }
 
   return (
-    <div data-slot="input-root" className="relative w-full">
+    <div data-slot="input-root" className="group/input-root relative w-full">
       {control}
       {showClear ? (
         <InputClearButton
@@ -107,6 +107,7 @@ function Input({
             if (!input) return
             if (!isControlled) setInternalValue("")
             clearNativeInputValue(input, onChange)
+            input.focus()
           }}
         />
       ) : null}

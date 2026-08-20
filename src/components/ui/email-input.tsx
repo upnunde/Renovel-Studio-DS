@@ -9,7 +9,7 @@ import { readOnlyFieldHandlers } from "../../lib/ui-disabled"
 import {
   InputClearButton,
   clearNativeInputValue,
-  inputEndActionPadding,
+  inputEndActionPaddingWhenFocused,
 } from "./input-clear-button"
 import { inputVariants } from "./input"
 
@@ -102,7 +102,7 @@ function EmailInput({
   })
 
   return (
-    <div className="relative w-full">
+    <div className="group/input-root relative w-full">
       <InputPrimitive
         ref={inputRef}
         type="email"
@@ -118,7 +118,7 @@ function EmailInput({
         readOnly={readOnly}
         className={cn(
           inputVariants({ size }),
-          showClear && inputEndActionPadding(1),
+          showClear && inputEndActionPaddingWhenFocused(1),
           className
         )}
         value={current}
@@ -173,6 +173,7 @@ function EmailInput({
             if (!isControlled) setInternalValue("")
             setOpen(false)
             clearNativeInputValue(input, onChange)
+            input.focus()
           }}
         />
       ) : null}

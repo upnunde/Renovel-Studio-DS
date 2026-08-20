@@ -28,6 +28,12 @@ export function inputEndActionPadding(actionCount: 0 | 1 | 2) {
   return undefined
 }
 
+/** 값이 있어도 포커스(focus-within)일 때만 패딩 예약 — 지우기 버튼과 짝 */
+export function inputEndActionPaddingWhenFocused(actionCount: 1 | 2) {
+  if (actionCount >= 2) return "group-focus-within/input-root:pe-16"
+  return "group-focus-within/input-root:pe-9"
+}
+
 function InputClearButton({
   size = "default",
   disabled,
@@ -50,8 +56,12 @@ function InputClearButton({
       data-slot="input-clear"
       className={cn(
         "absolute top-1/2 z-10 -translate-y-1/2 text-foreground-muted hover:text-foreground",
+        "pointer-events-none opacity-0 group-focus-within/input-root:pointer-events-auto group-focus-within/input-root:opacity-100",
         className
       )}
+      onMouseDown={(event) => {
+        event.preventDefault()
+      }}
       onClick={onClick}
     >
       <Icon icon={ICONS.close} size="md" />
