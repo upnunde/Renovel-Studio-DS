@@ -4,9 +4,10 @@
   "slot": "field-label",
   "$description": "OS-중립 FieldLabel 정본. 출처: src/components/ui/field-label.tsx. Label 위 합성(title+required+info+description).",
   "role": "group",
-  "axes": { "size": { "values": ["default", "lg"] } },
+  "axes": { "size": { "values": ["sm", "default", "lg"] } },
   "defaults": { "size": "default" },
   "sizeSpec": {
+    "sm":      { "titleTypography": "body3-700", "gap": "{space.0-5}" },
     "default": { "titleTypography": "body1-700", "gap": "{space.0-5}" },
     "lg":      { "titleTypography": "heading5-700", "gap": "{space.0-5}" },
     "$descriptionTypography": "body4-400",
