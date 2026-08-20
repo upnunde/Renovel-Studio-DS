@@ -10,7 +10,7 @@
   },
   "defaults": { "size": "default", "weight": "700" },
   "sizeSpec": {
-    "sm":      { "titleTypography": "body3-{weight}", "titleDescriptionGap": "{space.0-5}", "controlGap": 4 },
+    "sm":      { "titleTypography": "body2-{weight}", "titleDescriptionGap": "{space.0-5}", "controlGap": 4 },
     "default": { "titleTypography": "body1-{weight}", "titleDescriptionGap": "{space.0-5}", "controlGap": 8 },
     "lg":      { "titleTypography": "heading5-{weight}", "titleDescriptionGap": "{space.0-5}", "controlGap": 8 },
     "$descriptionTypography": "body4-400",

@@ -7,6 +7,7 @@
 
 - **타이포 600** — heading/body/caption 전 스케일에 semibold 합본 추가 (27→38 토큰)
 - **FieldLabel weight** — 500/600/700만 유지 (400 삭제)
+- **FieldLabel sm** — 타이포 14(body3) → **15(body2)**
 - **FieldLabel ↔ Input 간격** — Input 크기는 고정. sm 4px · default·lg 8px (`InputGroup` 소유)
 - **cn/twMerge** — 합본 타이포가 `font-medium`·`leading-*`와 충돌해 두께가 무시되던 문제 수정
 

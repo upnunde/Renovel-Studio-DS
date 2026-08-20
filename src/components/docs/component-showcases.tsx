@@ -827,14 +827,14 @@ const SHOWCASES: Record<string, ReactNode> = {
       <ComponentCaseGroup title="FieldLabel · Size">
         <ComponentCaseGrid columns={3}>
           <ComponentCase
-            label="14"
-            tags={["size: sm", "text-body3_700", "controlGap: 4"]}
+            label="15"
+            tags={["size: sm", "text-body2_700", "controlGap: 4"]}
           >
             <InputGroup className="w-full max-w-xs">
-              <FieldLabel htmlFor="field-size-14" size="sm">
+              <FieldLabel htmlFor="field-size-15" size="sm">
                 타이틀 입력
               </FieldLabel>
-              <Input id="field-size-14" placeholder="입력" />
+              <Input id="field-size-15" placeholder="입력" />
             </InputGroup>
           </ComponentCase>
           <ComponentCase

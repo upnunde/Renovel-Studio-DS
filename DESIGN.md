@@ -339,7 +339,7 @@ Tailwind 표준 spacing 네임스페이스와 동일하게 매핑 (`p-5` = 20px,
 
 | FieldLabel | 타이포 | Label ↔ Input |
 |------------|--------|----------------|
-| sm (14) | `text-body3_*` | 4 (`mt-1`) |
+| sm (15) | `text-body2_*` | 4 (`mt-1`) |
 | default (16) | `text-body1_*` | 8 (`mt-2`) |
 | lg (18) | `text-heading5_*` | 8 (`mt-2`) |
 

@@ -29,9 +29,9 @@ const fieldLabelTitleVariants = cva("", {
     },
   },
   compoundVariants: [
-    { size: "sm", weight: "500", class: "text-body3_500" },
-    { size: "sm", weight: "600", class: "text-body3_600" },
-    { size: "sm", weight: "700", class: "text-body3_700" },
+    { size: "sm", weight: "500", class: "text-body2_500" },
+    { size: "sm", weight: "600", class: "text-body2_600" },
+    { size: "sm", weight: "700", class: "text-body2_700" },
     { size: "default", weight: "500", class: "text-body1_500" },
     { size: "default", weight: "600", class: "text-body1_600" },
     { size: "default", weight: "700", class: "text-body1_700" },
