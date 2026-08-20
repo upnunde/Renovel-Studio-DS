@@ -15,10 +15,11 @@
       "placeholder": { "fg": "{foreground-placeholder}" },
       "focus": { "border": "{ring}", "ring": "{ring}/50", "ringWidth": 3 },
       "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "$ref": "shared.disabledField" },
+      "readonly": { "$note": "read-only:pointer-events-none · tabIndex=-1 · focus ring 제거(uiReadOnlyField)" },
       "invalid": { "border": "{destructive}", "ring": "{destructive}/20", "dark": { "border": "{destructive}/50", "ring": "{destructive}/40" } }
     }
   },
-  "states": ["rest", "focus", "disabled", "invalid"],
+  "states": ["rest", "focus", "disabled", "readonly", "invalid"],
   "nativeNotes": {
     "autoGrow": "웹 field-sizing-content(내용따라 자동 성장). iOS UITextView 동적 높이, Compose 자동 높이 처리 필요.",
     "placeholder": "웹 ::placeholder → 플랫폼 placeholder API."
