@@ -14,24 +14,53 @@ import {
   TooltipTrigger,
 } from "./tooltip"
 
-const fieldLabelTitleVariants = cva("font-bold", {
+const fieldLabelTitleVariants = cva("", {
   variants: {
     size: {
-      /** 14/700 · text-body3_700 */
-      sm: "text-body3_700 leading-[20px]",
-      /** 16/700 · text-body1_700 */
-      default: "text-body1_700 leading-[24px]",
-      /** 18/700 · text-heading5_700 */
-      lg: "text-heading5_700 leading-[26px]",
+      sm: "",
+      default: "",
+      lg: "",
+    },
+    /** 합본 타이포 두께 · 500 medium · 600 semibold · 700 bold */
+    weight: {
+      "500": "",
+      "600": "",
+      "700": "",
     },
   },
+  compoundVariants: [
+    { size: "sm", weight: "500", class: "text-body3_500" },
+    { size: "sm", weight: "600", class: "text-body3_600" },
+    { size: "sm", weight: "700", class: "text-body3_700" },
+    { size: "default", weight: "500", class: "text-body1_500" },
+    { size: "default", weight: "600", class: "text-body1_600" },
+    { size: "default", weight: "700", class: "text-body1_700" },
+    { size: "lg", weight: "500", class: "text-heading5_500" },
+    { size: "lg", weight: "600", class: "text-heading5_600" },
+    { size: "lg", weight: "700", class: "text-heading5_700" },
+  ],
   defaultVariants: {
     size: "default",
+    weight: "700",
   },
 })
 
+/** FieldLabel ↔ Control 간격 · 전 size 공통 8px. InputGroup(L2)이 소유 (`gap-2`). */
+export const FIELD_LABEL_CONTROL_GAP_PX = 8
+export const FIELD_LABEL_CONTROL_GAP_CLASS = "gap-2"
+
+/** FieldLabel size → 권장 Input size. 라벨·컨트롤 스케일을 같이 맞춰 간격이 일정하게 보이게 한다. */
+export const FIELD_LABEL_INPUT_SIZE = {
+  sm: "sm",
+  default: "default",
+  lg: "xl",
+} as const
+
+export type FieldLabelInputSize =
+  (typeof FIELD_LABEL_INPUT_SIZE)[keyof typeof FIELD_LABEL_INPUT_SIZE]
+
 const fieldLabelDescriptionClassName =
-  "text-body4_400 font-normal leading-[18px] text-foreground-muted"
+  "text-body4_400 text-foreground-muted"
 
 function normalizeFieldLabelDescription(
   description: FieldLabelProps["description"]
@@ -74,6 +103,7 @@ function FieldLabel({
   children,
   htmlFor,
   size = "default",
+  weight = "700",
   required = false,
   description,
   info,
@@ -81,7 +111,7 @@ function FieldLabel({
   ...props
 }: FieldLabelProps) {
   const autoId = React.useId()
-  const titleClassName = fieldLabelTitleVariants({ size })
+  const titleClassName = fieldLabelTitleVariants({ size, weight })
   const descriptionLines = normalizeFieldLabelDescription(description)
   const hasDescription = descriptionLines != null && descriptionLines.length > 0
   const hasInfo =
@@ -93,6 +123,7 @@ function FieldLabel({
   return (
     <div
       data-slot="field-label"
+      data-size={size}
       className={cn("inline-flex flex-col items-start gap-0.5", className)}
       {...props}
     >
@@ -158,4 +189,12 @@ function FieldLabel({
   )
 }
 
-export { FieldLabel, fieldLabelTitleVariants, type FieldLabelProps }
+export {
+  FieldLabel,
+  fieldLabelTitleVariants,
+  FIELD_LABEL_CONTROL_GAP_CLASS,
+  FIELD_LABEL_CONTROL_GAP_PX,
+  FIELD_LABEL_INPUT_SIZE,
+  type FieldLabelInputSize,
+  type FieldLabelProps,
+}

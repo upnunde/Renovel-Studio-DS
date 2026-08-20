@@ -41,8 +41,8 @@ import { cn } from "design-system/utils"
 
 | 토큰 | 역할 | 값 |
 |------|------|-----|
-| `formLabelGap` | Label ↔ Input (필드 **안**) | 4 |
-| `formFieldGapTight` | Helper·힌트 등 필드 **안** 밀착 | 8 |
+| `formLabelGap` | 짧은 Label ↔ Input (체크박스 옆 등) | 4 |
+| `formFieldGapTight` | **FieldLabel ↔ Input** · Input ↔ Helper (필드 **안**) · 전 size 공통 | **8** |
 | `formFieldGap` | 필드 단위 **사이** | **16 (확정)** |
 | `formGroupGap` | 폼 섹션·그룹 사이 | 24 |
 | `formGroupGapRelaxed` | 넉넉한 그룹 사이 | 32 |
