@@ -13,6 +13,7 @@ import {
   InputClearButton,
   clearNativeInputValue,
   inputEndActionPadding,
+  inputEndActionPaddingWhenFocused,
   inputEndActionSize,
 } from "./input-clear-button"
 import { inputVariants } from "./input"
@@ -51,7 +52,7 @@ function PasswordInput({
   })
 
   return (
-    <div data-slot="password-input" className="relative w-full">
+    <div data-slot="password-input" className="group/input-root relative w-full">
       <InputPrimitive
         ref={inputRef}
         type={visible ? "text" : "password"}
@@ -65,7 +66,8 @@ function PasswordInput({
         }}
         className={cn(
           inputVariants({ size }),
-          inputEndActionPadding(showClear ? 2 : 1),
+          inputEndActionPadding(1),
+          showClear && inputEndActionPaddingWhenFocused(2),
           className
         )}
         {...props}
@@ -82,6 +84,7 @@ function PasswordInput({
             if (!input) return
             if (!isControlled) setInternalValue("")
             clearNativeInputValue(input, onChange)
+            input.focus()
           }}
         />
       ) : null}

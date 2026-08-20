@@ -7,7 +7,7 @@ import { cn } from "../../lib/utils"
 import { uiDisabledField } from "../../lib/ui-disabled"
 import { ICONS } from "../icons"
 import { Icon } from "./icon"
-import { InputClearButton, inputEndActionPadding } from "./input-clear-button"
+import { InputClearButton, inputEndActionPaddingWhenFocused } from "./input-clear-button"
 import { inputVariants } from "./input"
 
 type FileInputProps = Omit<React.ComponentProps<"input">, "size" | "type"> &
@@ -53,7 +53,7 @@ function FileInput({
   }
 
   return (
-    <div data-slot="file-input" className="relative w-full">
+    <div data-slot="file-input" className="group/input-root relative w-full">
       <input
         {...props}
         ref={inputRef}
@@ -75,7 +75,7 @@ function FileInput({
         className={cn(
           inputVariants({ size }),
           "flex cursor-pointer items-center gap-2",
-          fileLabel && inputEndActionPadding(1),
+          fileLabel && inputEndActionPaddingWhenFocused(1),
           uiDisabledField,
           "peer-disabled/input:pointer-events-none peer-disabled/input:cursor-not-allowed peer-disabled/input:border-disabled-border peer-disabled/input:bg-disabled peer-disabled/input:text-disabled-foreground",
           "peer-aria-invalid/input:border-destructive peer-aria-invalid/input:ring-3 peer-aria-invalid/input:ring-destructive/20",

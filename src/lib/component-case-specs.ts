@@ -212,7 +212,7 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         name: "composition",
         values: ["clearable"],
         description:
-          "값 있을 때 우측 ✕ 지우기 기본 제공 · clearable={false}로 비활성 (file은 FileInput ✕)",
+          "값 있고 포커스일 때 우측 ✕ 지우기 · clearable={false}로 비활성 (file은 FileInput ✕)",
       },
       {
         name: "hypertext",

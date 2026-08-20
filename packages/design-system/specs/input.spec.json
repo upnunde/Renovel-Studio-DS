@@ -26,7 +26,7 @@
     }
   },
   "clearButton": {
-    "$note": "InputClearButton = Button+Icon(close, size md=16px). 버튼 크기: sm→icon-xs(24px), 그 외→icon-sm(36px). endPadding pe-9.",
+    "$note": "InputClearButton = Button+Icon(close, size md=16px). 값 있어도 포커스(focus-within)일 때만 노출. 버튼 크기: sm→icon-xs(24px), 그 외→icon-sm(36px). endPadding도 포커스 시에만 pe-9.",
     "icon": 14
   },
   "group": {

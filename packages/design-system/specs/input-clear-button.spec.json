@@ -14,11 +14,12 @@
     "xl": { "buttonSize": "icon-sm(32)" },
     "2xl": { "buttonSize": "icon-sm(32)" }
   },
-  "styleSpec": { "rest": { "fg": "{foreground-muted}", "$note": "Button ghost 기반" }, "hover": { "fg": "{foreground}" } },
-  "endPadding": { "$note": "부모 input의 우측 패딩 예약 계약", "0": "none", "1": "pe-9(36)", "2": "pe-16(64)" },
-  "states": ["rest", "hover"],
+  "styleSpec": { "rest": { "fg": "{foreground-muted}", "$note": "Button ghost 기반. 값 있어도 부모 focus-within 전에는 opacity-0." }, "hover": { "fg": "{foreground}" }, "focusWithin": { "$note": "group-focus-within에서만 노출" } },
+  "endPadding": { "$note": "부모 input의 우측 패딩 예약 계약. 지우기는 포커스일 때만 pe-9/pe-16", "0": "none", "1": "pe-9(36)", "2": "pe-16(64)" },
+  "states": ["rest", "hover", "focus-within"],
   "nativeNotes": {
     "shared": "Input/Email/Password/File 공유. 위치는 소비자가 지정.",
+    "visibility": "값이 있어도 필드 포커스(부모 focus-within)일 때만 보임. 클릭 시 input blur 방지(mousedown preventDefault).",
     "clearNativeValue": "웹 clearNativeInputValue는 React 제어입력 우회용 DOM 핵 — 네이티브 무의미(일반 상태 업데이트). 시각/동작 스펙에서 제외.",
     "tabIndex": "Tab 순서 제외(마우스/터치 전용)."
   }

@@ -9,7 +9,7 @@
 - **FieldLabel weight** — 500/600/700만 유지 (400 삭제)
 - **FieldLabel sm** — 타이포 14(body3) → **15(body2)**
 - **FieldLabel ↔ Input 간격** — Input 크기는 고정. sm 4px · default·lg 8px (`InputGroup` 소유)
-- **cn/twMerge** — 합본 타이포가 `font-medium`·`leading-*`와 충돌해 두께가 무시되던 문제 수정
+- **Input 지우기** — 값이 있어도 포커스(focus-within)일 때만 ✕ 노출 (Email·Password·File 포함)
 
 ## 다음에 할 일
 
@@ -26,7 +26,7 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
-- `packages/design-system/src/components/ui/field-label.tsx` · `input.tsx`
+- `packages/design-system/src/components/ui/input.tsx` · `input-clear-button.tsx` · `email-input.tsx` · `password-input.tsx` · `file-input.tsx`
 - `packages/design-system/specs/field-label.spec.json` · `input.spec.json`
 - `DESIGN.md` · `packages/design-system/docs/SPACING_SEMANTIC.md`
 - `src/components/docs/playground-registry.tsx` · `component-showcases.tsx`
