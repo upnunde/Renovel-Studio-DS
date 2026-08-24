@@ -277,7 +277,7 @@ export const TABS_TEXT_LIST_GAP_BY_SIZE = {
   sm: { className: "gap-3", px: 12, token: "3" },
   default: { className: "gap-4", px: 16, token: "4" },
   xl: { className: "gap-5", px: 20, token: "5" },
-  "2xl": { className: "gap-6", px: 24, token: "6" },
+  "2xl": { className: "gap-5", px: 20, token: "5" },
 } as const satisfies Record<
   TabsSizeApi,
   { className: string; px: number; token: string }

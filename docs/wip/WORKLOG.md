@@ -1,35 +1,30 @@
 # 작업 일지 (WORKLOG)
 
-> 마지막 갱신: 2026-08-20  
+> 마지막 갱신: 2026-08-24  
 > 다음 세션: Cursor에서 `@docs/wip/WORKLOG.md` 를 붙이고 「이어서」라고 하면 됩니다.
 
 ## 오늘 한 일
 
-- **타이포 600** — heading/body/caption 전 스케일에 semibold 합본 추가 (27→38 토큰)
-- **FieldLabel weight** — 500/600/700만 유지 (400 삭제)
-- **FieldLabel sm** — 타이포 14(body3) → **15(body2)**
-- **FieldLabel ↔ Input 간격** — 전 size 공통 **8px** (`InputGroup` `gap-2`). Input 크기는 고정
-- **Input 지우기** — 값이 있어도 포커스(focus-within)일 때만 ✕ 노출 (Email·Password·File 포함)
+- **Tabs line·text 2xl gap** — 24px(`gap-6`) → **20px(`gap-5`)**
+- **스튜디오 Sync 실패** — `ProfileAccountTab` 인라인 SVG → DS `Icon` 교체 (이전 세션)
 
 ## 다음에 할 일
 
+- Docs 예시 카드 2열·중앙 정렬 미커밋분 커밋 여부
 - 리노벨 스튜디오에서 구 시맨틱 클래스(`bg-card`, rest `bg-muted`, `border-input` 등)를 새 이름으로 대체
 - Docs 셸을 `space.layout.*`에 맞출지 여부 결정
-- 스펙 `nativeNotes` FLAG(shadow·z-index) 웹 코드 정렬 여부 결정
 
 ## 막힌 것 · 결정 필요
 
 - 패키지 소비는 **릴리스 태그** 경로 — docs `main`과 혼동하지 말 것
 - `bg-background`는 Surface. 앱 바닥은 `bg-canvas`만 (컴포넌트에 canvas 금지)
-- 윤곽 rest는 Surface가 아님 (`bg-transparent`)
 
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
-- `packages/design-system/src/components/ui/input.tsx` · `input-clear-button.tsx` · `email-input.tsx` · `password-input.tsx` · `file-input.tsx`
-- `packages/design-system/specs/field-label.spec.json` · `input.spec.json`
-- `DESIGN.md` · `packages/design-system/docs/SPACING_SEMANTIC.md`
-- `src/components/docs/playground-registry.tsx` · `component-showcases.tsx`
+- `packages/design-system/src/component-size-tokens.ts`
+- `packages/design-system/specs/tabs.spec.json`
+- `src/component-size-tokens.ts` · `src/lib/component-case-specs.ts`
 
 ## 메모
 

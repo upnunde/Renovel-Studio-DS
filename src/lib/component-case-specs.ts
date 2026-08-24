@@ -521,7 +521,7 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
     properties: [
       { name: "tabCount", values: ["2", "3", "4"], description: "표시할 탭 개수 (플레이그라운드)" },
       { name: "defaultValue", values: ["tab-1", "tab-2", "tab-3", "tab-4"], description: "초기 활성 탭" },
-      { name: "variant", values: ["default", "line", "text"], description: "default · 분리형 square · line · 밑줄 · text · size별 타이포·gap(2xl→16px)" },
+      { name: "variant", values: ["default", "line", "text"], description: "default · 분리형 square · line · 밑줄 · text · size별 타이포·gap(2xl→20px)" },
       {
         name: "size",
         values: [...TABS_SIZE_APIS],
