@@ -1,0 +1,36 @@
+{
+  "$schema": "./README.md",
+  "name": "Bubble",
+  "slot": "bubble",
+  "$description": "OS-중립 말풍선 표면. Message(아바타·메타)는 범위 밖.",
+  "role": "presentation",
+  "axes": {
+    "variant": { "values": ["default", "secondary", "tinted", "destructive"] },
+    "align": { "values": ["start", "end"] }
+  },
+  "defaults": { "variant": "default", "align": "start" },
+  "styleSpec": {
+    "content": {
+      "radius": "{radius.xl}",
+      "padX": 12,
+      "padY": 8,
+      "typography": "body3-400",
+      "maxWidth": "80%"
+    },
+    "default": { "rest": { "bg": "{primary}", "fg": "{primary-foreground}" }, "hover": { "bg": "{primary}/80", "$note": "button|a만" } },
+    "secondary": { "rest": { "bg": "{background-muted}", "fg": "{foreground}" }, "hover": { "bg": "{muted-strong}", "fg": "{muted-strong-foreground}" } },
+    "tinted": { "rest": { "bg": "{primary-container}", "fg": "{primary-container-foreground}" }, "hover": { "bg": "{primary-container}/80" } },
+    "destructive": { "rest": { "bg": "{destructive}/10", "fg": "{destructive}" }, "hover": { "bg": "{destructive}/20" } },
+    "reactions": { "bg": "{background-muted}", "ring": "{background}", "radius": "9999", "side": ["top", "bottom"], "align": ["start", "end"] }
+  },
+  "composition": {
+    "Bubble": { "slot": "bubble" },
+    "BubbleContent": { "slot": "bubble-content", "render": "div|button|a" },
+    "BubbleReactions": { "slot": "bubble-reactions" },
+    "BubbleGroup": { "slot": "bubble-group", "gap": 8 }
+  },
+  "nativeNotes": {
+    "scope": "말풍선 표면만. 아바타·이름·타임스탬프는 Message 등 상위.",
+    "reactionsA11y": "이모지 행은 role=img + aria-label 권장."
+  }
+}

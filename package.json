@@ -1,6 +1,6 @@
 {
   "name": "design-system",
-  "version": "0.1.51",
+  "version": "0.1.52",
   "description": "Renovel Studio 디자인 시스템 — shadcn/ui 기반 토큰·컴포넌트·유틸",
   "type": "module",
   "repository": {
@@ -51,6 +51,7 @@
     "./ui/alert": "./src/components/ui/alert.tsx",
     "./ui/avatar": "./src/components/ui/avatar.tsx",
     "./ui/badge": "./src/components/ui/badge.tsx",
+    "./ui/bubble": "./src/components/ui/bubble.tsx",
     "./ui/button": "./src/components/ui/button.tsx",
     "./ui/button-group": "./src/components/ui/button-group.tsx",
     "./ui/checkbox": "./src/components/ui/checkbox.tsx",
@@ -70,6 +71,7 @@
     "./ui/radio-group": "./src/components/ui/radio-group.tsx",
     "./ui/select": "./src/components/ui/select.tsx",
     "./ui/separator": "./src/components/ui/separator.tsx",
+    "./ui/sidebar": "./src/components/ui/sidebar.tsx",
     "./ui/skeleton": "./src/components/ui/skeleton.tsx",
     "./ui/slider": "./src/components/ui/slider.tsx",
     "./ui/sonner": "./src/components/ui/sonner.tsx",

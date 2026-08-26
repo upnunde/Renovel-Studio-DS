@@ -1,0 +1,46 @@
+{
+  "$schema": "./README.md",
+  "name": "SidebarMenuButton",
+  "slot": "sidebar-menu-button",
+  "$description": "OS-중립 사이드바 메뉴 버튼. 스튜디오 AppSidebar·SceneNavigation 데스크톱 좌측 내비 패턴. SidebarMenu / SidebarMenuItem과 조합.",
+  "role": "button",
+  "$use": ["_shared.disabledPresets"],
+  "axes": {
+    "size": { "values": ["sm", "default"] },
+    "isActive": { "values": [false, true] }
+  },
+  "defaults": { "size": "default", "isActive": false },
+  "sizeSpec": {
+    "sm": { "padX": 10, "padY": 6, "gap": 8, "typography": "body3-500", "iconGlyph": 16 },
+    "default": { "padX": 12, "padY": 8, "gap": 12, "typography": "body2-500", "iconGlyph": 20 }
+  },
+  "styleSpec": {
+    "rest": { "bg": "transparent", "fg": "{foreground-muted}", "radius": "{radius.md}" },
+    "hover": { "bg": "{muted}", "fg": "{foreground}", "$note": "inactive만" },
+    "active": { "bg": "transparent", "fg": "{primary}", "$note": "색만 변경. font-weight·타이포 스케일은 rest와 동일(합본 유지)." },
+    "focus": { "ring": "{ring}", "ringWidth": 2, "ringOffset": 2 }
+  },
+  "composition": {
+    "SidebarGroup": { "slot": "sidebar-group", "tag": "div", "$note": "섹션 묶음. 제목은 SidebarGroupLabel 유무로 선택." },
+    "SidebarGroupLabel": {
+      "slot": "sidebar-group-label",
+      "tag": "p",
+      "padTop": 4,
+      "size": {
+        "default": { "padX": 12 },
+        "sm": { "padX": 10 }
+      },
+      "typography": "caption1-500",
+      "fg": "{foreground-placeholder}",
+      "$note": "On Surface Hint · padTop 4 · 같은 size SidebarMenuButton padX와 좌측 정렬"
+    },
+    "SidebarMenu": { "slot": "sidebar-menu", "tag": "ul", "role": "list" },
+    "SidebarMenuItem": { "slot": "sidebar-menu-item", "tag": "li" },
+    "SidebarMenuButton": { "slot": "sidebar-menu-button", "render": "button|a|Link" }
+  },
+  "nativeNotes": {
+    "isActive": "aria-current=page + data-active. 활성 면 채움 없음(텍스트 primary만).",
+    "groupLabel": "SidebarGroupLabel을 넣으면 제목 노출, 생략하면 숨김.",
+    "width": "부모 Sidebar 폭(스튜디오 240px)에 맞추려면 w-full."
+  }
+}
