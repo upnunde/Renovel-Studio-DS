@@ -46,7 +46,7 @@
     "hover": { "opacity": 1 },
     "disabled": { "opacity": 1, "pointerEvents": "none" }
   },
-  "disabled": { "bg": "{disabled}", "fg": "{disabled-foreground}", "border": "{disabled-border}", "$ref": "shared.disabledInteractive" },
+  "disabled": { "fg": "{disabled-foreground}", "$ref": "shared.disabledInteractive", "$note": "outline은 rest 채움 없음 → uiDisabledNoSurface (disabled bg·border 면 금지)" },
   "states": ["rest", "hover", "focus", "selected", "disabled", "invalid"],
   "nativeNotes": {
     "selected": "aria-pressed(Toggle). iOS isSelected 바인딩, Compose selected state.",

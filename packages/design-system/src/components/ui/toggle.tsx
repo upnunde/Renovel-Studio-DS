@@ -4,7 +4,10 @@ import { Toggle as TogglePrimitive } from "@base-ui/react/toggle"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
-import { uiDisabledInteractive } from "../../lib/ui-disabled"
+import {
+  uiDisabledInteractive,
+  uiDisabledNoSurface,
+} from "../../lib/ui-disabled"
 
 /**
  * variant = 표현 (default 면 없음 · outline 윤곽)
@@ -15,9 +18,9 @@ const toggleVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-transparent",
-        outline:
-          "border border-border-emphasis bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground",
+        /** rest 채움 없음 — disabled surface 추가 금지 */
+        default: `bg-transparent ${uiDisabledNoSurface}`,
+        outline: `border border-border-emphasis bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground ${uiDisabledNoSurface}`,
       },
       tone: {
         /** 툴바·세그먼트 — 선택 면 muted-strong (Figma Flow, 아이콘색 유지) */

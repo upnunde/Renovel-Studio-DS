@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-26 15:00:13**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-26 15:13:20**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,14 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-26 14:59:30** — 링크도 마찬가지야 애초에 surface가 없던 버튼은 disabled 상태에선 surface를 추가하지마
+- **2026-08-26 15:09:44** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.border-b border-border lg:border-r lg:border-b-0 .pace-y-5 p-5 > div.border-t border-border pt-3 .pace-y-3 > div.pace-y-3 > div.flex item.-center ju.tify-between gap-5[0]
+Position: top=1064px, left=362px, width=231px, height=20px
+React Component: PlaygroundSwitch
+HTML Element: <div class="flex items-center justify-between gap-5" data-cursor-element-id="cursor-el-6">disabled</div> DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.border-b border-border lg:border-r lg:border-b-0 .pace-y-5 p-5 > div > div.pace-y-3 > div.flex flex-col gap-1[0] > div.flex flex-wrap item.-center gap-2 > button.group/chip inline-flex min-w-12 .hrink-0 item.-center ju.tify-center border font-medium white.pace-nowrap bg-clip-padding tran.ition-all duration-.hort ea.e-.tandard outline-none .elect-none focu.-vi.ible:border-ring focu.-vi.ible:ring-3 focu.-vi.ible:ring-ring/50 di.abled:pointer-event.-none di.abled:cur.or-not-allowed data-di.abled:pointer-event.-none data-di.abled:cur.or-not-allowed aria-di.abled:pointer-event.-none aria-di.abled:cur.or-not-allowed di.abled:bg-di.abled di.abled:text-di.abled-foreground di.abled:border-di.abled-border data-di.abled:bg-di.abled data-di.abled:text-di.abled-foreground data-di.abled:border-di.abled-border aria-di.abled:bg-di.abled aria-di.abled:text-di.abled-foreground aria-di.abled:border-di.abled-border aria-invalid:border-de.tructive aria-invalid:ring-3 aria-invalid:ring-de.tructive/20 [&_.vg]:pointer-event.-none [&_.vg]:.hrink-0 border-border bg-tran.parent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-pre.ed:border-tran.parent aria-pre.ed:bg-inver.e-muted aria-pre.ed:text-inver.e-muted-foreground aria-pre.ed:hover:bg-inver.e-muted/80 aria-pre.ed:data-[hovered=true]:bg-inver.e-muted/80 h-8 gap-1 px-2.5 text-[0.8rem] [&_.vg:not([cla.*='.ize-'])]:.ize-4 rounded-full[2]
+Position: top=535px, left=524px, width=62px, height=32px
+React Component: CompositeItem
+HTML Element: <button type="button" aria-disabled="false" tabindex="0" aria-pressed="true" data-slot="chip" class="group/chip inline-flex min-w-12 shrink-0 items-center justify-center border font-medium whitespace-nowrap bg-clip-padding transition-all duration-short ease-standard outline-none select-none focus-vis…" data-pressed="" data-cursor-element-id="cursor-el-7">outline</button> 아웃라인도 마찬가지야
+surface 없는 것엔 추가 하지 말라니까 왜 이런건 알아서 찾아서 수정 안하는거야?
 
 ## 다음 작업 (Claude Code용)
 
@@ -23,25 +30,37 @@
 - 브랜치: `main`
 
 ```
+ M DESIGN.md
  M docs/wip/HANDOFF.md
  M packages/design-system/specs/button.spec.json
+ M packages/design-system/specs/chip.spec.json
+ M packages/design-system/specs/toggle.spec.json
  M packages/design-system/src/components/ui/button.tsx
- M packages/design-system/src/components/ui/field-label.tsx
+ M packages/design-system/src/components/ui/chip.tsx
+ M packages/design-system/src/components/ui/sidebar.tsx
+ M packages/design-system/src/components/ui/toggle.tsx
  M packages/design-system/src/lib/ui-disabled.ts
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 31 +++++++++++++---------
- packages/design-system/specs/button.spec.json      |  2 +-
- .../design-system/src/components/ui/button.tsx     | 10 ++++---
- .../src/components/ui/field-label.tsx              |  6 ++---
- packages/design-system/src/lib/ui-disabled.ts      |  8 ++++++
- 5 files changed, 38 insertions(+), 19 deletions(-)
+ DESIGN.md                                            |  2 ++
+ docs/wip/HANDOFF.md                                  | 18 +++++-------------
+ packages/design-system/specs/button.spec.json        |  2 +-
+ packages/design-system/specs/chip.spec.json          |  2 +-
+ packages/design-system/specs/toggle.spec.json        |  2 +-
+ packages/design-system/src/components/ui/button.tsx  |  4 ++--
+ packages/design-system/src/components/ui/chip.tsx    |  8 ++++++--
+ packages/design-system/src/components/ui/sidebar.tsx |  7 +++++--
+ packages/design-system/src/components/ui/toggle.tsx  | 11 +++++++----
+ packages/design-system/src/lib/ui-disabled.ts        |  9 +++++++--
+ 10 files changed, 37 insertions(+), 28 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
 
 
 

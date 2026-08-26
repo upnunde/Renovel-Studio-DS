@@ -5,7 +5,10 @@ import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
-import { uiDisabledInteractive } from "../../lib/ui-disabled"
+import {
+  uiDisabledInteractive,
+  uiDisabledNoSurface,
+} from "../../lib/ui-disabled"
 import { Icon } from "./icon"
 import { ICONS } from "../icons"
 
@@ -23,7 +26,8 @@ const chipVariants = cva(
       variant: {
         /** 솔리드 표현 — off=secondary, on=inverse-muted */
         fill: `${chipFillResting} ${chipSelected}`,
-        outline: `border-border bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground ${chipSelected}`,
+        /** rest 채움 없음 — disabled surface 추가 금지 */
+        outline: `border-border bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground ${chipSelected} ${uiDisabledNoSurface}`,
         /** @deprecated variant="fill" 사용 */
         default: `${chipFillResting} ${chipSelected}`,
       },

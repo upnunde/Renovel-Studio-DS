@@ -24,8 +24,8 @@ const buttonVariants = cva(
         /** solid CTA — 색은 tone */
         default: "",
         secondary: "",
-        outline: "bg-transparent bg-clip-padding",
-        /** rest에 면 없음 — disabled surface 추가 금지 */
+        /** rest 채움 없음 — disabled surface 추가 금지 */
+        outline: `bg-transparent bg-clip-padding ${uiDisabledNoSurface}`,
         ghost: uiDisabledNoSurface,
         link: `underline underline-offset-4 ${uiDisabledNoSurface}`,
         /** @deprecated default + tone=brand 로 해석 */

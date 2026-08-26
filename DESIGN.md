@@ -609,6 +609,8 @@ CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 �
 
 **Button 축:** `variant` = 표현(default 솔리드 · secondary · outline · ghost · link), `tone` = 색(neutral · brand · success · warning · destructive). 솔리드 CTA는 `variant="default"` 하나뿐이며, 브랜드 채움은 `tone="brand"`. `variant="primary"`·`status`는 deprecated alias (`primary` → default+brand, `status` default→neutral).
 
+**Disabled · no-surface 규칙:** rest에 채움이 없는 표현(`outline` · `ghost` · `link`, Chip outline, Toggle default/outline, SidebarMenuButton)은 disabled 시 `bg-disabled`/`border-disabled` 면을 **추가하지 않는다**. `uiDisabledNoSurface`로 덮어쓰고 글자·인터랙션만 비활성. 솔리드·필드류는 `uiDisabledInteractive` 면 유지.
+
 **Toggle 축:** `variant` = 표현(default 면 없음 · outline), `tone` = 선택 색(neutral · brand). 툴바·세그먼트(Figma Flow)는 `tone="neutral"`(pressed=`muted-strong`, 아이콘은 `foreground` 유지). 브랜드 강조 선택은 `tone="brand"`(pressed=`accent`). 기본 `neutral`. Inverse 채움은 Chip·Button solid에만 쓴다.
 
 **Toggle Group:** Toggle을 붙인 세그먼트. `multiple={false}`(기본)는 Figma Resizing처럼 하나만 선택. `multiple`이면 굵게+기울임처럼 여러 개. 그룹이 `size`·`shape`를 일괄하고, 각 Toggle이 `variant`·`tone`·`value`를 가진다.

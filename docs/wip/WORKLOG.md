@@ -5,10 +5,9 @@
 
 ## 오늘 한 일
 
-- **Bubble** · **Sidebar** 추가 · docs 사이드바 DS 적용 · v0.1.52 릴리스
-- docs 사이드바 크롬 좌우 패딩 20px(`px-5`)
-- Button ghost·link: disabled 시 surface 추가 금지 (`uiDisabledNoSurface`)
-- 예시 카드 그리드 columns·정렬 조정
+- **Bubble** · **Sidebar** · docs 사이드바 DS · v0.1.53
+- docs 사이드바 크롬 좌우 패딩 20px
+- **uiDisabledNoSurface** — rest 채움 없는 컨트롤(Button outline/ghost/link, Chip outline, Toggle, SidebarMenuButton) disabled 시 surface 금지 (`DESIGN.md` 규칙)
 
 ## 다음에 할 일
 
@@ -21,7 +20,7 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
-- `src/components/docs-sidebar.tsx` · `component-case-docs.tsx`
+- `packages/design-system/src/lib/ui-disabled.ts` · `button.tsx` · `chip.tsx` · `toggle.tsx` · `sidebar.tsx`
 
 ## 메모
 
