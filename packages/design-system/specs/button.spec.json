@@ -103,7 +103,7 @@
 
   "disabled": {
     "$ref": "shared.disabledInteractive",
-    "$note": "opacity 저하 + pointer-events none. 정본: src/lib/ui-disabled.ts (uiDisabledInteractive)"
+    "$note": "정본: src/lib/ui-disabled.ts. ghost·link(rest에 면 없음)는 uiDisabledNoSurface로 disabled bg·border를 올리지 않음."
   },
 
   "nativeNotes": {

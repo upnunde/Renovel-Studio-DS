@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-26 14:12:16**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-26 15:00:13**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,13 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-26 14:11:59** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > aside.ticky top-0 flex h-.vh w-56 .hrink-0 flex-col overflow-hidden border-r border-border bg-background text-foreground lg:w-60 > div.hrink-0 px-3 py-5
-Position: top=0px, left=0px, width=239px, height=84px
-React Component: DocsSidebar
-HTML Element: <div class="shrink-0 px-3 py-5" data-cursor-element-id="cursor-el-2">DESIGN SYSTEM</div> DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > aside.ticky top-0 flex h-.vh w-56 .hrink-0 flex-col overflow-hidden border-r border-border bg-background text-foreground lg:w-60 > div.hrink-0 border-t border-border px-3 py-4
-Position: top=1140px, left=0px, width=239px, height=69px
-React Component: DocsSidebar
-HTML Element: <div class="shrink-0 border-t border-border px-3 py-4" data-cursor-element-id="cursor-el-3">Theme</div> 좌우 패딩 20px 적용
+- **2026-08-26 14:59:30** — 링크도 마찬가지야 애초에 surface가 없던 버튼은 disabled 상태에선 surface를 추가하지마
 
 ## 다음 작업 (Claude Code용)
 
@@ -30,18 +24,28 @@ HTML Element: <div class="shrink-0 border-t border-border px-3 py-4" data-cursor
 
 ```
  M docs/wip/HANDOFF.md
- M src/components/docs-sidebar.tsx
+ M packages/design-system/specs/button.spec.json
+ M packages/design-system/src/components/ui/button.tsx
+ M packages/design-system/src/components/ui/field-label.tsx
+ M packages/design-system/src/lib/ui-disabled.ts
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md             | 19 +++++++++++--------
- src/components/docs-sidebar.tsx |  6 +++---
- 2 files changed, 14 insertions(+), 11 deletions(-)
+ docs/wip/HANDOFF.md                                | 31 +++++++++++++---------
+ packages/design-system/specs/button.spec.json      |  2 +-
+ .../design-system/src/components/ui/button.tsx     | 10 ++++---
+ .../src/components/ui/field-label.tsx              |  6 ++---
+ packages/design-system/src/lib/ui-disabled.ts      |  8 ++++++
+ 5 files changed, 38 insertions(+), 19 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
 
 
 

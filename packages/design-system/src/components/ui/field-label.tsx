@@ -46,15 +46,15 @@ const fieldLabelTitleVariants = cva("", {
 })
 
 /** FieldLabel ↔ Control 간격 · 전 size 공통 8px. InputGroup(L2)이 소유. */
-export const FIELD_LABEL_CONTROL_GAP_PX = 8
-export const FIELD_LABEL_CONTROL_GAP = {
+const FIELD_LABEL_CONTROL_GAP_PX = 8
+const FIELD_LABEL_CONTROL_GAP = {
   sm: { px: 8, className: "mt-2" },
   default: { px: 8, className: "mt-2" },
   lg: { px: 8, className: "mt-2" },
 } as const
 
 /** InputGroup 스택 간격 — FieldLabel↔Input · Input↔Hypertext */
-export const FIELD_LABEL_CONTROL_GAP_GROUP_CLASS = "gap-2"
+const FIELD_LABEL_CONTROL_GAP_GROUP_CLASS = "gap-2"
 
 const fieldLabelDescriptionClassName =
   "text-body4_400 text-foreground-muted"
