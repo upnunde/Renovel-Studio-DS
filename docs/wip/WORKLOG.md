@@ -6,7 +6,8 @@
 ## 오늘 한 일
 
 - **Bubble** · **Sidebar** 추가 · docs 사이드바 DS 적용 · v0.1.52 릴리스
-- docs 사이드바 크롬(로고·탭·Theme) 좌우 패딩 20px(`px-5`)
+- docs 사이드바 크롬 좌우 패딩 20px(`px-5`)
+- Button ghost·link: disabled 시 surface 추가 금지 (`uiDisabledNoSurface`)
 - 예시 카드 그리드 columns·정렬 조정
 
 ## 다음에 할 일
