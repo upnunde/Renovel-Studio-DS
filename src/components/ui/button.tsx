@@ -2,7 +2,10 @@ import { Button as ButtonPrimitive } from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
-import { uiDisabledInteractive } from "../../lib/ui-disabled"
+import {
+  uiDisabledInteractive,
+  uiDisabledNoSurface,
+} from "../../lib/ui-disabled"
 
 /**
  * variant = 표현 방식 (채움·소프트·윤곽·고스트·링크)
@@ -22,8 +25,9 @@ const buttonVariants = cva(
         default: "",
         secondary: "",
         outline: "bg-transparent bg-clip-padding",
-        ghost: "",
-        link: "underline underline-offset-4",
+        /** rest에 면 없음 — disabled surface 추가 금지 */
+        ghost: uiDisabledNoSurface,
+        link: `underline underline-offset-4 ${uiDisabledNoSurface}`,
         /** @deprecated default + tone=brand 로 해석 */
         primary: "",
       },

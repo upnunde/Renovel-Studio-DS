@@ -18,6 +18,14 @@ export const uiDisabledFieldMuted =
 /** 버튼·토글·탭·셀렉트 트리거 등 */
 export const uiDisabledInteractive = `${uiDisabledBlock} ${uiDisabledColors}`
 
+/**
+ * rest에 면이 없는 컨트롤(Button ghost·link 등) —
+ * disabled 시 surface(bg·border)를 새로 올리지 않고 글자·인터랙션만 비활성.
+ * `uiDisabledInteractive` 위에 덮어쓴다.
+ */
+export const uiDisabledNoSurface =
+  "disabled:bg-transparent disabled:border-transparent data-disabled:bg-transparent data-disabled:border-transparent aria-disabled:bg-transparent aria-disabled:border-transparent dark:disabled:bg-transparent dark:data-disabled:bg-transparent dark:aria-disabled:bg-transparent"
+
 /** Input·Textarea 등 텍스트 필드 */
 export const uiDisabledField = `${uiDisabledBlock} ${uiDisabledColors} ${uiDisabledFieldMuted}`
 
