@@ -637,7 +637,7 @@ DS 컴포넌트는 자기 밖 간격을 소유하지 않는다. 형제 사이 �
 
 | 프로젝트 | 경로 | 연결 방식 |
 |---------|------|----------|
-| 리노벨 스튜디오 | `/Users/user/Desktop/프로젝트/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.51` |
+| 리노벨 스튜디오 | `/Users/user/Desktop/프로젝트/upnunde-test/app` | `github:upnunde/Renovel-Studio-DS#v0.1.52` |
 
 소비자 추가 시 이 목록 갱신. 디자인 시스템 변경 시 소비자 영향 항상 고려.
 
@@ -684,7 +684,7 @@ npm run lint   # 린트
 - `npm run tokens:sd:verify` — Style Dictionary 산출물이 tokens.css와 일치하는지
 - `npm run tokens:check` — 위 전부 (커밋 전 권장)
 
-**불변식:** 세 검증 모두 `0-DRIFT` / `무결성 OK` 여야 한다 = JSON 정본과 웹 `src/tokens.css` 값이 완전 일치(커스텀·SD 파이프라인 양쪽), 스펙의 모든 `{ref}`가 실재 토큰. 웹 산출물이 안 바뀌므로 **기존 소비자(리노벨, v0.1.51 pin) 영향 0**. `src/tokens.css` 는 이제 **"JSON 정본의 웹 산출물"** 성격이며, 값 변경은 JSON에서 하고 verify로 확인한다.
+**불변식:** 세 검증 모두 `0-DRIFT` / `무결성 OK` 여야 한다 = JSON 정본과 웹 `src/tokens.css` 값이 완전 일치(커스텀·SD 파이프라인 양쪽), 스펙의 모든 `{ref}`가 실재 토큰. 웹 산출물이 안 바뀌므로 **기존 소비자(리노벨, v0.1.52 pin) 영향 0**. `src/tokens.css` 는 이제 **"JSON 정본의 웹 산출물"** 성격이며, 값 변경은 JSON에서 하고 verify로 확인한다.
 
 **컴포넌트 스펙 커버리지:** 실제 구현된 29개 컴포넌트 전부. `card`는 DESIGN.md 목록에 있으나 미구현이라 스펙 없음(구현 시 추가). Dialog/Popover/Dropdown/Tooltip/Select는 `_shared.floatingSurface`를 공유 참조. 웹 코드의 shadow(`shadow-md` vs `shadow-elevation-30`)·z-index(`z-50` vs semantic `z-*`) 불일치는 스펙의 `nativeNotes`에 FLAG로 기록됨(웹 코드 미변경 — 별도 결정 대상).
 
