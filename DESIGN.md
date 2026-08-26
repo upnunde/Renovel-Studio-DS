@@ -510,6 +510,7 @@ z-toast    /* 500 — 토스트·스낵바 */
 | Size token (문서) | `{api}_{axis}{px}` | 문서·Properties | `md_h36`, `md_g16` |
 | 패키지 export path | `kebab-case` | 파일 stem 일치 | `design-system/ui/radio-group` |
 | Playground state key | `camelCase` | **공백·한글 금지** · Properties와 동일 키 | `variant`, `htmlFor`, `defaultValue` |
+| Playground 옵션·컨트롤 표시명 | **영문** | chip/select 값·필드 라벨·`valueHints` · API 값과 동일하거나 읽기 쉬운 영문 | `icon` / `number` / `none`, `show label` |
 | HTML/React 속성 (spec) | **속성명 그대로** | DOM·코드 생성 일치 | `aria-invalid`, `htmlFor` |
 
 **문서화 예외 (의도적):**
@@ -519,25 +520,27 @@ z-toast    /* 500 — 토스트·스낵바 */
 - **Properties 전용 메타**: `composition`, `itemHeight` — playground 컨트롤 없음 (`SKIPPED_SPEC_PROPS`)
 - **Dropdown spec enum**: `RadioItem`, `CheckboxItem` — export 컴포넌트명 참조
 - **트리거 ARIA**: `aria-expanded`는 `DropdownMenuTrigger` 등이 **자동 설정** — Button prop으로 노출하지 않음
+- **설명 카피**: Properties `description`·docs 본문·에이전트 답변은 한국어 가능 — **옵션명(칩·셀렉트·컨트롤 라벨)만 영문 고정**
 
 **금지:**
 
 - Playground/registry state key에 공백·한글 (`"item type"`, `"구성"`)
+- Playground 옵션·컨트롤 표시명에 한글 (`아이콘`, `없음`, `제목` 등)
 - 파일명 `PascalCase` / `snake_case`
 - CSS 클래스에 `camelCase`
 - 레이어 간 임의 혼용 (파일 `UserProfile.tsx`, 변수 `user_profile`)
 
 상세·에이전트 규칙: **`.cursor/rules/naming-conventions.mdc`**
 
-### 3-4. 컴포넌트 목록 (29개)
+### 3-4. 컴포넌트 목록 (31개)
 
 **Forms:** input, textarea, label, checkbox, radio-group, switch, slider, select, toggle, chip, email-input, password-input, file-input
 
 **Actions:** button, button-group, toggle-group, icon
 
-**Display:** badge, avatar, card, alert, progress, skeleton
+**Display:** badge, avatar, card, alert, progress, skeleton, bubble
 
-**Navigation:** tabs
+**Navigation:** tabs, sidebar (SidebarGroup · SidebarGroupLabel · SidebarMenu · SidebarMenuItem · SidebarMenuButton)
 
 **Overlays:** dialog, popover, dropdown-menu, tooltip, toast (sonner)
 

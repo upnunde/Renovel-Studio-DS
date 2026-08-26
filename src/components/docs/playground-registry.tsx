@@ -6,6 +6,12 @@ import { ICONS } from "@/components/icons"
 import { Alert, AlertDescription, AlertTitle } from "design-system/ui/alert"
 import { Avatar, AvatarFallback, AvatarIcon, AvatarImage } from "design-system/ui/avatar"
 import { Badge } from "design-system/ui/badge"
+import {
+  Bubble,
+  BubbleContent,
+  BubbleGroup,
+  BubbleReactions,
+} from "design-system/ui/bubble"
 import { Button } from "design-system/ui/button"
 import {
   ButtonGroup,
@@ -66,6 +72,13 @@ import {
   SelectValue,
 } from "design-system/ui/select"
 import { Skeleton } from "design-system/ui/skeleton"
+import {
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "design-system/ui/sidebar"
 import { Slider } from "design-system/ui/slider"
 import { Switch } from "design-system/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "design-system/ui/tabs"
@@ -1462,6 +1475,115 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       if (shape === "block")
         return `<Skeleton className="h-32 w-full rounded-lg" />`
       return `<Skeleton className="h-4 w-full" />`
+    },
+  },
+
+  bubble: {
+    description: "variant × align · BubbleContent · 선택적 Reactions",
+    initialState: {
+      variant: "default",
+      align: "start",
+      children: "안녕하세요. 말풍선 미리보기입니다.",
+    },
+    textareaKeys: ["children"],
+    selectKeys: {
+      variant: ["default", "secondary", "tinted", "destructive"],
+      align: ["start", "end"],
+    },
+    renderPreview: (state, _ctx) => (
+      <div className="flex w-full max-w-md flex-col gap-6">
+        <Bubble
+          variant={str(state, "variant") as "default"}
+          align={str(state, "align") as "start"}
+        >
+          <BubbleContent>{str(state, "children")}</BubbleContent>
+        </Bubble>
+      </div>
+    ),
+    buildCode: (state) => {
+      const attrs = playgroundPropAttrs([
+        playgroundPropAttr("variant", str(state, "variant")),
+        playgroundPropAttr("align", str(state, "align")),
+      ])
+      return `<Bubble${attrs}>\n  <BubbleContent>${str(state, "children")}</BubbleContent>\n</Bubble>`
+    },
+  },
+
+  "sidebar-menu-button": {
+    description: "그룹 라벨 · isActive · size · leading",
+    initialState: {
+      size: "default",
+      isActive: false,
+      showLabel: true,
+      leading: "icon",
+      label: "Display",
+      children: "내 작품",
+    },
+    textKeys: ["label", "children"],
+    selectKeys: {
+      size: ["sm", "default"],
+      leading: ["none", "icon", "number"],
+    },
+    showWhen: {
+      label: (state) => playgroundBool(state, "showLabel"),
+    },
+    renderPreview: (state, ctx) => {
+      const leading = str(state, "leading")
+      const size = str(state, "size")
+      const glyph = size === "sm" ? "md" : "xl"
+      const isActive = playgroundBool(state, "isActive")
+      const showLabel = playgroundBool(state, "showLabel")
+      const numberTypo = size === "sm" ? "text-body3_400" : "text-body2_400"
+      return (
+        <SidebarGroup className="w-56 rounded-lg border border-border bg-background p-2">
+          {showLabel ? (
+            <SidebarGroupLabel size={size as "default"}>
+              {str(state, "label")}
+            </SidebarGroupLabel>
+          ) : null}
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                size={size as "default"}
+                isActive={isActive}
+                onClick={() => ctx.set("isActive", !isActive)}
+              >
+                {leading === "icon" ? (
+                  <Icon icon={ICONS.home} size={glyph as "xl"} />
+                ) : null}
+                {leading === "number" ? (
+                  <span
+                    className={`w-5 shrink-0 text-center tabular-nums ${numberTypo}`}
+                  >
+                    01
+                  </span>
+                ) : null}
+                {str(state, "children")}
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroup>
+      )
+    },
+    buildCode: (state) => {
+      const attrs = playgroundPropAttrs([
+        playgroundPropAttr("size", str(state, "size")),
+        playgroundBool(state, "isActive") ? `isActive` : null,
+      ])
+      const leading = str(state, "leading")
+      const size = str(state, "size")
+      const glyph = size === "sm" ? "md" : "xl"
+      const numberTypo = size === "sm" ? "text-body3_400" : "text-body2_400"
+      const leadingLine =
+        leading === "icon"
+          ? `\n    <Icon icon={ICONS.home} size="${glyph}" />`
+          : leading === "number"
+            ? `\n    <span className="w-5 shrink-0 text-center tabular-nums ${numberTypo}">01</span>`
+            : ""
+      const labelLine = playgroundBool(state, "showLabel")
+        ? `  <SidebarGroupLabel${size === "sm" ? ' size="sm"' : ""}>${str(state, "label")}</SidebarGroupLabel>\n`
+        : ""
+      return `<SidebarGroup>\n${labelLine}  <SidebarMenu>\n    <SidebarMenuItem>\n      <SidebarMenuButton${attrs}>${leadingLine}\n        ${str(state, "children")}\n      </SidebarMenuButton>\n    </SidebarMenuItem>\n  </SidebarMenu>\n</SidebarGroup>`
     },
   },
 

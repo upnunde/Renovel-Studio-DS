@@ -7,6 +7,7 @@ import { Icon } from "design-system/ui/icon"
 import { Alert, AlertDescription, AlertTitle } from "design-system/ui/alert"
 import { Avatar, AvatarFallback, AvatarIcon, AvatarImage } from "design-system/ui/avatar"
 import { Badge } from "design-system/ui/badge"
+import { Bubble, BubbleContent } from "design-system/ui/bubble"
 import { Button } from "design-system/ui/button"
 import { ButtonGroup } from "design-system/ui/button-group"
 import { Chip } from "design-system/ui/chip"
@@ -18,6 +19,7 @@ import { Progress } from "design-system/ui/progress"
 import { RadioGroup, RadioGroupItem } from "design-system/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "design-system/ui/select"
 import { Skeleton } from "design-system/ui/skeleton"
+import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "design-system/ui/sidebar"
 import { Slider } from "design-system/ui/slider"
 import { Switch } from "design-system/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "design-system/ui/tabs"
@@ -256,6 +258,39 @@ function PreviewSkeleton() {
   )
 }
 
+function PreviewBubble() {
+  return (
+    <div className={cn(previewShell, "flex-col gap-2 px-4")}>
+      <Bubble variant="secondary" align="start">
+        <BubbleContent>상대 메시지</BubbleContent>
+      </Bubble>
+      <Bubble variant="default" align="end" className="self-end">
+        <BubbleContent>내 메시지</BubbleContent>
+      </Bubble>
+    </div>
+  )
+}
+
+function PreviewSidebarMenuButton() {
+  return (
+    <div className={cn(previewShell, "px-3")}>
+      <SidebarGroup className="w-44">
+        <SidebarGroupLabel size="sm">Display</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton isActive size="sm">
+              Avatar
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="sm">Badge</SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </div>
+  )
+}
+
 function PreviewDropdownMenu() {
   return (
     <div className={previewShell}>
@@ -363,6 +398,8 @@ const previewBySlug: Record<ComponentDoc["slug"], () => ReactNode> = {
   tabs: PreviewTabs,
   progress: PreviewProgress,
   skeleton: PreviewSkeleton,
+  bubble: PreviewBubble,
+  "sidebar-menu-button": PreviewSidebarMenuButton,
   "dropdown-menu": PreviewDropdownMenu,
   dialog: PreviewDialog,
   popover: PreviewPopover,

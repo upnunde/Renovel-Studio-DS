@@ -24,6 +24,7 @@ alwaysApply: true
 
 - **`properties[].name` / `initialState` / `selectKeys` 키**: `camelCase` 또는 HTML 속성명 (`aria-invalid`, `htmlFor`)
 - **공백·한글 키 금지** — 표시는 `getPlaygroundControlLabel` / `formatSpecPropertyName`
+- **옵션·컨트롤 표시명 = 영문만** — chip/select `valueHints`·필드 라벨·Properties Values 표기. API 값과 같거나 읽기 쉬운 영문 (`icon` / `number` / `none`). 한글 금지 (`아이콘`, `없음` 등). 설명 `description`·docs 본문은 한국어 가능
 - **Properties 전용** (컨트롤 없음): `composition`, `itemHeight` → `SKIPPED_SPEC_PROPS`
 - **Playground-only**: `showHeader`, `tabCount` 등 — 컴포넌트 API 아님, 문서에 명시
 
@@ -49,5 +50,6 @@ alwaysApply: true
 1. 파일명 `kebab-case`?
 2. 컴포넌트 `PascalCase`?
 3. Playground key `camelCase` (공백 없음)?
-4. CSS/`data-slot` `kebab-case`?
-5. slug가 `component-docs` · `component-case-specs` · `playground-registry`와 일치?
+4. Playground 옵션·컨트롤 표시명 영문?
+5. CSS/`data-slot` `kebab-case`?
+6. slug가 `component-docs` · `component-case-specs` · `playground-registry`와 일치?

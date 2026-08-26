@@ -385,14 +385,14 @@ export function getPlaygroundControlLabel(
     }
     if (slug === "chip" || slug === "badge") return "children"
     if (slug === "toggle") return "label"
-    if (slug === "label") return "제목"
+    if (slug === "label") return "title"
     if (slug === "tooltip") return "tip"
     return "children"
   }
   if (slug === "chip" && key === "pressed") return "selected"
   if (key === "removable") return "removable"
-  if (slug === "avatar" && key === "initials") return "이니셜"
-  if (slug === "label" && key === "infoText") return "info 문구"
+  if (slug === "avatar" && key === "initials") return "initials"
+  if (slug === "label" && key === "infoText") return "info text"
   return formatSpecPropertyName(key)
 }
 

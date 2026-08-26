@@ -546,6 +546,66 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       },
     ],
   },
+  bubble: {
+    slug: "bubble",
+    properties: [
+      {
+        name: "variant",
+        values: ["default", "secondary", "tinted", "destructive"],
+        description: "말풍선 면 · default(나) / secondary(상대) / tinted / destructive",
+      },
+      {
+        name: "align",
+        values: ["start", "end"],
+        description: "행 정렬 · start(상대) / end(나)",
+      },
+      {
+        name: "children",
+        values: ["string"],
+        description: "BubbleContent 텍스트",
+      },
+    ],
+  },
+  "sidebar-menu-button": {
+    slug: "sidebar-menu-button",
+    properties: [
+      {
+        name: "size",
+        values: ["sm", "default"],
+        description: "밀도 · default(앱 내비) / sm",
+      },
+      {
+        name: "isActive",
+        values: ["false", "true"],
+        description: "현재 선택 · primary 색만 · 크기·두께 유지",
+      },
+      {
+        name: "showLabel",
+        values: ["false", "true"],
+        description: "그룹 제목(SidebarGroupLabel) 표시 · Playground-only",
+      },
+      {
+        name: "label",
+        values: ["string"],
+        description: "그룹 제목 텍스트 · showLabel일 때 · Playground-only",
+      },
+      {
+        name: "leading",
+        values: ["none", "icon", "number"],
+        description: "선행 슬롯 · none / icon / number · Playground-only",
+        valueHints: {
+          none: "none",
+          icon: "icon",
+          number: "number",
+        },
+      },
+      {
+        name: "children",
+        values: ["string"],
+        description: "메뉴 항목 라벨",
+      },
+    ],
+  },
   "dropdown-menu": {
     slug: "dropdown-menu",
     properties: [
@@ -696,7 +756,7 @@ export function formatPropValue(prop: ComponentPropSpec, value: string): string 
 /** Playground 컨트롤 표시명 — `name`(camelCase·HTML 속성) → 읽기 쉬운 라벨 */
 export function formatSpecPropertyName(name: string): string {
   const labels: Record<string, string> = {
-    composition: "구성",
+    composition: "composition",
     itemType: "item type",
     itemVariant: "item variant",
     itemHeight: "item-height",
@@ -713,6 +773,7 @@ export function formatSpecPropertyName(name: string): string {
     showHeader: "show header",
     showTitle: "title",
     showLabel: "title",
+    leading: "leading",
     showIcon: "icon",
     showContent: "show content",
     showFooter: "show footer",

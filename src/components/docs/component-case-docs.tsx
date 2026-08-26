@@ -101,21 +101,13 @@ export function ComponentCaseGroup({
 
 export function ComponentCaseGrid({
   children,
-  columns = 3,
 }: {
   children: ReactNode
+  /** 무시됨 — 예시 카드는 최대 2열 고정 */
   columns?: 2 | 3 | 4
 }) {
   return (
-    <div
-      className={cn(
-        "grid",
-        docsSpace.caseGridGap,
-        columns === 2 && "sm:grid-cols-2",
-        columns === 3 && "sm:grid-cols-2 lg:grid-cols-3",
-        columns === 4 && "sm:grid-cols-2 lg:grid-cols-4"
-      )}
-    >
+    <div className={cn("grid sm:grid-cols-2", docsSpace.caseGridGap)}>
       {children}
     </div>
   )
@@ -147,7 +139,7 @@ export function ComponentCase({
         className={cn(
           flush
             ? cn(docsSpace.caseFlushFrame, docsSpace.pad)
-            : cn("flex min-h-14 flex-wrap items-center", docsSpace.inlineGap, docsSpace.pad)
+            : cn("flex min-h-14 flex-wrap items-center justify-center", docsSpace.inlineGap, docsSpace.pad)
         )}
       >
         {children}

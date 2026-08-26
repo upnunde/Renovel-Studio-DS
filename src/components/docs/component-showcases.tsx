@@ -39,6 +39,12 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "design-system/ui/alert"
 import { Avatar, AvatarFallback, AvatarIcon, AvatarImage } from "design-system/ui/avatar"
 import { Badge } from "design-system/ui/badge"
+import {
+  Bubble,
+  BubbleContent,
+  BubbleGroup,
+  BubbleReactions,
+} from "design-system/ui/bubble"
 import { Button } from "design-system/ui/button"
 import {
   ButtonGroup,
@@ -80,6 +86,13 @@ import {
   SelectValue,
 } from "design-system/ui/select"
 import { Skeleton } from "design-system/ui/skeleton"
+import {
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "design-system/ui/sidebar"
 import { Slider } from "design-system/ui/slider"
 import { Switch } from "design-system/ui/switch"
 import { Tabs, TabsList, TabsTrigger } from "design-system/ui/tabs"
@@ -1214,7 +1227,7 @@ const SHOWCASES: Record<string, ReactNode> = {
   badge: (
     <Showcase slug="badge">
       <ComponentCaseGroup title="Variant">
-        <ComponentCaseGrid columns={3}>
+        <ComponentCaseGrid columns={2}>
           <ComponentCase label="default" tags={["variant: default", "h20"]}>
             <Badge>default</Badge>
           </ComponentCase>
@@ -1231,7 +1244,7 @@ const SHOWCASES: Record<string, ReactNode> = {
       </ComponentCaseGroup>
 
       <ComponentCaseGroup title="Status × Variant">
-        <ComponentCaseGrid columns={4}>
+        <ComponentCaseGrid columns={2}>
           <ComponentCase label="default · success" tags={["솔리드"]}>
             <Badge status="success">success</Badge>
           </ComponentCase>
@@ -1289,7 +1302,7 @@ const SHOWCASES: Record<string, ReactNode> = {
         </ComponentCaseGrid>
       </ComponentCaseGroup>
       <ComponentCaseGroup title="Hover (snapshot)">
-        <ComponentCaseGrid columns={3}>
+        <ComponentCaseGrid columns={2}>
           <ComponentCase label="ghost → accent" tags={["hover", "accent"]}>
             <Badge variant="ghost" data-hovered>
               ghost
@@ -1315,7 +1328,7 @@ const SHOWCASES: Record<string, ReactNode> = {
       </ComponentCaseGroup>
 
       <ComponentCaseGroup title="Size">
-        <ComponentCaseGrid columns={4}>
+        <ComponentCaseGrid columns={2}>
           {BADGE_SIZE_APIS.map((size) => {
             const meta = badgeCaseMeta(size)
             return (
@@ -1511,6 +1524,166 @@ const SHOWCASES: Record<string, ReactNode> = {
             <Skeleton className="h-20 w-full" />
           </div>
         </ComponentCase>
+      </ComponentCaseGroup>
+    </Showcase>
+  ),
+
+  bubble: (
+    <Showcase slug="bubble">
+      <ComponentCaseGroup title="Variant">
+        <ComponentCaseGrid>
+          {(
+            ["default", "secondary", "tinted", "destructive"] as const
+          ).map((variant) => (
+            <ComponentCase key={variant} label={variant} tags={[`variant: ${variant}`]}>
+              <Bubble variant={variant}>
+                <BubbleContent>{variant} bubble</BubbleContent>
+              </Bubble>
+            </ComponentCase>
+          ))}
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Align">
+        <ComponentCaseGrid>
+          <ComponentCase label="start" tags={["align: start"]}>
+            <Bubble variant="secondary" align="start">
+              <BubbleContent>상대방 메시지</BubbleContent>
+            </Bubble>
+          </ComponentCase>
+          <ComponentCase label="end" tags={["align: end"]}>
+            <div className="flex w-full justify-end">
+              <Bubble variant="default" align="end">
+                <BubbleContent>내 메시지</BubbleContent>
+              </Bubble>
+            </div>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Group · Reactions">
+        <ComponentCaseGrid>
+          <ComponentCase label="BubbleGroup" tags={["composition"]}>
+            <BubbleGroup>
+              <Bubble variant="secondary">
+                <BubbleContent>첫 번째</BubbleContent>
+              </Bubble>
+              <Bubble variant="secondary">
+                <BubbleContent>같은 발신자 연속</BubbleContent>
+              </Bubble>
+            </BubbleGroup>
+          </ComponentCase>
+          <ComponentCase label="reactions" tags={["BubbleReactions"]}>
+            <Bubble variant="secondary">
+              <BubbleContent>리액션이 있는 말풍선</BubbleContent>
+              <BubbleReactions role="img" aria-label="Reactions: thumbs up">
+                <span>👍</span>
+              </BubbleReactions>
+            </Bubble>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+    </Showcase>
+  ),
+
+  "sidebar-menu-button": (
+    <Showcase slug="sidebar-menu-button">
+      <ComponentCaseGroup title="State">
+        <ComponentCaseGrid>
+          <ComponentCase label="inactive" tags={["isActive: false"]}>
+            <SidebarMenu className="w-56">
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <Icon icon={ICONS.home} size="xl" />
+                  내 작품
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </ComponentCase>
+          <ComponentCase label="active" tags={["isActive: true"]}>
+            <SidebarMenu className="w-56">
+              <SidebarMenuItem>
+                <SidebarMenuButton isActive>
+                  <Icon icon={ICONS.home} size="xl" />
+                  내 작품
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Size">
+        <ComponentCaseGrid>
+          <ComponentCase label="default" tags={["size: default"]}>
+            <SidebarMenu className="w-56">
+              <SidebarMenuItem>
+                <SidebarMenuButton size="default">
+                  <Icon icon={ICONS.barChart3} size="xl" />
+                  통계
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </ComponentCase>
+          <ComponentCase label="sm" tags={["size: sm"]}>
+            <SidebarMenu className="w-56">
+              <SidebarMenuItem>
+                <SidebarMenuButton size="sm">
+                  <Icon icon={ICONS.barChart3} size="md" />
+                  통계
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Group">
+        <ComponentCaseGrid>
+          <ComponentCase
+            label="with label"
+            tags={["SidebarGroupLabel"]}
+          >
+            <SidebarGroup className="w-56 rounded-lg border border-border bg-background p-2">
+              <SidebarGroupLabel size="sm">Display</SidebarGroupLabel>
+              <SidebarMenu>
+                {(
+                  [
+                    { id: "avatar", label: "Avatar", active: true },
+                    { id: "badge", label: "Badge", active: false },
+                    { id: "bubble", label: "Bubble", active: false },
+                  ] as const
+                ).map((item) => (
+                  <SidebarMenuItem key={item.id}>
+                    <SidebarMenuButton isActive={item.active} size="sm">
+                      {item.label}
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroup>
+          </ComponentCase>
+          <ComponentCase label="no label" tags={["SidebarGroupLabel: omit"]}>
+            <SidebarGroup className="w-56 rounded-lg border border-border bg-background p-2">
+              <SidebarMenu>
+                {(
+                  [
+                    { id: "works", label: "내 작품", icon: ICONS.home, active: true },
+                    { id: "analytics", label: "통계", icon: ICONS.barChart3, active: false },
+                    { id: "settings", label: "설정", icon: ICONS.settings2, active: false },
+                  ] as const
+                ).map((item) => (
+                  <SidebarMenuItem key={item.id}>
+                    <SidebarMenuButton isActive={item.active}>
+                      <Icon icon={item.icon} size="xl" />
+                      {item.label}
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroup>
+          </ComponentCase>
+        </ComponentCaseGrid>
       </ComponentCaseGroup>
     </Showcase>
   ),

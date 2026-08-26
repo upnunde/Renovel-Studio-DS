@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-20 14:36:09**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-26 12:03:55**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,10 +11,10 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-20 14:36:02** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.flex min-h-48 flex-col > div.flex min-h-[400px] w-full flex-1 item.-center ju.tify-center gap-3 px-5 py-10 > div.grid w-full gap-2 ha.-[input:di.abled]:[&_[data-.lot=label]]:pointer-event.-none ha.-[input:di.abled]:[&_[data-.lot=label]]:cur.or-not-allowed ha.-[input:di.abled]:[&_[data-.lot=label]]:text-di.abled-foreground ha.-[textarea:di.abled]:[&_[data-.lot=label]]:pointer-event.-none ha.-[textarea:di.abled]:[&_[data-.lot=label]]:cur.or-not-allowed ha.-[textarea:di.abled]:[&_[data-.lot=label]]:text-di.abled-foreground ha.-[input[data-di.abled]]:[&_[data-.lot=label]]:text-di.abled-foreground ha.-[input[aria-di.abled=true]]:[&_[data-.lot=label]]:text-di.abled-foreground max-w-x > div.inline-flex flex-col item.-.tart gap-0.5
-Position: top=683px, left=799px, width=320px, height=42px
-React Component: FieldLabel
-HTML Element: <div data-slot="field-label" data-size="sm" class="inline-flex flex-col items-start gap-0.5" data-cursor-element-id="cursor-el-2">타이틀 입력 필요 없는 보조문구는 삭제</div> 이 사이 갭은 몇이야?
+- **2026-08-26 12:02:33** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > aside.ticky top-0 flex h-.vh w-56 .hrink-0 flex-col overflow-hidden border-r border-border bg-background text-foreground lg:w-60 > div.group/tab. data-horizontal:flex-col flex min-h-0 flex-1 flex-col gap-0 > div#base-ui-_R_d6itmlb_ > nav.min-h-0 flex-1 overflow-y-auto over.croll-y-contain px-3 py-4
+Position: top=118px, left=0px, width=239px, height=1022px
+React Component: NavTabPanel
+HTML Element: <nav class="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-3 py-4" data-cursor-element-id="cursor-el-1">Overview Color Tokens Semantic Spacing Tokens Semantic Typography Icons Radius Elevation Motion</nav> gap 기준이 컴포는트와 맞지 않아
 
 ## 다음 작업 (Claude Code용)
 
@@ -26,33 +26,79 @@ HTML Element: <div data-slot="field-label" data-size="sm" class="inline-flex fle
 - 브랜치: `main`
 
 ```
+ M .cursor/rules/naming-conventions.mdc
  M DESIGN.md
  M docs/wip/HANDOFF.md
- M packages/design-system/docs/SPACING_SEMANTIC.md
- M packages/design-system/specs/field-label.spec.json
- M packages/design-system/specs/input.spec.json
- M packages/design-system/src/components/ui/field-label.tsx
- M packages/design-system/src/components/ui/input.tsx
+ M docs/wip/WORKLOG.md
+ M packages/design-system/package.json
+ M src/components/docs-sidebar.tsx
+ M src/components/docs/component-case-docs.tsx
+ M src/components/docs/component-overview-preview.tsx
  M src/components/docs/component-showcases.tsx
+ M src/components/docs/playground-registry.tsx
+ M src/components/docs/playground-utils.ts
  M src/lib/component-case-specs.ts
+ M src/lib/component-docs.ts
+ M src/lib/docs-nav.ts
+ M src/lib/docs-space.ts
+ M src/lib/playground-snippet.ts
+?? packages/design-system/specs/bubble.spec.json
+?? packages/design-system/specs/sidebar-menu-button.spec.json
+?? packages/design-system/src/components/ui/bubble.tsx
+?? packages/design-system/src/components/ui/sidebar.tsx
+?? src/components/ui/bubble.tsx
+?? src/components/ui/sidebar.tsx
 ```
 
 ### diff 요약
 
 ```
- DESIGN.md                                          |  8 ++---
- docs/wip/HANDOFF.md                                | 40 ++++++++++++----------
- packages/design-system/docs/SPACING_SEMANTIC.md    |  2 +-
- packages/design-system/specs/field-label.spec.json |  4 +--
- packages/design-system/specs/input.spec.json       |  4 +--
- .../src/components/ui/field-label.tsx              | 11 +++---
- packages/design-system/src/components/ui/input.tsx |  1 -
- src/components/docs/component-showcases.tsx        |  2 +-
- src/lib/component-case-specs.ts                    |  2 +-
- 9 files changed, 38 insertions(+), 36 deletions(-)
+ .cursor/rules/naming-conventions.mdc               |   6 +-
+ DESIGN.md                                          |   9 +-
+ docs/wip/HANDOFF.md                                |  91 ++++++++---
+ docs/wip/WORKLOG.md                                |  19 +--
+ packages/design-system/package.json                |   2 +
+ src/components/docs-sidebar.tsx                    | 139 +++++-----------
+ src/components/docs/component-case-docs.tsx        |  14 +-
+ src/components/docs/component-overview-preview.tsx |  37 +++++
+ src/components/docs/component-showcases.tsx        | 181 ++++++++++++++++++++-
+ src/components/docs/playground-registry.tsx        | 122 ++++++++++++++
+ src/components/docs/playground-utils.ts            |   6 +-
+ src/lib/component-case-specs.ts                    |  63 ++++++-
+ src/lib/component-docs.ts                          |  60 ++++---
+ src/lib/docs-nav.ts                                |   4 -
+ src/lib/docs-space.ts                              |   2 +-
+ src/lib/playground-snippet.ts                      |   9 +
+ 16 files changed, 582 insertions(+), 182 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- 완료: 스튜디오 Sync 실패 원인(`ProfileAccountTab` 인라인 SVG)을 DS `Icon`으로 교체, `upnunde-test` main 푸시
+- CI `32354680325` · Sync `32354718750` 통과. v0.1.50 동기화 PR https://github.com/upnunde/upnunde-test/pull/37
+- 스튜디오 로컬 WIP는 유지(해당 파일만 origin 기준으로 고친 뒤 WIP 복원)
+
+
+
+
+
+
 
 
 

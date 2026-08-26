@@ -7,6 +7,13 @@ import { usePathname, useRouter } from "next/navigation"
 import { ModeToggle } from "@/components/mode-toggle"
 import { RenvelStudioLogo } from "@/components/renovel-studio-logo"
 import { Separator } from "design-system/ui/separator"
+import {
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "design-system/ui/sidebar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "design-system/ui/tabs"
 import {
   docsNavTabs,
@@ -17,121 +24,59 @@ import {
   type DocsNavSection,
   type DocsNavTab,
 } from "@/lib/docs-nav"
-import { cn } from "@/lib/utils"
 
-function NavLink({
+const NAV_SIZE = "sm" as const
+
+function NavMenuButton({
   item,
   isActive,
-  className,
 }: {
   item: DocsNavItem
   isActive: boolean
-  className?: string
 }) {
   if (item.disabled) {
     return (
-      <span
-        className={cn(
-          "flex h-9 cursor-not-allowed items-center rounded-full px-3 text-sm text-disabled-foreground",
-          className
-        )}
-        aria-disabled
-      >
+      <SidebarMenuButton size={NAV_SIZE} disabled>
         {item.title}
-        <span className="ml-auto text-xs">Soon</span>
-      </span>
+        <span className="ml-auto text-caption2_400">Soon</span>
+      </SidebarMenuButton>
     )
   }
 
   return (
-    <Link
-      href={item.href}
-      className={cn(
-        "flex h-9 items-center rounded-full px-3 text-sm transition-colors",
-        isActive
-          ? "bg-primary font-medium text-primary-foreground"
-          : "text-foreground hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground",
-        className
-      )}
-      aria-current={isActive ? "page" : undefined}
+    <SidebarMenuButton
+      size={NAV_SIZE}
+      isActive={isActive}
+      render={<Link href={item.href} />}
     >
       {item.title}
-    </Link>
-  )
-}
-
-function NavCollapsibleSection({
-  section,
-  activeHref,
-}: {
-  section: DocsNavSection & { label: string; collapsible: true }
-  activeHref: string | null
-}) {
-  const defaultHref = section.items[0]?.href
-
-  if (!defaultHref) return null
-
-  return (
-    <div className="space-y-0.5">
-      <Link
-        href={defaultHref}
-        className="flex h-9 items-center rounded-full px-3 text-sm text-foreground transition-colors hover:bg-accent hover:text-accent-foreground data-[hovered=true]:bg-accent data-[hovered=true]:text-accent-foreground"
-      >
-        {section.label}
-      </Link>
-
-      <ul className="space-y-0.5 pl-2">
-        {section.items.map((item) => (
-          <li key={item.href}>
-            <NavLink item={item} isActive={item.href === activeHref} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    </SidebarMenuButton>
   )
 }
 
 function NavSection({
   section,
   activeHref,
-  compact = false,
 }: {
   section: DocsNavSection
   activeHref: string | null
-  compact?: boolean
 }) {
-  const sectionSpacing = compact
-    ? ""
-    : section.label && !section.collapsible
-      ? "mt-5 space-y-1"
-      : "space-y-1"
-
-  if (section.collapsible && section.label) {
-    return (
-      <div className={sectionSpacing}>
-        <NavCollapsibleSection
-          section={{ ...section, label: section.label, collapsible: true }}
-          activeHref={activeHref}
-        />
-      </div>
-    )
-  }
-
   return (
-    <div className={sectionSpacing}>
+    <SidebarGroup>
       {section.label ? (
-        <p className="px-2 text-xs font-medium tracking-wide text-foreground-muted/80">
-          {section.label}
-        </p>
+        <SidebarGroupLabel size={NAV_SIZE}>{section.label}</SidebarGroupLabel>
       ) : null}
-      <ul className="space-y-0.5">
+      <SidebarMenu>
         {section.items.map((item) => (
-          <li key={item.href}>
-            <NavLink item={item} isActive={item.href === activeHref} />
-          </li>
+          <SidebarMenuItem key={item.href}>
+            <NavMenuButton
+              item={item}
+              isActive={item.href === activeHref}
+            />
+          </SidebarMenuItem>
         ))}
-      </ul>
-    </div>
+      </SidebarMenu>
+    </SidebarGroup>
   )
 }
 
@@ -151,19 +96,15 @@ function NavTabPanel({
           {groupIndex > 0 ? (
             <Separator className="my-6 bg-border" />
           ) : null}
-          <div>
-            <div
-              className={cn(group.tab === "foundation" && "space-y-0.5")}
-            >
-              {group.sections.map((section, sectionIndex) => (
-                <NavSection
-                  key={section.label ?? sectionIndex}
-                  section={section}
-                  activeHref={activeHref}
-                  compact={group.tab === "foundation"}
-                />
-              ))}
-            </div>
+          {/* SidebarGroup 스택 간격 — 컴포넌트 정본(gap-1)·메뉴(gap-0)와 겹치지 않게 부모 gap만 */}
+          <div className="flex flex-col gap-5">
+            {group.sections.map((section, sectionIndex) => (
+              <NavSection
+                key={section.label ?? sectionIndex}
+                section={section}
+                activeHref={activeHref}
+              />
+            ))}
           </div>
         </Fragment>
       ))}
@@ -222,7 +163,7 @@ export function DocsSidebar() {
     <aside className="sticky top-0 flex h-svh w-56 shrink-0 flex-col overflow-hidden border-r border-border bg-background text-foreground lg:w-60">
       <div className="shrink-0 px-4 py-5">
         <Link href="/foundation" className="block space-y-0.5">
-          <p className="mb-2 text-xs font-medium uppercase tracking-widest text-foreground-muted">
+          <p className="mb-2 text-caption1_500 uppercase tracking-widest text-foreground-muted">
             Design System
           </p>
           <RenvelStudioLogo />
@@ -233,7 +174,7 @@ export function DocsSidebar() {
 
       <div className="shrink-0 border-t border-border px-4 py-4">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs text-foreground-muted">Theme</span>
+          <span className="text-caption1_400 text-foreground-muted">Theme</span>
           <ModeToggle />
         </div>
       </div>
