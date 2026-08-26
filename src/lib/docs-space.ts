@@ -19,7 +19,7 @@ export const docsSpace = {
   padX: "px-5",
   padY: "py-5",
   /** ComponentCase flush — 가변 프레임 안에 미리보기(모달 등) 중앙 배치 */
-  caseFlushFrame: "flex w-full items-center justify-center",
+  caseFlushFrame: "flex w-full justify-center",
   /** Table body cell — 좌우 20px · 상하 20px */
   tableCell: "px-5 py-5",
   /** Table header cell — 좌우 20px · 상하 8px (token 2) */

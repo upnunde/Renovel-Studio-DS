@@ -5,15 +5,13 @@
 
 ## 오늘 한 일
 
-- **Bubble** — variant `default`/`secondary`/`tinted`/`destructive`, `text-body3_400`, playground textarea
-- **Sidebar** — `SidebarGroup`/`Label`/`Menu`/`Item`/`Button` (size padX 정렬, Label=On Surface Hint)
-- docs 사이드바를 DS Sidebar로 교체 · 섹션 간격은 부모 `gap-5`
-- Playground 옵션·컨트롤 표시명 영문 가이드 (`DESIGN.md` §3-5)
+- **Bubble** · **Sidebar** 추가 · docs 사이드바 DS 적용 · v0.1.52 릴리스
+- docs 사이드바 좌우 패딩 12px(`px-3`) 통일
+- 예시 카드 그리드 columns·정렬 조정
 
 ## 다음에 할 일
 
 - 스튜디오 AppSidebar / SceneNavigation을 DS Sidebar로 교체
-- Docs 예시 카드 2열·중앙 정렬 잔여 확인
 
 ## 막힌 것 · 결정 필요
 
@@ -22,8 +20,7 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
-- `packages/design-system/src/components/ui/sidebar.tsx` · `bubble.tsx`
-- `src/components/docs-sidebar.tsx`
+- `src/components/docs-sidebar.tsx` · `component-case-docs.tsx`
 
 ## 메모
 

@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-26 12:03:55**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-26 14:09:11**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,10 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-26 12:02:33** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > aside.ticky top-0 flex h-.vh w-56 .hrink-0 flex-col overflow-hidden border-r border-border bg-background text-foreground lg:w-60 > div.group/tab. data-horizontal:flex-col flex min-h-0 flex-1 flex-col gap-0 > div#base-ui-_R_d6itmlb_ > nav.min-h-0 flex-1 overflow-y-auto over.croll-y-contain px-3 py-4
-Position: top=118px, left=0px, width=239px, height=1022px
-React Component: NavTabPanel
-HTML Element: <nav class="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-3 py-4" data-cursor-element-id="cursor-el-1">Overview Color Tokens Semantic Spacing Tokens Semantic Typography Icons Radius Elevation Motion</nav> gap 기준이 컴포는트와 맞지 않아
+- **2026-08-26 14:03:30** — 커밋 깃푸시
 
 ## 다음 작업 (Claude Code용)
 
@@ -26,53 +23,22 @@ HTML Element: <nav class="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px
 - 브랜치: `main`
 
 ```
- M .cursor/rules/naming-conventions.mdc
- M DESIGN.md
- M docs/wip/HANDOFF.md
- M docs/wip/WORKLOG.md
- M packages/design-system/package.json
  M src/components/docs-sidebar.tsx
  M src/components/docs/component-case-docs.tsx
- M src/components/docs/component-overview-preview.tsx
- M src/components/docs/component-showcases.tsx
- M src/components/docs/playground-registry.tsx
- M src/components/docs/playground-utils.ts
- M src/lib/component-case-specs.ts
- M src/lib/component-docs.ts
- M src/lib/docs-nav.ts
  M src/lib/docs-space.ts
- M src/lib/playground-snippet.ts
-?? packages/design-system/specs/bubble.spec.json
-?? packages/design-system/specs/sidebar-menu-button.spec.json
-?? packages/design-system/src/components/ui/bubble.tsx
-?? packages/design-system/src/components/ui/sidebar.tsx
-?? src/components/ui/bubble.tsx
-?? src/components/ui/sidebar.tsx
 ```
 
 ### diff 요약
 
 ```
- .cursor/rules/naming-conventions.mdc               |   6 +-
- DESIGN.md                                          |   9 +-
- docs/wip/HANDOFF.md                                |  91 ++++++++---
- docs/wip/WORKLOG.md                                |  19 +--
- packages/design-system/package.json                |   2 +
- src/components/docs-sidebar.tsx                    | 139 +++++-----------
- src/components/docs/component-case-docs.tsx        |  14 +-
- src/components/docs/component-overview-preview.tsx |  37 +++++
- src/components/docs/component-showcases.tsx        | 181 ++++++++++++++++++++-
- src/components/docs/playground-registry.tsx        | 122 ++++++++++++++
- src/components/docs/playground-utils.ts            |   6 +-
- src/lib/component-case-specs.ts                    |  63 ++++++-
- src/lib/component-docs.ts                          |  60 ++++---
- src/lib/docs-nav.ts                                |   4 -
- src/lib/docs-space.ts                              |   2 +-
- src/lib/playground-snippet.ts                      |   9 +
- 16 files changed, 582 insertions(+), 182 deletions(-)
+ src/components/docs-sidebar.tsx             |  4 ++--
+ src/components/docs/component-case-docs.tsx | 14 +++++++++++---
+ src/lib/docs-space.ts                       |  2 +-
+ 3 files changed, 14 insertions(+), 6 deletions(-)
 ```
 
 ## Claude Code 상태
+
 
 
 

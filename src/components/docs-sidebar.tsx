@@ -161,7 +161,7 @@ export function DocsSidebar() {
 
   return (
     <aside className="sticky top-0 flex h-svh w-56 shrink-0 flex-col overflow-hidden border-r border-border bg-background text-foreground lg:w-60">
-      <div className="shrink-0 px-4 py-5">
+      <div className="shrink-0 px-3 py-5">
         <Link href="/foundation" className="block space-y-0.5">
           <p className="mb-2 text-caption1_500 uppercase tracking-widest text-foreground-muted">
             Design System
@@ -172,7 +172,7 @@ export function DocsSidebar() {
 
       <NavGroups activeHref={activeHref} />
 
-      <div className="shrink-0 border-t border-border px-4 py-4">
+      <div className="shrink-0 border-t border-border px-3 py-4">
         <div className="flex items-center justify-between gap-2">
           <span className="text-caption1_400 text-foreground-muted">Theme</span>
           <ModeToggle />
