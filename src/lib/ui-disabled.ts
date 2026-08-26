@@ -19,9 +19,14 @@ export const uiDisabledFieldMuted =
 export const uiDisabledInteractive = `${uiDisabledBlock} ${uiDisabledColors}`
 
 /**
- * rest에 면이 없는 컨트롤(Button ghost·link 등) —
- * disabled 시 surface(bg·border)를 새로 올리지 않고 글자·인터랙션만 비활성.
+ * rest에 채움(surface)이 없는 컨트롤 — disabled 시 bg·border disabled 면을 새로 올리지 않음.
  * `uiDisabledInteractive` 위에 덮어쓴다.
+ *
+ * 적용 대상 (rest bg transparent / 없음):
+ * - Button: outline · ghost · link
+ * - Chip: outline
+ * - Toggle: default · outline
+ * - SidebarMenuButton
  */
 export const uiDisabledNoSurface =
   "disabled:bg-transparent disabled:border-transparent data-disabled:bg-transparent data-disabled:border-transparent aria-disabled:bg-transparent aria-disabled:border-transparent dark:disabled:bg-transparent dark:data-disabled:bg-transparent dark:aria-disabled:bg-transparent"
