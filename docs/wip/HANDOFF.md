@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-26 14:09:11**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-26 14:12:16**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,13 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-26 14:03:30** — 커밋 깃푸시
+- **2026-08-26 14:11:59** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > aside.ticky top-0 flex h-.vh w-56 .hrink-0 flex-col overflow-hidden border-r border-border bg-background text-foreground lg:w-60 > div.hrink-0 px-3 py-5
+Position: top=0px, left=0px, width=239px, height=84px
+React Component: DocsSidebar
+HTML Element: <div class="shrink-0 px-3 py-5" data-cursor-element-id="cursor-el-2">DESIGN SYSTEM</div> DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > aside.ticky top-0 flex h-.vh w-56 .hrink-0 flex-col overflow-hidden border-r border-border bg-background text-foreground lg:w-60 > div.hrink-0 border-t border-border px-3 py-4
+Position: top=1140px, left=0px, width=239px, height=69px
+React Component: DocsSidebar
+HTML Element: <div class="shrink-0 border-t border-border px-3 py-4" data-cursor-element-id="cursor-el-3">Theme</div> 좌우 패딩 20px 적용
 
 ## 다음 작업 (Claude Code용)
 
@@ -23,21 +29,22 @@
 - 브랜치: `main`
 
 ```
+ M docs/wip/HANDOFF.md
  M src/components/docs-sidebar.tsx
- M src/components/docs/component-case-docs.tsx
- M src/lib/docs-space.ts
 ```
 
 ### diff 요약
 
 ```
- src/components/docs-sidebar.tsx             |  4 ++--
- src/components/docs/component-case-docs.tsx | 14 +++++++++++---
- src/lib/docs-space.ts                       |  2 +-
- 3 files changed, 14 insertions(+), 6 deletions(-)
+ docs/wip/HANDOFF.md             | 19 +++++++++++--------
+ src/components/docs-sidebar.tsx |  6 +++---
+ 2 files changed, 14 insertions(+), 11 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
 
 
 
