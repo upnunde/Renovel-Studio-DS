@@ -5,8 +5,8 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
 import {
-  uiDisabledInteractive,
   uiDisabledNoSurface,
+  uiDisabledOutline,
 } from "../../lib/ui-disabled"
 
 /**
@@ -14,13 +14,13 @@ import {
  * tone    = 선택 색 (neutral · brand)
  */
 const toggleVariants = cva(
-  `group/toggle inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 ${uiDisabledInteractive} aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 in-data-[slot=toggle-group]:rounded-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
+  `group/toggle inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:focus-visible:border-transparent disabled:focus-visible:ring-0 data-disabled:focus-visible:border-transparent data-disabled:focus-visible:ring-0 aria-disabled:focus-visible:border-transparent aria-disabled:focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 in-data-[slot=toggle-group]:rounded-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
   {
     variants: {
       variant: {
         /** rest 채움 없음 — disabled surface 추가 금지 */
         default: `bg-transparent ${uiDisabledNoSurface}`,
-        outline: `border border-border-emphasis bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground ${uiDisabledNoSurface}`,
+        outline: `border border-border-emphasis bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground ${uiDisabledOutline}`,
       },
       tone: {
         /** 툴바·세그먼트 — 선택 면 muted-strong (Figma Flow, 아이콘색 유지) */

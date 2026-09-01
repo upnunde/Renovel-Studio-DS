@@ -6,8 +6,8 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
 import {
-  uiDisabledInteractive,
-  uiDisabledNoSurface,
+  uiDisabledFilledInteractive,
+  uiDisabledOutline,
 } from "../../lib/ui-disabled"
 import { Icon } from "./icon"
 import { ICONS } from "../icons"
@@ -20,16 +20,16 @@ const chipFillResting =
   "border-transparent bg-background-muted text-foreground hover:bg-muted-strong hover:text-muted-strong-foreground data-[hovered=true]:bg-muted-strong data-[hovered=true]:text-muted-strong-foreground"
 
 const chipVariants = cva(
-  `group/chip inline-flex min-w-12 shrink-0 items-center justify-center gap-1.5 border text-sm font-medium whitespace-nowrap bg-clip-padding transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledInteractive} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0`,
+  `group/chip inline-flex min-w-12 shrink-0 items-center justify-center gap-1.5 border text-sm font-medium whitespace-nowrap bg-clip-padding transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:focus-visible:border-transparent disabled:focus-visible:ring-0 data-disabled:focus-visible:border-transparent data-disabled:focus-visible:ring-0 aria-disabled:focus-visible:border-transparent aria-disabled:focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0`,
   {
     variants: {
       variant: {
         /** 솔리드 표현 — off=secondary, on=inverse-muted */
-        fill: `${chipFillResting} ${chipSelected}`,
-        /** rest 채움 없음 — disabled surface 추가 금지 */
-        outline: `border-border bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground ${chipSelected} ${uiDisabledNoSurface}`,
+        fill: `${chipFillResting} ${chipSelected} ${uiDisabledFilledInteractive}`,
+        /** rest 윤곽 유지 — disabled surface(bg)만 제거 */
+        outline: `border-border bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground ${chipSelected} ${uiDisabledOutline}`,
         /** @deprecated variant="fill" 사용 */
-        default: `${chipFillResting} ${chipSelected}`,
+        default: `${chipFillResting} ${chipSelected} ${uiDisabledFilledInteractive}`,
       },
       size: {
         sm: "h-8 gap-1 px-2.5 text-[0.8rem] [&_svg:not([class*='size-'])]:size-4",

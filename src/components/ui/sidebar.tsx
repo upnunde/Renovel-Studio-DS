@@ -6,10 +6,7 @@ import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
-import {
-  uiDisabledInteractive,
-  uiDisabledNoSurface,
-} from "../../lib/ui-disabled"
+import { uiDisabledNoSurface } from "../../lib/ui-disabled"
 
 /**
  * 내비 섹션 그룹 — docs NavSection / 스튜디오 사이드바 섹션과 같은 묶음 단위.
@@ -62,7 +59,7 @@ function SidebarGroupLabel({
  * 활성: 브랜드 텍스트만 (면 채움 없음). 비활성: foreground-muted + muted 호버.
  */
 const sidebarMenuButtonVariants = cva(
-  `group/sidebar-menu-button peer/menu-button flex w-full cursor-pointer items-center gap-3 rounded-md text-left outline-none transition-colors duration-short ease-standard focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${uiDisabledInteractive} ${uiDisabledNoSurface} [&_svg]:pointer-events-none [&_svg]:shrink-0`,
+  `group/sidebar-menu-button peer/menu-button flex w-full cursor-pointer items-center gap-3 rounded-md text-left outline-none transition-colors duration-short ease-standard focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${uiDisabledNoSurface} [&_svg]:pointer-events-none [&_svg]:shrink-0`,
   {
     variants: {
       size: {
