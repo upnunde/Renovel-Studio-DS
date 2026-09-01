@@ -103,7 +103,7 @@
 
   "disabled": {
     "$ref": "shared.disabledInteractive",
-    "$note": "정본: src/lib/ui-disabled.ts. rest 채움 없는 variant(outline·ghost·link)는 uiDisabledNoSurface — disabled bg·border 면을 올리지 않음."
+    "$note": "정본: ui-disabled.ts. outline disabled→uiDisabledOutline(border:{disabled-border}, bg transparent). ghost/link→uiDisabledNoSurface. solid→uiDisabledFilledInteractive."
   },
 
   "nativeNotes": {

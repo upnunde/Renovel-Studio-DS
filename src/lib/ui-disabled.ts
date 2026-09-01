@@ -9,12 +9,25 @@ export const uiDisabledBlock =
 export const uiDisabledColors =
   "disabled:bg-disabled disabled:text-disabled-foreground disabled:border-disabled-border data-disabled:bg-disabled data-disabled:text-disabled-foreground data-disabled:border-disabled-border aria-disabled:bg-disabled aria-disabled:text-disabled-foreground aria-disabled:border-disabled-border"
 
+/** disabled 글자만 — 면·보더 rest 유지 */
+export const uiDisabledTextOnly =
+  "disabled:text-disabled-foreground data-disabled:text-disabled-foreground aria-disabled:text-disabled-foreground"
+
 /** Input·Textarea — placeholder·file·다크 면이 disabled 토큰을 덮지 않도록 */
 export const uiDisabledFieldMuted =
   "disabled:placeholder:text-disabled-foreground data-disabled:placeholder:text-disabled-foreground aria-disabled:placeholder:text-disabled-foreground disabled:file:text-disabled-foreground data-disabled:file:text-disabled-foreground aria-disabled:file:text-disabled-foreground dark:disabled:bg-disabled dark:data-disabled:bg-disabled dark:aria-disabled:bg-disabled"
 
-/** 버튼·토글·탭·셀렉트 트리거 등 */
+/** 버튼·토글·탭·셀렉트 트리거 등 — rest에 윤곽 보더가 있는 컨트롤(Select 등) */
 export const uiDisabledInteractive = `${uiDisabledBlock} ${uiDisabledColors}`
+
+/** 채움형 인터랙티브 — disabled 시 면·글자만. border는 rest처럼 transparent 유지. */
+export const uiDisabledFilledInteractive = `${uiDisabledBlock} disabled:bg-disabled disabled:text-disabled-foreground disabled:border-transparent data-disabled:bg-disabled data-disabled:text-disabled-foreground data-disabled:border-transparent aria-disabled:bg-disabled aria-disabled:text-disabled-foreground aria-disabled:border-transparent`
+
+/** 윤곽(outline) variant — disabled 시 bg disabled 면 제거, border는 {disabled-border}(M3 Disabled Outline). */
+export const uiDisabledOutline = `${uiDisabledBlock} ${uiDisabledTextOnly} disabled:bg-transparent disabled:border-disabled-border data-disabled:bg-transparent data-disabled:border-disabled-border aria-disabled:bg-transparent aria-disabled:border-disabled-border dark:disabled:bg-transparent dark:data-disabled:bg-transparent dark:aria-disabled:bg-transparent`
+
+/** rest에 채움·윤곽 모두 없음 — ghost · link · SidebarMenuButton 등 */
+export const uiDisabledNoSurface = `${uiDisabledBlock} ${uiDisabledTextOnly} disabled:bg-transparent disabled:border-transparent data-disabled:bg-transparent data-disabled:border-transparent aria-disabled:bg-transparent aria-disabled:border-transparent dark:disabled:bg-transparent dark:data-disabled:bg-transparent dark:aria-disabled:bg-transparent`
 
 /** Input·Textarea 등 텍스트 필드 */
 export const uiDisabledField = `${uiDisabledBlock} ${uiDisabledColors} ${uiDisabledFieldMuted}`

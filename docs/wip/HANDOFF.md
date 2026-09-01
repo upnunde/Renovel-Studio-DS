@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-08-26 15:13:20**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-09-01 17:01:44**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,14 +11,11 @@
 
 ## 최근 Cursor 요청
 
-- **2026-08-26 15:09:44** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.border-b border-border lg:border-r lg:border-b-0 .pace-y-5 p-5 > div.border-t border-border pt-3 .pace-y-3 > div.pace-y-3 > div.flex item.-center ju.tify-between gap-5[0]
-Position: top=1064px, left=362px, width=231px, height=20px
-React Component: PlaygroundSwitch
-HTML Element: <div class="flex items-center justify-between gap-5" data-cursor-element-id="cursor-el-6">disabled</div> DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.border-b border-border lg:border-r lg:border-b-0 .pace-y-5 p-5 > div > div.pace-y-3 > div.flex flex-col gap-1[0] > div.flex flex-wrap item.-center gap-2 > button.group/chip inline-flex min-w-12 .hrink-0 item.-center ju.tify-center border font-medium white.pace-nowrap bg-clip-padding tran.ition-all duration-.hort ea.e-.tandard outline-none .elect-none focu.-vi.ible:border-ring focu.-vi.ible:ring-3 focu.-vi.ible:ring-ring/50 di.abled:pointer-event.-none di.abled:cur.or-not-allowed data-di.abled:pointer-event.-none data-di.abled:cur.or-not-allowed aria-di.abled:pointer-event.-none aria-di.abled:cur.or-not-allowed di.abled:bg-di.abled di.abled:text-di.abled-foreground di.abled:border-di.abled-border data-di.abled:bg-di.abled data-di.abled:text-di.abled-foreground data-di.abled:border-di.abled-border aria-di.abled:bg-di.abled aria-di.abled:text-di.abled-foreground aria-di.abled:border-di.abled-border aria-invalid:border-de.tructive aria-invalid:ring-3 aria-invalid:ring-de.tructive/20 [&_.vg]:pointer-event.-none [&_.vg]:.hrink-0 border-border bg-tran.parent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-pre.ed:border-tran.parent aria-pre.ed:bg-inver.e-muted aria-pre.ed:text-inver.e-muted-foreground aria-pre.ed:hover:bg-inver.e-muted/80 aria-pre.ed:data-[hovered=true]:bg-inver.e-muted/80 h-8 gap-1 px-2.5 text-[0.8rem] [&_.vg:not([cla.*='.ize-'])]:.ize-4 rounded-full[2]
-Position: top=535px, left=524px, width=62px, height=32px
-React Component: CompositeItem
-HTML Element: <button type="button" aria-disabled="false" tabindex="0" aria-pressed="true" data-slot="chip" class="group/chip inline-flex min-w-12 shrink-0 items-center justify-center border font-medium whitespace-nowrap bg-clip-padding transition-all duration-short ease-standard outline-none select-none focus-vis…" data-pressed="" data-cursor-element-id="cursor-el-7">outline</button> 아웃라인도 마찬가지야
-surface 없는 것엔 추가 하지 말라니까 왜 이런건 알아서 찾아서 수정 안하는거야?
+- **2026-09-01 17:01:06** — <Button data-slot="button" data-tone="neutral" data-status={null} className="group/button inline-flex shrink-0 items-center justify-center border text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:focus-visible:border-transparent disabled:focus-visible:ring-0 data-disabled:focus-visible:border-transparent data-disabled:focus-visible:ring-0 aria-disabled:focus-visible:border-transparent aria-disabled:focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 bg-clip-padding disabled:pointer-events-none disabled:cursor-not-allowed data-disabled:pointer-events-none data-disabled:cursor-not-allowed aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed disabled:text-disabled-foreground data-disabled:text-disabled-foreground aria-disabled:text-disabled-foreground disabled:bg-transparent disabled:border-disabled-border data-disabled:bg-transparent data-disabled:border-disabled-border aria-disabled:bg-transparent aria-disabled:border-disabled-border dark:disabled:bg-transparent dark:data-disabled:bg-transparent dark:aria-disabled:bg-transparent rounded-md in-data-[slot=button-group]:rounded-none h-9 min-w-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [&_svg:not([class*='size-'])]:size-[1.125rem] border-border bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-border-emphasis dark:hover:bg-muted dark:data-[hovered=true]:bg-muted" disabled={true} aria-invalid={null} aria-label={null} children="Label">Label</Button>
+<button type="button" tabindex="0" data-slot="button" data-tone="neutral" class="group/button inline-flex shrink-0 items-center justify-center border text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus-visible:border-rin…" data-cursor-element-id="cursor-el-3">Label</button> DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.flex min-h-48 flex-col > div.flex min-h-[400px] w-full flex-1 item.-center ju.tify-center gap-3 px-5 py-10 > button.group/button inline-flex .hrink-0 item.-center ju.tify-center border text-.m font-medium white.pace-nowrap tran.ition-all duration-.hort ea.e-.tandard outline-none .elect-none focu.-vi.ible:border-ring focu.-vi.ible:ring-3 focu.-vi.ible:ring-ring/50 di.abled:focu.-vi.ible:border-tran.parent di.abled:focu.-vi.ible:ring-0 data-di.abled:focu.-vi.ible:border-tran.parent data-di.abled:focu.-vi.ible:ring-0 aria-di.abled:focu.-vi.ible:border-tran.parent aria-di.abled:focu.-vi.ible:ring-0 aria-invalid:border-de.tructive aria-invalid:ring-3 aria-invalid:ring-de.tructive/20 dark:aria-invalid:border-de.tructive/50 dark:aria-invalid:ring-de.tructive/40 [&_.vg]:pointer-event.-none [&_.vg]:.hrink-0 bg-clip-padding di.abled:pointer-event.-none di.abled:cur.or-not-allowed data-di.abled:pointer-event.-none data-di.abled:cur.or-not-allowed aria-di.abled:pointer-event.-none aria-di.abled:cur.or-not-allowed di.abled:text-di.abled-foreground data-di.abled:text-di.abled-foreground aria-di.abled:text-di.abled-foreground di.abled:bg-tran.parent di.abled:border-di.abled-border data-di.abled:bg-tran.parent data-di.abled:border-di.abled-border aria-di.abled:bg-tran.parent aria-di.abled:border-di.abled-border dark:di.abled:bg-tran.parent dark:data-di.abled:bg-tran.parent dark:aria-di.abled:bg-tran.parent rounded-md in-data-[.lot=button-group]:rounded-none h-9 min-w-9 gap-1.5 px-2.5 ha.-data-[icon=inline-end]:pr-2 ha.-data-[icon=inline-.tart]:pl-2 [&_.vg:not([cla.*='.ize-'])]:.ize-[1.125rem] border-border bg-tran.parent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-border-empha.i. dark:hover:bg-muted dark:data-[hovered=true]:bg-muted
+Position: top=673px, left=984px, width=57px, height=36px
+React Component: Button
+HTML Element: <button type="button" tabindex="0" data-slot="button" data-tone="neutral" class="group/button inline-flex shrink-0 items-center justify-center border text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus-visible:border-rin…" data-cursor-element-id="cursor-el-3">Label</button> 이게 기존 아웃라인 컬러랑 같은거라고?
 
 ## 다음 작업 (Claude Code용)
 
@@ -32,6 +29,7 @@ surface 없는 것엔 추가 하지 말라니까 왜 이런건 알아서 찾아�
 ```
  M DESIGN.md
  M docs/wip/HANDOFF.md
+ M packages/design-system/specs/_shared.spec.json
  M packages/design-system/specs/button.spec.json
  M packages/design-system/specs/chip.spec.json
  M packages/design-system/specs/toggle.spec.json
@@ -40,25 +38,38 @@ surface 없는 것엔 추가 하지 말라니까 왜 이런건 알아서 찾아�
  M packages/design-system/src/components/ui/sidebar.tsx
  M packages/design-system/src/components/ui/toggle.tsx
  M packages/design-system/src/lib/ui-disabled.ts
+ M src/lib/ui-disabled.ts
 ```
 
 ### diff 요약
 
 ```
- DESIGN.md                                            |  2 ++
- docs/wip/HANDOFF.md                                  | 18 +++++-------------
- packages/design-system/specs/button.spec.json        |  2 +-
- packages/design-system/specs/chip.spec.json          |  2 +-
- packages/design-system/specs/toggle.spec.json        |  2 +-
- packages/design-system/src/components/ui/button.tsx  |  4 ++--
- packages/design-system/src/components/ui/chip.tsx    |  8 ++++++--
- packages/design-system/src/components/ui/sidebar.tsx |  7 +++++--
- packages/design-system/src/components/ui/toggle.tsx  | 11 +++++++----
- packages/design-system/src/lib/ui-disabled.ts        |  9 +++++++--
- 10 files changed, 37 insertions(+), 28 deletions(-)
+ DESIGN.md                                          |  2 +-
+ docs/wip/HANDOFF.md                                | 52 +++++++++++++---------
+ packages/design-system/specs/_shared.spec.json     |  3 ++
+ packages/design-system/specs/button.spec.json      |  2 +-
+ packages/design-system/specs/chip.spec.json        |  2 +-
+ packages/design-system/specs/toggle.spec.json      |  2 +-
+ .../design-system/src/components/ui/button.tsx     | 15 ++++---
+ packages/design-system/src/components/ui/chip.tsx  | 14 +++---
+ .../design-system/src/components/ui/sidebar.tsx    |  7 +--
+ .../design-system/src/components/ui/toggle.tsx     |  6 +--
+ packages/design-system/src/lib/ui-disabled.ts      | 30 +++++++++----
+ src/lib/ui-disabled.ts                             | 15 ++++++-
+ 12 files changed, 94 insertions(+), 56 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
+
+
+
+
+
 
 
 

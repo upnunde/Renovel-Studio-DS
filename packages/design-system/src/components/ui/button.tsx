@@ -3,8 +3,9 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/utils"
 import {
-  uiDisabledInteractive,
+  uiDisabledFilledInteractive,
   uiDisabledNoSurface,
+  uiDisabledOutline,
 } from "../../lib/ui-disabled"
 
 /**
@@ -17,19 +18,19 @@ import {
 const buttonVariants = cva(
   // border-transparent 로 outline과 박스 높이를 맞춘다. 채움은 기본 clip(border-box) —
   // bg-clip-padding 이면 투명 보더만큼 솔리드가 작아 보인다.
-  `group/button inline-flex shrink-0 items-center justify-center border border-transparent text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${uiDisabledInteractive} aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
+  `group/button inline-flex shrink-0 items-center justify-center border border-transparent text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:focus-visible:border-transparent disabled:focus-visible:ring-0 data-disabled:focus-visible:border-transparent data-disabled:focus-visible:ring-0 aria-disabled:focus-visible:border-transparent aria-disabled:focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
   {
     variants: {
       variant: {
         /** solid CTA — 색은 tone */
-        default: "",
-        secondary: "",
-        /** rest 채움 없음 — disabled surface 추가 금지 */
-        outline: `bg-transparent bg-clip-padding ${uiDisabledNoSurface}`,
+        default: uiDisabledFilledInteractive,
+        secondary: uiDisabledFilledInteractive,
+        /** rest 윤곽 유지 — disabled surface(bg)만 제거 */
+        outline: `bg-transparent bg-clip-padding ${uiDisabledOutline}`,
         ghost: uiDisabledNoSurface,
         link: `underline underline-offset-4 ${uiDisabledNoSurface}`,
         /** @deprecated default + tone=brand 로 해석 */
-        primary: "",
+        primary: uiDisabledFilledInteractive,
       },
       tone: {
         neutral: "",
