@@ -10,7 +10,7 @@
   "composition": {
     "Message": { "slot": "message" },
     "MessageGroup": { "slot": "message-group", "gap": 8 },
-    "MessageAvatar": { "slot": "message-avatar", "anchor": "bottom", "footerOffset": "-translate-y-8" },
+    "MessageAvatar": { "slot": "message-avatar", "anchor": "bubble-bottom", "footerOffset": "mb-6 (gap-2 + caption1)" },
     "MessageContent": { "slot": "message-content" },
     "MessageHeader": { "slot": "message-header", "typography": "caption1-500", "fg": "{foreground-muted}", "padX": 0 },
     "MessageFooter": { "slot": "message-footer", "typography": "caption1-500", "fg": "{foreground-muted}", "padX": 0 }

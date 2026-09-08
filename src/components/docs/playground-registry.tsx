@@ -1544,6 +1544,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
             {showAvatar ? (
               <MessageAvatar>
                 <Avatar size="default">
+                  <AvatarImage src={AVATAR_IMAGE} alt="Renovel" />
                   <AvatarFallback>RN</AvatarFallback>
                 </Avatar>
               </MessageAvatar>
@@ -1567,7 +1568,7 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
       const showFooter = playgroundBool(state, "showFooter")
       const alignAttr = playgroundPropAttr("align", align)
       const avatar = showAvatar
-        ? `\n  <MessageAvatar>\n    <Avatar>\n      <AvatarFallback>RN</AvatarFallback>\n    </Avatar>\n  </MessageAvatar>`
+        ? `\n  <MessageAvatar>\n    <Avatar>\n      <AvatarImage src="…" alt="Renovel" />\n      <AvatarFallback>RN</AvatarFallback>\n    </Avatar>\n  </MessageAvatar>`
         : ""
       const header = showHeader ? `\n    <MessageHeader>Renovel</MessageHeader>` : ""
       const footer = showFooter ? `\n    <MessageFooter>오후 2:44</MessageFooter>` : ""

@@ -1602,6 +1602,10 @@ const SHOWCASES: Record<string, ReactNode> = {
             <Message align="start">
               <MessageAvatar>
                 <Avatar>
+                  <AvatarImage
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&crop=face"
+                    alt="Renovel"
+                  />
                   <AvatarFallback>RN</AvatarFallback>
                 </Avatar>
               </MessageAvatar>
@@ -1618,6 +1622,7 @@ const SHOWCASES: Record<string, ReactNode> = {
             <Message align="end">
               <MessageAvatar>
                 <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" alt="Me" />
                   <AvatarFallback>ME</AvatarFallback>
                 </Avatar>
               </MessageAvatar>
@@ -1646,6 +1651,10 @@ const SHOWCASES: Record<string, ReactNode> = {
             <Message align="start">
               <MessageAvatar>
                 <Avatar>
+                  <AvatarImage
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&crop=face"
+                    alt="Renovel"
+                  />
                   <AvatarFallback>RN</AvatarFallback>
                 </Avatar>
               </MessageAvatar>
@@ -1665,6 +1674,10 @@ const SHOWCASES: Record<string, ReactNode> = {
           <Message align="start">
             <MessageAvatar>
               <Avatar>
+                <AvatarImage
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&crop=face"
+                  alt="Renovel"
+                />
                 <AvatarFallback>RN</AvatarFallback>
               </Avatar>
             </MessageAvatar>

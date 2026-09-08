@@ -283,6 +283,10 @@ function PreviewMessage() {
       <Message align="start" className="max-w-xs">
         <MessageAvatar>
           <Avatar size="sm">
+            <AvatarImage
+              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&crop=face"
+              alt="Renovel"
+            />
             <AvatarFallback>RN</AvatarFallback>
           </Avatar>
         </MessageAvatar>

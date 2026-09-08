@@ -41,7 +41,9 @@ function MessageAvatar({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="message-avatar"
       className={cn(
-        "flex w-fit min-w-8 shrink-0 items-center justify-center self-end overflow-hidden rounded-full bg-background-muted group-has-data-[slot=message-footer]/message:-translate-y-8",
+        // self-end = 말풍선(또는 content) 하단 정렬
+        // footer가 있으면 gap-2(8)+caption(16)만큼 올려 말풍선 하단에 맞춤
+        "flex w-fit min-w-8 shrink-0 items-center justify-center self-end overflow-hidden rounded-full bg-background-muted group-has-data-[slot=message-footer]/message:mb-6",
         className
       )}
       {...props}
