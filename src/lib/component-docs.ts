@@ -4,6 +4,11 @@ export type ComponentDoc = {
   description: string
   /** 사이드바 그룹 라벨 */
   section: string
+  /**
+   * true면 docs 사이드바·Overview·상세 페이지에서 숨김.
+   * 패키지 코드·스펙은 유지 — `docs/wip/DEFERRED_COMPONENTS.md` 참고.
+   */
+  hidden?: boolean
 }
 
 export const componentDocs: ComponentDoc[] = [
@@ -119,7 +124,14 @@ export const componentDocs: ComponentDoc[] = [
     slug: "bubble",
     title: "Bubble",
     description: "채팅·대화 UI에서 메시지 본문을 담는 말풍선 표면입니다. 아바타·시간은 Message 등 상위에서 둡니다.",
-    section: "Display",
+    section: "Chat",
+  },
+  {
+    slug: "message",
+    title: "Message",
+    description:
+      "대화 한 줄의 행 레이아웃입니다. 아바타·정렬·헤더·푸터를 두고, 본문 면은 Bubble로 조합합니다.",
+    section: "Chat",
   },
   {
     slug: "sidebar-menu-button",
@@ -169,10 +181,15 @@ export function getComponentDoc(slug: string) {
   return componentDocs.find((c) => c.slug === slug)
 }
 
+/** docs 네비·Overview용 — hidden 제외 */
+export function getVisibleComponentDocs() {
+  return componentDocs.filter((doc) => !doc.hidden)
+}
+
 export function componentDocsBySection() {
   const sections = new Map<string, ComponentDoc[]>()
 
-  for (const doc of componentDocs) {
+  for (const doc of getVisibleComponentDocs()) {
     const items = sections.get(doc.section) ?? []
     items.push(doc)
     sections.set(doc.section, items)

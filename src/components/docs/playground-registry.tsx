@@ -12,6 +12,14 @@ import {
   BubbleGroup,
   BubbleReactions,
 } from "design-system/ui/bubble"
+import {
+  Message,
+  MessageAvatar,
+  MessageContent,
+  MessageFooter,
+  MessageGroup,
+  MessageHeader,
+} from "design-system/ui/message"
 import { Button } from "design-system/ui/button"
 import {
   ButtonGroup,
@@ -1509,6 +1517,68 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
   },
 
+  message: {
+    description: "align · Avatar · Header/Footer · Bubble 조합",
+    initialState: {
+      align: "start",
+      showAvatar: true,
+      showHeader: true,
+      showFooter: true,
+      bubbleVariant: "secondary",
+      children: "어떻게 도와드릴까요?",
+    },
+    textareaKeys: ["children"],
+    selectKeys: {
+      align: ["start", "end"],
+      bubbleVariant: ["default", "secondary", "tinted", "destructive"],
+    },
+    renderPreview: (state, _ctx) => {
+      const align = str(state, "align") as "start" | "end"
+      const bubbleVariant = str(state, "bubbleVariant") as "secondary"
+      const showAvatar = playgroundBool(state, "showAvatar")
+      const showHeader = playgroundBool(state, "showHeader")
+      const showFooter = playgroundBool(state, "showFooter")
+      return (
+        <div className="w-full max-w-md">
+          <Message align={align}>
+            {showAvatar ? (
+              <MessageAvatar>
+                <Avatar size="default">
+                  <AvatarFallback>RN</AvatarFallback>
+                </Avatar>
+              </MessageAvatar>
+            ) : null}
+            <MessageContent>
+              {showHeader ? <MessageHeader>Renovel</MessageHeader> : null}
+              <Bubble variant={bubbleVariant} align={align}>
+                <BubbleContent>{str(state, "children")}</BubbleContent>
+              </Bubble>
+              {showFooter ? <MessageFooter>오후 2:44</MessageFooter> : null}
+            </MessageContent>
+          </Message>
+        </div>
+      )
+    },
+    buildCode: (state) => {
+      const align = str(state, "align")
+      const bubbleVariant = str(state, "bubbleVariant")
+      const showAvatar = playgroundBool(state, "showAvatar")
+      const showHeader = playgroundBool(state, "showHeader")
+      const showFooter = playgroundBool(state, "showFooter")
+      const alignAttr = playgroundPropAttr("align", align)
+      const avatar = showAvatar
+        ? `\n  <MessageAvatar>\n    <Avatar>\n      <AvatarFallback>RN</AvatarFallback>\n    </Avatar>\n  </MessageAvatar>`
+        : ""
+      const header = showHeader ? `\n    <MessageHeader>Renovel</MessageHeader>` : ""
+      const footer = showFooter ? `\n    <MessageFooter>오후 2:44</MessageFooter>` : ""
+      const bubbleAttrs = playgroundPropAttrs([
+        playgroundPropAttr("variant", bubbleVariant),
+        playgroundPropAttr("align", align),
+      ])
+      return `<Message${alignAttr}>${avatar}\n  <MessageContent>${header}\n    <Bubble${bubbleAttrs}>\n      <BubbleContent>${str(state, "children")}</BubbleContent>\n    </Bubble>${footer}\n  </MessageContent>\n</Message>`
+    },
+  },
+
   "sidebar-menu-button": {
     description: "그룹 라벨 · isActive · size · leading",
     initialState: {
@@ -1698,38 +1768,34 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
 
   tooltip: {
     initialState: {
-      removable: false,
+      mode: "hover",
       side: "top",
       children: "도움말 텍스트",
-      open: false,
     },
     textKeys: ["children"],
+    /** mode가 open/removable을 표현 — API props는 컨트롤에서 숨김 */
+    skipControlKeys: ["open", "removable"],
     selectKeys: {
+      mode: ["hover", "pinned"],
       side: ["top", "right", "bottom", "left"],
     },
-    showWhen: {
-      removable: (state) => playgroundBool(state, "open"),
-    },
     renderPreview: (state, ctx) => {
-      const forcedOpen = bool(state, "open")
-      const removable = forcedOpen && bool(state, "removable")
+      const pinned = str(state, "mode") === "pinned"
 
       return (
         <TooltipProvider delay={0}>
           <Tooltip
-            key={`${forcedOpen ? "open" : "auto"}-${removable ? "removable" : "plain"}`}
-            removable={removable}
-            {...(forcedOpen
+            key={pinned ? "pinned" : "hover"}
+            {...(pinned
               ? {
                   open: true,
-                  onOpenChange: (open, details) => {
+                  onOpenChange: (nextOpen, details) => {
                     if (
-                      !open &&
-                      removable &&
+                      !nextOpen &&
                       (details.reason === "imperative-action" ||
                         details.reason === "escape-key")
                     ) {
-                      ctx.set("open", false)
+                      ctx.set("mode", "hover")
                     }
                   },
                 }
@@ -1747,9 +1813,8 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
     },
     buildCode: (state) => {
       const side = ` side="${str(state, "side")}"`
-      const open = bool(state, "open")
-      const removable = open && bool(state, "removable")
-      const attrs = `${open ? " open" : ""}${removable ? " removable" : ""}`
+      const pinned = str(state, "mode") === "pinned"
+      const attrs = pinned ? " open" : ""
       return `<Tooltip${attrs}>\n  <TooltipTrigger asChild>\n    <Button variant="outline">툴팁</Button>\n  </TooltipTrigger>\n  <TooltipContent${side}>\n    ${str(state, "children")}\n  </TooltipContent>\n</Tooltip>`
     },
   },

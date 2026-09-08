@@ -566,6 +566,41 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
       },
     ],
   },
+  message: {
+    slug: "message",
+    properties: [
+      {
+        name: "align",
+        values: ["start", "end"],
+        description: "대화 행 정렬 · start(상대) / end(나)",
+      },
+      {
+        name: "showAvatar",
+        values: ["false", "true"],
+        description: "Playground-only · MessageAvatar 표시",
+      },
+      {
+        name: "showHeader",
+        values: ["false", "true"],
+        description: "Playground-only · MessageHeader 표시",
+      },
+      {
+        name: "showFooter",
+        values: ["false", "true"],
+        description: "Playground-only · MessageFooter 표시",
+      },
+      {
+        name: "bubbleVariant",
+        values: ["default", "secondary", "tinted", "destructive"],
+        description: "Playground-only · 내부 Bubble variant",
+      },
+      {
+        name: "children",
+        values: ["string"],
+        description: "BubbleContent 텍스트",
+      },
+    ],
+  },
   "sidebar-menu-button": {
     slug: "sidebar-menu-button",
     properties: [
@@ -685,9 +720,26 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
   tooltip: {
     slug: "tooltip",
     properties: [
+      {
+        name: "mode",
+        values: ["hover", "pinned"],
+        description:
+          "Playground-only · hover=호버 타입 · pinned=고정 노출(API open + ✕)",
+        valueHints: { hover: "hover", pinned: "pinned" },
+      },
       { name: "side", values: ["top", "right", "bottom", "left"], description: "표시 위치" },
-      { name: "open", values: ["false", "true"], description: "상시 노출 · false면 hover" },
-      { name: "removable", values: ["false", "true"], description: "open일 때만 ✕ 표시 · ✕·Esc로 닫기 · 바깥 클릭으로 안 닫힘" },
+      {
+        name: "open",
+        values: ["false", "true"],
+        description:
+          "API · 고정 노출(pinned) · true면 ✕ 자동(removable과 한 몸) · false/미지정이면 hover",
+      },
+      {
+        name: "removable",
+        values: ["false", "true"],
+        description:
+          "API · ✕·sticky 닫기 · open=true면 자동 · hover만 쓸 때 단독 true로 클릭 고정 가능",
+      },
     ],
   },
   alert: {
@@ -771,12 +823,14 @@ export function formatSpecPropertyName(name: string): string {
     captionText: "caption text",
     descriptionLines: "description lines",
     showHeader: "show header",
+    showAvatar: "avatar",
     showTitle: "title",
     showLabel: "title",
     leading: "leading",
     showIcon: "icon",
     showContent: "show content",
     showFooter: "show footer",
+    bubbleVariant: "bubble variant",
     showBodyText: "show body text",
     bodyText: "body text",
     showList: "show list",

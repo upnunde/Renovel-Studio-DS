@@ -3,10 +3,10 @@ import { notFound } from "next/navigation"
 import { ComponentShowcase } from "@/components/docs/component-showcase-client"
 import { DocsMain } from "@/components/docs/docs-main"
 import { DocsPageHeader } from "@/components/docs-page-header"
-import { componentDocs, getComponentDoc } from "@/lib/component-docs"
+import { getComponentDoc, getVisibleComponentDocs } from "@/lib/component-docs"
 
 export function generateStaticParams() {
-  return componentDocs.map((doc) => ({ slug: doc.slug }))
+  return getVisibleComponentDocs().map((doc) => ({ slug: doc.slug }))
 }
 
 export default async function ComponentDocPage({
@@ -17,7 +17,7 @@ export default async function ComponentDocPage({
   const { slug } = await params
   const doc = getComponentDoc(slug)
 
-  if (!doc) {
+  if (!doc || doc.hidden) {
     notFound()
   }
 

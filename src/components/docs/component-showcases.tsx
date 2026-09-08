@@ -45,6 +45,14 @@ import {
   BubbleGroup,
   BubbleReactions,
 } from "design-system/ui/bubble"
+import {
+  Message,
+  MessageAvatar,
+  MessageContent,
+  MessageFooter,
+  MessageGroup,
+  MessageHeader,
+} from "design-system/ui/message"
 import { Button } from "design-system/ui/button"
 import {
   ButtonGroup,
@@ -1586,6 +1594,100 @@ const SHOWCASES: Record<string, ReactNode> = {
     </Showcase>
   ),
 
+  message: (
+    <Showcase slug="message">
+      <ComponentCaseGroup title="Align">
+        <ComponentCaseGrid>
+          <ComponentCase label="start" tags={["align: start"]}>
+            <Message align="start">
+              <MessageAvatar>
+                <Avatar>
+                  <AvatarFallback>RN</AvatarFallback>
+                </Avatar>
+              </MessageAvatar>
+              <MessageContent>
+                <MessageHeader>Renovel</MessageHeader>
+                <Bubble variant="secondary" align="start">
+                  <BubbleContent>어떻게 도와드릴까요?</BubbleContent>
+                </Bubble>
+                <MessageFooter>오후 2:44</MessageFooter>
+              </MessageContent>
+            </Message>
+          </ComponentCase>
+          <ComponentCase label="end" tags={["align: end"]}>
+            <Message align="end">
+              <MessageAvatar>
+                <Avatar>
+                  <AvatarFallback>ME</AvatarFallback>
+                </Avatar>
+              </MessageAvatar>
+              <MessageContent>
+                <Bubble variant="default" align="end">
+                  <BubbleContent>프로젝트 상태를 알려줘</BubbleContent>
+                </Bubble>
+                <MessageFooter>오후 2:45</MessageFooter>
+              </MessageContent>
+            </Message>
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Group">
+        <ComponentCase label="MessageGroup" tags={["composition"]}>
+          <MessageGroup className="w-full max-w-md">
+            <Message align="start">
+              <MessageAvatar className="invisible" aria-hidden />
+              <MessageContent>
+                <Bubble variant="secondary" align="start">
+                  <BubbleContent>첫 번째 연속 메시지</BubbleContent>
+                </Bubble>
+              </MessageContent>
+            </Message>
+            <Message align="start">
+              <MessageAvatar>
+                <Avatar>
+                  <AvatarFallback>RN</AvatarFallback>
+                </Avatar>
+              </MessageAvatar>
+              <MessageContent>
+                <Bubble variant="secondary" align="start">
+                  <BubbleContent>같은 발신자 · 아바타는 마지막에</BubbleContent>
+                </Bubble>
+                <MessageFooter>오후 2:46</MessageFooter>
+              </MessageContent>
+            </Message>
+          </MessageGroup>
+        </ComponentCase>
+      </ComponentCaseGroup>
+
+      <ComponentCaseGroup title="Actions">
+        <ComponentCase label="footer actions" tags={["MessageFooter"]}>
+          <Message align="start">
+            <MessageAvatar>
+              <Avatar>
+                <AvatarFallback>RN</AvatarFallback>
+              </Avatar>
+            </MessageAvatar>
+            <MessageContent>
+              <Bubble variant="secondary" align="start">
+                <BubbleContent>복사·재시도 액션은 푸터에 둡니다.</BubbleContent>
+              </Bubble>
+              <MessageFooter className="gap-1">
+                <Button variant="ghost" size="sm" aria-label="Copy">
+                  Copy
+                </Button>
+                <Button variant="ghost" size="sm" aria-label="Retry">
+                  <Icon icon={ICONS.refreshCw} size="md" />
+                  Retry
+                </Button>
+              </MessageFooter>
+            </MessageContent>
+          </Message>
+        </ComponentCase>
+      </ComponentCaseGroup>
+    </Showcase>
+  ),
+
   "sidebar-menu-button": (
     <Showcase slug="sidebar-menu-button">
       <ComponentCaseGroup title="State">
@@ -1937,7 +2039,7 @@ const SHOWCASES: Record<string, ReactNode> = {
   tooltip: (
     <Showcase slug="tooltip">
       <ComponentCaseGroup title="Default">
-        <ComponentCase label="hover">
+        <ComponentCase label="hover" tags={["mode: hover"]}>
           <Tooltip>
             <TooltipTrigger render={<Button variant="outline" />}>
               툴팁
@@ -1945,12 +2047,12 @@ const SHOWCASES: Record<string, ReactNode> = {
             <TooltipContent>짧은 설명</TooltipContent>
           </Tooltip>
         </ComponentCase>
-        <ComponentCase label="open" tags={["open: true"]}>
+        <ComponentCase label="pinned" tags={["mode: pinned", "open: true", "✕"]}>
           <Tooltip open>
             <TooltipTrigger render={<Button variant="outline" />}>
               툴팁
             </TooltipTrigger>
-            <TooltipContent>상시 노출</TooltipContent>
+            <TooltipContent>고정 노출 · ✕로 닫기</TooltipContent>
           </Tooltip>
         </ComponentCase>
         <ComponentCase label="removable" tags={["removable: true"]}>
@@ -1958,7 +2060,7 @@ const SHOWCASES: Record<string, ReactNode> = {
             <TooltipTrigger render={<Button variant="outline" />}>
               툴팁
             </TooltipTrigger>
-            <TooltipContent>닫기 전까지 유지되는 도움말</TooltipContent>
+            <TooltipContent>클릭으로 열고 ✕·Esc로 닫기</TooltipContent>
           </Tooltip>
         </ComponentCase>
       </ComponentCaseGroup>

@@ -8,6 +8,12 @@ import { Alert, AlertDescription, AlertTitle } from "design-system/ui/alert"
 import { Avatar, AvatarFallback, AvatarIcon, AvatarImage } from "design-system/ui/avatar"
 import { Badge } from "design-system/ui/badge"
 import { Bubble, BubbleContent } from "design-system/ui/bubble"
+import {
+  Message,
+  MessageAvatar,
+  MessageContent,
+  MessageHeader,
+} from "design-system/ui/message"
 import { Button } from "design-system/ui/button"
 import { ButtonGroup } from "design-system/ui/button-group"
 import { Chip } from "design-system/ui/chip"
@@ -271,6 +277,26 @@ function PreviewBubble() {
   )
 }
 
+function PreviewMessage() {
+  return (
+    <div className={cn(previewShell, "px-4")}>
+      <Message align="start" className="max-w-xs">
+        <MessageAvatar>
+          <Avatar size="sm">
+            <AvatarFallback>RN</AvatarFallback>
+          </Avatar>
+        </MessageAvatar>
+        <MessageContent>
+          <MessageHeader>Renovel</MessageHeader>
+          <Bubble variant="secondary" align="start">
+            <BubbleContent>어떻게 도와드릴까요?</BubbleContent>
+          </Bubble>
+        </MessageContent>
+      </Message>
+    </div>
+  )
+}
+
 function PreviewSidebarMenuButton() {
   return (
     <div className={cn(previewShell, "px-3")}>
@@ -399,6 +425,7 @@ const previewBySlug: Record<ComponentDoc["slug"], () => ReactNode> = {
   progress: PreviewProgress,
   skeleton: PreviewSkeleton,
   bubble: PreviewBubble,
+  message: PreviewMessage,
   "sidebar-menu-button": PreviewSidebarMenuButton,
   "dropdown-menu": PreviewDropdownMenu,
   dialog: PreviewDialog,

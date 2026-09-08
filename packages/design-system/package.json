@@ -65,6 +65,7 @@
     "./ui/icon": "./src/components/ui/icon.tsx",
     "./ui/input": "./src/components/ui/input.tsx",
     "./ui/label": "./src/components/ui/label.tsx",
+    "./ui/message": "./src/components/ui/message.tsx",
     "./ui/password-input": "./src/components/ui/password-input.tsx",
     "./ui/popover": "./src/components/ui/popover.tsx",
     "./ui/progress": "./src/components/ui/progress.tsx",

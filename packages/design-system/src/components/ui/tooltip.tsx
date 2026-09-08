@@ -26,25 +26,31 @@ function TooltipProvider({
 }
 
 type TooltipProps = TooltipPrimitive.Root.Props & {
-  /** ✕ 표시. 클릭으로 열고 ✕·Esc로 닫기. 바깥 클릭·hover 이탈로는 닫히지 않음 */
+  /**
+   * ✕ 표시 · 클릭으로 열고 ✕·Esc로 닫기.
+   * `open={true}`이면 자동 적용(상시 노출과 한 몸).
+   */
   removable?: boolean
 }
 
 function Tooltip({
   removable = false,
+  open,
   disableHoverablePopup,
   onOpenChange,
   actionsRef: actionsRefProp,
   ...props
 }: TooltipProps) {
   const removableActionsRef = React.useRef<TooltipPrimitive.Root.Actions>(null)
+  /** 상시 노출(open)과 ✕는 한 몸 — open이면 닫기 버튼·sticky 닫기 규칙 고정 */
+  const isRemovable = removable || open === true
 
   const handleOpenChange = React.useCallback(
     (
-      open: boolean,
+      nextOpen: boolean,
       eventDetails: TooltipPrimitive.Root.ChangeEventDetails
     ) => {
-      if (removable) {
+      if (isRemovable) {
         if (
           eventDetails.reason === "trigger-hover" ||
           eventDetails.reason === "trigger-focus"
@@ -54,7 +60,7 @@ function Tooltip({
         }
 
         if (
-          !open &&
+          !nextOpen &&
           eventDetails.reason !== "escape-key" &&
           eventDetails.reason !== "imperative-action"
         ) {
@@ -63,22 +69,23 @@ function Tooltip({
         }
       }
 
-      onOpenChange?.(open, eventDetails)
+      onOpenChange?.(nextOpen, eventDetails)
     },
-    [removable, onOpenChange]
+    [isRemovable, onOpenChange]
   )
 
   return (
     <TooltipRemovableContext.Provider
-      value={removable ? removableActionsRef : null}
+      value={isRemovable ? removableActionsRef : null}
     >
       <TooltipPrimitive.Root
         {...props}
+        open={open}
         data-slot="tooltip"
-        data-removable={removable ? "" : undefined}
-        disableHoverablePopup={removable ? false : disableHoverablePopup}
-        onOpenChange={removable ? handleOpenChange : onOpenChange}
-        actionsRef={removable ? removableActionsRef : actionsRefProp}
+        data-removable={isRemovable ? "" : undefined}
+        disableHoverablePopup={isRemovable ? false : disableHoverablePopup}
+        onOpenChange={isRemovable ? handleOpenChange : onOpenChange}
+        actionsRef={isRemovable ? removableActionsRef : actionsRefProp}
       />
     </TooltipRemovableContext.Provider>
   )

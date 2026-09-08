@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-09-01 17:01:44**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-09-08 14:55:13**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,11 +11,13 @@
 
 ## 최근 Cursor 요청
 
-- **2026-09-01 17:01:06** — <Button data-slot="button" data-tone="neutral" data-status={null} className="group/button inline-flex shrink-0 items-center justify-center border text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:focus-visible:border-transparent disabled:focus-visible:ring-0 data-disabled:focus-visible:border-transparent data-disabled:focus-visible:ring-0 aria-disabled:focus-visible:border-transparent aria-disabled:focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 bg-clip-padding disabled:pointer-events-none disabled:cursor-not-allowed data-disabled:pointer-events-none data-disabled:cursor-not-allowed aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed disabled:text-disabled-foreground data-disabled:text-disabled-foreground aria-disabled:text-disabled-foreground disabled:bg-transparent disabled:border-disabled-border data-disabled:bg-transparent data-disabled:border-disabled-border aria-disabled:bg-transparent aria-disabled:border-disabled-border dark:disabled:bg-transparent dark:data-disabled:bg-transparent dark:aria-disabled:bg-transparent rounded-md in-data-[slot=button-group]:rounded-none h-9 min-w-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [&_svg:not([class*='size-'])]:size-[1.125rem] border-border bg-transparent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-border-emphasis dark:hover:bg-muted dark:data-[hovered=true]:bg-muted" disabled={true} aria-invalid={null} aria-label={null} children="Label">Label</Button>
-<button type="button" tabindex="0" data-slot="button" data-tone="neutral" class="group/button inline-flex shrink-0 items-center justify-center border text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus-visible:border-rin…" data-cursor-element-id="cursor-el-3">Label</button> DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.flex min-h-48 flex-col > div.flex min-h-[400px] w-full flex-1 item.-center ju.tify-center gap-3 px-5 py-10 > button.group/button inline-flex .hrink-0 item.-center ju.tify-center border text-.m font-medium white.pace-nowrap tran.ition-all duration-.hort ea.e-.tandard outline-none .elect-none focu.-vi.ible:border-ring focu.-vi.ible:ring-3 focu.-vi.ible:ring-ring/50 di.abled:focu.-vi.ible:border-tran.parent di.abled:focu.-vi.ible:ring-0 data-di.abled:focu.-vi.ible:border-tran.parent data-di.abled:focu.-vi.ible:ring-0 aria-di.abled:focu.-vi.ible:border-tran.parent aria-di.abled:focu.-vi.ible:ring-0 aria-invalid:border-de.tructive aria-invalid:ring-3 aria-invalid:ring-de.tructive/20 dark:aria-invalid:border-de.tructive/50 dark:aria-invalid:ring-de.tructive/40 [&_.vg]:pointer-event.-none [&_.vg]:.hrink-0 bg-clip-padding di.abled:pointer-event.-none di.abled:cur.or-not-allowed data-di.abled:pointer-event.-none data-di.abled:cur.or-not-allowed aria-di.abled:pointer-event.-none aria-di.abled:cur.or-not-allowed di.abled:text-di.abled-foreground data-di.abled:text-di.abled-foreground aria-di.abled:text-di.abled-foreground di.abled:bg-tran.parent di.abled:border-di.abled-border data-di.abled:bg-tran.parent data-di.abled:border-di.abled-border aria-di.abled:bg-tran.parent aria-di.abled:border-di.abled-border dark:di.abled:bg-tran.parent dark:data-di.abled:bg-tran.parent dark:aria-di.abled:bg-tran.parent rounded-md in-data-[.lot=button-group]:rounded-none h-9 min-w-9 gap-1.5 px-2.5 ha.-data-[icon=inline-end]:pr-2 ha.-data-[icon=inline-.tart]:pl-2 [&_.vg:not([cla.*='.ize-'])]:.ize-[1.125rem] border-border bg-tran.parent hover:bg-muted hover:text-foreground data-[hovered=true]:bg-muted data-[hovered=true]:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-border-empha.i. dark:hover:bg-muted dark:data-[hovered=true]:bg-muted
-Position: top=673px, left=984px, width=57px, height=36px
-React Component: Button
-HTML Element: <button type="button" tabindex="0" data-slot="button" data-tone="neutral" class="group/button inline-flex shrink-0 items-center justify-center border text-sm font-medium whitespace-nowrap transition-all duration-short ease-standard outline-none select-none focus-visible:border-rin…" data-cursor-element-id="cursor-el-3">Label</button> 이게 기존 아웃라인 컬러랑 같은거라고?
+- **2026-09-08 14:54:48** — DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.flex min-h-48 flex-col > div.flex min-h-[400px] w-full flex-1 item.-center ju.tify-center gap-3 px-5 py-10 > div.w-full max-w-md > div.group/me.age relative flex w-full min-w-0 gap-2 text-body3_400 data-[align=end]:flex-row-rever.e > div.flex w-full min-w-0 flex-col gap-2 wrap-break-word group-data-[align=end]/me.age:*:data-.lot:.elf-end > div.flex max-w-full min-w-0 item.-center px-3 text-caption1_500 text-foreground-muted group-ha.-data-[variant=gho.t]/me.age:px-0
+Position: top=798px, left=871px, width=408px, height=16px
+React Component: MessageHeader
+HTML Element: <div data-slot="message-header" class="flex max-w-full min-w-0 items-center px-3 text-caption1_500 text-foreground-muted group-has-data-[variant=ghost]/message:px-0" data-cursor-element-id="cursor-el-1">Renovel</div> 좌측 끝 정렬 여백 없이 DOM Path: div.fixed in.et-0 flex overflow-hidden bg-canva > div.min-h-0 min-w-0 flex-1 overflow-x-clip overflow-y-auto over.croll-contain > div.mx-auto flex w-full min-w-0 max-w-7xl gap-8 px-5 xl:pr-10 > main#docs-main > div.pace-y-5 > div.flex flex-col gap-10 > section.overflow-hidden rounded-xl border border-border bg-background[1] > div.overflow-x-auto > div.grid gap-0 lg:grid-col.-[17rem_minmax(0,1fr)] > div.flex min-h-48 flex-col > div.flex min-h-[400px] w-full flex-1 item.-center ju.tify-center gap-3 px-5 py-10 > div.w-full max-w-md > div.group/me.age relative flex w-full min-w-0 gap-2 text-body3_400 data-[align=end]:flex-row-rever.e > div.flex w-full min-w-0 flex-col gap-2 wrap-break-word group-data-[align=end]/me.age:*:data-.lot:.elf-end > div.flex max-w-full min-w-0 item.-center px-3 text-caption1_500 text-foreground-muted group-ha.-data-[variant=gho.t]/me.age:px-0 group-data-[align=end]/me.age:ju.tify-end
+Position: top=868px, left=871px, width=408px, height=16px
+React Component: MessageFooter
+HTML Element: <div data-slot="message-footer" class="flex max-w-full min-w-0 items-center px-3 text-caption1_500 text-foreground-muted group-has-data-[variant=ghost]/message:px-0 group-data-[align=end]/message:justify-end" data-cursor-element-id="cursor-el-2">오후 2:44</div>
 
 ## 다음 작업 (Claude Code용)
 
@@ -27,39 +29,82 @@ HTML Element: <button type="button" tabindex="0" data-slot="button" data-tone="n
 - 브랜치: `main`
 
 ```
- M DESIGN.md
  M docs/wip/HANDOFF.md
- M packages/design-system/specs/_shared.spec.json
- M packages/design-system/specs/button.spec.json
- M packages/design-system/specs/chip.spec.json
- M packages/design-system/specs/toggle.spec.json
- M packages/design-system/src/components/ui/button.tsx
- M packages/design-system/src/components/ui/chip.tsx
- M packages/design-system/src/components/ui/sidebar.tsx
- M packages/design-system/src/components/ui/toggle.tsx
- M packages/design-system/src/lib/ui-disabled.ts
- M src/lib/ui-disabled.ts
+ M docs/wip/WORKLOG.md
+ M packages/design-system/package.json
+ M packages/design-system/specs/tooltip.spec.json
+ M packages/design-system/src/components/ui/bubble.tsx
+ M packages/design-system/src/components/ui/tooltip.tsx
+ M src/app/(docs)/components/[slug]/page.tsx
+ M src/components/docs/component-overview-preview.tsx
+ M src/components/docs/component-playground.tsx
+ M src/components/docs/component-showcases.tsx
+ M src/components/docs/playground-registry.tsx
+ M src/lib/component-case-specs.ts
+ M src/lib/component-docs.ts
+?? docs/wip/DEFERRED_COMPONENTS.md
+?? packages/design-system/specs/message.spec.json
+?? packages/design-system/src/components/ui/message.tsx
+?? scripts/figma-button-variants.mjs
+?? scripts/figma-input-policy.mjs
+?? scripts/figma-input-variants.mjs
+?? src/components/ui/message.tsx
 ```
 
 ### diff 요약
 
 ```
- DESIGN.md                                          |  2 +-
- docs/wip/HANDOFF.md                                | 52 +++++++++++++---------
- packages/design-system/specs/_shared.spec.json     |  3 ++
- packages/design-system/specs/button.spec.json      |  2 +-
- packages/design-system/specs/chip.spec.json        |  2 +-
- packages/design-system/specs/toggle.spec.json      |  2 +-
- .../design-system/src/components/ui/button.tsx     | 15 ++++---
- packages/design-system/src/components/ui/chip.tsx  | 14 +++---
- .../design-system/src/components/ui/sidebar.tsx    |  7 +--
- .../design-system/src/components/ui/toggle.tsx     |  6 +--
- packages/design-system/src/lib/ui-disabled.ts      | 30 +++++++++----
- src/lib/ui-disabled.ts                             | 15 ++++++-
- 12 files changed, 94 insertions(+), 56 deletions(-)
+ docs/wip/HANDOFF.md                                | 116 +++++++++++++++------
+ docs/wip/WORKLOG.md                                |  11 +-
+ packages/design-system/package.json                |   1 +
+ packages/design-system/specs/tooltip.spec.json     |   4 +-
+ .../design-system/src/components/ui/bubble.tsx     |   1 +
+ .../design-system/src/components/ui/tooltip.tsx    |  29 ++++--
+ src/app/(docs)/components/[slug]/page.tsx          |   6 +-
+ src/components/docs/component-overview-preview.tsx |  27 +++++
+ src/components/docs/component-playground.tsx       |   3 -
+ src/components/docs/component-showcases.tsx        | 110 ++++++++++++++++++-
+ src/components/docs/playground-registry.tsx        |  99 +++++++++++++++---
+ src/lib/component-case-specs.ts                    |  58 ++++++++++-
+ src/lib/component-docs.ts                          |  21 +++-
+ 13 files changed, 406 insertions(+), 80 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
