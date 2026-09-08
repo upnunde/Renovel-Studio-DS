@@ -1,0 +1,23 @@
+{
+  "$schema": "./README.md",
+  "name": "Message",
+  "slot": "message",
+  "$description": "대화 행 레이아웃. 말풍선 표면은 Bubble. 아바타·header/footer·align.",
+  "role": "presentation",
+  "axes": {
+    "align": { "values": ["start", "end"], "default": "start" }
+  },
+  "composition": {
+    "Message": { "slot": "message" },
+    "MessageGroup": { "slot": "message-group", "gap": 8 },
+    "MessageAvatar": { "slot": "message-avatar", "anchor": "bottom", "footerOffset": "-translate-y-8" },
+    "MessageContent": { "slot": "message-content" },
+    "MessageHeader": { "slot": "message-header", "typography": "caption1-500", "fg": "{foreground-muted}", "padX": 0 },
+    "MessageFooter": { "slot": "message-footer", "typography": "caption1-500", "fg": "{foreground-muted}", "padX": 0 }
+  },
+  "nativeNotes": {
+    "scope": "행 레이아웃만. 본문 면은 Bubble·BubbleContent.",
+    "align": "start=상대 · end=나(flex-row-reverse).",
+    "a11y": "프레젠테이션 래퍼. 아이콘-only footer 액션은 aria-label 필수."
+  }
+}
