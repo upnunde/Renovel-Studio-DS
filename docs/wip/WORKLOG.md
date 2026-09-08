@@ -5,10 +5,9 @@
 
 ## 오늘 한 일
 
-- **Message** DS 추가 — shadcn 행 레이아웃을 토큰 정규화 (`message.tsx` · spec · export · docs Chat)
-- **Bubble** docs 재노출 · Header/Footer `px-3` 제거(좌측 끝 정렬)
-- **Tooltip** Playground `mode=hover|pinned` 칩 · `open`이면 ✕ 자동
-- Figma Input/Button 배리언트 스크립트 추가 (`scripts/figma-*-variants.mjs`)
+- **Message** DS 추가 — Chat 섹션 · Bubble 재노출 · Header/Footer 좌측 끝 정렬
+- Message 아바타를 **말풍선 하단 정렬** (`mb-6`) · docs 기본을 **AvatarImage**로
+- Tooltip `mode=hover|pinned` · Figma Input/Button 스크립트
 
 ## 다음에 할 일
 
@@ -23,11 +22,11 @@
 ## 주요 파일 · 브랜치
 
 - 브랜치: `main`
-- `packages/design-system/src/components/ui/message.tsx` · `bubble.tsx` · `tooltip.tsx`
-- `src/lib/component-docs.ts` · playground/showcase · `docs/wip/DEFERRED_COMPONENTS.md`
+- `packages/design-system/src/components/ui/message.tsx` · `specs/message.spec.json`
+- Message playground/showcase/overview
 
 ## 메모
 
 - 개발: `npm run dev` → http://localhost:3001
 - 패키지 릴리스+스튜디오: `npm run ds:release`
-- Message: http://localhost:3001/components/message · Bubble: `/components/bubble`
+- Message: http://localhost:3001/components/message
