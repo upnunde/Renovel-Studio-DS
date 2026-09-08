@@ -15,7 +15,7 @@
       "padX": 12,
       "padY": 8,
       "typography": "body3-400",
-      "maxWidth": "80%"
+      "maxWidth": "60%"
     },
     "default": { "rest": { "bg": "{primary}", "fg": "{primary-foreground}" }, "hover": { "bg": "{primary}/80", "$note": "button|a만" } },
     "secondary": { "rest": { "bg": "{background-muted}", "fg": "{foreground}" }, "hover": { "bg": "{muted-strong}", "fg": "{muted-strong-foreground}" } },

@@ -22,7 +22,7 @@ function BubbleGroup({ className, ...props }: React.ComponentProps<"div">) {
  * 대화 행(아바타·메타)은 `Message`와 조합한다.
  */
 const bubbleVariants = cva(
-  "group/bubble relative flex w-fit max-w-[80%] min-w-0 flex-col gap-1 data-[align=end]:self-end",
+  "group/bubble relative flex w-fit max-w-[60%] min-w-0 flex-col gap-1 data-[align=end]:self-end",
   {
     variants: {
       variant: {
