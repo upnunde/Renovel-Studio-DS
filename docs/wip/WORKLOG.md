@@ -6,7 +6,8 @@
 ## 오늘 한 일
 
 - **Message** DS 추가 — Chat 섹션 · Bubble 재노출 · Header/Footer 좌측 끝 정렬
-- Message 아바타를 **말풍선 하단 정렬** (`mb-6`) · docs 기본을 **AvatarImage**로
+- Message 아바타 **말풍선 하단 정렬** · docs **AvatarImage** 기본
+- **Bubble** max-width `80%` → **`60%`**
 - Tooltip `mode=hover|pinned` · Figma Input/Button 스크립트
 
 ## 다음에 할 일
