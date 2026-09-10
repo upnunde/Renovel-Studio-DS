@@ -1,6 +1,6 @@
 # 에이전트 핸드오프 (HANDOFF)
 
-> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-09-08 15:52:13**
+> Cursor ↔ Claude Code 맥락 공유 · **마지막 갱신: 2026-09-10 15:39:31**
 > Claude Code 세션 시작 시 이 파일과 `docs/wip/WORKLOG.md`를 먼저 읽을 것.
 
 ## Claude Code — 시작 체크리스트
@@ -11,7 +11,7 @@
 
 ## 최근 Cursor 요청
 
-- **2026-09-08 15:52:00** — 60%로 변경
+- **2026-09-10 15:39:04** — 플레이그라운드에서 시각적으로 다른 표현이 되는 옵션인건가?
 
 ## 다음 작업 (Claude Code용)
 
@@ -23,21 +23,54 @@
 - 브랜치: `main`
 
 ```
+ M DESIGN.md
  M docs/wip/HANDOFF.md
- M packages/design-system/specs/bubble.spec.json
- M packages/design-system/src/components/ui/bubble.tsx
+ M packages/design-system/specs/switch.spec.json
+ M packages/design-system/specs/textarea.spec.json
+ M packages/design-system/src/components/ui/switch.tsx
+ M packages/design-system/src/components/ui/textarea.tsx
+ M src/components/docs/component-overview-preview.tsx
+ M src/components/docs/component-showcases.tsx
+ M src/components/docs/lucide-icon-gallery.tsx
+ M src/components/docs/playground-registry.tsx
+ M src/lib/component-case-specs.ts
 ```
 
 ### diff 요약
 
 ```
- docs/wip/HANDOFF.md                                | 27 +++++++---------------
- packages/design-system/specs/bubble.spec.json      |  2 +-
- .../design-system/src/components/ui/bubble.tsx     |  2 +-
- 3 files changed, 10 insertions(+), 21 deletions(-)
+ DESIGN.md                                          |  2 +
+ docs/wip/HANDOFF.md                                | 51 ++++++++++---
+ packages/design-system/specs/switch.spec.json      | 28 ++++++--
+ packages/design-system/specs/textarea.spec.json    |  2 +-
+ .../design-system/src/components/ui/switch.tsx     | 83 ++++++++++++++++------
+ .../design-system/src/components/ui/textarea.tsx   |  5 +-
+ src/components/docs/component-overview-preview.tsx |  2 +-
+ src/components/docs/component-showcases.tsx        | 10 +++
+ src/components/docs/lucide-icon-gallery.tsx        | 60 +++++++++++++++-
+ src/components/docs/playground-registry.tsx        |  6 ++
+ src/lib/component-case-specs.ts                    |  5 ++
+ 11 files changed, 212 insertions(+), 42 deletions(-)
 ```
 
 ## Claude Code 상태
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

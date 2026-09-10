@@ -1,10 +1,12 @@
 "use client"
 
 import { useDeferredValue, useMemo, useState } from "react"
+import { toast } from "sonner"
 
 import { ShowcaseBlock } from "@/components/docs/showcase-block"
 import { DocsFilterChips } from "@/components/docs/docs-filter-chips"
 import { Icon } from "design-system/ui/icon"
+import { ICONS } from "design-system/icons"
 import {
   Tooltip,
   TooltipContent,
@@ -20,9 +22,59 @@ import { docsType } from "@/lib/docs-type"
 import { docsSpace } from "@/lib/docs-space"
 import { cn } from "@/lib/utils"
 
+/** Lucide PascalCase → DS ICONS camelCase 키 (레지스트리에 있을 때만) */
+function dsIconsKey(lucideName: string): string | null {
+  const camel = lucideName.charAt(0).toLowerCase() + lucideName.slice(1)
+  if (Object.prototype.hasOwnProperty.call(ICONS, camel)) return camel
+  // Lucide X → ICONS.close 등 별칭
+  const aliases: Record<string, string> = {
+    X: "close",
+    Bold: "formatBold",
+    Italic: "formatItalic",
+    Underline: "formatUnderlined",
+  }
+  const alias = aliases[lucideName]
+  if (alias && Object.prototype.hasOwnProperty.call(ICONS, alias)) return alias
+  return null
+}
+
+/**
+ * 붙여넣기·스튜디오 지시용 스니펫.
+ * - DS 레지스트리에 있으면 ICONS.* 경로
+ * - 없으면 lucide-react 직접 import
+ */
+export function buildIconCopySnippet(lucideName: string): string {
+  const key = dsIconsKey(lucideName)
+  if (key) {
+    return [
+      `// icon: ${lucideName} · ICONS.${key}`,
+      `import { ICONS } from "design-system/icons"`,
+      `import { Icon } from "design-system/ui/icon"`,
+      ``,
+      `<Icon icon={ICONS.${key}} />`,
+    ].join("\n")
+  }
+  return [
+    `// icon: ${lucideName} · lucide-react`,
+    `import { ${lucideName} } from "lucide-react"`,
+    `import { Icon } from "design-system/ui/icon"`,
+    ``,
+    `<Icon icon={${lucideName}} />`,
+  ].join("\n")
+}
+
 function IconTile({ name }: { name: string }) {
   const LucideIcon = resolveLucideIcon(name)
   if (!LucideIcon) return null
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(buildIconCopySnippet(name))
+      toast.success(`${name} 코드가 복사되었습니다`)
+    } catch {
+      toast.error("복사에 실패했습니다")
+    }
+  }
 
   return (
     <TooltipProvider delay={0}>
@@ -31,14 +83,14 @@ function IconTile({ name }: { name: string }) {
           render={
             <button
               type="button"
-              onClick={() => navigator.clipboard.writeText(name)}
+              onClick={handleCopy}
               className={cn(
                 "flex aspect-square w-full items-center justify-center rounded-lg border border-transparent transition-colors",
                 "hover:border-border hover:bg-muted/50 data-[hovered=true]:border-border data-[hovered=true]:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               )}
             />
           }
-          aria-label={`${name} — 클릭하여 이름 복사`}
+          aria-label={`${name} — 클릭하여 적용 코드 복사`}
         >
           <Icon icon={LucideIcon} size="2xl" className="text-foreground" />
         </TooltipTrigger>
@@ -73,6 +125,10 @@ export function LucideIconGallery() {
   return (
     <ShowcaseBlock name="Icon Set">
       <div className={docsSpace.stack}>
+        <p className={docsType.bodyMuted}>
+          아이콘을 클릭하면 적용 코드가 복사됩니다. 스튜디오·이슈에 붙여 넣어 아이콘을
+          지정하세요.
+        </p>
         <div className={cn("flex flex-col sm:flex-row sm:items-center sm:justify-between", docsSpace.gap)}>
           <input
             type="search"

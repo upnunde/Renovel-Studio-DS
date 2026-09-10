@@ -7,7 +7,7 @@
   "axes": {},
   "defaults": {},
   "sizeSpec": {
-    "default": { "minHeight": 64, "padX": 10, "padY": 8, "radius": "{radius.base}", "typography": "body3-400", "$note": "rows 지정 시 minHeight=rows*lineHeight. 모바일 text-base→md:text-sm 반응형" }
+    "default": { "minHeight": 120, "padX": 10, "padY": 8, "radius": "{radius.base}", "typography": "body3-400", "$note": "minHeight 120(min-h-30). rows 지정 시 max(rows*lh, 120px). 모바일 text-base→md:text-sm 반응형" }
   },
   "styleSpec": {
     "control": {

@@ -1131,6 +1131,16 @@ const SHOWCASES: Record<string, ReactNode> = {
           </ComponentCase>
         </ComponentCaseGrid>
       </ComponentCaseGroup>
+      <ComponentCaseGroup title="Tone">
+        <ComponentCaseGrid columns={2}>
+          <ComponentCase label="brand" tags={["tone: brand", "checked: true"]}>
+            <Switch tone="brand" aria-label="알림" defaultChecked />
+          </ComponentCase>
+          <ComponentCase label="neutral" tags={["tone: neutral", "checked: true"]}>
+            <Switch tone="neutral" aria-label="알림" defaultChecked />
+          </ComponentCase>
+        </ComponentCaseGrid>
+      </ComponentCaseGroup>
       <ComponentCaseGroup title="State">
         <ComponentCaseGrid columns={3}>
           <ComponentCase label="off" tags={["checked: false"]}>

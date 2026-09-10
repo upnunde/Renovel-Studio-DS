@@ -2,10 +2,13 @@
   "$schema": "./README.md",
   "name": "Switch",
   "slot": "switch",
-  "$description": "OS-중립 Switch 정본. 출처: src/components/ui/switch.tsx. SWITCH_SIZE_SCALE. track+thumb.",
+  "$description": "OS-중립 Switch 정본. 출처: src/components/ui/switch.tsx. SWITCH_SIZE_SCALE. track+thumb. tone=켜짐 색.",
   "role": "switch",
-  "axes": { "size": { "values": ["sm", "default", "md"] } },
-  "defaults": { "size": "default" },
+  "axes": {
+    "size": { "values": ["sm", "default", "md"] },
+    "tone": { "values": ["neutral", "brand"] }
+  },
+  "defaults": { "size": "default", "tone": "brand" },
   "sizeSpec": {
     "sm":      { "trackW": 28, "trackH": 16, "thumb": 12, "travel": 12, "inset": 2 },
     "default": { "trackW": 36, "trackH": 20, "thumb": 16, "travel": 16, "inset": 2 },
@@ -13,16 +16,28 @@
   },
   "styleSpec": {
     "track": {
-      "checked": { "bg": "{primary}" },
       "unchecked": { "bg": "{border-emphasis}", "dark": { "bg": "{border-emphasis}/80" } },
+      "checked": {
+        "neutral": { "bg": "{inverse-muted}" },
+        "brand": { "bg": "{primary}" }
+      },
       "focus": { "ring": "{ring}/50", "ringWidth": 3 },
       "invalid": { "ring": "{destructive}/20", "dark": { "ring": "{destructive}/40" } },
       "disabledUnchecked": { "bg": "{disabled}" },
-      "disabledChecked": { "bg": "{primary}/40" }
+      "disabledChecked": {
+        "neutral": { "bg": "{inverse-muted}/40" },
+        "brand": { "bg": "{primary}/40" }
+      }
     },
     "thumb": {
       "rest": { "bg": "{background}" },
-      "dark": { "checked": { "bg": "{primary-foreground}" }, "unchecked": { "bg": "{foreground}" } }
+      "dark": {
+        "unchecked": { "bg": "{foreground}" },
+        "checked": {
+          "neutral": { "bg": "{inverse-muted-foreground}" },
+          "brand": { "bg": "{primary-foreground}" }
+        }
+      }
     }
   },
   "states": ["checked", "unchecked", "focus", "disabled", "invalid"],
@@ -30,6 +45,7 @@
     "checked": "data-checked. iOS Toggle(isOn), Compose Switch checked.",
     "thumbTravel": "translate-x로 thumb 이동. iOS/AOS 네이티브 Switch가 자체 애니메이션 — travel 값은 커스텀 구현 시만 필요.",
     "focus": "border 없이 ring만(Switch는 보더 없음).",
+    "tone": "neutral=inverse-muted ON · brand=primary ON(기존 기본). Button/Toggle tone 축과 동일 네이밍.",
     "note": "네이티브 Switch 컴포넌트가 있으면 track/thumb 대신 그것을 토큰 색으로 테마링하는 게 우선."
   }
 }

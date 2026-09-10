@@ -613,6 +613,8 @@ CVA variant 확장은 `buttonVariants` 등 `*Variants` export를 import해서 �
 
 **Toggle 축:** `variant` = 표현(default 면 없음 · outline), `tone` = 선택 색(neutral · brand). 툴바·세그먼트(Figma Flow)는 `tone="neutral"`(pressed=`muted-strong`, 아이콘은 `foreground` 유지). 브랜드 강조 선택은 `tone="brand"`(pressed=`accent`). 기본 `neutral`. Inverse 채움은 Chip·Button solid에만 쓴다.
 
+**Switch 축:** `size` = 트랙 높이(sm · default · md), `tone` = 켜짐 색(neutral · brand). `tone="brand"`(기본)=`primary` ON — 기존 Switch 표현. `tone="neutral"`=`inverse-muted` ON — Button default/neutral·Chip pressed와 동일. OFF는 톤과 무관하게 `border-emphasis`.
+
 **Toggle Group:** Toggle을 붙인 세그먼트. `multiple={false}`(기본)는 Figma Resizing처럼 하나만 선택. `multiple`이면 굵게+기울임처럼 여러 개. 그룹이 `size`·`shape`를 일괄하고, 각 Toggle이 `variant`·`tone`·`value`를 가진다.
 
 ### 4-3-1. 간격 규칙

@@ -362,6 +362,11 @@ export const COMPONENT_CASE_SPECS: Record<string, ComponentCaseSpec> = {
         valueHints: switchHints(...SWITCH_SIZE_APIS),
         description: "트랙 높이 · sm_h16 · default_h20 · md_h24",
       },
+      {
+        name: "tone",
+        values: ["neutral", "brand"],
+        description: "켜짐 색 · neutral=inverse-muted · brand=primary",
+      },
       { name: "checked", values: ["false", "true"], description: "켜짐/꺼짐" },
       { name: "disabled", values: ["false", "true"], description: "비활성" },
       { name: "caption", values: ["false", "true"], description: "라벨 표시" },

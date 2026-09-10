@@ -1081,11 +1081,13 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   switch: {
     initialState: {
       size: "default",
+      tone: "brand",
       checked: false,
       disabled: false,
     },
     selectKeys: {
       size: ["sm", "default", "md"],
+      tone: ["neutral", "brand"],
     },
     renderPreview: (state, ctx) => {
       const size =
@@ -1094,10 +1096,12 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
           : str(state, "size") === "md"
             ? "md"
             : "default"
+      const tone = str(state, "tone") === "neutral" ? "neutral" : "brand"
       return (
         <Switch
           id="playground-switch"
           size={size}
+          tone={tone}
           {...ctx.bindSwitch("checked")}
           disabled={bool(state, "disabled")}
           aria-label="알림"
@@ -1111,8 +1115,10 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
           : str(state, "size") === "md"
             ? "md"
             : "default"
+      const tone = str(state, "tone") === "neutral" ? "neutral" : "brand"
       const props = [
         size !== "default" ? `size="${size}"` : "",
+        tone !== "brand" ? `tone="${tone}"` : "",
         bool(state, "checked") ? "checked" : "",
         bool(state, "disabled") ? "disabled" : "",
         'aria-label="알림"',

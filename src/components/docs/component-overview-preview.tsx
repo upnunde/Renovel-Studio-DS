@@ -141,7 +141,7 @@ function PreviewTextarea() {
       <Textarea
         readOnly
         defaultValue="여러 줄 텍스트"
-        className="min-h-16 resize-none text-sm"
+        className="resize-none text-sm"
         rows={2}
       />
     </div>
